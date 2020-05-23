@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>かんた東海オンエア伝道大使の</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+  </head>
+
+  <body>
+    <%# ↓deviseのフラッシュメッセージを表示するもの %>
+    <% if flash[:notice] %>
+      <div class="notification is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="notification is-danger">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+    <%# ↑devise用の記述 %>
+
+    <div class="navbar">
+
+      <div class="title-logo">
+        <h1><%= link_to "かんた東海オンエア伝道大使の" ,videos_path %></h1>
+      </div><%# title-logo %>
+
+      <% if user_signed_in? %>
+        <div class="user_btn">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        </div>
+      <% else %>
+        <div class="user_btn">
+          <div class="not-user">
+            <%= link_to "ログイン", new_user_session_path, class: 'post' %>
+            /
+            <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
+          </div>
+         </div>
+      <% end %>
+
+    </div><%# navbar %>
+
+    <div class="main-contents">
+      <div class="yield"><%= yield %></div>
+    </div>
+
+
+  </body>
+</html>

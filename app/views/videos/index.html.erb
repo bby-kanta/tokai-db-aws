@@ -1,0 +1,13 @@
+<h2>東海オンエア出演最新動画一覧</h2>
+
+<ul>
+  <% @videos.each do |video|%>
+
+    <%= link_to video_path(video.id) do %>
+      <li>
+      <%= video.title %>
+      <%= video.updated_on %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
