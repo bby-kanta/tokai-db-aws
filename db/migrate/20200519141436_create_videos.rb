@@ -28,9 +28,3 @@ class CreateVideos < ActiveRecord::Migration[6.0]
     end
   end
 end
-
-
-# t.integer :person_id
-# t.integer :place_id
-# t.integer :penalty_id
-# t.integer :tag_id

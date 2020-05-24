@@ -1,0 +1,45 @@
+<div class="article-image">
+  <iframe width="50%" height="500px" src="https://www.youtube.com/embed/<%= @video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div class="video-title">
+  <h3> <%= @video.title %> </h3>
+</div>
+
+<div class="video-description">
+  <h3> <%= @video.description %> </h3>
+</div>
+
+<div class="kind_of">
+  <h3> <%= @video.kind_of %> </h3>
+</div>
+
+<div class="video-highlight">
+  <h3> <%= @video.highlight %> </h3>
+</div>
+
+<div class="video-category">
+  <h3> <%= @video.category %> </h3>
+</div>
+
+<div class="video-quotes">
+  <h3> <%= @video.quotes %> </h3>
+</div>
+
+<div class="video-mvp">
+  <h3> <%= @video.mvp %> </h3>
+</div>
+
+<div class="video-editor">
+  <h3> <%= @video.editor %> </h3>
+</div>
+
+<div class="video-updated_on">
+  <h3> <%= @video.updated_on %> </h3>
+</div>
+
+<%= link_to '編集',edit_video_path(@video) %>
+<%= link_to '削除',video_path(@video) ,
+  method: :delete,
+  data: {confirm: '本当に削除しますか？'}
+%>
