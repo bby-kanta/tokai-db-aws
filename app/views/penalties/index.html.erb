@@ -1,0 +1,13 @@
+<h2>罰ゲーム（十字架）リスト</h2>
+
+<ul>
+  <% @penalties.each do |penalty|%>
+
+    <%= link_to penalty_path(penalty.id) do %>
+      <li>
+        <%= penalty.name %>
+      </li>
+    <% end %>
+  <% end %>
+
+</ul>

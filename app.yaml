@@ -1,0 +1,2 @@
+entrypoint: bundle exec rackup --port $PORT
+runtime: ruby

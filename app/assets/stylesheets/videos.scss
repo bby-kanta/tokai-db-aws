@@ -1,3 +1,125 @@
 // Place all the styles related to the videos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// ul{
+//   padding: 0;
+//   display: flex;
+//   flex-wrap: wrap;
+// }
+
+// li {
+//   width: 200px;
+//   margin-right: 1%;
+//   margin-bottom: 1%;
+// }
+
+.video-articles{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  // align-items: center;
+  // justify-content: center;
+}
+
+.video-articles a {
+  margin-right: 0.3em;
+  margin-bottom: 1em;
+}
+
+.video-article {
+  width :13em;
+  height: 11em;
+  border: 2px solid rgb(238, 237, 237)
+}
+
+// ↓記事が上にホバーするコード
+.video-article{
+  -webkit-transform: translate(0);
+  transform: translate(0) ;
+  -webkit-transition: .3s ease-in-out;
+  transition: .4s ease-in-out;
+}
+.video-article:hover {
+  -webkit-transform: translateY(-10px) scale(1);
+  transform: translateY(-10px) scale(1);
+  opacity: 0.5;
+}
+// ↑記事が上にホバーするコード
+
+.article-image {
+  width: 100%;
+}
+
+.article-column{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.article-title {
+  width : 100%;
+  font-size :16px
+}
+
+.article_title{
+  overflow: hidden;
+  height: 3em;
+  line-height: 1.7;
+}
+
+.article_row{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.article-rate {
+
+}
+.S {
+  color: gold;
+}
+.A {
+  color: rgb(224, 12, 231);
+}
+.B {
+  color: rgb(235, 29, 29);
+}
+.C {
+  color: rgb(245, 158, 27);
+}
+
+.article-mvp {
+  display: inline-block;
+  color:white;
+  font-size: 15px;
+}
+.article-mvp h3{
+  border-radius: 5px;
+  padding: 1px 13px ;
+}
+.tetsuya {
+  background-color: rgb(255, 145, 0);
+}
+.shibayu {
+  background-color: rgb(251, 255, 0);
+}
+.ryo {
+  background-color: rgb(4, 0, 255);
+}
+.toshimitsu {
+  background-color: rgb(51, 255, 0);
+}
+.yumemaru {
+  background-color: rgb(255, 0, 242);
+}
+.mushimegane {
+  background-color: rgb(117, 76, 0);
+}
+
+.article-date {
+  width : 100%;
+  font-size :13px;
+}
