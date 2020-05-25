@@ -1,0 +1,13 @@
+<h2>ハッシュタグリスト</h2>
+
+<ul>
+  <% @tags.each do |tag|%>
+
+    <%= link_to tag_path(tag.id) do %>
+      <li>
+        <%= tag.name %>
+      </li>
+    <% end %>
+  <% end %>
+
+</ul>

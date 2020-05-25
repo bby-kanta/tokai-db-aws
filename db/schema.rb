@@ -100,8 +100,10 @@ ActiveRecord::Schema.define(version: 2020_05_22_144150) do
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
+    t.bigint "person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_tags_on_person_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -147,4 +149,5 @@ ActiveRecord::Schema.define(version: 2020_05_22_144150) do
   add_foreign_key "place_videos", "videos"
   add_foreign_key "tag_videos", "tags"
   add_foreign_key "tag_videos", "videos"
+  add_foreign_key "tags", "people"
 end

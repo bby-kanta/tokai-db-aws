@@ -30,6 +30,18 @@
         <h1><%= link_to "かんた東海オンエア伝道大使の" ,videos_path %></h1>
       </div><%# title-logo %>
 
+      <div class="title_people">
+        <%= link_to "登場人物",people_path %>
+      </div>
+      
+      <div class="title_penalty">
+        <%= link_to "罰ゲーム(十字架)",penalties_path %>
+      </div>
+
+      <div class="title_tags">
+        <%= link_to "ハッシュタグ",tags_path %>
+      </div>
+
       <% if user_signed_in? %>
         <div class="user_btn">
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>

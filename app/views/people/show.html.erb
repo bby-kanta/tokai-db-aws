@@ -1,0 +1,27 @@
+<%= @person.name %>
+
+<%= @person.description %>
+
+<%= @person.id %>
+
+
+<h2>ハッシュタグ入力フォーム</h2>
+<ul>
+<%= form_for ([@person,@tag]) do |a| %>
+
+  <li>
+    <%= a.label :name ,'ハッシュタグ' %>
+    <%= a.text_field :name,placeholder:'ハッシュタグ名を入力してください' %>
+  </li>
+
+  <li>
+    <%= a.label :description ,'タグの概要' %>
+    <%= a.text_area :description,placeholder:'概要を入力してください' %>
+  </li>
+
+  <li>
+    <%= a.submit %>
+  </li>
+
+<% end %>
+</ul>
