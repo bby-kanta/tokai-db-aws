@@ -19,10 +19,4 @@ class Video < ApplicationRecord
   has_many :musics,through: :music_videos
   has_many :music_videos
   
-  # enum rate: [:C,:B,:A,:S]
-  # ランク付け
-  # enum mvp: [:'該当無し',:'てつや',:'しばゆー',:'りょう',:'としみつ',:'ゆめまる',:'虫眼鏡']
-  # 一番活躍したメンバー
-  # enum editor: [:'該当無し',:'てつや',:'しばゆー',:'りょう',:'としみつ',:'ゆめまる',:'虫眼鏡']
-  # 編集者 初期のころは記載無し
 end

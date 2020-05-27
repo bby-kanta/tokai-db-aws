@@ -5,11 +5,16 @@ Rails.application.routes.draw do
   root 'videos#index'
 
   resources :people do
-    resources :tags,only: [:create,:destroy]
-    resources :penalties,only: [:create,:destroy]
+    resources :tags,only: [:create]
+    resources :penalties,only: [:create]
   end
 
   resources :penalties
 
   resources :tags
+
+  resources :places
+
+  resources :musics
+  
 end

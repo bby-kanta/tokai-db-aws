@@ -1,0 +1,12 @@
+<h1>撮影場所一覧</h2>
+<% @places.each do |place|%>
+  <ul>
+
+    <li>
+      <%= link_to place_path(place.id) do %>
+          <%= place.name %>
+      <% end %>
+    </li>
+
+  </ul>
+<% end %>

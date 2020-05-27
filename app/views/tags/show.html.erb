@@ -6,4 +6,8 @@
 
 <%= @tag.id %>
 
-</div>
+  <%= link_to '編集',tag_path(@tag) %>
+  <%= link_to '削除',tag_path(@tag),
+    method: :delete,
+    data: {confirm: '本当に削除しますか？'}
+  %>

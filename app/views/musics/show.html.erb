@@ -1,0 +1,11 @@
+<%= @music.name %>
+
+<%= @music.description %>
+
+<%= @music.id %>
+
+  <%= link_to '編集',music_path(@music) %>
+  <%= link_to '削除',music_path(@music),
+    method: :delete,
+    data: {confirm: '本当に削除しますか？'}
+  %>

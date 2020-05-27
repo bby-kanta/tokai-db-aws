@@ -1,0 +1,13 @@
+<h1>BGMリスト</h1>
+
+<% @musics.each do |music|%>
+  <ul>
+
+    <li>
+      <%= link_to music_path(music.id) do %>
+          <%= music.name %>
+      <% end %>
+    </li>
+
+  </ul>
+<% end %>
