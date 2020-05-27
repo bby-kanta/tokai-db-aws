@@ -63,6 +63,10 @@ li {
   font-size: 30px;
 }
 
+div[class^="nav_"] a{ //nav_で始まるクラスに適用
+  font-size: 15px;
+}
+
 .user_btn{
   width : 220px;
   height: 50px;

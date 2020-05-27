@@ -1,0 +1,21 @@
+<h1>撮影場所作成フォーム</h1>
+
+<%= form_for @place,url: places_path do |f| %>
+<ul>
+
+  <li>
+    <%= f.label :name ,'名前' %>
+    <%= f.text_field :name,placeholder:'名前を入力してください' %>
+  </li>
+
+  <li>
+    <%= f.label :description ,'場所の概要' %>
+    <%= f.text_area :description,placeholder:'概要を入力してください' %>
+  </li>
+
+  <li>
+    <%= f.submit %>
+  </li>
+
+</ul>
+<% end %>

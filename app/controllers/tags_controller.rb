@@ -12,20 +12,28 @@ class TagsController < ApplicationController
   end
 
   def create
-    人物のところにフォームあり
+    # 人物のところにフォームあり
     person = Person.find(params[:person_id])
-    penalty = person.penalties.build(penalty_params)
-      if penalty.save
-        redirect_to penalties_path
+    tag = person.tags.build(tag_params)
+      if tag.save
+        redirect_to tags_path
       else
         render 'index'
       end
   end
 
 
+
+  def destroy
+    @tag = Tag.find(params[:id])
+    @tag.destroy
+    redirect_to tags_path
+  end
+
+
   private
-  def penalty_params
-    params.require(:penalty).permit(:name,:description,:person_id)
+  def tag_params
+    params.require(:tag).permit(:name,:description,:person_id)
   end
 
 end

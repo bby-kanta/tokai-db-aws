@@ -26,19 +26,27 @@
 
     <div class="navbar">
 
-      <div class="title-logo">
+      <div class="title_logo">
         <h1><%= link_to "かんた東海オンエア伝道大使の" ,videos_path %></h1>
       </div><%# title-logo %>
 
-      <div class="title_people">
+      <div class="nav_people">
         <%= link_to "登場人物",people_path %>
       </div>
       
-      <div class="title_penalty">
+      <div class="nav_penalty">
         <%= link_to "罰ゲーム(十字架)",penalties_path %>
       </div>
+      
+      <div class="nav_place">
+        <%= link_to "撮影場所",places_path %>
+      </div>
+      
+      <div class="nav_music">
+        <%= link_to "BGM",musics_path %>
+      </div>
 
-      <div class="title_tags">
+      <div class="nav_tags">
         <%= link_to "ハッシュタグ",tags_path %>
       </div>
 

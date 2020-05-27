@@ -4,6 +4,7 @@ class CreatePenalties < ActiveRecord::Migration[6.0]
 
       t.string :name,null: false
       t.text :description
+      t.integer :already,null: false,default: 1
       t.date :since,precision: 8,default: 19980928
 
       t.references :person,foreign_key: true

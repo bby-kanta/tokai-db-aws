@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2020_05_22_144150) do
   create_table "penalties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
+    t.integer "already", default: 1, null: false
+    # 0のときは未消化、1のときは消化済み
     t.date "since", default: "1998-09-28"
     t.bigint "person_id"
     t.datetime "created_at", precision: 6, null: false

@@ -1,0 +1,21 @@
+<h1>BGM作成フォーム</h1>
+
+<%= form_for @music,url: musics_path do |f| %>
+<ul>
+
+  <li>
+    <%= f.label :name ,'曲名' %>
+    <%= f.text_field :name,placeholder:'曲名を入力してください' %>
+  </li>
+
+  <li>
+    <%= f.label :description ,'概要' %>
+    <%= f.text_area :description,placeholder:'概要を入力してください' %>
+  </li>
+
+  <li>
+    <%= f.submit %>
+  </li>
+
+</ul>
+<% end %>

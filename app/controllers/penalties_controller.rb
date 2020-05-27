@@ -13,7 +13,7 @@ class PenaltiesController < ApplicationController
   end
 
   def create
-    人物のところにフォームあり
+    # 人物のところにフォームあり
     person = Person.find(params[:person_id])
     penalty = person.penalties.build(penalty_params)
       if penalty.save
@@ -21,13 +21,12 @@ class PenaltiesController < ApplicationController
       else
         render 'index'
       end
+  end
 
-  #     @tag = Tag.new(tag_params)
-  #       if @tag.save
-  #         redirect_to tags_path
-  #       else
-  #         render 'new'
-  #       end
+  def destroy
+    @penalty = Penalty.find(params[:id])
+    @penalty.destroy
+    redirect_to penalties_path
   end
 
 
