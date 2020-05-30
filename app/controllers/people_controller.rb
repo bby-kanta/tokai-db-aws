@@ -30,6 +30,19 @@ class PeopleController < ApplicationController
     @penalty = @person.penalties.build
   end
 
+  def edit
+    @person = Person.find(params[:id])
+  end
+
+  def update
+    @person = Person.find(params[:id])
+    if @person.update(person_params)
+      redirect_to people_path
+    else
+      render 'edit'
+    end
+  end
+
   private
   def person_params
     params.require(:person).permit(:name,:description)

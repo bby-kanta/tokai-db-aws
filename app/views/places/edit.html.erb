@@ -1,0 +1,22 @@
+<h2>撮影場所編集フォーム</h2>
+<div class="place_form">
+<%= form_for @place,url: place_path(@place) do |a| %>
+  <ul>
+
+    <li>
+      <%= a.label :name ,'撮影場所名' %>
+      <%= a.text_field :name,placeholder:'撮影場所名を入力してください' %>
+    </li>
+
+    <li>
+      <%= a.label :description ,'概要' %>
+      <%= a.text_area :description,placeholder:'概要を入力してください' %>
+    </li>
+
+    <li>
+      <%= a.submit %>
+    </li>
+
+  </ul>
+<% end %>
+</div>

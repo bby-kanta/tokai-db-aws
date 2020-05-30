@@ -4,7 +4,7 @@
 
 <%= @place.id %>
 
-  <%= link_to '編集',place_path(@place) %>
+  <%= link_to '編集',edit_place_path(@place) %>
   <%= link_to '削除',place_path(@place),
     method: :delete,
     data: {confirm: '本当に削除しますか？'}

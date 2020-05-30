@@ -20,6 +20,19 @@ class MusicsController < ApplicationController
       end
   end
 
+  def edit
+    @music = Music.find(params[:id])
+  end
+
+  def update
+    @music = Music.find(params[:id])
+    if @music.update(music_params)
+      redirect_to musics_path
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @music = Music.find(params[:id])
     @music.destroy
