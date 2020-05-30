@@ -1,0 +1,22 @@
+<h2>BGM編集フォーム</h2>
+<div class="bgm_form">
+<%= form_for @music,url: music_path(@music) do |a| %>
+  <ul>
+
+    <li>
+      <%= a.label :name ,'BGM名' %>
+      <%= a.text_field :name,placeholder:'BGM名を入力してください' %>
+    </li>
+
+    <li>
+      <%= a.label :description ,'概要' %>
+      <%= a.text_area :description,placeholder:'概要を入力してください' %>
+    </li>
+
+    <li>
+      <%= a.submit %>
+    </li>
+
+  </ul>
+<% end %>
+</div>

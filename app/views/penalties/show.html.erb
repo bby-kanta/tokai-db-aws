@@ -10,7 +10,7 @@
 
 <%= @penalty.id %>
 
-  <%= link_to '編集',penalty_path(@penalty) %>
+  <%= link_to '編集',edit_penalty_path(@penalty) %>
   <%= link_to '削除',penalty_path(@penalty),
     method: :delete,
     data: {confirm: '本当に削除しますか？'}

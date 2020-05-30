@@ -6,6 +6,12 @@
 
 <%= @person.id %>
 
+  <%= link_to '編集',edit_person_path(@person) %>
+  <%= link_to '削除',tag_path(@person),
+    method: :delete,
+    data: {confirm: '本当に削除しますか？'}
+  %>
+
 <%# personが持っているハッシュタグリストです %>
 <div class="peson_tag">
   <h2> <%= @person.name %> に関係するハッシュタグ </h2>

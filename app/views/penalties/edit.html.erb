@@ -1,0 +1,27 @@
+<h2>罰ゲーム編集フォーム</h2>
+<div class="penalty_form">
+<%= form_for @penalty,url: penalty_path(@penalty) do |a| %>
+  <ul>
+
+    <li>
+      <%= a.label :name ,'罰ゲーム名' %>
+      <%= a.text_field :name,placeholder:'罰ゲーム名を入力してください' %>
+    </li>
+
+    <li>
+      <%= a.label :description ,'罰ゲームの概要' %>
+      <%= a.text_area :description,placeholder:'概要を入力してください' %>
+    </li>
+
+    <li>
+      <%= a.label :since ,'いつから始まったか' %>
+    <%= a.date_select :since,{start_year: 2014,end_year: 2020,use_month_numbers: true} %>
+    </li>
+
+    <li>
+      <%= a.submit %>
+    </li>
+
+  </ul>
+<% end %>
+</div>

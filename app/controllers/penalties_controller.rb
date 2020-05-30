@@ -23,6 +23,19 @@ class PenaltiesController < ApplicationController
       end
   end
 
+  def edit
+    @penalty = Penalty.find(params[:id])
+  end
+
+  def update
+    @penalty = Penalty.find(params[:id])
+    if @penalty.update(penalty_params)
+      redirect_to penalties_path
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @penalty = Penalty.find(params[:id])
     @penalty.destroy
