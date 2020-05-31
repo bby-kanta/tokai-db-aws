@@ -1,45 +1,146 @@
-<div class="article-image">
-  <iframe width="50%" height="500px" src="https://www.youtube.com/embed/<%= @video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<%= stylesheet_link_tag "videos", :media => "all" %>
+
+<div class="video_box">
+  <div class="video-youtube">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/<%= @video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <table border="2px" style="border-collapse: collapse; border-color: rgb(238, 232, 232)">
+
+
+    <tr class="video-title">
+      <th> タイトル </th>
+      <th>   
+        <h3> <%= @video.title %> </h3>
+      </th>
+    </tr>
+
+    <tr class="video-description">
+      <th> 概要 </th>
+      <th>   
+        <h3> <%= @video.description %> </h3>
+      </th>
+    </tr>
+
+    <tr class="video_kind_of">
+      <th> チャンネル種類 </th>
+      <th>   
+        <h3> <%= @video.kind_of %> </h3> 
+      </th>
+    </tr>
+
+    <tr class="video_rate">
+      <th> ランク </th>
+      <th>   
+          <% case @video.rate %>
+            <% when 1 %>
+              <h3 class="S"> S </h3>
+            <% when 2 %>
+              <h3 class="A"> A </h3> 
+            <% when 3 %>
+              <h3 class="B"> B </h3> 
+            <% else %>
+              <h3 class="C"> C </h3> 
+          <% end %>
+
+      </th>
+    </tr>
+
+    <tr class="video-highlight">
+      <th> 見所 </th>
+      <th>   
+        <h3> <%= @video.highlight %> </h3>
+      </th>
+    </tr>
+
+    <tr class="video-category">
+      <th> カテゴリー </th>
+      <th>   
+        <h3> <%= @video.category %> </h3>
+      </th>
+    </tr>
+
+    <tr class="video-person">
+      <th> 登場メンバー </th>
+      <th>
+        <% @video.people.each do |person| %>
+          <span class= 'badge badge-primary'><%= person.name %>,</span>
+        <% end %>
+      </th>
+    </tr>
+
+    <tr class="video-quotes">
+      <th> 名言 </th>
+      <th>   
+        <h3> <%= @video.quotes %> </h3>
+      </th>
+    </tr>
+
+    <tr class="video-mvp">
+      <th> マンオブザマッチ </th>
+      <th>   
+        <h3> <%= @video.mvp %> </h3> 
+      </th>
+    </tr>
+
+    <tr class="video-editor">
+      <th> 編集者 </th>
+      <th>   
+        <h3> <%= @video.editor %> </h3>
+      </th>
+    </tr>
+
+    <tr class="video-place">
+      <th> 撮影場所 </th>
+      <th>
+        <% @video.places.each do |place| %>
+          <span class= 'badge badge-primary'><%= place.name %></span>
+        <% end %>
+      </th>
+    </tr>
+
+    <tr class="video-music">
+      <th> BGM </th>
+      <th>   
+        <% @video.musics.each do |music| %>
+          <span class= 'badge badge-primary'><%= music.name %></span>
+        <% end %>
+      </th>
+    </tr>
+
+    <tr class="video-penalty">
+      <th> 罰ゲーム </th>
+      <th>   
+        <% @video.penalties.each do |penalty| %>
+          <span class= 'badge badge-primary'><%= penalty.name %></span>
+        <% end %>
+      </th>
+    </tr>
+
+    <tr class="video-tag">
+      <th> ハッシュタグ </th>
+      <th>   
+        <% @video.tags.each do |tag| %>
+          <span class= 'badge badge-primary'><%= tag.name %></span>
+        <% end %>
+      </th>
+    </tr>
+
+    <tr class="video-updated_on">
+      <th> アップロード日 </th>
+      <th>   
+        <%= @video.updated_on %> 
+      </th>
+    </tr>
+
+  </table>
+
 </div>
 
-<div class="video-title">
-  <h3> <%= @video.title %> </h3>
-</div>
-
-<div class="video-description">
-  <h3> <%= @video.description %> </h3>
-</div>
-
-<div class="kind_of">
-  <h3> <%= @video.kind_of %> </h3>
-</div>
-
-<div class="video-highlight">
-  <h3> <%= @video.highlight %> </h3>
-</div>
-
-<div class="video-category">
-  <h3> <%= @video.category %> </h3>
-</div>
-
-<div class="video-quotes">
-  <h3> <%= @video.quotes %> </h3>
-</div>
-
-<div class="video-mvp">
-  <h3> <%= @video.mvp %> </h3>
-</div>
-
-<div class="video-editor">
-  <h3> <%= @video.editor %> </h3>
-</div>
-
-<div class="video-updated_on">
-  <h3> <%= @video.updated_on %> </h3>
-</div>
 
 <%= link_to '編集',edit_video_path(@video) %>
 <%= link_to '削除',video_path(@video) ,
   method: :delete,
   data: {confirm: '本当に削除しますか？'}
 %>
+<br>

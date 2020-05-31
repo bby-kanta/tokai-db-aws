@@ -32,6 +32,20 @@
       ["晩ご飯じゃんけん",99],["いじわる",98],["十字架(サブチャン)",97]
     ],include_blank: "選択必須です" %>
   </li>
+
+  <li>
+    <div class='form-group'>
+      <%= a.collection_check_boxes(:person_ids, Person.all, :id, :name) do |person| %>
+        <div class='form-check'>
+            <%= person.label class: 'form-check-label' do %>
+                <%= person.check_box class: 'form-check-input' %>
+                <%= person.text %>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </li>
+
   <li>
     <%= a.label :名言 %>
     <%= a.text_field :quotes %>
@@ -48,6 +62,60 @@
     <%= a.label :投稿日 %>
     <%= a.date_select :updated_on,{start_year: 2014,end_year: 2020,use_month_numbers: true} %>
   </li>
+
+  <li>
+    <div class='form-group'>
+      <%= a.collection_check_boxes(:place_ids, Place.all, :id, :name) do |place| %>
+        <div class='form-check'>
+            <%= place.label class: 'form-check-label' do %>
+                <%= place.check_box class: 'form-check-input' %>
+                <%= place.text %>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </li>
+
+  <li>
+    <div class='form-group'>
+      <%= a.collection_check_boxes(:penalty_ids, Penalty.all, :id, :name) do |penalty| %>
+        <div class='form-check'>
+            <%= penalty.label class: 'form-check-label' do %>
+                <%= penalty.check_box class: 'form-check-input' %>
+                <%= penalty.text %>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </li>
+
+    <li>
+    <div class='form-group'>
+      <%= a.collection_check_boxes(:music_ids, Music.all, :id, :name) do |music| %>
+        <div class='form-check'>
+            <%= music.label class: 'form-check-label' do %>
+                <%= music.check_box class: 'form-check-input' %>
+                <%= music.text %>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </li>
+
+  <li>
+    <div class='form-group'>
+      <%= a.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+        <div class='form-check'>
+            <%= tag.label class: 'form-check-label' do %>
+                <%= tag.check_box class: 'form-check-input' %>
+                <%= tag.text %>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </li>
+
+
   <li>
     <%= a.submit %>
   </li>

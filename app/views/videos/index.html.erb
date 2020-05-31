@@ -50,8 +50,13 @@
                 <% else %>
                   <h3 class="no-one"> 該当者無し </h3>
               <% end %>
-
             </div><%# article-mvp %>
+            
+            <div class="article-tags">
+              <% video.tags.shuffle.first(4).each do |tag| %>
+                <div class="article-tag"><%= tag.name %></div>
+              <% end %>
+            </div>
 
           </div><%# article_row %>
 
