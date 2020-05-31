@@ -30,7 +30,6 @@
 
 .video-article {
   width :13em;
-  height: 11em;
   border: 2px solid rgb(238, 237, 237)
 }
 
@@ -48,8 +47,19 @@
 }
 // ↑記事が上にホバーするコード
 
+// iframeのheightをレスポンシブにする　https://akros-ac.jp/8277/
 .article-image {
+  position: relative;
   width: 100%;
+  height: 0;
+  padding-top: 56%;
+}
+.article-image iframe{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .article-column{
@@ -124,13 +134,14 @@
   background-color: rgb(117, 76, 0);
 }
 
+
+// ハッシュタグのデザイン
 .article-tags{
   width: 55%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
 }
-
 .article-tag {
   width: 49%;
   margin: 0.5%;
@@ -147,13 +158,37 @@
   font-size :13px;
 }
 
+
+// showのCSS
+.all-contents {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
 .video_box{
-  width : 70%;
+  width : 75%;
+  border-top: 2px solid rgb(238, 237, 237);
 }
 
 .video-youtube{
+  position: relative;
   width : 100%;
-  height : 300px;
+  height : 0;
+  padding-top:55%
+}
+
+.video-youtube iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video_title {
+  width: 100%;
+  margin: 20px 0px;
 }
 
 table {
@@ -163,3 +198,72 @@ table {
 td, th {
   padding: 20px 30px;
   } 
+
+.video-rate h3 {// ランク
+  font-size: 40px;
+}
+
+.video-tags{ // ハッシュタグ
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.video-tag * {
+  margin: 0 5px 5px 0;
+  display: inline-block;
+  background-color: rgb(0, 247, 255);
+  border-radius: 5px;
+  color: white;
+  font-size: 1em;
+}
+
+div[class*="video-person"] , .channel , .video-category , .video-penalty , .video-place , .video-music {
+  color: white;
+  display: flex;
+  justify-content:center;
+}
+
+div[class*="video-person"] a , .channel h3 , .video-category h3 , .video-penalty h3 , .video-place h3 , .video-music h3{
+  width: 30%;
+  border-radius: 5px;
+  font-size: 1.5em;
+  color : white;
+}
+
+div[class*="video-person"] a h3 {
+  border-radius: 5px;
+}
+
+.channel h3 {
+  background-color: red;
+  font-size: 1.3em;
+}
+.video-category h3 {
+  background-color: rgb(212, 0, 255);
+}
+.video-penalty h3 {
+  font-size: 0.7em;
+}
+
+.video-places h3 {
+  background-color: rgb(255, 153, 0);
+  font-size: 0.7em;
+}
+
+.video-musics h3{
+  background-color: greenyellow;
+  font-size: 0.7em;
+}
+
+.video-people .video-person-cast, .video-penalty{ //登場メンバーのデザインです
+  margin: 5px;
+}
+
+
+.related-videos{
+  display: inline-block;
+}
+
+.related-videos .video-article{
+  margin-bottom: 10px;
+}

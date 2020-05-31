@@ -1,0 +1,28 @@
+<% case person_kind %>
+<% when 1 %>
+  <%= link_to person_path(1) do %>
+    <h3 class="tetsuya"> てつや </h3>
+  <% end %>
+<% when 2 %>
+  <%= link_to person_path(2) do %>
+    <h3 class="shibayu"> しばゆー </h3>
+  <% end %>
+<% when 3 %>
+  <%= link_to person_path(3) do %>
+    <h3 class="ryo"> りょう </h3> 
+  <% end %>
+<% when 4 %>
+  <%= link_to person_path(4) do %>
+    <h3 class="toshimitsu"> としみつ </h3>
+  <% end %>
+<% when 5 %>
+  <%= link_to person_path(5) do %>
+    <h3 class="yumemaru"> ゆめまる </h3>
+  <% end %>
+<% when 6 %>
+  <%= link_to person_path(6) do %>
+    <h3 class="mushimegane"> 虫眼鏡 </h3>
+  <% end %>
+<% else %>
+  <h3 class="no-one"> 該当者無し </h3>
+<% end %>
