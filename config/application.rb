@@ -31,5 +31,10 @@ module TokaiDatabase
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # 日本語設定
+    config.time_zone = 'Tokyo'
+    config.i18n.default_locale = :ja
+    
   end
 end

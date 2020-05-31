@@ -2,7 +2,6 @@ class VideosController < ApplicationController
 
   def index
     @videos = Video.all.order(updated_on:'desc')
-    # @tags = @video.tags
   end
 
   def new
@@ -29,7 +28,7 @@ class VideosController < ApplicationController
   def update
     @video = Video.find(params[:id])
     if @video.update(video_params)
-      redirect_to videos_path
+      redirect_to video_path(@video)
     else
       render 'edit'
     end
@@ -43,7 +42,7 @@ class VideosController < ApplicationController
 
   private
     def video_params
-      params.require(:video).permit(:url,:title,:kind_of,:rate,:description,:highlight,:category,:quotes,:mvp,:editor,:updated_on,person_attributes:[:id,:name])
+      params.require(:video).permit(:url,:title,:kind_of,:rate,:description,:highlight,:category,:quotes,:mvp,:editor,:updated_on,person_attributes:[:id,:name],person_ids: [],place_ids: [],penalty_ids: [],music_ids: [],tag_ids: [])
     end
 
 end
