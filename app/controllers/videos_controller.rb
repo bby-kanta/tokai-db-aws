@@ -19,6 +19,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    @videos = Video.all.order(updated_on:'desc')
   end
 
   def edit

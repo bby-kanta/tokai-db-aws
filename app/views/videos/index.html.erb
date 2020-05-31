@@ -8,7 +8,7 @@
       <div class="video-article">
       
         <div class="article-image">
-          <iframe width="100%" height="200px" src="https://www.youtube.com/embed/<%= video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/<%= video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
         <div class="article-column">
@@ -33,23 +33,7 @@
 
 
             <div class="article-mvp">
-
-              <% case video.mvp %>
-                <% when 1 %>
-                  <h3 class="tetsuya"> てつや </h3>
-                <% when 2 %>
-                  <h3 class="shibayu"> しばゆー </h3>
-                <% when 3 %>
-                  <h3 class="ryo"> りょう </h3> 
-                <% when 4 %>
-                  <h3 class="toshimitsu"> としみつ </h3>
-                <% when 5 %>
-                  <h3 class="yumemaru"> ゆめまる </h3>
-                <% when 6 %>
-                  <h3 class="mushimegane"> 虫眼鏡 </h3>
-                <% else %>
-                  <h3 class="no-one"> 該当者無し </h3>
-              <% end %>
+              <%= render partial: "person-color", locals: { person_kind: video.mvp } %>
             </div><%# article-mvp %>
             
             <div class="article-tags">
