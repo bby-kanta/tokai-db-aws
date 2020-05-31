@@ -93,3 +93,57 @@ div[class^="nav_"] a{ //nav_で始まるクラスに適用
   max-width: 100%;
   width: 90%;
 }
+
+div[class*="form_video"]{
+  background-color: rgb(250, 250, 250);
+}
+
+div[class*="form-"]{
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"] {
+  width: 300px;
+  height: 30px;
+}
+
+textarea {
+  width: 300px;
+  height: 200px;
+}
+
+select {
+  width: 300px;
+  height: 40px;
+}
+
+.form-collection-check { //中間テーブルのセレクター
+  width: 100%;
+}
+.form_group { //中間テーブルのセレクター
+  display: flex;
+  flex-wrap: wrap;
+}
+.form_check { //中間テーブルのセレクター
+  margin-right: 0.5em;
+  font-size: 1em;
+}
+
+// sumitボタン
+.decorated-btn {
+  background-color: rgb(255, 145, 0);
+  font-size: 12px;
+  border-radius: 5px;
+  border-bottom: solid 3px rgb(0, 0, 0);
+  box-shadow: 3px 3px 3px gray;
+  transition: 0.3s;
+}
+.click-down:active {
+  transform: translateY(2px);
+  border-bottom: none;
+}
+.decorated-btn:hover {
+  background-color: rgb(5, 253, 253);
+}
