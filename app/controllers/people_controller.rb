@@ -2,6 +2,7 @@ class PeopleController < ApplicationController
 
   def index
     @people = Person.all.order(id:'asc')
+    @ryo = Person.find(3)
   end
 
   def new

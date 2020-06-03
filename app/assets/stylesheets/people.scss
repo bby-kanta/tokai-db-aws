@@ -1,3 +1,84 @@
 // Place all the styles related to the people controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+h2 {
+  margin-bottom: 1%;
+}
+
+.people-tokai{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
+div[class*="person-"] {
+  width: 30%;
+  min-width: 200px;
+  margin-bottom: 3%;
+  border: 2px solid rgb(238, 232, 232);
+}
+
+div[class*="person-"] img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+div[class*="person-"] p {
+  font-size: 0.5em;
+  overflow: hidden;
+  height: 5.4em;
+  line-height: 1.8;
+}
+
+.image-person{
+  padding: 7% 7% 0 7%;
+}
+
+.introduce-person { //記事の写真の下の部分
+  padding: 0 5% 5% 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.introduce-person h4 { //出演回数
+  margin: 0;
+  font-size: 0.5em;
+}
+
+// 記事の中の罰ゲームタグのデザイン
+.person_penalties{
+  margin-top: 3%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.penalty-person h4{
+  margin: 0;
+  padding: 2px;
+  color: white;
+  border-radius: 5px;
+  // 2行以上は隠す
+  font-size: 0.4em;
+  overflow: hidden;
+  height: 1.8em;
+  line-height: 1.8;
+}
+
+
+.people-sub { //出演者一覧のdiv
+  display: flex;
+  flex-wrap: wrap;
+}
+.people-sub a{ //出演者の a タグ
+  margin: 0 20px 20px 0;
+}
+.person_tag h4 {
+  margin: 0;
+  color: white;
+  background-color: rgb(200, 255, 0);
+  border-radius: 5px;
+  white-space: nowrap; //改行させないコード
+}
