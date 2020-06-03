@@ -2,31 +2,34 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-// ul{
-//   padding: 0;
-//   display: flex;
-//   flex-wrap: wrap;
-// }
+.tab-pane {
+  margin-top: 20px;
+}
 
-// li {
-//   width: 200px;
-//   margin-right: 1%;
-//   margin-bottom: 1%;
-// }
+.nav-item{
+  background-color: rgb(255, 255, 255);
+  a{
+    color: rgb(171, 169, 169);
+    font-size: 1em;
+  }
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link { //タブがアクティブのときの背景色 https://application.hateblo.jp/entry/2019/07/25/000000_1
+  color: #fff;
+  background-color: rgb(255, 145, 0);
+}
 
 .video-articles{
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  // align-items: center;
-  // justify-content: center;
+  a{
+    margin-right: 0.3em;
+    margin-bottom: 1em;
+  }
 }
 
-.video-articles a {
-  margin-right: 0.3em;
-  margin-bottom: 1em;
-}
 
 .video-article {
   width :13em;
@@ -109,11 +112,12 @@
   display: flex;
   justify-content: center;
   color:white;
-  font-size: 15px;
 }
 .article-mvp h3{
+  white-space: nowrap;
   border-radius: 5px;
   padding: 1px 13px ;
+  font-size: 0.7em;
 }
 .tetsuya {
   background-color: rgb(255, 145, 0);
@@ -144,13 +148,18 @@
 }
 .article-tag {
   width: 49%;
+  height: 24px;
   margin: 0.5%;
-  font-size: 13px;
+  border-radius: 5px;
+  background-color: rgb(0, 247, 255);
   display: flex;
   justify-content: center;
-  border-radius: 5px;
+  align-items: center;
+}
+.article-tag h3 {
+  font-size: 13px;
   color: white;
-  background-color: rgb(0, 247, 255);
+  white-space: nowrap;
 }
 
 .article-date {

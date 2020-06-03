@@ -1,56 +1,45 @@
 <%= stylesheet_link_tag "videos", :media => "all" %>
-
-<h2>東海オンエア出演最新動画一覧</h2>
-
-<div class="video-articles">
-  <% @videos.each do |video|%>
-    <%= link_to video_path(video.id) do %>
-      <div class="video-article">
-      
-        <div class="article-image">
-          <iframe src="https://www.youtube.com/embed/<%= video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-
-        <div class="article-column">
-          <div class="article-title">
-            <p class="article_title"><%= video.title %></p>
-          </div>
-
-          <div class="article_row">
-
-            <div class="article-rate">
-              <% case video.rate %>
-                <% when 1 %>
-                  <h3 class="S"> S </h3>
-                <% when 2 %>
-                  <h3 class="A"> A </h3> 
-                <% when 3 %>
-                  <h3 class="B"> B </h3> 
-                <% else %>
-                  <h3 class="C"> C </h3> 
-              <% end %>
-            </div><%# article-rate %>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 
-            <div class="article-mvp">
-              <%= render partial: "person-color", locals: { person_kind: video.mvp } %>
-            </div><%# article-mvp %>
-            
-            <div class="article-tags">
-              <% video.tags.shuffle.first(4).each do |tag| %>
-                <div class="article-tag"><%= tag.name %></div>
-              <% end %>
-            </div>
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a href="#all-videos" class="nav-link active" data-toggle="tab">全動画一覧(<%= @videos.count %>)</a>
+  </li>
+  <li class="nav-item">
+    <a href="#main-videos" class="nav-link" data-toggle="tab">メインチャンネル(<%= @main.count %>)</a>
+  </li>
+  <li class="nav-item">
+    <a href="#sub-videos" class="nav-link" data-toggle="tab">サブチャンネル(<%= @sub.count %>)</a>
+  </li>
+  <li class="nav-item">
+    <a href="#private-videos" class="nav-link" data-toggle="tab">個人チャンネル(<%= @private.count %>)</a>
+  </li>
+  <li class="nav-item">
+    <a href="#deffrent-videos" class="nav-link" data-toggle="tab">その他(<%= @other.count %>)</a>
+  </li>
+</ul>
 
-          </div><%# article_row %>
+<div class="tab-content">
+  <div id="all-videos" class="tab-pane fade show active">
+    <%= render partial: "video-articles", locals: { videos: @videos }%>
+  </div>
 
-          <div class="article-date">
-            <%= video.updated_on %>
-          </div>
+  <div id="main-videos" class="tab-pane fade">
+    <%= render partial: "video-articles", locals: { videos: @main }%>
+  </div>
 
-        </div><%# article-column %>
+  <div id="sub-videos" class="tab-pane fade">
+    <%= render partial: "video-articles", locals: { videos: @sub }%>
+  </div>
 
-      </div><%# video-article %>
-    <% end %>
-  <% end %>
-</div><%# video-articles %>
+  <div id="private-videos" class="tab-pane fade">
+    <%= render partial: "video-articles", locals: { videos: @private }%>
+  </div>
+
+  <div id="deffrent-videos" class="tab-pane fade">
+    <%= render partial: "video-articles", locals: { videos: @other }%>
+  </div>
+
+</div>

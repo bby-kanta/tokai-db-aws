@@ -1,7 +1,11 @@
 class VideosController < ApplicationController
 
   def index
-    @videos = Video.all.order(updated_on:'desc')
+    @videos  = Video.all.order(updated_on:'desc')
+    @main    = Video.where(kind_of: 0)
+    @sub     = Video.where(kind_of: 1)
+    @private = Video.where(kind_of:2)
+    @other   = Video.where(kind_of:3)
   end
 
   def new

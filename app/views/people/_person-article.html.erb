@@ -4,6 +4,7 @@
   </div>
   <div class="introduce-person">
     <h3><%= person_id.name %></h3>
+    <h4> 出演回数 <%= person_id.videos.count %>  回 </h4>
     <p><%=person_id.description %></p>
     <div class="person_penalties">
       <% person_id.penalties.shuffle.first(2).each do |penalty|%>

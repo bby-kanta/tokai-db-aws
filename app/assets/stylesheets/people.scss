@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+h2 {
+  margin-bottom: 1%;
+}
+
 .people-tokai{
   display: flex;
   flex-wrap: wrap;
@@ -10,7 +14,7 @@
 }
 
 div[class*="person-"] {
-  width: 25%;
+  width: 30%;
   min-width: 200px;
   margin-bottom: 3%;
   border: 2px solid rgb(238, 232, 232);
@@ -39,6 +43,10 @@ div[class*="person-"] p {
   align-items: center;
   justify-content: center;
 }
+.introduce-person h4 { //出演回数
+  margin: 0;
+  font-size: 0.5em;
+}
 
 // 記事の中の罰ゲームタグのデザイン
 .person_penalties{
@@ -57,4 +65,20 @@ div[class*="person-"] p {
   overflow: hidden;
   height: 1.8em;
   line-height: 1.8;
+}
+
+
+.people-sub { //出演者一覧のdiv
+  display: flex;
+  flex-wrap: wrap;
+}
+.people-sub a{ //出演者の a タグ
+  margin: 0 20px 20px 0;
+}
+.person_tag h4 {
+  margin: 0;
+  color: white;
+  background-color: rgb(200, 255, 0);
+  border-radius: 5px;
+  white-space: nowrap; //改行させないコード
 }

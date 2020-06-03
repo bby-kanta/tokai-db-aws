@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "people", :media => "all" %>
 
-<h2>登場人物一覧</h2> 
+<h2>メンバー一覧</h2> 
 <h3><%= link_to "作成",new_person_path %></h3>
 
 <div class="people-tokai"><%# メンバーの記事一覧 %>
@@ -32,19 +32,16 @@
 </div>  <%# people-tokai %>
 
 
-  <% Person.find(3).penalties.each do |penalty|%>
-    <%= penalty.name %>
-  <% end %>
+<h2>出演者一覧</h2> 
 
-
-
-
-
-<div class="tab-people">
+<div class="people-sub">
   <% @people.each do |person|%>
     <%= link_to person_path(person.id) do %>
-      <div class="tab-person">
-        <%= person.name %>
+      <div class="person_tag">
+        <h4>
+          <%= person.name %>
+          (<%= person.videos.count %>)
+        </h4>
       </div>
     <% end %>
   <% end %>
