@@ -1,0 +1,30 @@
+<%= link_to person_path(person_id) do %>
+  <div class="image-person">
+    <%= image_tag(person_image) %>
+  </div>
+  <div class="introduce-person">
+    <h3><%= person_id.name %></h3>
+    <p><%=person_id.description %></p>
+    <div class="person_penalties">
+      <% person_id.penalties.shuffle.first(2).each do |penalty|%>
+        <div class="penalty-person">
+            <% case penalty.person_id %>
+            <% when 1 %>
+                <h4 class="tetsuya"> <%= penalty.name %> </h4>
+            <% when 2 %>
+                <h4 class="shibayu"> <%= penalty.name %> </h4>
+            <% when 3 %>
+                <h4 class="ryo"> <%= penalty.name %> </h4>
+            <% when 4 %>
+                <h4 class="toshimitsu"> <%= penalty.name %> </h4>
+            <% when 5 %>
+                <h4 class="yumemaru"> <%= penalty.name %> </h4>
+            <% when 6 %>
+                <h4 class="mushimegane"> <%= penalty.name %> </h4>
+            <% end %>
+        </div> <%# person_penalty %>
+      <% end %>
+    </div>
+
+  </div> <%# introduce-person %>
+<% end %>
