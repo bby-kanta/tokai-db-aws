@@ -2,10 +2,18 @@ class VideosController < ApplicationController
 
   def index
     @videos  = Video.all.order(updated_on:'desc')
-    @main    = Video.where(kind_of: 0)
-    @sub     = Video.where(kind_of: 1)
-    @private = Video.where(kind_of:2)
-    @other   = Video.where(kind_of:3)
+    @main    = @videos.where(kind_of: 0)
+    @sub     = @videos.where(kind_of: 1)
+    @private = @videos.where(kind_of:2)
+    @other   = @videos.where(kind_of:3)
+  end
+
+  def search
+    @videos = Video.search(params[:keyword])
+    @main    = @videos.where(kind_of: 0)
+    @sub     = @videos.where(kind_of: 1)
+    @private = @videos.where(kind_of:2)
+    @other   = @videos.where(kind_of:3)
   end
 
   def new
