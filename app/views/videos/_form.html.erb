@@ -126,6 +126,20 @@
       </div>
     </div>
 
+    <div class="form-collection-check">
+      <%= a.label :recommend_ids , '関連動画' %>
+      <div class='form_group'>
+        <%= a.collection_check_boxes(:recommend_ids, Video.all, :id, :title) do |recommend| %>
+          <div class='form_check'>
+              <%= recommend.label class: 'form-check-label' do %>
+                  <%= recommend.check_box class: 'form-check-input' %>
+                  <%= recommend.text %>
+              <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <div class="form-">
       <%= a.label :投稿日 %>
       <%= a.date_select :updated_on,{start_year: 2014,end_year: 2020,use_month_numbers: true} %>

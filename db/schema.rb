@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_22_144150) do
+ActiveRecord::Schema.define(version: 2020_06_04_135058) do
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.bigint "user_id"
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 2020_05_22_144150) do
     t.string "name", null: false
     t.text "description"
     t.integer "already", default: 1, null: false
-    # 0のときは未消化、1のときは消化済み
     t.date "since", default: "1998-09-28"
     t.bigint "person_id"
     t.datetime "created_at", precision: 6, null: false
@@ -88,6 +87,16 @@ ActiveRecord::Schema.define(version: 2020_05_22_144150) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.bigint "video_id"
+    t.bigint "recommend_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recommend_id"], name: "index_relationships_on_recommend_id"
+    t.index ["video_id", "recommend_id"], name: "index_relationships_on_video_id_and_recommend_id", unique: true
+    t.index ["video_id"], name: "index_relationships_on_video_id"
   end
 
   create_table "tag_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -149,6 +158,8 @@ ActiveRecord::Schema.define(version: 2020_05_22_144150) do
   add_foreign_key "person_videos", "videos"
   add_foreign_key "place_videos", "places"
   add_foreign_key "place_videos", "videos"
+  add_foreign_key "relationships", "videos"
+  add_foreign_key "relationships", "videos", column: "recommend_id"
   add_foreign_key "tag_videos", "tags"
   add_foreign_key "tag_videos", "videos"
   add_foreign_key "tags", "people"

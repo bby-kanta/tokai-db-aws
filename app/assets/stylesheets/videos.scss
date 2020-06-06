@@ -50,20 +50,21 @@
 }
 // ↑記事が上にホバーするコード
 
-// iframeのheightをレスポンシブにする　https://akros-ac.jp/8277/
-.article-image {
+.article-image {// iframeのheightをレスポンシブにする　https://akros-ac.jp/8277/
   position: relative;
   width: 100%;
   height: 0;
   padding-top: 56%;
+
+  iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
-.article-image iframe{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+
 
 .article-column{
   display: flex;
@@ -112,13 +113,15 @@
   display: flex;
   justify-content: center;
   color:white;
+
+  h3{
+    white-space: nowrap;
+    border-radius: 5px;
+    padding: 1px 13px ;
+    font-size: 0.6em;
+  }
 }
-.article-mvp h3{
-  white-space: nowrap;
-  border-radius: 5px;
-  padding: 1px 13px ;
-  font-size: 0.7em;
-}
+
 .tetsuya {
   background-color: rgb(255, 145, 0);
 }
@@ -139,27 +142,28 @@
 }
 
 
-// ハッシュタグのデザイン
-.article-tags{
+.article-tags{// ハッシュタグのデザイン
   width: 55%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-}
-.article-tag {
-  width: 49%;
-  height: 24px;
-  margin: 0.5%;
-  border-radius: 5px;
-  background-color: rgb(0, 247, 255);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.article-tag h3 {
-  font-size: 13px;
-  color: white;
-  white-space: nowrap;
+
+  .article-tag {
+    width: 49%;
+    height: 24px;
+    margin: 0.5%;
+    border-radius: 5px;
+    background-color: rgb(0, 247, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h3 {
+      font-size: 13px;
+      color: white;
+      white-space: nowrap;
+    }
+  }
 }
 
 .article-date {
@@ -184,16 +188,16 @@
   position: relative;
   width : 100%;
   height : 0;
-  padding-top:55%
+  padding-top:55%;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
-.video-youtube iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 
 .video_title {
   width: 100%;
@@ -271,8 +275,8 @@ div[class*="video-person"] a h3 {
 
 .related-videos{
   display: inline-block;
-}
-
-.related-videos .video-article{
-  margin-bottom: 10px;
+  
+  .video-article{
+    margin-bottom: 10px;
+  }
 }
