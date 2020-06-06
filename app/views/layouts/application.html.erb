@@ -50,6 +50,13 @@
         <%= link_to "ハッシュタグ",tags_path %>
       </div>
 
+      <div class="nav_search">
+        <%= form_with(url: search_videos_path, local: true, method: :get, class: "search-form") do |f| %>
+          <%= f.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" %>
+          <%= f.submit "検索", class: "search-btn" %>
+      <% end %>
+      </div>
+
       <% if user_signed_in? %>
         <div class="user_btn">
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>

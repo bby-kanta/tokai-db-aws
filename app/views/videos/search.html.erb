@@ -1,0 +1,55 @@
+<%= stylesheet_link_tag "videos", :media => "all" %>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a href="#all-videos" class="nav-link active" data-toggle="tab">全動画一覧(<%= @videos.count %>)</a>
+  </li>
+  <li class="nav-item">
+    <a href="#main-videos" class="nav-link" data-toggle="tab">メインチャンネル(<%= @main.count %>)</a>
+  </li>
+  <li class="nav-item">
+    <a href="#sub-videos" class="nav-link" data-toggle="tab">サブチャンネル(<%= @sub.count %>)</a>
+  </li>
+  <li class="nav-item">
+    <a href="#private-videos" class="nav-link" data-toggle="tab">個人チャンネル(<%= @private.count %>)</a>
+  </li>
+  <li class="nav-item">
+    <a href="#deffrent-videos" class="nav-link" data-toggle="tab">その他(<%= @other.count %>)</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div id="all-videos" class="tab-pane fade show active">
+    <div class="video-articles">
+      <%= render partial: "video-articles", locals: { videos: @videos }%>
+    </div>
+  </div>
+
+  <div id="main-videos" class="tab-pane fade">
+    <div class="video-articles">
+      <%= render partial: "video-articles", locals: { videos: @main }%>
+    </div>
+  </div>
+
+  <div id="sub-videos" class="tab-pane fade">
+    <div class="video-articles">
+      <%= render partial: "video-articles", locals: { videos: @sub }%>
+    </div>
+  </div>
+
+  <div id="private-videos" class="tab-pane fade">
+    <div class="video-articles">
+      <%= render partial: "video-articles", locals: { videos: @private }%>
+    </div>
+  </div>
+
+  <div id="deffrent-videos" class="tab-pane fade">
+    <div class="video-articles">
+      <%= render partial: "video-articles", locals: { videos: @other }%>
+    </div>
+  </div>
+
+</div>
