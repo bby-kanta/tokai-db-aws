@@ -19,5 +19,9 @@ class Video < ApplicationRecord
   has_many :tag_videos,dependent: :destroy
   has_many :tags,through: :tag_videos
 
-  
+  has_many :relationships,dependent: :destroy
+  # has_many :relationships,dependent: :destroy
+  has_many :recommends, through: :relationships
+  # has_many :videos, through: :relationships
+
 end

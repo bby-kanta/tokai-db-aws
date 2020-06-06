@@ -24,6 +24,7 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     @videos = Video.all.order(updated_on:'desc')
+    @related = @video.recommends
   end
 
   def edit
@@ -47,7 +48,7 @@ class VideosController < ApplicationController
 
   private
     def video_params
-      params.require(:video).permit(:url,:title,:kind_of,:rate,:description,:highlight,:category,:quotes,:mvp,:editor,:updated_on,person_attributes:[:id,:name],person_ids: [],place_ids: [],penalty_ids: [],music_ids: [],tag_ids: [])
+      params.require(:video).permit(:url,:title,:kind_of,:rate,:description,:highlight,:category,:quotes,:mvp,:editor,:updated_on,person_attributes:[:id,:name],person_ids: [],place_ids: [],penalty_ids: [],music_ids: [],tag_ids: [],recommend_ids: [])
     end
 
 end
