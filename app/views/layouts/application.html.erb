@@ -51,10 +51,17 @@
       </div>
 
       <div class="nav_search">
-        <%= form_with(url: search_videos_path, local: true, method: :get, class: "search-form") do |f| %>
-          <%= f.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" %>
-          <%= f.submit "検索", class: "search-btn" %>
-      <% end %>
+        <%= search_form_for @search, url: search_videos_path do |f| %>
+        
+          <%= f.label :updated_on_cont, '日付'%>
+          <%= f.date_select :updated_on_gteq,{start_year: 2013,end_year: 2020,selected:Date.new(2013, 10, 12),include_blank: true} %>
+          <%= f.label :updated_on_cont, '〜' %>
+          <%= f.date_select :updated_on_lteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
+
+          <%= f.label :title_cont, 'タイトル' %>
+          <%= f.search_field :title_cont %>
+          <%= f.submit '検索' %>
+        <% end %>
       </div>
 
       <% if user_signed_in? %>
