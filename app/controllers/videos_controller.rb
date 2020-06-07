@@ -9,7 +9,8 @@ class VideosController < ApplicationController
   end
 
   def search
-    @videos = Video.search(params[:keyword])
+    @search = Video.ransack(params[:q])
+    @videos = @search.result
     @main    = @videos.where(kind_of: 0)
     @sub     = @videos.where(kind_of: 1)
     @private = @videos.where(kind_of:2)
@@ -57,6 +58,10 @@ class VideosController < ApplicationController
   private
     def video_params
       params.require(:video).permit(:url,:title,:kind_of,:rate,:description,:highlight,:category,:quotes,:mvp,:editor,:updated_on,person_attributes:[:id,:name],person_ids: [],place_ids: [],penalty_ids: [],music_ids: [],tag_ids: [],recommend_ids: [])
+    end
+
+    def search_params
+      params.require(:q).permit(:title_or_description_or_highlight_cont_or_rate_or_updated_on_cont)
     end
 
 end
