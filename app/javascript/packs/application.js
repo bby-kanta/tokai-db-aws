@@ -3,6 +3,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+
 import 'bootstrap'; // 6/3に追加
 import '../stylesheets/application'; // 6/3に追加
 
