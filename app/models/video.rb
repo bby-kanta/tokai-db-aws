@@ -22,8 +22,4 @@ class Video < ApplicationRecord
   has_many :relationships,dependent: :destroy
   has_many :recommends, through: :relationships
 
-  def self.search(search)
-    return Video.all unless search
-    Video.where(['title LIKE ? OR description LIKE ? OR highlight LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"])
-  end
 end

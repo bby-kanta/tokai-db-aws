@@ -10,7 +10,7 @@ class VideosController < ApplicationController
 
   def search
     @search = Video.ransack(params[:q])
-    @videos = @search.result
+    @videos = @search.result.order(updated_on: 'desc')
     @main    = @videos.where(kind_of: 0)
     @sub     = @videos.where(kind_of: 1)
     @private = @videos.where(kind_of:2)

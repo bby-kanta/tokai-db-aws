@@ -4,9 +4,8 @@
     <title>かんた東海オンエア伝道大使の</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all','data-turbolinks-eval': 'false'%>
+    <%= javascript_pack_tag 'application','data-turbolinks-eval': 'false' %>
   </head>
 
   <body>
@@ -24,35 +23,17 @@
     <% end %>
     <%# ↑devise用の記述 %>
 
-    <div class="navbar">
-
-      <div class="title_logo">
+    <%# <div class="navbar"> %>
+    <nav class="navbar navbar-light bg-white fixed-top">
+      <div>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <%= link_to image_tag('tokaidb-logo.jpg',size: '400x60'),videos_path %>
-      </div><%# title-logo %>
-
-      <div class="nav_people">
-        <%= link_to "登場人物",people_path %>
-      </div>
-      
-      <div class="nav_penalty">
-        <%= link_to "罰ゲーム(十字架)",penalties_path %>
-      </div>
-      
-      <div class="nav_place">
-        <%= link_to "撮影場所",places_path %>
-      </div>
-      
-      <div class="nav_music">
-        <%= link_to "BGM",musics_path %>
       </div>
 
-      <div class="nav_tags">
-        <%= link_to "ハッシュタグ",tags_path %>
-      </div>
-
-      <div class="nav_search">
-        <%= search_form_for @search, url: search_videos_path do |f| %>
-        
+      <div>
+        <%= search_form_for @search,html: { class: "form-inline" }, url: search_videos_path do |f| %>
           <%= f.label :updated_on_cont, '日付'%>
           <%= f.date_select :updated_on_gteq,{start_year: 2013,end_year: 2020,selected:Date.new(2013, 10, 12),include_blank: true} %>
           <%= f.label :updated_on_cont, '〜' %>
@@ -78,7 +59,42 @@
          </div>
       <% end %>
 
-    </div><%# navbar %>
+        
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to "登場人物",people_path, {class: "nav-link"} %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "罰ゲーム(十字架)",penalties_path,{class: "nav-link"} %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "撮影場所",places_path ,{class: "nav-link"}%>
+          </li>
+          <li class="nav-item">
+            <%= link_to "BGM",musics_path,{class: "nav-link"} %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ハッシュタグ",tags_path,{class: "nav-link"} %>
+          </li>
+
+          <li class="nav-item">
+              <%= search_form_for @search,html: { class: "form-inline" }, url: search_videos_path do |f| %>
+              
+                <%= f.label :updated_on_cont, '日付'%>
+                <%= f.date_select :updated_on_gteq,{start_year: 2013,end_year: 2020,selected:Date.new(2013, 10, 12),include_blank: true} %>
+                <%= f.label :updated_on_cont, '〜' %>
+                <%= f.date_select :updated_on_lteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
+
+                <%= f.label :title_cont, 'タイトル' %>
+                <%= f.search_field :title_cont %>
+                <%= f.submit '検索' %>
+              <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
 
     <div class="main-contents">
       <div class="yield"><%= yield %></div>
