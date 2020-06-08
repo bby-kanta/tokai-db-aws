@@ -18,3 +18,15 @@ require('jquery')
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+
+function clickModalA() {
+    $("#modalA").modal('hide');
+    $("#modalB").modal('show');
+}
+
+function clickModalB() {
+    $("#modalB").modal('hide');
+    $("#modalA").modal('show');
+}
+

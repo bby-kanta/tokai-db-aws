@@ -61,7 +61,7 @@ class VideosController < ApplicationController
     end
 
     def search_params
-      params.require(:q).permit(:title_or_description_or_highlight_cont_or_rate_or_updated_on_cont)
+      params.require(:q).permit(:title_cont_or_description_or_highlight_cont_or_rate_or_updated_on_cont_or_updated_on_lteq_or_category_eq_or_mvp_eq)
     end
 
 end

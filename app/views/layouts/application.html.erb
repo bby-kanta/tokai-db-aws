@@ -32,17 +32,68 @@
         <%= link_to image_tag('tokaidb-logo.jpg',size: '400x60'),videos_path %>
       </div>
 
-      <div>
-        <%= search_form_for @search,html: { class: "form-inline" }, url: search_videos_path do |f| %>
-          <%= f.label :updated_on_cont, '日付'%>
-          <%= f.date_select :updated_on_gteq,{start_year: 2013,end_year: 2020,selected:Date.new(2013, 10, 12),include_blank: true} %>
-          <%= f.label :updated_on_cont, '〜' %>
-          <%= f.date_select :updated_on_lteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
 
-          <%= f.label :title_cont, 'タイトル' %>
-          <%= f.search_field :title_cont %>
+
+      <div class="nav-serch">
+        <%= search_form_for @search,html: { class: "form-inline" }, url: search_videos_path do |f| %>
+          <%#= f.label :title_or_description_or_highlight, 'キーワード' %>
+          <%= f.search_field :title_or_description_or_highlight_cont %>
           <%= f.submit '検索' %>
         <% end %>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">詳細検索</button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">詳細検索</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <%= search_form_for @search,html: { class: "form-inline" }, url: search_videos_path do |f| %>
+                <div class="modal-body">
+                  <div class="form_">
+                    <%= f.label :rate ,'ランク' %>
+                    <%= f.select :rate_eq,[["S",1],["A",2],["B",3],["C",4]],include_blank: true %>
+                  </div>
+
+                  <div class="form_">
+                    <%= f.label :カテゴリー %>
+                    <%= f.select :category,[
+                      ["企画もの",0],["サブチャン",1],["コント",2],["クイズ",3],["選手権",4],["検証系",5],["対決",6],["王",7],
+                      ["文理対決",8],["旅行",9],["料理",10],["スポーツ",11],["ドッキリ",12],["ゲーム",13],["コラボ",14],
+                      ["晩ご飯じゃんけん",99],["いじわる",98],["十字架(サブチャン)",97]
+                    ],include_blank: true %>
+                  </div>
+
+                  <div class="form_">
+                    <%= f.label :mvp , 'マンオブザマッチ' %>
+                    <%= f.select :mvp_eq,[["該当無し",0],["てつや",1],["しばゆー",2],["りょう",3],["としみつ",4],["ゆめまる",5],["虫眼鏡",6]],include_blank: true %>
+                  </div>
+
+                  <div class="form-date">
+                    <%= f.label :updated_on, 'アップデート日'%>
+                    <%= f.date_select :updated_on_gteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
+                    <%= f.label :updated_on_cont, 'から' %>
+                    <%= f.date_select :updated_on_lteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
+                  </div>
+
+                  <div class="form_">
+                    <%= f.label :title_or_description_or_highlight, 'キーワード' %>
+                    <%= f.search_field :title_or_description_or_highlight_cont %>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <%= f.submit '検索' %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <% if user_signed_in? %>
@@ -78,19 +129,6 @@
             <%= link_to "ハッシュタグ",tags_path,{class: "nav-link"} %>
           </li>
 
-          <li class="nav-item">
-              <%= search_form_for @search,html: { class: "form-inline" }, url: search_videos_path do |f| %>
-              
-                <%= f.label :updated_on_cont, '日付'%>
-                <%= f.date_select :updated_on_gteq,{start_year: 2013,end_year: 2020,selected:Date.new(2013, 10, 12),include_blank: true} %>
-                <%= f.label :updated_on_cont, '〜' %>
-                <%= f.date_select :updated_on_lteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
-
-                <%= f.label :title_cont, 'タイトル' %>
-                <%= f.search_field :title_cont %>
-                <%= f.submit '検索' %>
-              <% end %>
-          </li>
         </ul>
       </div>
     </nav>
