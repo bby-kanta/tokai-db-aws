@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
 
   def set_search
     @search = Video.ransack(params[:q])
-    @videos = @search.result
   end
 
   private
