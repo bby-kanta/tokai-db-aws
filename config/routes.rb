@@ -15,14 +15,33 @@ Rails.application.routes.draw do
   resources :people do
     resources :tags,only: [:create]
     resources :penalties,only: [:create]
+    collection do
+      get 'search'
+    end
   end
 
-  resources :penalties
+  resources :penalties do
+    collection do
+      get 'search'
+    end
+  end
 
-  resources :tags
+  resources :tags do
+    collection do
+      get 'search'
+    end
+  end
 
-  resources :places
+  resources :places do
+    collection do
+      get 'search'
+    end
+  end
 
-  resources :musics
+  resources :musics do
+    collection do
+      get 'search'
+    end
+  end
   
 end

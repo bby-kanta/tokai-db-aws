@@ -1,6 +1,13 @@
 class MusicsController < ApplicationController
   def index
+    @searches = Music.ransack(params[:q])
     @musics = Music.all.order(created_at:'asc')
+  end
+
+  def search
+    @searches = Music.ransack(params[:q])
+    @musics = @searches.result.order(created_at: 'desc')
+    render 'index'
   end
 
   def show
@@ -42,6 +49,10 @@ class MusicsController < ApplicationController
   private
   def music_params
     params.require(:music).permit(:name,:description)
+  end
+
+  def search_params
+    params.require(:q).permit(:name_cont_or_description_cont)
   end
 
 end

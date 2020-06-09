@@ -1,7 +1,14 @@
 class PenaltiesController < ApplicationController
 
   def index
+    @searches = Penalty.ransack(params[:q])
     @penalties = Penalty.all.order(created_at:'desc')
+  end
+
+  def search
+    @searches = Penalty.ransack(params[:q])
+    @penalties = @searches.result.order(created_at: 'desc')
+    render 'index'
   end
 
   def show
@@ -46,6 +53,10 @@ class PenaltiesController < ApplicationController
   private
   def penalty_params
     params.require(:penalty).permit(:name,:description,:since,:person_id)
+  end
+
+  def search_params
+    params.require(:q).permit(:name_cont_or_description_cont)
   end
 
 end
