@@ -3,7 +3,14 @@ class ApplicationController < ActionController::Base
   before_action :set_search
 
   def set_search
-    @search = Video.ransack(params[:q])
+    if params[:q].present? # qが空だとエラーがでるから分岐させる。
+      # 検索フォームからアクセスした時の処理
+        @search = Video.ransack(params[:q])
+      else
+      # 検索フォーム以外からアクセスした時の処理。
+        params[:q] = { sorts: 'updated_on asc' }
+        @search = Video.ransack()
+      end
   end
 
   private

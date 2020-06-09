@@ -1,7 +1,14 @@
 class PlacesController < ApplicationController
   def index
+    @searches = Place.ransack(params[:q])
     @places = Place.all.order(created_at:'asc')
   end 
+
+  def search
+    @searches = Place.ransack(params[:q])
+    @places = @searches.result.order(created_at: 'desc')
+    render 'index'
+  end
 
   def show
     @place = Place.find(params[:id])

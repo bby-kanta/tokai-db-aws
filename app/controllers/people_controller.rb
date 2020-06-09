@@ -1,8 +1,14 @@
 class PeopleController < ApplicationController
 
   def index
+    @searches = Person.ransack(params[:q])
     @people = Person.all.order(id:'asc')
-    @ryo = Person.find(3)
+  end
+
+  def search
+    @searches = Person.ransack(params[:q])
+    @people = @searches.result.order(created_at: 'desc')
+    render 'index'
   end
 
   def new
@@ -47,6 +53,10 @@ class PeopleController < ApplicationController
   private
   def person_params
     params.require(:person).permit(:name,:description)
+  end
+
+  def search_params
+    params.require(:q).permit(:name_cont_or_description_cont)
   end
 
 end

@@ -1,6 +1,13 @@
 class TagsController < ApplicationController
   def index
+    @searches = Tag.ransack(params[:q])
     @tags = Tag.all.order(created_at:'desc')
+  end
+
+  def search
+    @searches = Tag.ransack(params[:q])
+    @tags = @searches.result.order(created_at: 'desc')
+    render 'index'
   end
 
   def show
@@ -45,6 +52,10 @@ class TagsController < ApplicationController
   private
   def tag_params
     params.require(:tag).permit(:name,:description,:person_id)
+  end
+
+  def search_params
+    params.require(:q).permit(:name_cont_or_description_cont)
   end
 
 end

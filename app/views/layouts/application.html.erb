@@ -54,6 +54,12 @@
               </div>
               <%= search_form_for @search,html: { class: "form-inline" }, url: search_videos_path do |f| %>
                 <div class="modal-body">
+
+                  <div class="form_">
+                    <%= f.label :sorts ,'並び替え' %>
+                    <%= f.select :sorts, { '新しい順': 'updated_on desc', '古い順': 'updated_on asc'} , { selected: params[:q][:sorts] } %>
+                  </div>
+
                   <div class="form_">
                     <%= f.label :rate ,'ランク' %>
                     <%= f.select :rate_eq,[["S",1],["A",2],["B",3],["C",4]],include_blank: true %>
