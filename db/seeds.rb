@@ -6,34 +6,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-Person.create!(
-  name: 'てつや',
-  description: 'fさああ',
-  id: 1
-  )
-Person.create!(
-  name: 'てつや',
-  description: 'fさああ',
-  id: 2
-  )
-Person.create!(
-  name: 'てつや',
-  description: 'fさああ',
-  id: 3
-  )
-Person.create!(
-  name: 'てつや',
-  description: 'fさああ',
-  id: 4
-  )
-Person.create!(
-  name: 'てつや',
-  description: 'fさああ',
-  id: 5
-  )
-Person.create!(
-  name: 'てつや',
-  description: 'fさああ',
-  id: 6
-  )
