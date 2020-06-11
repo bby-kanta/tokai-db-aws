@@ -19,7 +19,7 @@
   background-color: rgb(255, 145, 0);
 }
 
-.video-articles{
+.video_articles{
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -31,19 +31,19 @@
 }
 
 
-.video-article {
+.video_article {
   width :13em;
   border: 2px solid rgb(238, 237, 237)
 }
 
 // ↓記事が上にホバーするコード
-.video-article{
+.video_article{
   -webkit-transform: translate(0);
   transform: translate(0) ;
   -webkit-transition: .3s ease-in-out;
   transition: .4s ease-in-out;
 }
-.video-article:hover {
+.video_article:hover {
   -webkit-transform: translateY(-10px) scale(1);
   transform: translateY(-10px) scale(1);
   opacity: 0.5;
@@ -227,24 +227,45 @@ td, th {
   background-color: rgb(0, 247, 255);
   border-radius: 5px;
   color: white;
-  font-size: 1em;
+  font-size: 0.8em;
 }
 
-div[class*="video-person"] , .channel , .video-category , .video-penalty , .video-place , .video-music {
+div[class*="video-"] , .channel{
   color: white;
-  display: flex;
-  justify-content:center;
+  display:inline-block;
 }
 
-div[class*="video-person"] a , .channel h3 , .video-category h3 , .video-penalty h3 , .video-place h3 , .video-music h3{
-  width: 30%;
+
+div[class*="video-"] a , .channel h3 , .video-category h3 , .video-penalty h3 , .video-place h3 , .video-music h3{
   border-radius: 5px;
   font-size: 1.5em;
   color : white;
+  padding: 8px;
 }
 
 div[class*="video-person"] a h3 {
   border-radius: 5px;
+  padding: 8px;
+}
+
+.video-penalties { //showの罰ゲームリスト
+
+  .video-penalty {
+    margin: 0 5px 5px 0;
+    display: inline-block;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.8em;
+    a {
+      display: inline-block;
+
+      p{
+        display: inline-block;
+        border-radius: 5px;
+      }
+
+    }
+  }
 }
 
 .channel h3 {
@@ -269,7 +290,7 @@ div[class*="video-person"] a h3 {
 }
 
 .video-people .video-person-cast, .video-penalty{ //登場メンバーのデザインです
-  margin: 5px;
+  margin: 0 10px 0 0 ;
 }
 
 

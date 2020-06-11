@@ -173,25 +173,45 @@
         <th>
           <div class="video-penalties">
             <% @video.penalties.each do |penalty| %>
-              <%= link_to penalty_path(penalty.id) do %>
-                <div class="video-penalty">
-                  <% case penalty.person.name %>
-                    <% when 'てつや'%>
-                      <h3 class="tetsuya"> <%= penalty.name %> </h3>
-                    <% when 'しばゆー' %>
-                      <h3 class="shibayu"> <%= penalty.name %> </h3>
-                    <% when 'りょう' %>
-                      <h3 class="ryo"> <%= penalty.name %> </h3> 
-                    <% when 'としみつ' %>
-                      <h3 class="toshimitsu"> <%= penalty.name %> </h3>
-                    <% when 'ゆめまる' %>
-                      <h3 class="yumemaru"> <%= penalty.name %> </h3>
-                    <% when '虫眼鏡' %>
-                      <h3 class="mushimegane"> <%= penalty.name %> </h3>
-                    <% else %>
-                      <h3 class="no-one"> 該当者無し </h3>
-                  <% end %>
-                </div>
+              <% case penalty.person.name %>
+                <% when 'てつや'%>
+                  <div class="video-penalty tetsuya">
+                    <%= link_to penalty_path(penalty.id) do %>
+                      <p> <%= penalty.name %> </p>
+                    <% end %>
+                  </div>
+                <% when 'しばゆー' %>
+                  <div class="video-penalty shibayu">
+                    <%= link_to penalty_path(penalty.id) do %>
+                      <p> <%= penalty.name %> </p>
+                    <% end %>
+                  </div>    
+                <% when 'りょう' %>
+                  <div class="video-penalty ryo">
+                    <%= link_to penalty_path(penalty.id) do %>
+                      <p> <%= penalty.name %> </p>
+                    <% end %>
+                  </div>
+                <% when 'としみつ' %>
+                  <div class="video-penalty toshimitsu">
+                    <%= link_to penalty_path(penalty.id) do %>
+                      <p> <%= penalty.name %> </p>
+                    <% end %>
+                  </div>
+                <% when 'ゆめまる' %>
+                  <div class="video-penalty yumemaru">
+                    <%= link_to penalty_path(penalty.id) do %>
+                      <p> <%= penalty.name %> </p>
+                    <% end %>
+                  </div>
+                <% when '虫眼鏡' %>
+                  <div class="video-penalty mushimegane">
+                    <%= link_to penalty_path(penalty.id) do %>
+                      <p> <%= penalty.name %> </p>
+                    <% end %>
+                  </div>
+                <% else %>
+                      <p class="no-one"> 該当者無し </p>
               <% end %>
             <% end %>
           </div>
