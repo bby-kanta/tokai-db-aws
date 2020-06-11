@@ -50,3 +50,9 @@ gem 'ransack'
 
 # 日本語化設定
 gem 'rails-i18n'
+
+gem 'uglifier'
+
+gem 'jquery-rails'
+
+gem 'bootstrap'
