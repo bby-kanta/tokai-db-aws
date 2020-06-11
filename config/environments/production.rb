@@ -26,6 +26,8 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.css_compressor = :sass
+  config.assets.enabled = true
   config.assets.compile = true
   config.assets.initialize_on_precompile=false
 

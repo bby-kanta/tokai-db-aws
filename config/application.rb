@@ -37,6 +37,7 @@ module TokaiDatabase
     config.i18n.default_locale = :ja
 
     config.hosts << "tokai-onair.herokuapp.com"
+    # config.hosts << "tokai-onair-db.an.r.appspot.com"
     
   end
 end
