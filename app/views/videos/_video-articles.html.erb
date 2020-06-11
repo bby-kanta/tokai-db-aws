@@ -1,7 +1,7 @@
 <% videos.each do |video|%>
 
   <%= link_to video_path(video.id) do %>
-    <div class="video-article">
+    <div class="video_article">
     
       <div class="article-image">
         <iframe src="https://www.youtube.com/embed/<%= video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
