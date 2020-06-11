@@ -1,13 +1,13 @@
-<%= link_to person_path(person_id) do %>
+<%= link_to person_path(personid) do %>
   <div class="image-person">
     <%= image_tag(person_image) %>
   </div>
   <div class="introduce-person">
-    <h3><%= person_id.name %></h3>
-    <h4> 出演回数 <%= person_id.videos.count %>  回 </h4>
-    <p><%=person_id.description %></p>
+    <h3><%= personid.name %></h3>
+    <h4> 出演回数 <%= personid.videos.count %>  回 </h4>
+    <p><%=personid.description %></p>
     <div class="person_penalties">
-      <% person_id.penalties.shuffle.first(2).each do |penalty|%>
+      <% personid.penalties.shuffle.first(2).each do |penalty|%>
         <div class="penalty-person">
             <% case penalty.person_id %>
             <% when 1 %>

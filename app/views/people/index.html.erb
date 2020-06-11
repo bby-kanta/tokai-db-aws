@@ -6,30 +6,32 @@
 <div class="people-tokai"><%# メンバーの記事一覧 %>
 
   <div class="person-tetsuya">
-    <%= render partial: "person-article", locals: { person_id: Person.find(1) , person_image: 'tetsuya.jpg'} %>
+    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'てつや') , person_image: 'tetsuya.jpg'} %>
   </div>
 
   <div class="person-sibayu">
-    <%= render partial: "person-article", locals: { person_id: Person.find(2) , person_image: 'sibayu.jpg'} %>
+    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'しばゆー') , person_image: 'sibayu.jpg'} %>
   </div>
 
   <div class="person-ryo">
-    <%= render partial: "person-article", locals: { person_id: Person.find(3) , person_image: 'ryo.jpg'} %>
+    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'りょう') , person_image: 'ryo.jpg'} %>
   </div>
 
   <div class="person-toshimitsu">
-    <%= render partial: "person-article", locals: { person_id: Person.find(4) , person_image: 'toshimitsu.jpg'} %>
+    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'としみつ'), person_image: 'toshimitsu.jpg'} %>
   </div>
 
   <div class="person-yumemaru">
-    <%= render partial: "person-article", locals: { person_id: Person.find(5) , person_image: 'yumemaru.jpg'} %>
+    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'ゆめまる') , person_image: 'yumemaru.jpg'} %>
   </div>
 
   <div class="person-mushimegane">
-    <%= render partial: "person-article", locals: { person_id: Person.find(6) , person_image: 'mushimegane.jpg'} %>
+    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'虫眼鏡') , person_image: 'mushimegane.jpg'} %>
   </div>
 
 </div>  <%# people-tokai %>
+
+
 
 
 <h2>出演者一覧</h2> 

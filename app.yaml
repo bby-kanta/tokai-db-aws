@@ -1,3 +1,4 @@
-entrypoint: bundle exec rackup --port $PORT
-env: flex
-runtime: ruby
+runtime: ruby25
+entrypoint: bundle exec rails server Puma -p $PORT
+includes: 
+  - secret.yaml

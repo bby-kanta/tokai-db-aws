@@ -49,7 +49,7 @@ test:
 #
 production:
   <<: *default
-  database: tokai_database_production
-  username: root
+  database: tokai_onair_db_production
+  username: kanta
   password: <%= ENV['TOKAI_DATABASE_DATABASE_PASSWORD'] %>
-  socket: “/cloudsql/tokai-onair-db:asia-northeast1:tokai-onair-db”
+  socket: /cloudsql/tokai-onair-db:asia-northeast1:tokai-onair-db
