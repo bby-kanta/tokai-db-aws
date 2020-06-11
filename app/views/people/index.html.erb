@@ -3,207 +3,35 @@
 <h2>メンバー一覧</h2> 
 <h3><%= link_to "作成",new_person_path %></h3>
 
-
 <div class="people-tokai"><%# メンバーの記事一覧 %>
-  <div class="person-tetsuya">
-    <%= link_to person_path(1) do %>
-      <div class="image-person">
-        <%= image_tag('tetsuya.jpg') %>
-      </div>
-      <div class="introduce-person">
-        <h3><%= Person.find(1).name %></h3>
-        <h4> 出演回数 <%= Person.find(1).videos.count %>  回 </h4>
-        <p><%=Person.find(1).description %></p>
-        <div class="person_penalties">
-          <% Person.find(1).penalties.shuffle.first(2).each do |penalty|%>
-            <div class="penalty-person">
-                <% case penalty.person_id %>
-                <% when 1 %>
-                    <h4 class="tetsuya"> <%= penalty.name %> </h4>
-                <% when 2 %>
-                    <h4 class="shibayu"> <%= penalty.name %> </h4>
-                <% when 3 %>
-                    <h4 class="ryo"> <%= penalty.name %> </h4>
-                <% when 4 %>
-                    <h4 class="toshimitsu"> <%= penalty.name %> </h4>
-                <% when 5 %>
-                    <h4 class="yumemaru"> <%= penalty.name %> </h4>
-                <% when 6 %>
-                    <h4 class="mushimegane"> <%= penalty.name %> </h4>
-                <% end %>
-            </div> <%# person_penalty %>
-          <% end %>
-        </div>
 
-      </div> <%# introduce-person %>
-    <% end %>
-  </div>
   <div class="person-tetsuya">
-    <%= link_to person_path(1) do %>
-      <div class="image-person">
-        <%= image_tag('tetsuya.jpg') %>
-      </div>
-      <div class="introduce-person">
-        <h3><%= Person.find(1).name %></h3>
-        <h4> 出演回数 <%= Person.find(1).videos.count %>  回 </h4>
-        <p><%=Person.find(1).description %></p>
-        <div class="person_penalties">
-          <% Person.find(1).penalties.shuffle.first(2).each do |penalty|%>
-            <div class="penalty-person">
-                <% case penalty.person_id %>
-                <% when 1 %>
-                    <h4 class="tetsuya"> <%= penalty.name %> </h4>
-                <% when 2 %>
-                    <h4 class="shibayu"> <%= penalty.name %> </h4>
-                <% when 3 %>
-                    <h4 class="ryo"> <%= penalty.name %> </h4>
-                <% when 4 %>
-                    <h4 class="toshimitsu"> <%= penalty.name %> </h4>
-                <% when 5 %>
-                    <h4 class="yumemaru"> <%= penalty.name %> </h4>
-                <% when 6 %>
-                    <h4 class="mushimegane"> <%= penalty.name %> </h4>
-                <% end %>
-            </div> <%# person_penalty %>
-          <% end %>
-        </div>
-
-      </div> <%# introduce-person %>
-    <% end %>
+    <%= render partial: "person-article", locals: { person_id: @tetsuya , person_image: 'tetsuya.jpg'} %>
   </div>
-  <div class="person-tetsuya">
-    <%= link_to person_path(1) do %>
-      <div class="image-person">
-        <%= image_tag('tetsuya.jpg') %>
-      </div>
-      <div class="introduce-person">
-        <h3><%= Person.find(1).name %></h3>
-        <h4> 出演回数 <%= Person.find(1).videos.count %>  回 </h4>
-        <p><%=Person.find(1).description %></p>
-        <div class="person_penalties">
-          <% Person.find(1).penalties.shuffle.first(2).each do |penalty|%>
-            <div class="penalty-person">
-                <% case penalty.person_id %>
-                <% when 1 %>
-                    <h4 class="tetsuya"> <%= penalty.name %> </h4>
-                <% when 2 %>
-                    <h4 class="shibayu"> <%= penalty.name %> </h4>
-                <% when 3 %>
-                    <h4 class="ryo"> <%= penalty.name %> </h4>
-                <% when 4 %>
-                    <h4 class="toshimitsu"> <%= penalty.name %> </h4>
-                <% when 5 %>
-                    <h4 class="yumemaru"> <%= penalty.name %> </h4>
-                <% when 6 %>
-                    <h4 class="mushimegane"> <%= penalty.name %> </h4>
-                <% end %>
-            </div> <%# person_penalty %>
-          <% end %>
-        </div>
 
-      </div> <%# introduce-person %>
-    <% end %>
+  <div class="person-sibayu">
+    <%= render partial: "person-article", locals: { person_id: @shibayu , person_image: 'sibayu.jpg'} %>
   </div>
-  <div class="person-tetsuya">
-    <%= link_to person_path(1) do %>
-      <div class="image-person">
-        <%= image_tag('tetsuya.jpg') %>
-      </div>
-      <div class="introduce-person">
-        <h3><%= Person.find(1).name %></h3>
-        <h4> 出演回数 <%= Person.find(1).videos.count %>  回 </h4>
-        <p><%=Person.find(1).description %></p>
-        <div class="person_penalties">
-          <% Person.find(1).penalties.shuffle.first(2).each do |penalty|%>
-            <div class="penalty-person">
-                <% case penalty.person_id %>
-                <% when 1 %>
-                    <h4 class="tetsuya"> <%= penalty.name %> </h4>
-                <% when 2 %>
-                    <h4 class="shibayu"> <%= penalty.name %> </h4>
-                <% when 3 %>
-                    <h4 class="ryo"> <%= penalty.name %> </h4>
-                <% when 4 %>
-                    <h4 class="toshimitsu"> <%= penalty.name %> </h4>
-                <% when 5 %>
-                    <h4 class="yumemaru"> <%= penalty.name %> </h4>
-                <% when 6 %>
-                    <h4 class="mushimegane"> <%= penalty.name %> </h4>
-                <% end %>
-            </div> <%# person_penalty %>
-          <% end %>
-        </div>
 
-      </div> <%# introduce-person %>
-    <% end %>
+  <div class="person-ryo">
+    <%= render partial: "person-article", locals: { person_id: @ryo , person_image: 'ryo.jpg'} %>
   </div>
-  <div class="person-tetsuya">
-    <%= link_to person_path(1) do %>
-      <div class="image-person">
-        <%= image_tag('tetsuya.jpg') %>
-      </div>
-      <div class="introduce-person">
-        <h3><%= Person.find(1).name %></h3>
-        <h4> 出演回数 <%= Person.find(1).videos.count %>  回 </h4>
-        <p><%=Person.find(1).description %></p>
-        <div class="person_penalties">
-          <% Person.find(1).penalties.shuffle.first(2).each do |penalty|%>
-            <div class="penalty-person">
-                <% case penalty.person_id %>
-                <% when 1 %>
-                    <h4 class="tetsuya"> <%= penalty.name %> </h4>
-                <% when 2 %>
-                    <h4 class="shibayu"> <%= penalty.name %> </h4>
-                <% when 3 %>
-                    <h4 class="ryo"> <%= penalty.name %> </h4>
-                <% when 4 %>
-                    <h4 class="toshimitsu"> <%= penalty.name %> </h4>
-                <% when 5 %>
-                    <h4 class="yumemaru"> <%= penalty.name %> </h4>
-                <% when 6 %>
-                    <h4 class="mushimegane"> <%= penalty.name %> </h4>
-                <% end %>
-            </div> <%# person_penalty %>
-          <% end %>
-        </div>
 
-      </div> <%# introduce-person %>
-    <% end %>
+  <div class="person-toshimitsu">
+    <%= render partial: "person-article", locals: { person_id: @toshimitsu, person_image: 'toshimitsu.jpg'} %>
   </div>
-  <div class="person-tetsuya">
-    <%= link_to person_path(1) do %>
-      <div class="image-person">
-        <%= image_tag('tetsuya.jpg') %>
-      </div>
-      <div class="introduce-person">
-        <h3><%= Person.find(1).name %></h3>
-        <h4> 出演回数 <%= Person.find(1).videos.count %>  回 </h4>
-        <p><%=Person.find(1).description %></p>
-        <div class="person_penalties">
-          <% Person.find(1).penalties.shuffle.first(2).each do |penalty|%>
-            <div class="penalty-person">
-                <% case penalty.person_id %>
-                <% when 1 %>
-                    <h4 class="tetsuya"> <%= penalty.name %> </h4>
-                <% when 2 %>
-                    <h4 class="shibayu"> <%= penalty.name %> </h4>
-                <% when 3 %>
-                    <h4 class="ryo"> <%= penalty.name %> </h4>
-                <% when 4 %>
-                    <h4 class="toshimitsu"> <%= penalty.name %> </h4>
-                <% when 5 %>
-                    <h4 class="yumemaru"> <%= penalty.name %> </h4>
-                <% when 6 %>
-                    <h4 class="mushimegane"> <%= penalty.name %> </h4>
-                <% end %>
-            </div> <%# person_penalty %>
-          <% end %>
-        </div>
 
-      </div> <%# introduce-person %>
-    <% end %>
+  <div class="person-yumemaru">
+    <%= render partial: "person-article", locals: { person_id: @yumemaru , person_image: 'yumemaru.jpg'} %>
   </div>
+
+  <div class="person-mushimegane">
+    <%= render partial: "person-article", locals: { person_id: @mushimegane , person_image: 'mushimegane.jpg'} %>
+  </div>
+
 </div>  <%# people-tokai %>
+
+
 
 
 <h2>出演者一覧</h2> 

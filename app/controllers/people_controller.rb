@@ -3,6 +3,12 @@ class PeopleController < ApplicationController
   def index
     @searches = Person.ransack(params[:q])
     @people = Person.all.order(id:'asc')
+    @tetsuya = Person.find(1)
+    @shibayu = Person.find(2)
+    @ryo = Person.find(3)
+    @toshimitsu = Person.find(4)
+    @yumemaru = Person.find(5)
+    @mushimegane = Person.find(6)
   end
 
   def search
