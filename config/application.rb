@@ -35,6 +35,8 @@ module TokaiDatabase
     # 日本語設定
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
+
+    config.hosts << "tokai-onair-db.an.r.appspot.com"
     
   end
 end
