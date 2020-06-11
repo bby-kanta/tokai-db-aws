@@ -143,7 +143,7 @@
           <div class="video-people">
             <% @video.people.each do |person| %>
               <div class="video-person-cast">
-                <%= render partial: "person-color-link", locals: { person_kind: person.id } %>
+                <%= render partial: "person-color-link", locals: { person_kind: person.name } %>
               </div>
             <% end %>
           </div>
@@ -175,18 +175,18 @@
             <% @video.penalties.each do |penalty| %>
               <%= link_to penalty_path(penalty.id) do %>
                 <div class="video-penalty">
-                  <% case penalty.person.id %>
-                    <% when 1 %>
+                  <% case penalty.person.name %>
+                    <% when 'てつや'%>
                       <h3 class="tetsuya"> <%= penalty.name %> </h3>
-                    <% when 2 %>
+                    <% when 'しばゆー' %>
                       <h3 class="shibayu"> <%= penalty.name %> </h3>
-                    <% when 3 %>
+                    <% when 'りょう' %>
                       <h3 class="ryo"> <%= penalty.name %> </h3> 
-                    <% when 4 %>
+                    <% when 'としみつ' %>
                       <h3 class="toshimitsu"> <%= penalty.name %> </h3>
-                    <% when 5 %>
+                    <% when 'ゆめまる' %>
                       <h3 class="yumemaru"> <%= penalty.name %> </h3>
-                    <% when 6 %>
+                    <% when '虫眼鏡' %>
                       <h3 class="mushimegane"> <%= penalty.name %> </h3>
                     <% else %>
                       <h3 class="no-one"> 該当者無し </h3>
