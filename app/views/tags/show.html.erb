@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "tags", :media => "all" %>
+
 <%= @tag.name %>
 
 <%= @tag.description %>
@@ -11,3 +13,9 @@
     method: :delete,
     data: {confirm: '本当に削除しますか？'}
   %>
+
+<h2><%= @tag.name %> が付いている動画リスト </h2>
+
+<div class="video_articles">
+  <%= render partial: "videos/video-articles", locals: { videos: @tag.videos } %>
+</div>

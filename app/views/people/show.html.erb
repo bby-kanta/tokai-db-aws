@@ -88,3 +88,10 @@
   <% end %>
   </ul>
 </div>
+
+
+<h2><%= @person.name %> さんが出演している動画（ランダムで表示されます） </h2>
+
+<div class="video_articles">
+  <%= render partial: "videos/video-articles", locals: { videos: @person.videos.sample(20) } %>
+</div>

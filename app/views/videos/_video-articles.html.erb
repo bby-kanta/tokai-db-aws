@@ -1,5 +1,4 @@
 <% videos.each do |video|%>
-
   <%= link_to video_path(video.id) do %>
     <div class="video_article">
     
@@ -29,7 +28,7 @@
 
 
           <div class="article-mvp">
-            <%= render partial: "person-color", locals: { person_kind: video.mvp } %>
+            <%= render partial: "videos/person-color", locals: { person_kind: video.mvp } %>
           </div><%# article-mvp %>
           
           <div class="article-tags">
