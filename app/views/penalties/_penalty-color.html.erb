@@ -1,0 +1,53 @@
+  <% penalties.each do |penalty|%>
+    <% case penalty.person.name %>
+      <% when 'てつや' , 1 %>
+        <div class="btn btn-secondary tetsuya">
+          <%= link_to penalty_path(penalty.id) do %>
+            <%= penalty.name %>
+            (<%= penalty.videos.count %>)      
+          <% end %>
+        </div>
+      <% when 'しばゆー',2 %>
+        <div class="btn btn-secondary shibayu">
+          <%= link_to penalty_path(penalty.id) do %>
+            <%= penalty.name %>
+            (<%= penalty.videos.count %>)      
+          <% end %>
+        </div>
+      <% when 'りょう',3 %>
+        <div class="btn btn-secondary ryo">
+          <%= link_to penalty_path(penalty.id) do %>
+            <%= penalty.name %>
+            (<%= penalty.videos.count %>)      
+          <% end %>
+        </div>
+      <% when 'としみつ' ,4%>
+        <div class="btn btn-secondary toshimitsu">
+          <%= link_to penalty_path(penalty.id) do %>
+            <%= penalty.name %>
+            (<%= penalty.videos.count %>)      
+          <% end %>
+        </div>
+      <% when 'ゆめまる',5 %>
+        <div class="btn btn-secondary yumemaru">
+          <%= link_to penalty_path(penalty.id) do %>
+            <%= penalty.name %>
+            (<%= penalty.videos.count %>)      
+          <% end %>
+        </div>
+      <% when '虫眼鏡',6 %>
+        <div class="btn btn-secondary mushimegane">
+          <%= link_to penalty_path(penalty.id) do %>
+            <%= penalty.name %>
+            (<%= penalty.videos.count %>)      
+          <% end %>
+        </div>
+      <% else %>
+        <div class="btn btn-secondary tokai">
+          <%= link_to penalty_path(penalty.id) do %>
+            <%= penalty.name %>
+            (<%= penalty.videos.count %>)      
+          <% end %>
+        </div>
+    <% end %>
+  <% end %>

@@ -1,12 +1,12 @@
 class TagsController < ApplicationController
   def index
     @searches = Tag.ransack(params[:q])
-    @tags = Tag.all.order(created_at:'desc')
+    @tags = Tag.joins(:tag_videos).group(:tag_id).order('count(video_id) desc')  # https://qiita.com/kent_ear/items/5748d6b6db83fb5e8782
   end
 
   def search
     @searches = Tag.ransack(params[:q])
-    @tags = @searches.result.order(created_at: 'desc')
+    @tags = @searches.result.joins(:tag_videos).group(:tag_id).order('count(video_id) desc') 
     render 'index'
   end
 

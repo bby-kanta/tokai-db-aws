@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "musics", :media => "all" %>
+
 <h1>撮影場所一覧</h2>
 <%= search_form_for @searches,html: { class: "form-inline" }, url: search_places_path do |f| %>
  <%= f.label :name_or_description, '撮影場所検索' %>
@@ -6,13 +8,10 @@
 <% end %>
 
 <% @places.each do |place|%>
-  <ul>
-
-    <li>
-      <%= link_to place_path(place.id) do %>
-          <%= place.name %>
-      <% end %>
-    </li>
-
-  </ul>
+  <div class="btn btn-danger">
+    <%= link_to place_path(place.id) do %>
+      <%= place.name %>
+      (<%= place.videos.count %>)
+    <% end %>
+  </div>
 <% end %>

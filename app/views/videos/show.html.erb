@@ -168,64 +168,15 @@
         </th>
       </tr>
 
-      <tr>
-        <th> 罰ゲーム </th>
-        <th>
-          <div class="video-penalties">
-            <% @video.penalties.each do |penalty| %>
-              <% case penalty.person.name %>
-                <% when 'てつや'%>
-                  <div class="video-penalty tetsuya">
-                    <%= link_to penalty_path(penalty.id) do %>
-                      <p> <%= penalty.name %> </p>
-                    <% end %>
-                  </div>
-                <% when 'しばゆー' %>
-                  <div class="video-penalty shibayu">
-                    <%= link_to penalty_path(penalty.id) do %>
-                      <p> <%= penalty.name %> </p>
-                    <% end %>
-                  </div>    
-                <% when 'りょう' %>
-                  <div class="video-penalty ryo">
-                    <%= link_to penalty_path(penalty.id) do %>
-                      <p> <%= penalty.name %> </p>
-                    <% end %>
-                  </div>
-                <% when 'としみつ' %>
-                  <div class="video-penalty toshimitsu">
-                    <%= link_to penalty_path(penalty.id) do %>
-                      <p> <%= penalty.name %> </p>
-                    <% end %>
-                  </div>
-                <% when 'ゆめまる' %>
-                  <div class="video-penalty yumemaru">
-                    <%= link_to penalty_path(penalty.id) do %>
-                      <p> <%= penalty.name %> </p>
-                    <% end %>
-                  </div>
-                <% when '虫眼鏡' %>
-                  <div class="video-penalty mushimegane">
-                    <%= link_to penalty_path(penalty.id) do %>
-                      <p> <%= penalty.name %> </p>
-                    <% end %>
-                  </div>
-                <% else %>
-                      <p class="no-one"> 該当者無し </p>
-              <% end %>
-            <% end %>
-          </div>
-        </th>
-      </tr>
 
       <tr>
         <th> 撮影場所 </th>
         <th>
-          <div class="video-places">
+          <div class="places">
             <% @video.places.each do |place| %>
               <%= link_to place_path(place.id) do %>
-                <div class="video-place">
-                  <h3> <%= place.name %> </h3>
+                <div class="btn btn-danger">
+                  <%= place.name %>
                 </div>
               <% end %>
             <% end %>
@@ -236,30 +187,30 @@
       <tr>
         <th> BGM </th>
         <th>
-          <div class="video-musics">
+          <div class="musics">
             <% @video.musics.each do |music| %>
-              <%= link_to music_path(music.id) do %>
-                <div class="video-music">
-                  <h3> <%= music.name %> </h3>
-                </div>
-              <% end %>
+              <div class="btn btn-success">
+                <%= link_to music.name ,music_path(music.id)%>
+              </div>
             <% end %>
           </div>
         </th>
       </tr>
 
+      <tr>
+        <th> 罰ゲーム </th>
+        <th>
+          <div class="penalties">
+              <%= render partial: "penalties/penalty-color", locals: { penalties: @video.penalties }%>
+          </div> <%# video-tags %>
+        </th>
+      </tr>
 
       <tr>
         <th> ハッシュタグ </th>
         <th> 
-          <div class="video-tags">
-            <% @video.tags.each do |tag| %>
-              <div class="video-tag">
-                <%= link_to tag_path(tag.id) do %>
-                  <p> <%= tag.name %> </p>
-                <% end %>
-              </div>
-            <% end %>
+          <div class="tags">
+              <%= render partial: "tags/tag-color", locals: { tags: @video.tags }%>
           </div> <%# video-tags %>
         </th>
       </tr>

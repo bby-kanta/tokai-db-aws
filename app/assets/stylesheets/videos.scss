@@ -27,6 +27,7 @@
   a{
     margin-right: 0.3em;
     margin-bottom: 1em;
+    font-size: 30px;
   }
 }
 
@@ -122,25 +123,6 @@
   }
 }
 
-.tetsuya {
-  background-color: rgb(255, 145, 0);
-}
-.shibayu {
-  background-color: rgb(251, 255, 0);
-}
-.ryo {
-  background-color: rgb(4, 0, 255);
-}
-.toshimitsu {
-  background-color: rgb(51, 255, 0);
-}
-.yumemaru {
-  background-color: rgb(255, 0, 242);
-}
-.mushimegane {
-  background-color: rgb(117, 76, 0);
-}
-
 
 .article-tags{// ハッシュタグのデザイン
   width: 55%;
@@ -230,17 +212,25 @@ td, th {
   font-size: 0.8em;
 }
 
+
 div[class*="video-"] , .channel{
   color: white;
   display:inline-block;
 }
 
 
-div[class*="video-"] a , .channel h3 , .video-category h3 , .video-penalty h3 , .video-place h3 , .video-music h3{
+div[class*="video-"] a , .channel h3 , .video-category h3 {
   border-radius: 5px;
-  font-size: 1.5em;
   color : white;
   padding: 8px;
+}
+
+.btn-secondary , .btn-success , .btn-danger {
+  border-radius: 5px;
+  border-color: transparent;
+  a , a:visited{
+    color: white;
+  }
 }
 
 div[class*="video-person"] a h3 {
@@ -248,25 +238,6 @@ div[class*="video-person"] a h3 {
   padding: 8px;
 }
 
-.video-penalties { //showの罰ゲームリスト
-
-  .video-penalty {
-    margin: 0 5px 5px 0;
-    display: inline-block;
-    border-radius: 5px;
-    color: white;
-    font-size: 0.8em;
-    a {
-      display: inline-block;
-
-      p{
-        display: inline-block;
-        border-radius: 5px;
-      }
-
-    }
-  }
-}
 
 .channel h3 {
   background-color: red;
