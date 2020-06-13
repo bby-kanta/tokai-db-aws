@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "tags", :media => "all" %>
+
 <h2>罰ゲーム（十字架）リスト</h2>
 <%= search_form_for @searches,html: { class: "form-inline" }, url: search_penalties_path do |f| %>
  <%= f.label :name_or_description, '罰ゲーム検索' %>
@@ -5,14 +7,6 @@
  <%= f.submit '検索' %>
 <% end %>
 
-<ul>
-  <% @penalties.each do |penalty|%>
-
-    <%= link_to penalty_path(penalty.id) do %>
-      <li>
-        <%= penalty.name %>
-      </li>
-    <% end %>
-  <% end %>
-
-</ul>
+<div class="penalties">
+  <%= render partial: "penalty-color", locals: { penalties: @penalties }%>
+</div>

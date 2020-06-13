@@ -35,11 +35,11 @@ class VideosController < ApplicationController
     @videos = Video.all.order(updated_on:'desc')
     @related = @video.recommends
     @tetsuya     = @video.people.find_by(name:'てつや')
-    @shibayu    = @video.people.find_by(name:'しばゆー')
+    @shibayu     = @video.people.find_by(name:'しばゆー')
     @ryo         = @video.people.find_by(name:'りょう')
-    @toshimitsu  =  @video.people.find_by(name:'としみつ')
-    @yumemaru    =  @video.people.find_by(name:'ゆめまる')
-    @mushimegane =  @video.people.find_by(name:'虫眼鏡')
+    @toshimitsu  = @video.people.find_by(name:'としみつ')
+    @yumemaru    = @video.people.find_by(name:'ゆめまる')
+    @mushimegane = @video.people.find_by(name:'虫眼鏡')
   end
 
   def edit

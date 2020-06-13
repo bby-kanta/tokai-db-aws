@@ -2,12 +2,12 @@ class PenaltiesController < ApplicationController
 
   def index
     @searches = Penalty.ransack(params[:q])
-    @penalties = Penalty.all.order(created_at:'desc')
+    @penalties = Penalty.joins(:penalty_videos).group(:penalty_id).order('count(video_id) desc') 
   end
 
   def search
     @searches = Penalty.ransack(params[:q])
-    @penalties = @searches.result.order(created_at: 'desc')
+    @penalties = @searches.result.joins(:penalty_videos).group(:penalty_id).order('count(video_id) desc') 
     render 'index'
   end
 

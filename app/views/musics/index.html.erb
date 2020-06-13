@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "musics", :media => "all" %>
+
 <h1>BGMリスト</h1>
 <%= search_form_for @searches,html: { class: "form-inline" }, url: search_musics_path do |f| %>
  <%= f.label :name_or_description, 'ハッシュタグ検索' %>
@@ -6,13 +8,10 @@
 <% end %>
 
 <% @musics.each do |music|%>
-  <ul>
-
-    <li>
-      <%= link_to music_path(music.id) do %>
-          <%= music.name %>
-      <% end %>
-    </li>
-
-  </ul>
+  <div class="btn btn-success">
+    <%= link_to music_path(music.id) do %>
+      <%= music.name %>
+      (<%= music.videos.count %>)
+    <% end %>
+  </div>
 <% end %>

@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "tags", :media => "all" %>
+
 <h2>ハッシュタグリスト</h2>
 <%= search_form_for @searches,html: { class: "form-inline" }, url: search_tags_path do |f| %>
  <%= f.label :name_or_description, 'ハッシュタグ検索' %>
@@ -5,14 +7,6 @@
  <%= f.submit '検索' %>
 <% end %>
 
-<ul>
-  <% @tags.each do |tag|%>
-
-    <%= link_to tag_path(tag.id) do %>
-      <li>
-        <%= tag.name %>
-      </li>
-    <% end %>
-  <% end %>
-
-</ul>
+<div class="hash-tags">
+  <%= render partial: "tag-color", locals: { tags: @tags }%>
+</div>

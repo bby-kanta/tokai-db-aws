@@ -11,6 +11,9 @@ h2 {
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-around;
+  a {
+    font-size: 30px;
+  }
 }
 
 div[class*="person-"] {

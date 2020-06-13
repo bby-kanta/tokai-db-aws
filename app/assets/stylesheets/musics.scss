@@ -1,3 +1,11 @@
 // Place all the styles related to the musics controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.btn {
+  border-radius: 5px;
+  border-color: transparent;
+  a , a:visited{
+    color: white;
+    font-size: unset;
+  }
+}
