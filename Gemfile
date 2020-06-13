@@ -56,3 +56,5 @@ gem 'uglifier'
 gem 'jquery-rails'
 
 gem 'bootstrap'
+
+gem 'kaminari'

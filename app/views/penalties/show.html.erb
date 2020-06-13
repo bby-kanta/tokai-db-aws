@@ -15,3 +15,8 @@
     method: :delete,
     data: {confirm: '本当に削除しますか？'}
   %>
+
+<h2><%= @penalty.name %> が行われている動画リスト </h2>
+<div class="video_articles">
+  <%= render partial: "videos/video-articles", locals: { videos: @penalty.videos } %>
+</div>

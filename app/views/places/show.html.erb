@@ -9,3 +9,9 @@
     method: :delete,
     data: {confirm: '本当に削除しますか？'}
   %>
+
+<h2><%= @place.name %> で撮影が行われている動画リスト </h2>
+
+<div class="video_articles">
+  <%= render partial: "videos/video-articles", locals: { videos: @place.videos.sample(40) } %>
+</div>

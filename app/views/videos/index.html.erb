@@ -2,19 +2,19 @@
 
 <ul class="nav nav-pills nav-fill">
   <li class="nav-item">
-    <a href="#all-videos" class="nav-link active" data-toggle="tab">全動画一覧(<%= @videos.count %>)</a>
+    <a href="#all-videos" class="nav-link active" data-toggle="tab">全動画一覧(<%= @all_videos.count %>)</a>
   </li>
   <li class="nav-item">
-    <a href="#main-videos" class="nav-link" data-toggle="tab">メインチャンネル(<%= @main.count %>)</a>
+    <a href="#main-videos" class="nav-link" data-toggle="tab">メインチャンネル(<%= @all_videos.where(kind_of: 0).count %>)</a>
   </li>
   <li class="nav-item">
-    <a href="#sub-videos" class="nav-link" data-toggle="tab">サブチャンネル(<%= @sub.count %>)</a>
+    <a href="#sub-videos" class="nav-link" data-toggle="tab">サブチャンネル(<%= @all_videos.where(kind_of: 1).count %>)</a>
   </li>
   <li class="nav-item">
-    <a href="#private-videos" class="nav-link" data-toggle="tab">個人チャンネル(<%= @private.count %>)</a>
+    <a href="#private-videos" class="nav-link" data-toggle="tab">個人チャンネル(<%= @all_videos.where(kind_of: 2).count %>)</a>
   </li>
   <li class="nav-item">
-    <a href="#deffrent-videos" class="nav-link" data-toggle="tab">その他(<%= @other.count %>)</a>
+    <a href="#deffrent-videos" class="nav-link" data-toggle="tab">その他(<%= @all_videos.where(kind_of: 3).count %>)</a>
   </li>
 </ul>
 
@@ -23,30 +23,35 @@
     <div class="video_articles">
       <%= render partial: "video-articles", locals: { videos: @videos }%>
     </div>
+    <%= paginate @videos %>
   </div>
 
   <div id="main-videos" class="tab-pane fade">
     <div class="video_articles">
       <%= render partial: "video-articles", locals: { videos: @main }%>
     </div>
+    <%= paginate @main %>
   </div>
 
   <div id="sub-videos" class="tab-pane fade">
     <div class="video_articles">
       <%= render partial: "video-articles", locals: { videos: @sub }%>
     </div>
+    <%= paginate @sub %>
   </div>
 
   <div id="private-videos" class="tab-pane fade">
     <div class="video_articles">
       <%= render partial: "video-articles", locals: { videos: @private }%>
     </div>
+    <%= paginate @private %>
   </div>
 
   <div id="deffrent-videos" class="tab-pane fade">
     <div class="video_articles">
       <%= render partial: "video-articles", locals: { videos: @other }%>
     </div>
+    <%= paginate @other %>
   </div>
 
 </div>

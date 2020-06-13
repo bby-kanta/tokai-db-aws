@@ -228,4 +228,5 @@
 
   <div class="related-videos">
     <%= render partial: "video-articles", locals: { videos: @related }%>
+    <%= render partial: "video-articles", locals: { videos: Video.all.sample(6) }%>
   </div>
