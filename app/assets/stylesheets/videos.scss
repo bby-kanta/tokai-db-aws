@@ -267,10 +267,14 @@ div[class*="video-person"] a h3 {
 
 .related-videos{
   display: inline-block;
-  
-  .video-article{
-    margin-bottom: 10px;
+
+  a{
+    font-size: 30px; //30pxにしないとデザイン崩れる
+    .video-article{
+      margin-bottom: 10px;
+    }
   }
+
 }
 
 // フォーム共通CSS
