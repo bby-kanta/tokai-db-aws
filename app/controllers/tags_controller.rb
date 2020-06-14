@@ -1,4 +1,14 @@
 class TagsController < ApplicationController
+  before_action :manji, except: [:index,:show]
+  
+  def manji
+    if user_signed_in?
+      redirect_to action: :index unless current_user.id == 1
+    else
+      redirect_to action: :index
+    end
+  end
+
   def index
     @searches = Tag.ransack(params[:q])
     @tags = Tag.joins(:tag_videos).group(:tag_id).order('count(video_id) desc')  # https://qiita.com/kent_ear/items/5748d6b6db83fb5e8782

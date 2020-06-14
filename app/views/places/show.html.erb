@@ -4,11 +4,14 @@
 
 <%= @place.id %>
 
+<% if user_signed_in?  && current_user.id == 1 %>
   <%= link_to '編集',edit_place_path(@place) %>
   <%= link_to '削除',place_path(@place),
     method: :delete,
     data: {confirm: '本当に削除しますか？'}
   %>
+<% end %>
+
 
 <h2><%= @place.name %> で撮影が行われている動画リスト </h2>
 

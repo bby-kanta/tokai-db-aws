@@ -1,6 +1,13 @@
 <%= stylesheet_link_tag "musics", :media => "all" %>
 
 <h1>BGMリスト</h1>
+
+<%# 自分がログインしているときのみ表示  %>
+<% if user_signed_in?  && current_user.id == 1 %>
+  <h2> <%= link_to 'BGM作成' ,new_music_path if current_user.id == 1 %> </h2>
+<% end %>
+
+
 <%= search_form_for @searches,html: { class: "form-inline" }, url: search_musics_path do |f| %>
  <%= f.label :name_or_description, 'ハッシュタグ検索' %>
  <%= f.search_field :name_or_description_cont %>

@@ -10,11 +10,13 @@
 
 <%= @penalty.id %>
 
+<% if user_signed_in?  && current_user.id == 1 %>
   <%= link_to '編集',edit_penalty_path(@penalty) %>
   <%= link_to '削除',penalty_path(@penalty),
     method: :delete,
     data: {confirm: '本当に削除しますか？'}
   %>
+<% end %>
 
 <h2><%= @penalty.name %> が行われている動画リスト </h2>
 <div class="video_articles">

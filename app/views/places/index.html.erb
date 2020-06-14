@@ -1,6 +1,12 @@
 <%= stylesheet_link_tag "musics", :media => "all" %>
 
 <h1>撮影場所一覧</h2>
+
+<%# 自分がログインしているときのみ表示  %>
+<% if user_signed_in?  && current_user.id == 1 %>
+  <h2> <%= link_to '撮影場所作成' ,new_place_path if current_user.id == 1 %> </h2>
+<% end %>
+
 <%= search_form_for @searches,html: { class: "form-inline" }, url: search_places_path do |f| %>
  <%= f.label :name_or_description, '撮影場所検索' %>
  <%= f.search_field :name_or_description_cont %>
