@@ -14,12 +14,14 @@
     <div class="video_date">
       <h4><%= @video.updated_on %> に公開済み </h4>
 
+    <%# 自分がログインしているときのみ表示  %>
+    <% if user_signed_in?  && current_user.id == 1 %>
         <%= link_to '編集',edit_video_path(@video) %>
         <%= link_to '削除',video_path(@video) ,
         method: :delete,
         data: {confirm: '本当に削除しますか？'}
         %>
-        
+    <% end %>
     </div>
 
     <table border="1px" style="border-collapse: collapse; border-color: rgb(238, 232, 232)">

@@ -6,11 +6,7 @@
 
 <%= @person.id %>
 
-  <%= link_to '編集',edit_person_path(@person) %>
-  <%= link_to '削除',person_path(@person),
-    method: :delete,
-    data: {confirm: '本当に削除しますか？'}
-  %>
+
 
 <%# personが持っているハッシュタグリストです %>
 <div class="peson_tag">
@@ -36,58 +32,66 @@
   <% end %>
 </div>
 
+<%# かんたのみ表示 %>
+<% if user_signed_in?  && current_user.id == 1 %>
 
+  <%= link_to '編集',edit_person_path(@person) %>
+  <%= link_to '削除',person_path(@person),
+    method: :delete,
+    data: {confirm: '本当に削除しますか？'}
+  %>
 
-<h2>ハッシュタグ入力フォーム</h2>
-<div class="tag_form">
-  <ul>
-  <%= form_for ([@person,@tag]) do |a| %>
+  <h2>ハッシュタグ入力フォーム</h2>
+  <div class="tag_form">
+    <ul>
+    <%= form_for ([@person,@tag]) do |a| %>
 
-    <li>
-      <%= a.label :name ,'ハッシュタグ' %>
-      <%= a.text_field :name,placeholder:'ハッシュタグ名を入力してください' %>
-    </li>
+      <li>
+        <%= a.label :name ,'ハッシュタグ' %>
+        <%= a.text_field :name,placeholder:'ハッシュタグ名を入力してください' %>
+      </li>
 
-    <li>
-      <%= a.label :description ,'タグの概要' %>
-      <%= a.text_area :description,placeholder:'概要を入力してください' %>
-    </li>
+      <li>
+        <%= a.label :description ,'タグの概要' %>
+        <%= a.text_area :description,placeholder:'概要を入力してください' %>
+      </li>
 
-    <li>
-      <%= a.submit %>
-    </li>
+      <li>
+        <%= a.submit %>
+      </li>
 
-  <% end %>
-  </ul>
-</div>
+    <% end %>
+    </ul>
+  </div>
 
-<h2>罰ゲーム入力フォーム</h2>
-<div class="penalty_form">
-  <ul>
-  <%= form_for ([@person,@penalty]) do |a| %>
+  <h2>罰ゲーム入力フォーム</h2>
+  <div class="penalty_form">
+    <ul>
+    <%= form_for ([@person,@penalty]) do |a| %>
 
-    <li>
-      <%= a.label :name ,'罰ゲーム名' %>
-      <%= a.text_field :name,placeholder:'罰ゲーム名を入力してください' %>
-    </li>
+      <li>
+        <%= a.label :name ,'罰ゲーム名' %>
+        <%= a.text_field :name,placeholder:'罰ゲーム名を入力してください' %>
+      </li>
 
-    <li>
-      <%= a.label :description ,'罰ゲームの概要' %>
-      <%= a.text_area :description,placeholder:'概要を入力してください' %>
-    </li>
+      <li>
+        <%= a.label :description ,'罰ゲームの概要' %>
+        <%= a.text_area :description,placeholder:'概要を入力してください' %>
+      </li>
 
-    <li>
-      <%= a.label :since ,'いつから始まったか' %>
-    <%= a.date_select :since,{start_year: 2014,end_year: 2020,use_month_numbers: true} %>
-    </li>
+      <li>
+        <%= a.label :since ,'いつから始まったか' %>
+      <%= a.date_select :since,{start_year: 2014,end_year: 2020,use_month_numbers: true} %>
+      </li>
 
-    <li>
-      <%= a.submit %>
-    </li>
+      <li>
+        <%= a.submit %>
+      </li>
 
-  <% end %>
-  </ul>
-</div>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
 
 <h2><%= @person.name %> さんが出演している動画（ランダムで表示されます） </h2>

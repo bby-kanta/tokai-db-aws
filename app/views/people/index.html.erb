@@ -1,7 +1,12 @@
 <%= stylesheet_link_tag "people", :media => "all" %>
 
-<h2>メンバー一覧</h2> 
-<h3><%= link_to "作成",new_person_path %></h3>
+<h2>メンバー一覧</h2>
+
+<%# 自分がログインしているときのみ表示  %>
+    <%# 自分がログインしているときのみ表示  %>
+<% if user_signed_in?  && current_user.id == 1 %>
+  <h2> <%= link_to '人物タグ作成' ,new_person_path %> </h2>
+<% end %>
 
 <div class="people-tokai"><%# メンバーの記事一覧 %>
 

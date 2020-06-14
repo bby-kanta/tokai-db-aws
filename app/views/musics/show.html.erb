@@ -4,11 +4,13 @@
 
 <%= @music.id %>
 
+<% if user_signed_in?  && current_user.id == 1 %>
   <%= link_to '編集',edit_music_path(@music) %>
   <%= link_to '削除',music_path(@music),
     method: :delete,
     data: {confirm: '本当に削除しますか？'}
   %>
+<% end %>
 
 <h2><%= @music.name %> が使われている動画リスト </h2>
 <div class="video_articles">

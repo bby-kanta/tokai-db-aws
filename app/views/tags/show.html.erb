@@ -8,11 +8,13 @@
 
 <%= @tag.id %>
 
+<% if user_signed_in?  && current_user.id == 1 %>
   <%= link_to '編集',edit_tag_path(@tag) %>
   <%= link_to '削除',tag_path(@tag),
     method: :delete,
     data: {confirm: '本当に削除しますか？'}
   %>
+<% end %>
 
 <h2><%= @tag.name %> が付いている動画リスト </h2>
 

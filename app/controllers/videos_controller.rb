@@ -1,5 +1,16 @@
 class VideosController < ApplicationController
 
+  before_action :manji, except: [:index,:show]
+
+
+  def manji
+    if user_signed_in?
+      redirect_to action: :index unless current_user.id == 1
+    else
+      redirect_to action: :index
+    end
+  end
+
   def index
     @all_videos  = Video.all
     @videos  = @all_videos.page(params[:page]).per(40).order(updated_on:'desc')

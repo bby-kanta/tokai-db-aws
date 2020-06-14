@@ -1,4 +1,13 @@
 class PeopleController < ApplicationController
+  before_action :manji, except: [:index,:show]
+
+  def manji
+    if user_signed_in?
+      redirect_to action: :index unless current_user.id == 1
+    else
+      redirect_to action: :index
+    end
+  end
 
   def index
     @searches = Person.ransack(params[:q])

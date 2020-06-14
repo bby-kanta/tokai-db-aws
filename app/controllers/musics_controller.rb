@@ -1,4 +1,14 @@
 class MusicsController < ApplicationController
+  before_action :manji, except: [:index,:show]
+
+  def manji
+    if user_signed_in?
+      redirect_to action: :index unless current_user.id == 1
+    else
+      redirect_to action: :index
+    end
+  end
+  
   def index
     @searches = Music.ransack(params[:q])
     @musics = Music.all.order(created_at:'asc')

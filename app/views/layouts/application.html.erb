@@ -9,6 +9,17 @@
   </head>
 
   <body>
+
+    <%# <div class="navbar"> %>
+    <nav class="navbar navbar-light bg-white fixed-top">
+      <div>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <%= link_to image_tag('tokaidb-logo.jpg',size: '400x60'),videos_path %>
+      </div>
+
+
     <%# ↓deviseのフラッシュメッセージを表示するもの %>
     <% if flash[:notice] %>
       <div class="notification is-info">
@@ -23,16 +34,10 @@
     <% end %>
     <%# ↑devise用の記述 %>
 
-    <%# <div class="navbar"> %>
-    <nav class="navbar navbar-light bg-white fixed-top">
-      <div>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <%= link_to image_tag('tokaidb-logo.jpg',size: '400x60'),videos_path %>
-      </div>
-
-
+    <%# 自分がログインしているときのみ表示  %>
+    <% if user_signed_in?  && current_user.id == 1 %>
+      <%= link_to '記事作成' ,new_video_path  %>
+    <% end %>
 
       <div class="nav-serch">
         <%= search_form_for @search,html: { class: "form-inline" }, url: search_videos_path do |f| %>
