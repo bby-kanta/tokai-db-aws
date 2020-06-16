@@ -1,5 +1,5 @@
-$(function() {
+// $(function() {
     
-  $(".S").css("color", "red");
+//   $(".S").css("color", "red");
 
-});
+// });
