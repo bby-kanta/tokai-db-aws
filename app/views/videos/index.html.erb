@@ -20,7 +20,7 @@
 
 <div class="tab-content">
   <div id="all-videos" class="tab-pane fade show active">
-    <div class="video_articles">
+    <div class="jscroll video_articles">
       <%= render partial: "video-articles", locals: { videos: @videos }%>
     </div>
     <%= paginate @videos %>

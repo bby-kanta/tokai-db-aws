@@ -22,6 +22,7 @@ class MusicsController < ApplicationController
 
   def show
     @music = Music.find(params[:id])
+    @musics = Music.all.sample(10)
   end
 
   def new

@@ -23,6 +23,7 @@ class PenaltiesController < ApplicationController
 
   def show
     @penalty = Penalty.find(params[:id])
+    @penalties = Penalty.all.sample(10)
   end
 
   def new

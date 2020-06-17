@@ -1,14 +1,34 @@
-<h1>罰ゲーム・十字架リスト</h1>
+<%= stylesheet_link_tag "penalties", :media => "all" %>
 
-<%= @penalty.name %>
+<p><%= link_to '罰ゲーム一覧に戻る',penalties_path %></p>
 
-<%= @penalty.description %>
+<div class="penalty-show">
+  <table class="table table-borderless">
+    <tr> 
+      <th>罰ゲーム名</th> 
+      <th><%= @penalty.name %> </th> 
+    </tr>
+    <tr> 
+      <th>概要</th> 
+      <th><%= @penalty.description %></th>
+    </tr>
+    <tr> 
+      <th>受けた人</th> 
+      <th><%= @penalty.person.name %></th>
+    </tr>
+    <tr> 
+      <th>いつから</th> 
+      <th><%= @penalty.since %></th>
+    </tr>
+</table>
+</div>
 
-<%= @penalty.person.name %>
-
-<%= @penalty.since %>
-
-<%= @penalty.id %>
+<div class="recommend-penalty">
+  <h2>おすすめ罰ゲーム</h2>
+  <div class="penalties">
+    <%= render partial: "penalty-color", locals: { penalties: @penalties }%>
+  </div>
+</div>
 
 <% if user_signed_in?  && current_user.id == 1 %>
   <%= link_to '編集',edit_penalty_path(@penalty) %>
@@ -22,3 +42,5 @@
 <div class="video_articles">
   <%= render partial: "videos/video-articles", locals: { videos: @penalty.videos } %>
 </div>
+
+<%= @penalty.id %>

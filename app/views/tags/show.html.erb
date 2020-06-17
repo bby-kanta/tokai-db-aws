@@ -1,12 +1,30 @@
 <%= stylesheet_link_tag "tags", :media => "all" %>
 
-<%= @tag.name %>
+<p><%= link_to 'ハッシュタグ一覧に戻る',tags_path %></p>
 
-<%= @tag.description %>
+<div class="tag-show">
+  <table class="table table-borderless">
+    <tr> 
+      <th>ハッシュタグ名</th> 
+      <th><%= @tag.name %> </th> 
+    </tr>
+    <tr> 
+      <th>概要</th> 
+      <th><%= @tag.description %></th>
+    </tr>
+    <tr> 
+      <th>受けた人</th> 
+      <th><%= @tag.person.name %></th>
+    </tr>
+</table>
+</div>
 
-<%= @tag.person.name %>
-
-<%= @tag.id %>
+<div class="recommend-tag">
+  <h2>おすすめハッシュタグ</h2>
+  <div class="hash-tags">
+    <%= render partial: "tag-color", locals: { tags: @tags }%>
+  </div>
+</div>
 
 <% if user_signed_in?  && current_user.id == 1 %>
   <%= link_to '編集',edit_tag_path(@tag) %>
@@ -21,3 +39,5 @@
 <div class="video_articles">
   <%= render partial: "videos/video-articles", locals: { videos: @tag.videos } %>
 </div>
+
+<%= @tag.id %>
