@@ -1,0 +1,11 @@
+$(".video_articles_main").append("<%= escape_javascript(render partial: 'video-articles', locals: { videos: @main }) %>");
+$("#more_link_main").replaceWith("<%= escape_javascript(link_to_next_page(@main, 'さらに見る', remote: true ,class: 'btn btn-secondary tetsuya', id: 'more_link_main')) %>");
+
+$(".video_articles_sub").append("<%= escape_javascript(render partial: 'video-articles', locals: { videos: @sub }) %>");
+$("#more_link_sub").replaceWith("<%= escape_javascript(link_to_next_page(@sub, 'さらに見る', remote: true ,class: 'btn btn-secondary tetsuya', id: 'more_link_sub')) %>");
+
+$(".video_articles_private").append("<%= escape_javascript(render partial: 'video-articles', locals: { videos: @private }) %>");
+$("#more_link_private").replaceWith("<%= escape_javascript(link_to_next_page(@private, 'さらに見る', remote: true ,class: 'btn btn-secondary tetsuya', id: 'more_link_private')) %>");
+
+$(".video_articles_other").append("<%= escape_javascript(render partial: 'video-articles', locals: { videos: @other }) %>");
+$("#more_link_other").replaceWith("<%= escape_javascript(link_to_next_page(@other, 'さらに見る', remote: true ,class: 'btn btn-secondary tetsuya', id: 'more_link_other')) %>");
