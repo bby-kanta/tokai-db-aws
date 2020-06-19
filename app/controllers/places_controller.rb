@@ -22,6 +22,7 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
+    @places = Place.all.sample(10)
   end
 
   def new

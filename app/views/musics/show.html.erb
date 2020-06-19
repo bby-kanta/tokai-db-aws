@@ -1,8 +1,34 @@
-<%= @music.name %>
+<%= stylesheet_link_tag "musics", :media => "all" %>
 
-<%= @music.description %>
+<p><%= link_to 'BGM一覧に戻る',musics_path %></p>
 
-<%= @music.id %>
+<div class="music-show">
+  <table class="table table-borderless">
+    <tr> 
+      <th>BGM名</th> 
+      <th><%= @music.name %> </th> 
+    </tr>
+    <tr> 
+      <th>概要</th> 
+      <th><%= @music.description %></th>
+    </tr>
+</table>
+</div>
+
+<div class="recommend-bgm">
+  <h2>おすすめBGM</h2>
+  <% @musics.each do |music|%>
+    <div class="btn btn-success">
+      <%= link_to music_path(music.id) do %>
+        <%= music.name %>
+        (<%= music.videos.count %>)
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+
 
 <% if user_signed_in?  && current_user.id == 1 %>
   <%= link_to '編集',edit_music_path(@music) %>
@@ -16,3 +42,5 @@
 <div class="video_articles">
   <%= render partial: "videos/video-articles", locals: { videos: @music.videos } %>
 </div>
+
+<%= @music.id %>

@@ -12,12 +12,12 @@ class VideosController < ApplicationController
   end
 
   def index
-    @all_videos  = Video.all
-    @videos  = @all_videos.page(params[:page]).per(40).order(updated_on:'desc')
-    @main    = @videos.where(kind_of: 0).page(params[:page]).per(40)
-    @sub     = @videos.where(kind_of: 1).page(params[:page]).per(40)
-    @private = @videos.where(kind_of: 2).page(params[:page]).per(40)
-    @other   = @videos.where(kind_of: 3).page(params[:page]).per(40)
+    @all_videos  = Video.all.order(updated_on:'desc')
+    @videos  = @all_videos.page(params[:page]).per(4)
+    @main    = @all_videos.where(kind_of: 0).page(params[:page]).per(2)
+    @sub     = @all_videos.where(kind_of: 1).page(params[:page]).per(40)
+    @private = @all_videos.where(kind_of: 2).page(params[:page]).per(40)
+    @other   = @all_videos.where(kind_of: 3).page(params[:page]).per(40)
   end
 
   def search

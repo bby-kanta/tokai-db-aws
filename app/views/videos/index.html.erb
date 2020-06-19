@@ -27,31 +27,31 @@
   </div>
 
   <div id="main-videos" class="tab-pane fade">
-    <div class="video_articles">
+    <div class="video_articles_main">
       <%= render partial: "video-articles", locals: { videos: @main }%>
     </div>
-    <%= paginate @main %>
+    <%= link_to_next_page @main, 'さらに見る', remote: true ,class: 'btn btn-secondary tetsuya', id: 'more_link_main' %>
   </div>
 
   <div id="sub-videos" class="tab-pane fade">
-    <div class="video_articles">
+    <div class="video_articles_sub">
       <%= render partial: "video-articles", locals: { videos: @sub }%>
     </div>
-    <%= paginate @sub %>
+    <%= link_to_next_page @sub, 'さらに見る', remote: true ,class: 'btn btn-secondary tetsuya', id: 'more_link_sub' %>
   </div>
 
   <div id="private-videos" class="tab-pane fade">
-    <div class="video_articles">
+    <div class="video_articles_private">
       <%= render partial: "video-articles", locals: { videos: @private }%>
     </div>
-    <%= paginate @private %>
+    <%= link_to_next_page @private, 'さらに見る', remote: true ,class: 'btn btn-secondary tetsuya', id: 'more_link_private' %>
   </div>
 
   <div id="deffrent-videos" class="tab-pane fade">
-    <div class="video_articles">
+    <div class="video_articles_other">
       <%= render partial: "video-articles", locals: { videos: @other }%>
     </div>
-    <%= paginate @other %>
+    <%= link_to_next_page @other, 'さらに見る', remote: true ,class: 'btn btn-secondary tetsuya', id: 'more_link_other' %>
   </div>
 
 </div>

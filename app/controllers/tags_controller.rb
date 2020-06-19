@@ -23,6 +23,7 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
     @videos = @tag.videos
+    @tags = Tag.all.sample(10)
   end
 
   def new
