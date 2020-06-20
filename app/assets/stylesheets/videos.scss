@@ -143,24 +143,12 @@ div[class*="video-person"] a h3 {
 
 }
 
-// フォーム共通CSS
-// div[class*="form_video"]{
-//   background-color: rgb(250, 250, 250);
-// }
-// div[class*="form-"]{
-//   margin-bottom: 30px;
-//   display: flex;
-//   flex-direction: column;
-// }
-// input[type="text"] {
-//   width: 300px;
-//   height: 30px;
-// }
-// textarea {
-//   width: 300px;
-//   height: 200px;
-// }
-// select {
-//   width: 300px;
-//   height: 40px;
-// }
+@media screen and (max-width: 999px){ //widthが999pxまでのCSS(スマホ用)
+  .all-contents {
+    flex-direction: column;
+  }
+
+  .video_box{
+    width : 100%;
+  }
+}

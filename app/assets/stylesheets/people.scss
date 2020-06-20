@@ -85,3 +85,19 @@ div[class*="person-"] p {
   border-radius: 5px;
   white-space: nowrap; //改行させないコード
 }
+
+@media screen and (max-width: 999px){ //widthが999pxまでのCSS(スマホ用)
+  .people-tokai{
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    a {
+      font-size: 30px;
+    }
+  }
+
+  div[class*="person-"] {
+    width: 100%;
+  }
+
+}
