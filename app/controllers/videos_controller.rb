@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
 
-  before_action :manji, except: [:index,:show]
+  before_action :manji, except: [:index,:show,:search]
 
 
   def manji
@@ -13,8 +13,8 @@ class VideosController < ApplicationController
 
   def index
     @all_videos  = Video.all.order(updated_on:'desc')
-    @videos  = @all_videos.page(params[:page]).per(4)
-    @main    = @all_videos.where(kind_of: 0).page(params[:page]).per(2)
+    @videos  = @all_videos.page(params[:page]).per(40)
+    @main    = @all_videos.where(kind_of: 0).page(params[:page]).per(40)
     @sub     = @all_videos.where(kind_of: 1).page(params[:page]).per(40)
     @private = @all_videos.where(kind_of: 2).page(params[:page]).per(40)
     @other   = @all_videos.where(kind_of: 3).page(params[:page]).per(40)
