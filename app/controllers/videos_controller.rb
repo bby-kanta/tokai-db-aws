@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
 
-  before_action :manji, except: [:index,:show]
+  before_action :manji, except: [:index,:show,:search]
 
 
   def manji
