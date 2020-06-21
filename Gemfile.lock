@@ -79,6 +79,8 @@ GEM
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.12.2)
+    font-awesome-sass (5.13.0)
+      sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.2)
@@ -225,6 +227,7 @@ DEPENDENCIES
   bootstrap
   byebug
   devise
+  font-awesome-sass
   jbuilder (~> 2.7)
   jquery-rails
   kaminari

@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+  <% if current_user.already_favorited?(video) %>
+    <%= link_to video_favorites_path(video),method: :delete, remote: true do %>
+      <i class="fas fa-heart" style="color:red">
+      <%= video.favorites.count %></i>
+    <% end %>
+  <% else %>
+    <%= link_to video_favorites_path(video),method: :post, remote: true do %>
+      <i class="far fa-heart">
+      <%= video.favorites.count %></i>
+    <% end %>
+  <% end %>
+
+<% else %>
+  <%= link_to new_user_session_path do %>
+   <i class="far fa-heart">
+   <%= video.favorites.count %></i>
+  <% end %>
+<% end %>

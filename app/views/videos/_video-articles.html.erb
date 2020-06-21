@@ -39,11 +39,15 @@
 
         </div><%# article_row %>
 
-        <div class="article-date">
-          <%= video.updated_on %>
-        </div>
 
       </div><%# article-column %>
+
+      <div class="article-date">
+        <%= video.updated_on %>
+        <div id="like-<%= video.id %>"> <%#いいね機能%>
+          <%= render partial: "videos/like", locals: {video: video }%>
+        </div>
+      </div>
 
     </div><%# video-article %>
   <% end %>

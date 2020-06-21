@@ -58,3 +58,5 @@ gem 'jquery-rails'
 gem 'bootstrap'
 
 gem 'kaminari'
+
+gem 'font-awesome-sass'
