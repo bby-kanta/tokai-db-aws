@@ -391,6 +391,9 @@ div[id*="like-"]{ //inlineがないと横並びにならない
 }
 
 @media screen and (max-width: 999px){ //widthが999pxまでのCSS(スマホ用)
+  h3 {
+    font-size: 2em;
+  }
   div[class*="video_articles"] {
     width: 100%;
     display: flex;
@@ -407,5 +410,35 @@ div[id*="like-"]{ //inlineがないと横並びにならない
     width: 100%;
     margin-bottom: 1px;
   }
+
+  .article-title {
+    font-size :1em;
+    margin-bottom: 30px;
+  }
+
+  .article-mvp {
+
+    h3{
+      font-size: 1.3em;
+    }
+  }
+
+  .article-tags{// ハッシュタグのデザイン
+
+    .article-tag {
+
+      h3 {
+        font-size: 1em;
+      }
+    }
+  }
+
+  .article-date {
+
+    a {
+      font-size: 1.5em !important;
+    }
+  }
+  
   
 }
