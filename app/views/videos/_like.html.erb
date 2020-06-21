@@ -1,0 +1,6 @@
+<% if current_user.already_favorited?(video) %>
+  <%= link_to 'いいねを外す',video_favorites_path(video),method: :delete, remote: true %>
+<% else %>
+  <%= link_to 'いいね',video_favorites_path(video),method: :post, remote: true %>
+<% end %>
+<%= video.favorites.count %>

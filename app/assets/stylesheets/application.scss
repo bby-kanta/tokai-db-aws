@@ -251,7 +251,7 @@ select {
 }
 
 .video_article {
-  width :13em;
+  width :400px;
   border: 2px solid rgb(238, 237, 237)
 }
 
@@ -368,8 +368,14 @@ select {
 }
 
 .article-date {
-  width : 100%;
+  display: inline;
   font-size :13px;
+  a {
+    font-size: 13px !important;
+  }
+}
+div[id*="like-"]{ //inlineがないと横並びにならない
+  display: inline;
 }
 //ここまでvideo記事のデザイン
 
