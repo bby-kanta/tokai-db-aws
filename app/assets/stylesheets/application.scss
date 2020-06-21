@@ -1,5 +1,7 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -243,15 +245,15 @@ select {
     flex-direction: row;
     flex-wrap: wrap;
     a{
-      margin-right: 0.3em;
-      margin-bottom: 1em;
       font-size: 30px;
     }
   }
 }
 
 .video_article {
-  width :400px;
+  margin-right: 0.5em;
+  margin-bottom: 1em;
+  width :24em;
   border: 2px solid rgb(238, 237, 237)
 }
 
@@ -376,6 +378,7 @@ select {
 }
 div[id*="like-"]{ //inlineがないと横並びにならない
   display: inline;
+  margin-left: 10px;
 }
 //ここまでvideo記事のデザイン
 

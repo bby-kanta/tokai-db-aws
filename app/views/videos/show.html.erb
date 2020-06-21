@@ -24,6 +24,10 @@
     <% end %>
     </div>
 
+    <div id="like-<%= @video.id %>"> <%#いいね機能%>
+      <%= render partial: "videos/like", locals: {video: @video }%>
+    </div>
+
     <table border="1px" style="border-collapse: collapse; border-color: rgb(238, 232, 232)">
 
 
