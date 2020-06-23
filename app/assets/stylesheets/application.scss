@@ -394,6 +394,15 @@ div[id*="like-"]{ //inlineがないと横並びにならない
   h3 {
     font-size: 2em;
   }
+
+  .navbar-nav {
+    li{
+      a , .nav-link{
+        font-size: 40px;
+      }
+    }
+  }
+
   div[class*="video_articles"] {
     width: 100%;
     display: flex;
