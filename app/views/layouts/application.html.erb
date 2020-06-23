@@ -19,21 +19,6 @@
         <%= link_to image_tag('tokaidb-logo.jpg',size: '400x60'),videos_path %>
       </div>
 
-
-    <%# ↓deviseのフラッシュメッセージを表示するもの %>
-    <% if flash[:notice] %>
-      <div class="notification is-info">
-        <p class="notice"><%= notice %></p>
-      </div>
-    <% end %>
-
-    <% if flash[:alert] %>
-      <div class="notification is-danger">
-        <p class="alert"><%= alert %></p>
-      </div>
-    <% end %>
-    <%# ↑devise用の記述 %>
-
     <%# 自分がログインしているときのみ表示  %>
     <% if user_signed_in?  && current_user.id == 1 %>
       <%= link_to '記事作成' ,new_video_path  %>
@@ -162,6 +147,19 @@
       </div>
     </nav>
 
+    <%# ↓deviseのフラッシュメッセージを表示するもの %>
+    <% if flash[:notice] %>
+      <div class="notification is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="notification is-danger">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+    <%# ↑devise用の記述 %>
 
     <div class="main-contents">
       <div class="yield"><%= yield %></div>

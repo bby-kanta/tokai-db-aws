@@ -44,6 +44,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+gem 'devise-i18n-views' #deviceの日本語化
 
 # 検索機能をつけるgem
 gem 'ransack'

@@ -37,6 +37,21 @@
 
  body { padding-top: 57px; } //navbarを固定した時にに必要なpadding!公式にも記述あり。 https://qiita.com/PoohSunny/items/ff78ed50332ddaf330a8
 
+ .nav {
+  padding-top: 30px; //重ならない用
+}
+
+.notification {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: rgb(5, 253, 253);
+  p {
+    font-size: 30px;
+    color: white;
+  }
+}
+
  .tetsuya {
   background-color: rgb(255, 145, 0);
   color: white !important;
@@ -137,25 +152,6 @@ li {
   width: 90%;
 }
 
-.form-collection-check { //中間テーブルのセレクター
-  width: 100%;
-
-  .form_group {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 20px;
-
-    .form_check {
-      margin-right: 2em;
-      font-size: 1em;
-
-      input{ 
-
-      }
-    }
-  }
-}
-
 // submitボタン
 .decorated-btn {
   background-color: rgb(255, 145, 0);
@@ -205,6 +201,29 @@ textarea {
 select {
   width: 100px;
   height: 40px;
+}
+
+.form-collection-check { //中間テーブルのセレクター
+  width: 100%;
+  
+
+  .form_group {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-left: 20px;
+
+    .form_check {
+      width: auto;
+      display: flex;
+      margin-right: 2em;
+      font-size: 1em;
+      
+      input{ 
+
+      }
+    }
+  }
 }
 
 //kaminariのデザイン
