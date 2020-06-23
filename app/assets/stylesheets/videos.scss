@@ -144,11 +144,27 @@ div[class*="video-person"] a h3 {
 }
 
 @media screen and (max-width: 999px){ //widthが999pxまでのCSS(スマホ用)
+  .yield {
+    margin: 0;
+  }
   .all-contents {
     flex-direction: column;
+  }
+  .main-contents {
+    margin : 0;
   }
 
   .video_box{
     width : 100%;
+  }
+
+  .video-youtube { //動画を固定表示する
+    position: fixed;
+    z-index: 999;
+    top : 1;
+    left: 0;
+  }
+  .video_title { //重ならない用
+    margin-top: 550px;
   }
 }
