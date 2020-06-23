@@ -35,7 +35,7 @@
   justify-content: flex-start;
 }
 
- body { padding-top: 70px; } //navbarを固定した時にに必要なpadding!公式にも記述あり。 https://qiita.com/PoohSunny/items/ff78ed50332ddaf330a8
+ body { padding-top: 57px; } //navbarを固定した時にに必要なpadding!公式にも記述あり。 https://qiita.com/PoohSunny/items/ff78ed50332ddaf330a8
 
  .tetsuya {
   background-color: rgb(255, 145, 0);
@@ -393,6 +393,10 @@ div[id*="like-"]{ //inlineがないと横並びにならない
 @media screen and (max-width: 999px){ //widthが999pxまでのCSS(スマホ用)
   h3 {
     font-size: 2em;
+  }
+
+  .nav {
+    padding-top: 50px; //重ならない用
   }
 
   .navbar-nav {
