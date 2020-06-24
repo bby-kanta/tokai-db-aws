@@ -78,13 +78,50 @@ div[class*="person-"] p {
 .people-sub a{ //出演者の a タグ
   margin: 0 20px 20px 0;
 }
-.person_tag h4 {
-  margin: 0;
-  color: white;
-  background-color: rgb(200, 255, 0);
-  border-radius: 5px;
-  white-space: nowrap; //改行させないコード
+
+.person_tag  {
+  h4 {
+    margin: 0;
+    color: white;
+    background-color: rgb(200, 255, 0);
+    border-radius: 5px;
+    white-space: nowrap; //改行させないコード
+  }
 }
+
+.person_name,.person_description {
+  margin: 30px 0px;
+  h3 {
+    border-bottom: 1px solid;
+  }
+}
+
+.person_tags , .person_penalty {
+  margin: 30px 0px;
+  h3 {
+    border-bottom: 1px solid;
+    margin-bottom: 20px;
+  }
+}
+
+.btn a{
+  color: white;
+}
+
+.tag_forms {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tag_form {
+
+  .tag-field{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
 
 @media screen and (max-width: 999px){ //widthが999pxまでのCSS(スマホ用)
   .people-tokai{

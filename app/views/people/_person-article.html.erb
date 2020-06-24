@@ -9,18 +9,18 @@
     <div class="person_penalties">
       <% personid.penalties.sample(3).each do |penalty|%>
 
-            <% case penalty.person_id %>
-            <% when 1 %>
+            <% case penalty.person.name %>
+            <% when 'てつや' %>
                 <div class="tetsuya btn btn-secondary"> <%= penalty.name %> </div>
-            <% when 2 %>
+            <% when 'しばゆー' %>
                 <div class="shibayu btn btn-secondary"> <%= penalty.name %> </div>
-            <% when 3 %>
+            <% when 'りょう' %>
                 <div class="ryo btn btn-secondary"> <%= penalty.name %> </div>
-            <% when 4 %>
+            <% when 'としみつ' %>
                 <div class="toshimitsu btn btn-secondary"> <%= penalty.name %> </div>
-            <% when 5 %>
+            <% when 'ゆめまる' %>
                 <div class="yumemaru btn btn-secondary"> <%= penalty.name %> </div>
-            <% when 6 %>
+            <% when '虫眼鏡' %>
                 <div class="mushimegane btn btn-secondary"> <%= penalty.name %> </div>
             <% end %>
 
