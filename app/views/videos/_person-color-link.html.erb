@@ -24,5 +24,7 @@
     <h3 class="mushimegane"> 虫眼鏡 </h3>
   <% end %>
 <% else %>
-  <h3 class="no-one"> 該当者無し </h3>
+  <%= link_to person_path(person) do %>
+    <h3 class="tokai"> <%= person.name %> </h3>
+  <% end %>
 <% end %>

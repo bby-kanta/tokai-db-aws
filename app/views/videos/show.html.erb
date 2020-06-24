@@ -161,7 +161,7 @@
           <div class="video-people">
             <% @video.people.each do |person| %>
               <div class="video-person-cast">
-                <%= render partial: "person-color-link", locals: { person_kind: person.name } %>
+                <%= render partial: "person-color-link", locals: { person_kind: person.name,person: person } %>
               </div>
             <% end %>
           </div>
