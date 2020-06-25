@@ -61,3 +61,5 @@ gem 'bootstrap'
 gem 'kaminari'
 
 gem 'font-awesome-sass'
+
+gem 'google-analytics-rails'

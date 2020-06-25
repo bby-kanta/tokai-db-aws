@@ -84,6 +84,7 @@ GEM
       sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    google-analytics-rails (1.1.1)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
@@ -230,6 +231,7 @@ DEPENDENCIES
   devise
   devise-i18n-views
   font-awesome-sass
+  google-analytics-rails
   jbuilder (~> 2.7)
   jquery-rails
   kaminari
