@@ -21,8 +21,21 @@ class VideosController < ApplicationController
   end
 
   def search
-    @search = Video.ransack(params[:q])
+    query = params[:q]
+    query ||= eval(cookies[:recent_search_history].to_s) #値を保持するためのコード
+
+    @search = Video.ransack(query) 
+
+    search_history = {  #値を保持するためのコード
+      value: params[:q],
+      expires: 1.minutes.from_now
+    }
+    cookies[:recent_search_history] = search_history if params[:q].present?
+
     @all_videos = @search.result
+
+    # @search = Video.ransack(params[:q])
+    # @all_videos = @search.result
     @videos  = @search.result.page(params[:page]).per(40).order(updated_on: 'desc')
     @main    = @videos.where(kind_of: 0).page(params[:page]).per(40)
     @sub     = @videos.where(kind_of: 1).page(params[:page]).per(40)
@@ -46,7 +59,7 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     @videos = Video.all.order(updated_on:'desc')
-    @related = @video.recommends.order(created_at:'asc')
+    @related = @video.recommends
     @tetsuya     = @video.people.find_by(name:'てつや')
     @shibayu     = @video.people.find_by(name:'しばゆー')
     @ryo         = @video.people.find_by(name:'りょう')

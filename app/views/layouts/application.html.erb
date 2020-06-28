@@ -48,7 +48,7 @@
 
                   <div class="form_">
                     <%= f.label :sorts ,'並び替え' %>
-                    <%= f.select :sorts, { '新しい順': 'updated_on desc', '古い順': 'updated_on asc'} , { selected: params[:q][:sorts] } %>
+                    <%= f.select :sorts, { '新しい順': 'updated_on desc', '古い順': 'updated_on asc','作成順': 'created_at desc'} , { selected: params[:q][:sorts] } %>
                   </div>
 
                   <div class="form_">
