@@ -59,7 +59,7 @@ class MusicsController < ApplicationController
 
   private
   def music_params
-    params.require(:music).permit(:name,:description)
+    params.require(:music).permit(:name,:description,:url)
   end
 
   def search_params
