@@ -21,21 +21,8 @@ class VideosController < ApplicationController
   end
 
   def search
-    query = params[:q]
-    query ||= eval(cookies[:recent_search_history].to_s) #値を保持するためのコード
-
-    @search = Video.ransack(query) 
-
-    search_history = {  #値を保持するためのコード
-      value: params[:q],
-      expires: 1.minutes.from_now
-    }
-    cookies[:recent_search_history] = search_history if params[:q].present?
-
+    @search = Video.ransack(params[:q])
     @all_videos = @search.result
-
-    # @search = Video.ransack(params[:q])
-    # @all_videos = @search.result
     @videos  = @search.result.page(params[:page]).per(40).order(updated_on: 'desc')
     @main    = @videos.where(kind_of: 0).page(params[:page]).per(40)
     @sub     = @videos.where(kind_of: 1).page(params[:page]).per(40)
