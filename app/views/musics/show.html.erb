@@ -2,6 +2,11 @@
 
 <p><%= link_to 'BGM一覧に戻る',musics_path %></p>
 
+
+<div class="article-image">
+  <iframe src="https://www.youtube.com/embed/<%= @music.url %>?autoplay=1&loop=1&playlist=<%= @music.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 <div class="music-show">
   <table class="table table-borderless">
     <tr> 
