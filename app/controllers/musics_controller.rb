@@ -11,7 +11,8 @@ class MusicsController < ApplicationController
   
   def index
     @searches = Music.ransack(params[:q])
-    @musics = Music.all.order(created_at:'asc')
+    # @musics = Music.all.order(created_at:'asc')
+    @musics = Music.joins(:music_videos).group(:music_id).order('count(video_id) desc')
   end
 
   def search
