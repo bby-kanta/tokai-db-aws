@@ -4,15 +4,15 @@
 
   <div class="video_box">
     <div class="video-youtube">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/<%= @video.url %>?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/<%= @video.url %>?autoplay=1&loop=1&playlist=<%= @video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <div class="video_title">
-      <h2> <%= @video.title %> </h2>
+      <h3> <%= @video.title %> </h3>
     </div>
 
     <div class="video_date">
-      <h4><%= @video.updated_on %> に公開済み </h4>
+      <h2><%= @video.updated_on %> に公開済み </h2>
 
     <%# 自分がログインしているときのみ表示  %>
     <% if user_signed_in?  && current_user.id == 1 %>
@@ -34,28 +34,28 @@
       <tr class="video-title">
         <th> タイトル </th>
         <th>   
-          <h3> <%= @video.title %> </h3>
+          <p> <%= @video.title %> </p>
         </th>
       </tr>
 
       <tr class="video-description">
         <th> 概要 </th>
         <th>   
-          <h3> <%= @video.description %> </h3>
+          <p> <%= @video.description %> </p>
         </th>
       </tr>
 
       <tr class="video-highlight">
         <th> 見所 </th>
         <th>   
-          <h3> <%= @video.highlight %> </h3>
+          <p> <%= @video.highlight %> </p>
         </th>
       </tr>
 
       <tr class="video-quotes">
         <th> 名言 </th>
         <th>   
-          <h3> <%= @video.quotes %> </h3>
+          <p> <%= @video.quotes %> </p>
         </th>
       </tr>
 
