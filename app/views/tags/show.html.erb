@@ -10,7 +10,7 @@
     </tr>
     <tr> 
       <th>概要</th> 
-      <th><%= @tag.description %></th>
+      <th> <%=safe_join(@tag.description.split("\n"),tag(:br))%> </th>
     </tr>
     <tr> 
       <th>受けた人</th> 

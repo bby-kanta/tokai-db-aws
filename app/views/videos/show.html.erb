@@ -41,14 +41,14 @@
       <tr class="video-description">
         <th> 概要 </th>
         <th>   
-          <p> <%= @video.description %> </p>
+          <p> <%=safe_join(@video.description.split("\n"),tag(:br))%> </p>
         </th>
       </tr>
 
       <tr class="video-highlight">
         <th> 見所 </th>
         <th>   
-          <p> <%= @video.highlight %> </p>
+          <p> <%=safe_join(@video.highlight.split("\n"),tag(:br))%> </p>
         </th>
       </tr>
 

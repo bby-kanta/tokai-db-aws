@@ -10,7 +10,7 @@
     </tr>
     <tr> 
       <th>概要</th> 
-      <th><%= @place.description %></th>
+      <th> <%=safe_join(@place.description.split("\n"),tag(:br))%> </th>
     </tr>
 </table>
 </div>
