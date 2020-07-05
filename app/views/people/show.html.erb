@@ -10,7 +10,7 @@
 
   <div class="person_description">
     <h3> 紹介文</h3>
-    <p> <%= @person.description %> </p>
+    <p> <%= safe_join(@person.description.split("\n"),tag(:br)) %> </p>
   </div>
 
   <%# personが持っているハッシュタグリストです %>
