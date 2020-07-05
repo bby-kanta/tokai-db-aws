@@ -1,95 +1,97 @@
 <%= stylesheet_link_tag "people", :media => "all" %>
 
-<h1>メンバー・登場人物一覧</h1>
+<div class="show-person_page">
+  <h1>メンバー・登場人物一覧</h1>
 
-<div class="person_name">
-  <h3> 名前</h3>
-  <p><%= @person.name %></p>
-</div>
-
-<div class="person_description">
-  <h3> 紹介文</h3>
-  <p> <%= @person.description %> </p>
-</div>
-
-<%# personが持っているハッシュタグリストです %>
-<div class="person_tags">
-  <h3> <%= @person.name %> に関係するハッシュタグ </h3>
-  <%= render partial: "tags/tag-color", locals: { tags: @tags }%>
-</div>
-
-<%# pesonが持っている罰ゲーム一覧です %>
-<div class="person_penalty">
-  <h3> <%= @person.name %> に関係する罰ゲーム </h3>
-  <%= render partial: "penalties/penalty-color", locals: { penalties: @penalties }%>
-</div>
-
-<%# かんたのみ表示 %>
-<% if user_signed_in?  && current_user.id == 1 %>
-
-  <%= link_to '編集',edit_person_path(@person) %>
-  <%= link_to '削除',person_path(@person),
-    method: :delete,
-    data: {confirm: '本当に削除しますか？'}
-  %>
-
-
-<div class="tag_forms">
-  <div class="tag_form">
-  <h2>ハッシュタグ入力フォーム</h2>
-    <%= form_for ([@person,@tag]) do |a| %>
-
-      <div class="tag-field">
-        <%= a.label :name ,'ハッシュタグ' %>
-        <%= a.text_field :name,placeholder:'ハッシュタグ名を入力してください' %>
-      </div>
-
-      <div class="tag-field">
-        <%= a.label :description ,'タグの概要' %>
-        <%= a.text_area :description,placeholder:'概要を入力してください' %>
-      </div>
-
-      <div>
-        <%= a.submit %>
-      </div>
-
-    <% end %>
+  <div class="person_name">
+    <h3> 名前</h3>
+    <p><%= @person.name %></p>
   </div>
 
-  <div class="tag_form">
-  <h2>罰ゲーム入力フォーム</h2>
-    <%= form_for ([@person,@penalty]) do |a| %>
-
-      <div class="tag-field">
-        <%= a.label :name ,'罰ゲーム名' %>
-        <%= a.text_field :name,placeholder:'罰ゲーム名を入力してください' %>
-      </div>
-
-      <div class="tag-field">
-        <%= a.label :description ,'罰ゲームの概要' %>
-        <%= a.text_area :description,placeholder:'概要を入力してください' %>
-      </div>
-
-      <div class="tag-field">
-        <%= a.label :since ,'いつから始まったか' %>
-      <%= a.date_select :since,{start_year: 2014,end_year: 2020,use_month_numbers: true} %>
-      </div>
-
-      <div>
-        <%= a.submit %>
-      </div>
-
-    <% end %>
+  <div class="person_description">
+    <h3> 紹介文</h3>
+    <p> <%= @person.description %> </p>
   </div>
-<% end %>
+
+  <%# personが持っているハッシュタグリストです %>
+  <div class="person_tags">
+    <h3> <%= @person.name %> に関係するハッシュタグ </h3>
+    <%= render partial: "tags/tag-color", locals: { tags: @tags }%>
+  </div>
+
+  <%# pesonが持っている罰ゲーム一覧です %>
+  <div class="person_penalty">
+    <h3> <%= @person.name %> に関係する罰ゲーム </h3>
+    <%= render partial: "penalties/penalty-color", locals: { penalties: @penalties }%>
+  </div>
+
+  <%# かんたのみ表示 %>
+  <% if user_signed_in?  && current_user.id == 1 %>
+
+    <%= link_to '編集',edit_person_path(@person) %>
+    <%= link_to '削除',person_path(@person),
+      method: :delete,
+      data: {confirm: '本当に削除しますか？'}
+    %>
+
+
+  <div class="tag_forms">
+    <div class="tag_form">
+    <h2>ハッシュタグ入力フォーム</h2>
+      <%= form_for ([@person,@tag]) do |a| %>
+
+        <div class="tag-field">
+          <%= a.label :name ,'ハッシュタグ' %>
+          <%= a.text_field :name,placeholder:'ハッシュタグ名を入力してください' %>
+        </div>
+
+        <div class="tag-field">
+          <%= a.label :description ,'タグの概要' %>
+          <%= a.text_area :description,placeholder:'概要を入力してください' %>
+        </div>
+
+        <div>
+          <%= a.submit %>
+        </div>
+
+      <% end %>
+    </div>
+
+    <div class="tag_form">
+    <h2>罰ゲーム入力フォーム</h2>
+      <%= form_for ([@person,@penalty]) do |a| %>
+
+        <div class="tag-field">
+          <%= a.label :name ,'罰ゲーム名' %>
+          <%= a.text_field :name,placeholder:'罰ゲーム名を入力してください' %>
+        </div>
+
+        <div class="tag-field">
+          <%= a.label :description ,'罰ゲームの概要' %>
+          <%= a.text_area :description,placeholder:'概要を入力してください' %>
+        </div>
+
+        <div class="tag-field">
+          <%= a.label :since ,'いつから始まったか' %>
+        <%= a.date_select :since,{start_year: 2014,end_year: 2020,use_month_numbers: true} %>
+        </div>
+
+        <div>
+          <%= a.submit %>
+        </div>
+
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+
+
+
+  <h2><%= @person.name %> さんが出演している動画（ランダムで表示されます） </h2>
+
+  <div class="video_articles">
+    <%= render partial: "videos/video-articles", locals: { videos: @person.videos.sample(20) } %>
+  </div>
+
+  <%= @person.id %>
 </div>
-
-
-
-<h2><%= @person.name %> さんが出演している動画（ランダムで表示されます） </h2>
-
-<div class="video_articles">
-  <%= render partial: "videos/video-articles", locals: { videos: @person.videos.sample(20) } %>
-</div>
-
-<%= @person.id %>
