@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_06_28_100311) do
 
-  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "video_id"
     t.datetime "created_at", precision: 6, null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["video_id"], name: "index_favorites_on_video_id"
   end
 
-  create_table "music_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "music_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "music_id"
     t.bigint "video_id"
     t.datetime "created_at", precision: 6, null: false
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["video_id"], name: "index_music_videos_on_video_id"
   end
 
-  create_table "musics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "musics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.string "url"
   end
 
-  create_table "penalties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "penalties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.integer "already", default: 1, null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["person_id"], name: "index_penalties_on_person_id"
   end
 
-  create_table "penalty_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "penalty_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "penalty_id"
     t.bigint "video_id"
     t.datetime "created_at", precision: 6, null: false
@@ -58,14 +58,14 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["video_id"], name: "index_penalty_videos_on_video_id"
   end
 
-  create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "person_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "person_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "person_id"
     t.bigint "video_id"
     t.datetime "created_at", precision: 6, null: false
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["video_id"], name: "index_person_videos_on_video_id"
   end
 
-  create_table "place_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "place_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "place_id"
     t.bigint "video_id"
     t.datetime "created_at", precision: 6, null: false
@@ -83,14 +83,14 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["video_id"], name: "index_place_videos_on_video_id"
   end
 
-  create_table "places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "video_id"
     t.bigint "recommend_id"
     t.datetime "created_at", precision: 6, null: false
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["video_id"], name: "index_relationships_on_video_id"
   end
 
-  create_table "tag_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "tag_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "tag_id"
     t.bigint "video_id"
     t.datetime "created_at", precision: 6, null: false
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["video_id"], name: "index_tag_videos_on_video_id"
   end
 
-  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.bigint "person_id"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["person_id"], name: "index_tags_on_person_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "kind_of", default: 0, null: false
     t.string "url", null: false
     t.string "title", null: false
