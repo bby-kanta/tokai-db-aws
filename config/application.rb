@@ -38,7 +38,7 @@ module TokaiDatabase
 
     config.hosts << "tokai-onair.herokuapp.com"
     config.hosts << "www.tokai-onair.work"
-    # config.hosts << "tokai-onair-db.an.r.appspot.com"
+    config.hosts << "tokai-onair-db.an.r.appspot.com"
     
   end
 end
