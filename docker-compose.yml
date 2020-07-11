@@ -11,8 +11,6 @@ services:
       - log-data:/Tokai-Onair_DB/log
     environment:
       RAILS_ENV: production
-    depends_on:
-      - db
     command: sh scripts/launch.sh
   nginx:
     build: 
