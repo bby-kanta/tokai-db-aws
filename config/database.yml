@@ -13,23 +13,15 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= Rails.application.credentials.rds[:host] %>
-  database: <%= Rails.application.credentials.rds[:database] %>
-  username: <%= Rails.application.credentials.rds[:username] %>
-  password: <%= Rails.application.credentials.rds[:password] %>
-  # username: root
-  # password: password
-  # socket: /tmp/mysql.sock
-  # host: db
+  username: root
+  password: password
+  socket: /tmp/mysql.sock
+  host: db
   # host: localhost
 
 development:
   <<: *default
-  host: <%= Rails.application.credentials.rds[:host] %>
-  database: <%= Rails.application.credentials.rds[:database] %>
-  username: <%= Rails.application.credentials.rds[:username] %>
-  password: <%= Rails.application.credentials.rds[:password] %>
-  # database: tokai_database_development
+  database: tokai_database_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
