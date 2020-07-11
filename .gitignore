@@ -35,3 +35,6 @@
 yarn-debug.log*
 .yarn-integrity
 secret.yaml
+
+!/tmp/pid/.keep
+!/tmp/sockets/.keep
