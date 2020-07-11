@@ -1,11 +1,5 @@
 version: '3'
 services:
-  db:
-    image: mysql:5.7
-    tty: true
-    ports:
-      - 3306:3306
-    command: mysqld --character-set-server=utf8mb4 --explicit_defaults_for_timestamp=true
   rails:
     build:
       context: .
