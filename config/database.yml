@@ -51,7 +51,7 @@ test:
 #
 production:
   <<: *default
-  database: tokai_onair_db_production
-  username: kanta
-  password: <%= ENV['TOKAI_DATABASE_DATABASE_PASSWORD'] %>
-  socket: /cloudsql/tokai-onair-db:asia-northeast1:tokai-onair-db
+  host: <%= Rails.application.credentials.rds[:host] %>
+  database: <%= Rails.application.credentials.rds[:database] %>
+  username: <%= Rails.application.credentials.rds[:username] %>
+  password: <%= Rails.application.credentials.rds[:password] %>

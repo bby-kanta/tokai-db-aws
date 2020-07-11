@@ -3,9 +3,9 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: tokai_database_development
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: tokai_db_mysql_aws_production
+      MYSQL_USER: kanta 
+      MYSQL_ROOT_PASSWORD: $Kanta4714
     tty: true
     ports:
       - 3306:3306
