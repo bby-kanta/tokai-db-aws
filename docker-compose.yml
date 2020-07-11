@@ -32,7 +32,7 @@ services:
     depends_on:
       - rails
     volumes:
-      - public-data:/neptume/public
+      - public-data:/Tokai-Onair_DB/public
       - tmp-data:/Tokai-Onair_DB/tmp
 volumes:
   public-data:
