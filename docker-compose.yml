@@ -2,7 +2,7 @@ version: '3'
 services:
   db:
     image: mysql:5.7
-    environment: production
+    environment:
       MYSQL_DATABASE: tokai_db_mysql_aws_production
       MYSQL_USER: kanta 
       MYSQL_ROOT_PASSWORD: $Kanta4714
