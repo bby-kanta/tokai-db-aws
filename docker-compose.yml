@@ -20,7 +20,7 @@ services:
       - tmp-data:/Tokai-Onair_DB/tmp
       - log-data:/Tokai-Onair_DB/log
     environment:
-      RAILS_ENV: development
+      RAILS_ENV: production
     depends_on:
       - db
     command: sh scripts/launch.sh
