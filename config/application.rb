@@ -36,8 +36,11 @@ module TokaiDatabase
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
 
+    #heroku
     config.hosts << "tokai-onair.herokuapp.com"
     config.hosts << "www.tokai-onair.work"
+
+    #AWS
     config.hosts << "3.128.212.54"
     config.hosts << "tokai-database-219787774.us-east-2.elb.amazonaws.com"
     config.hosts << "www.tokaionair.cf"

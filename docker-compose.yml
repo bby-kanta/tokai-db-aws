@@ -2,10 +2,6 @@ version: '3'
 services:
   db:
     image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: <%= Rails.application.credentials.rds[:database] %>
-      MYSQL_USER: <%= Rails.application.credentials.rds[:username] %>
-      MYSQL_ROOT_PASSWORD: <%= Rails.application.credentials.rds[:password] %>
     tty: true
     ports:
       - 3306:3306
