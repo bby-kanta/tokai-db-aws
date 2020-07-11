@@ -38,6 +38,7 @@ module TokaiDatabase
 
     config.hosts << "tokai-onair.herokuapp.com"
     config.hosts << "www.tokai-onair.work"
+    config.hosts << "3.128.212.54"
     
   end
 end
