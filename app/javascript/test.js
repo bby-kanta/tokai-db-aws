@@ -1,2 +1,5 @@
-  $(".S").css("color", "red");
-  console.log("huga")
+// $(function() {
+    
+//   $(".S").css("color", "red");
+//   console.log("huga")
+// });
