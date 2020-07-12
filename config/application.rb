@@ -44,6 +44,7 @@ module TokaiDatabase
     config.hosts << "3.128.212.54"
     config.hosts << "tokai-database-219787774.us-east-2.elb.amazonaws.com"
     config.hosts << "www.tokaionair.cf"
+    config.hosts << "toukaionair.com"
     
   end
 end
