@@ -60,6 +60,15 @@ td, th {
   padding: 20px 30px;
   } 
 
+.highlight-content {
+  display: flex;
+  flex-direction: column;
+  a {
+    margin-bottom: 1%;
+    color: rgb(0, 60, 255);
+  }
+}
+
 .video-rate h3 {// ランク
   font-size: 40px;
 }
