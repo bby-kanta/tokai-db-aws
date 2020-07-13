@@ -110,7 +110,7 @@ div[class*="person-"] p {
 
 .tag_forms {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
 }
 
 .tag_form {
