@@ -1,5 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Penalty, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do 
+    @penalty = FactoryBot.build(:penalty)
+  end
+
+  describe 'バリデーション' do
+    it 'それぞれ値が設定されていれば、OK' do
+      expect(@penalty.valid?).to eq(true)
+    end
+  end
+
 end
