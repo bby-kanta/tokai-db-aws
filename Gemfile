@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# ruby '2.6.2'
+ruby '2.6.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
@@ -63,3 +63,9 @@ gem 'kaminari'
 gem 'font-awesome-sass'
 
 gem 'google-analytics-rails'
+
+# 7/14 逃げていたテストに挑戦
+group :development, :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+end
