@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :music do
-    
-  end
+    name {"曲"}
+    description {"概要"}  end
 end
