@@ -1,38 +1,15 @@
-version: 2
- 
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+
 jobs:
-    # build ジョブ: CircleCI 上で Docker コンテナを作成してテストする
-    build:
-        docker:
-            - image: alpine
-        steps:
-            - checkout
-            - run:
-                name: Echo Test
-                command: echo "CircleCI Test"
-    # deploy ジョブ: EC2 に SSH 接続して、デプロイを実行する
-    deploy:
-        machine:
-            image: circleci/classic:edge
-        steps:
-            - checkout
-            # CircleCI に登録した秘密鍵を呼び出す
-            - add_ssh_keys:
-            # CircleCI に登録した環境変数を使って SSH
-            - run: ssh ${USER_NAME}@${HOST_NAME} 'cd tokai-db-aws && git pull'
- 
-workflows:
-    version: 2
-    # build_and_deploy ジョブ: 一番最初に呼ばれるジョブ
-    build_and_deploy:
-        # build ジョブと deploy ジョブを呼び出す
-        jobs:
-            - build
-            - deploy:
-                requires:
-                    # deploy ジョブより先に build ジョブを実行しろ！
-                    - build
-                # master ブランチに push された場合のみ deploy ジョブを実行する
-                filters:
-                    branches:
-                        only: master
+  build:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install
