@@ -32,10 +32,20 @@ module TokaiDatabase
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    # 7/14追加　　https://qiita.com/Ushinji/items/522ed01c9c14b680222c
+    config.generators do |g|
+      g.test_framework :rspec, 
+            view_specs: false, 
+            helper_specs: false, 
+            controller_specs: false, 
+            routing_specs: false
+    end
+
     # 日本語設定
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
 
+    config.hosts << "localhost"
     #heroku
     config.hosts << "tokai-onair.herokuapp.com"
     config.hosts << "www.tokai-onair.work"
