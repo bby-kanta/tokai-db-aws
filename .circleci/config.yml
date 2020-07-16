@@ -18,7 +18,7 @@ jobs:
             - checkout
             # CircleCI に登録した秘密鍵を呼び出す
             - add_ssh_keys:
-            # CircleCI に登録した環境変数を使って SSH
+            # CircleCI に登録した環境変数を使って SSH → masterからpullする
             - run: ssh ${USER_NAME}@${HOST_NAME} 'cd tokai-db-aws && git pull origin master'
  
 workflows:
