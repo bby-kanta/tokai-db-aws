@@ -22,6 +22,8 @@ jobs:
             - run: ssh ${USER_NAME}@${HOST_NAME} 'cd tokai-db-aws && git pull origin master && docker-compose stop && docker-compose run rails rails assets:precompile && docker-compose up -d'
  
 workflows:
+
+    
     version: 2
     # build_and_deploy ジョブ: 一番最初に呼ばれるジョブ
     build_and_deploy:
