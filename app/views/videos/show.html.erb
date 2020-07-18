@@ -245,6 +245,6 @@
   </div>
 
   <div class="related-videos">
-    <%= render partial: "video-articles", locals: { videos: @related }%>
-    <%= render partial: "video-articles", locals: { videos: Video.all.sample(6) }%>
+    <%= render partial: "video-articles-show", locals: { videos: @related }%>
+    <%= render partial: "video-articles-show", locals: { videos: Video.all.sample(6) }%>
   </div>
