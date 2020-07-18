@@ -64,7 +64,8 @@ rails+docker+MySQL（RDS）で構築したものをAWSのEC2にSSH接続して�
 勉強しているときはいるのかこれと思いましたが使ってみてDockerのすごさを感じ取りました。初期の頃は環境構築で挫折しかけたのですが最初にDockerを学べばそのリスクからは逃れられそうです。
 
 ## CircleCI
-masterブランチにプッシュされたら、CircleCIからEC2にSSH接続して自動デプロイするようにしています。
+masterブランチにプッシュされたら、CircleCIからEC2にSSH接続して自動デプロイしDockerComposeを再起動するようにしています。
+導入する前はプルリクを飛ばしてマスターブランチにマージ👉EC2にSSH接続👉git pullコマンド👉docker compose restart と手動でやっていたのでとてもストレスでした。
 
 ## MySQL  
 DBは実務で役立ちそうという思いからMySQLを選択しました。
