@@ -2,18 +2,12 @@
 
 <p><%= link_to '撮影場所一覧に戻る',places_path %></p>
 
-<div class="place-show">
-  <table class="table table-borderless">
-    <tr> 
-      <th>撮影場所名</th> 
-      <th><%= @place.name %> </th> 
-    </tr>
-    <tr> 
-      <th>概要</th> 
-      <th> <%=safe_join(@place.description.split("\n"),tag(:br))%> </th>
-    </tr>
-</table>
-</div>
+<div
+  class="js-places-show"
+  data-name="<%= @place.name %>"
+  data-description="<%= @place.description %>"
+  data-edit-place-path="<%= edit_place_path(@place) %>"
+></div>
 
 <div class="recommend-place">
   <h2>おすすめ撮影場所</h2>
@@ -43,3 +37,10 @@
 </div>
 
 <%= @place.id %>
+
+<div
+  class="js-places-show"
+  data-name="<%= @place.name %>"
+  data-description="<%= @place.description %>"
+  data-edit-place-path="<%= edit_place_path(@place) %>"
+></div>
