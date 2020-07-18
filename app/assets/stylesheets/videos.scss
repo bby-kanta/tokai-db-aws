@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.main-contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .tab-pane {
   margin-top: 20px;
 }
