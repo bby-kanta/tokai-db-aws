@@ -89,16 +89,43 @@ div[class*="person-"] p {
   }
 }
 
-.person_title {
-  background-color: orange;
-}
 
-.person_name,.person_description {
-  margin: 30px 0px;
-  h3 {
-    border-bottom: 1px solid;
+// showページのデザイン
+.person_title {
+  height: 100px;
+  background-color: rgb(44, 44, 44);
+  color: white;
+  box-shadow: 2px 2px 4px gray;
+  display: flex;
+  align-items: center;
+  h3{
+    margin-left: 30px;
   }
 }
+
+.person_introduce_box {
+  margin: 5% 0;
+  display: flex;
+  justify-content: center;
+  .person_image img {
+    width: 400px;
+    box-shadow: 2px 2px 4px gray;
+  }
+  .person_name_description {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .person_name {
+      margin-bottom: 80px;
+      h3 {
+        font-size: 40px;
+        font-weight: bold;      }
+    }
+
+  }
+}
+
 
 .person_tags , .person_penalty {
   margin: 30px 0px;

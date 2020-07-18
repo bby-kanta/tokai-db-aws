@@ -38,6 +38,8 @@
  body { padding-top: 57px; } //navbarを固定した時にに必要なpadding!公式にも記述あり。 https://qiita.com/PoohSunny/items/ff78ed50332ddaf330a8
 
  .nav {
+   margin: 0 auto;
+   width : 97%;
   padding-top: 30px; //重ならない用
 }
 
@@ -149,7 +151,8 @@ li {
 .yield {
   margin: 20px 0;
   max-width: 100%;
-  width: 90%;
+  width: 100%;
+  min-width: 100%;
   min-height: 100vh;
 }
 
@@ -272,9 +275,9 @@ select {
   div[class*="video_articles"] {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     a{
       font-size: 30px;
     }
@@ -284,8 +287,13 @@ select {
 .video_article {
   margin-right: 0.5em;
   margin-bottom: 1em;
-  width :24em;
+  width :24%;
   border: 2px solid rgb(238, 237, 237)
+}
+.video_article-show {
+  width: 400px;
+  border: 2px solid rgb(238, 237, 237)
+
 }
 
 // ↓記事が上にホバーするコード

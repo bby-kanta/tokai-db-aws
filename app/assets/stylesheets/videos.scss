@@ -28,7 +28,7 @@
 
 // showのCSS
 .all-contents {
-  margin: 20px 0;
+  margin: 20px 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -43,6 +43,7 @@
   width : 100%;
   height : 0;
   padding-top:55%;
+  box-shadow: 2px 2px 4px gray;
   iframe {
     position: absolute;
     top: 0;
@@ -148,7 +149,7 @@ div[class*="video-person"] a h3 {
 
 .related-videos{
   display: inline-block;
-
+  margin: 0 auto;
   a{
     font-size: 30px; //30pxにしないとデザイン崩れる
     .video-article{
