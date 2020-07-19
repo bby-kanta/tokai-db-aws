@@ -1,0 +1,28 @@
+    <% case person_id %>
+    <% when 1 %>
+      <%= link_to person_path(person_id) do %>
+        <%= image_tag('tetsuya.jpg') %>
+      <% end %>
+    <% when 2 %>
+      <%= link_to person_path(person_id) do %>
+        <%= image_tag('sibayu.jpg') %>
+      <% end %>
+    <% when 3 %>
+      <%= link_to person_path(person_id) do %>
+        <%= image_tag('ryo.jpg') %>
+      <% end %>
+    <% when 4 %>
+      <%= link_to person_path(person_id) do %>
+        <%= image_tag('toshimitsu.jpg') %>
+      <% end %>
+    <% when 5 %>
+      <%= link_to person_path(person_id) do %>
+        <%= image_tag('yumemaru.jpg') %>
+      <% end %>
+    <% when 6 %>
+      <%= link_to person_path(person_id) do %>
+        <%= image_tag('mushimegane.jpg') %>
+      <% end %>
+    <% else %>
+      <%= image_tag('onair-bird.jpg') %>
+    <% end %>

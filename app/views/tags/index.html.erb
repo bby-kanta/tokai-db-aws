@@ -1,12 +1,24 @@
 <%= stylesheet_link_tag "tags", :media => "all" %>
 
-<h2>ハッシュタグリスト</h2>
-<%= search_form_for @searches,html: { class: "form-inline" }, url: search_tags_path do |f| %>
- <%= f.label :name_or_description, 'ハッシュタグ検索' %>
- <%= f.search_field :name_or_description_cont %>
- <%= f.submit '検索' %>
-<% end %>
+<div class="background-image">
+  <%= image_tag 'tokai-onair4.jpg' %>
+</div>
+<div class="background-title">
+  <div class="background-title-column">
+    <h3>Hashtags</h3>
+    <h2>ハッシュタグ</h2>
+  </div>
+</div>
 
-<div class="hash-tags">
-  <%= render partial: "tag-color", locals: { tags: @tags }%>
+<div class="width-96">
+  <div class="search-form">
+    <%= search_form_for @searches,html: { class: "form-inline" }, url: search_tags_path do |f| %>
+    <%= f.search_field :name_or_description_cont %>
+    <%= f.submit '検索' %>
+    <% end %>
+  </div>
+
+  <div class="hash-tags">
+    <%= render partial: "tag-color", locals: { tags: @tags }%>
+  </div>
 </div>

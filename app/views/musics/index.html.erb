@@ -1,24 +1,36 @@
 <%= stylesheet_link_tag "musics", :media => "all" %>
 
-<h1>BGMリスト</h1>
+<div class="background-image">
+  <%= image_tag 'bgm.jpg' %>
+</div>
+<div class="background-title">
+  <div class="background-title-column">
+    <h3>BGM</h3>
+    <h2>東海オンエア愛用音源</h2>
+  </div>
+</div>
 
 <%# 自分がログインしているときのみ表示  %>
 <% if user_signed_in?  && current_user.id == 1 %>
   <h2> <%= link_to 'BGM作成' ,new_music_path if current_user.id == 1 %> </h2>
 <% end %>
 
-
-<%= search_form_for @searches,html: { class: "form-inline" }, url: search_musics_path do |f| %>
- <%= f.label :name_or_description, 'ハッシュタグ検索' %>
- <%= f.search_field :name_or_description_cont %>
- <%= f.submit '検索' %>
-<% end %>
-
-<% @musics.each do |music|%>
-  <div class="btn btn-success">
-    <%= link_to music_path(music.id) do %>
-      <%= music.name %>
-      (<%= music.videos.count %>)
+<div class="width-96">
+  <div class="search-form">
+    <%= search_form_for @searches,html: { class: "form-inline" }, url: search_musics_path do |f| %>
+    <%= f.search_field :name_or_description_cont %>
+    <%= f.submit '検索' %>
     <% end %>
   </div>
-<% end %>
+
+  <div class="musics">
+    <% @musics.each do |music|%>
+      <div class="btn btn-success">
+        <%= link_to music_path(music.id) do %>
+          <%= music.name %>
+          (<%= music.videos.count %>)
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

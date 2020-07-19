@@ -1,52 +1,45 @@
 <%= stylesheet_link_tag "people", :media => "all" %>
 
 <div class="show-person_page">
-  <div class="person_title">
-    <h3> Character </h3>
+  <div class="title">
+    <%= link_to 'Character',people_path %>
   </div>
 
-<div class="person_introduce_box">
-  <div class="person_image">
-    <% case @person.id %>
-    <% when 1 %>
-      <%= image_tag('tetsuya.jpg') %>
-    <% when 2 %>
-      <%= image_tag('sibayu.jpg') %>
-    <% when 3 %>
-      <%= image_tag('ryo.jpg') %>
-    <% when 4 %>
-      <%= image_tag('toshimitsu.jpg') %>
-    <% when 5 %>
-      <%= image_tag('yumemaru.jpg') %>
-    <% when 6 %>
-      <%= image_tag('mushimegane.jpg') %>
-    <% else %>
-      <%= image_tag('tetsuya.jpg') %>
-    <% end %>
+  <div class="person_background-image">
+      <%= render partial: "person-image", locals: {person_id: @person.id }%>
   </div>
 
-  <div class="person_name_description">
-    <div class="person_name">
-      <h3><%= @person.name %></h3>
+  <div class="person_introduce_box">
+    <div class="person_image">
+      <%= render partial: "person-image", locals: {person_id: @person.id }%>
     </div>
-    <div class="person_description">
-      <p> <%= safe_join(@person.description.split("\n"),tag(:br)) %> </p>
+
+    <div class="person_name_description">
+      <div class="person_name">
+        <h3><%= @person.name %></h3>
+      </div>
+      <div class="person_description">
+        <p> <%= safe_join(@person.description.split("\n"),tag(:br)) %> </p>
+      </div>
     </div>
   </div>
-</div>
 
 
 
   <%# personが持っているハッシュタグリストです %>
   <div class="person_tags">
     <h3> <%= @person.name %> に関係するハッシュタグ </h3>
-    <%= render partial: "tags/tag-color", locals: { tags: @tags }%>
+    <div class="tags-list">
+      <%= render partial: "tags/tag-color", locals: { tags: @tags }%>
+    </div>
   </div>
 
   <%# pesonが持っている罰ゲーム一覧です %>
   <div class="person_penalty">
     <h3> <%= @person.name %> に関係する罰ゲーム </h3>
-    <%= render partial: "penalties/penalty-color", locals: { penalties: @penalties }%>
+    <div class="penalty-list">
+      <%= render partial: "penalties/penalty-color", locals: { penalties: @penalties }%>
+    </div>
   </div>
 
   <%# かんたのみ表示 %>
@@ -109,10 +102,9 @@
   <% end %>
   </div>
 
-
-
-  <h2><%= @person.name %> さんが出演している動画（ランダムで表示されます） </h2>
-
+  <div class="Appear-on-videos">
+    <h2><%= @person.name %> さんが出演している動画（ランダムで表示されます） </h2>
+  </div>
   <div class="video_articles">
     <%= render partial: "videos/video-articles", locals: { videos: @person.videos.sample(20) } %>
   </div>
