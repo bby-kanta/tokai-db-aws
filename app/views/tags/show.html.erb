@@ -1,43 +1,50 @@
 <%= stylesheet_link_tag "tags", :media => "all" %>
 
-<p><%= link_to 'ハッシュタグ一覧に戻る',tags_path %></p>
-
-<div class="tag-show">
-  <table class="table table-borderless">
-    <tr> 
-      <th>ハッシュタグ名</th> 
-      <th><%= @tag.name %> </th> 
-    </tr>
-    <tr> 
-      <th>概要</th> 
-      <th> <%=safe_join(@tag.description.split("\n"),tag(:br))%> </th>
-    </tr>
-    <tr> 
-      <th>受けた人</th> 
-      <th><%= @tag.person.name %></th>
-    </tr>
-</table>
+<div class="title">
+  <h3><%= link_to 'Hashtag',tags_path %></h3>
 </div>
 
-<div class="recommend-tag">
-  <h2>おすすめハッシュタグ</h2>
-  <div class="hash-tags">
-    <%= render partial: "tag-color", locals: { tags: @tags }%>
+<div class="person_background-image">
+    <%= render partial: "people/person-image", locals: {person_id: @tag.person_id }%>
+</div>
+
+<div class="person_introduce_box">
+  <div class="person_image">
+    <%= render partial: "people/person-image", locals: {person_id: @tag.person_id }%>
+  </div>
+
+  <div class="person_name_description">
+    <div class="person_name">
+      <h3><%= @tag.name %></h3>
+    </div>
+    <div class="person_description">
+      <p> <%= safe_join(@tag.description.split("\n"),tag(:br)) %> </p>  
+    </div>
   </div>
 </div>
 
-<% if user_signed_in?  && current_user.id == 1 %>
-  <%= link_to '編集',edit_tag_path(@tag) %>
-  <%= link_to '削除',tag_path(@tag),
-    method: :delete,
-    data: {confirm: '本当に削除しますか？'}
-  %>
-<% end %>
+<div class="width-96">
+  <div class="recommend-tag">
+    <h2>おすすめハッシュタグ</h2>
+    <div class="hash-tags">
+      <%= render partial: "tag-color", locals: { tags: @tags }%>
+    </div>
+  </div>
 
-<h2><%= @tag.name %> が付いている動画リスト </h2>
+  <% if user_signed_in?  && current_user.id == 1 %>
+    <%= link_to '編集',edit_tag_path(@tag) %>
+    <%= link_to '削除',tag_path(@tag),
+      method: :delete,
+      data: {confirm: '本当に削除しますか？'}
+    %>
+  <% end %>
 
-<div class="video_articles">
-  <%= render partial: "videos/video-articles", locals: { videos: @tag.videos } %>
+  <h2><%= @tag.name %> が付いている動画リスト </h2>
+
+  <div class="video_articles">
+    <%= render partial: "videos/video-articles", locals: { videos: @tag.videos } %>
+  </div>
+
+  <%= @tag.id %>
 </div>
 
-<%= @tag.id %>

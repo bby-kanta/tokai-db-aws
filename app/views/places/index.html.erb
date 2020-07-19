@@ -1,23 +1,37 @@
 <%= stylesheet_link_tag "musics", :media => "all" %>
 
-<h1>撮影場所一覧</h2>
+<div class="background-image">
+  <%= image_tag 'okazaki.jpeg' %>
+</div>
+<div class="background-title">
+  <div class="background-title-column">
+    <h3>PLACES</h3>
+    <h2>撮影場所</h2>
+  </div>
+</div>
 
 <%# 自分がログインしているときのみ表示  %>
 <% if user_signed_in?  && current_user.id == 1 %>
   <h2> <%= link_to '撮影場所作成' ,new_place_path if current_user.id == 1 %> </h2>
 <% end %>
 
-<%= search_form_for @searches,html: { class: "form-inline" }, url: search_places_path do |f| %>
- <%= f.label :name_or_description, '撮影場所検索' %>
- <%= f.search_field :name_or_description_cont %>
- <%= f.submit '検索' %>
-<% end %>
-
-<% @places.each do |place|%>
-  <div class="btn btn-danger">
-    <%= link_to place_path(place.id) do %>
-      <%= place.name %>
-      (<%= place.videos.count %>)
+<div class="width-96">
+  <div class="search-form">
+    <%= search_form_for @searches,html: { class: "form-inline" }, url: search_places_path do |f| %>
+    <%= f.label :name_or_description, '撮影場所検索' %>
+    <%= f.search_field :name_or_description_cont %>
+    <%= f.submit '検索' %>
     <% end %>
   </div>
-<% end %>
+
+  <div class="hashtags">
+    <% @places.each do |place|%>
+      <div class="btn btn-danger">
+        <%= link_to place_path(place.id) do %>
+          <%= place.name %>
+          (<%= place.videos.count %>)
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

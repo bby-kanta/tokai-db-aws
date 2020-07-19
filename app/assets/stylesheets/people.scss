@@ -21,6 +21,16 @@ div[class*="person-"] {
   min-width: 200px;
   margin-bottom: 3%;
   border: 2px solid rgb(238, 232, 232);
+  box-shadow: 2px 2px 2px 4px gray;
+  animation: anim-scale 0.5s ease-out;
+  transform-origin: 50% 50%;
+}
+@keyframes anim-scale {
+  0% { transform: scale(0.4, 0.4); }
+  40% { transform: scale(1.2, 1.2); }
+  60% { transform: scale(1, 1); }
+  80% { transform: scale(1.1, 1.1); }
+  100% { transform: scale(1, 1); }
 }
 
 div[class*="person-"] img {
@@ -91,47 +101,33 @@ div[class*="person-"] p {
 
 
 // showページのデザイン
-.person_title {
-  height: 100px;
-  background-color: rgb(44, 44, 44);
-  color: white;
-  box-shadow: 2px 2px 4px gray;
-  display: flex;
-  align-items: center;
-  h3{
-    margin-left: 30px;
-  }
+.show-person_page{
+
 }
 
-.person_introduce_box {
-  margin: 5% 0;
-  display: flex;
-  justify-content: center;
-  .person_image img {
-    width: 400px;
-    box-shadow: 2px 2px 4px gray;
-  }
-  .person_name_description {
-    margin-left: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .person_name {
-      margin-bottom: 80px;
-      h3 {
-        font-size: 40px;
-        font-weight: bold;      }
-    }
-
+.person_background-image {
+  img {
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    object-fit: cover;  //トリミング
+    object-position: 0 30%;
+    opacity: 0.4;
+    filter: blur(5px);
   }
 }
 
 
 .person_tags , .person_penalty {
-  margin: 30px 0px;
+  padding: 30px 0px;
+  background-color: rgb(250, 250, 250);
   h3 {
-    border-bottom: 1px solid;
-    margin-bottom: 20px;
+    border-bottom: 2px solid white;
+    padding-bottom: 10px;
+    margin: 0 0 20px 4%;
+  }
+  .tags-list , .penalty-list {
+    margin-left: 4%;
   }
 }
 
@@ -150,6 +146,12 @@ div[class*="person-"] p {
     display: flex;
     flex-direction: column;
   }
+}
+
+.Appear-on-videos {
+  margin: 20px 0px;
+  display: flex;
+  justify-content: center
 }
 
 

@@ -1,6 +1,13 @@
 // Place all the styles related to the tags controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.background-image {
+  img {
+    object-position: 0 45%;
+  }
+}
+
  .btn {
    border-radius: 5px;
    border-color: transparent;

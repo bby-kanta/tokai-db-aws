@@ -6,26 +6,6 @@
     <h3><%= personid.name %></h3>
     <h4> 出演回数 <%= personid.videos.count %>  回 </h4>
     <p><%=personid.description %></p>
-    <div class="person_penalties">
-      <% personid.penalties.sample(3).each do |penalty|%>
-
-            <% case penalty.person.name %>
-            <% when 'てつや' %>
-                <div class="tetsuya btn btn-secondary"> <%= penalty.name %> </div>
-            <% when 'しばゆー' %>
-                <div class="shibayu btn btn-secondary"> <%= penalty.name %> </div>
-            <% when 'りょう' %>
-                <div class="ryo btn btn-secondary"> <%= penalty.name %> </div>
-            <% when 'としみつ' %>
-                <div class="toshimitsu btn btn-secondary"> <%= penalty.name %> </div>
-            <% when 'ゆめまる' %>
-                <div class="yumemaru btn btn-secondary"> <%= penalty.name %> </div>
-            <% when '虫眼鏡' %>
-                <div class="mushimegane btn btn-secondary"> <%= penalty.name %> </div>
-            <% end %>
-
-      <% end %>
-    </div>
 
   </div> <%# introduce-person %>
 <% end %>

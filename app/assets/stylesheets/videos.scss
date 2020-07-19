@@ -61,6 +61,7 @@
 
 table {
   width : 100%;
+  box-shadow: 2px 2px 4px gray;
 }
 
 td, th {
@@ -107,13 +108,7 @@ div[class*="video-"] a , .channel h3 , .video-category h3 {
   padding: 8px;
 }
 
-.btn-secondary , .btn-success , .btn-danger {
-  border-radius: 5px;
-  border-color: transparent;
-  a , a:visited{
-    color: white;
-  }
-}
+
 
 div[class*="video-person"] a h3 {
   border-radius: 5px;

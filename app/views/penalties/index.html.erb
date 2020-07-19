@@ -1,12 +1,24 @@
-<%= stylesheet_link_tag "tags", :media => "all" %>
+<%= stylesheet_link_tag "penalties", :media => "all" %>
 
-<h2>罰ゲーム（十字架）リスト</h2>
-<%= search_form_for @searches,html: { class: "form-inline" }, url: search_penalties_path do |f| %>
- <%= f.label :name_or_description, '罰ゲーム検索' %>
- <%= f.search_field :name_or_description_cont %>
- <%= f.submit '検索' %>
-<% end %>
+<div class="background-image">
+  <%= image_tag 'tokai-onair.png' %>
+</div>
+<div class="background-title">
+  <div class="background-title-column">
+    <h3>Penalties</h3>
+    <h2>罰ゲーム（十字架）</h2>
+  </div>
+</div>
 
-<div class="penalties">
-  <%= render partial: "penalty-color", locals: { penalties: @penalties }%>
+<div class="width-96">
+  <div class="search-form">
+    <%= search_form_for @searches,html: { class: "form-inline" }, url: search_penalties_path do |f| %>
+    <%= f.search_field :name_or_description_cont %>
+    <%= f.submit  %>
+    <% end %>
+  </div>
+
+  <div class="penalties">
+    <%= render partial: "penalty-color", locals: { penalties: @penalties }%>
+  </div>
 </div>
