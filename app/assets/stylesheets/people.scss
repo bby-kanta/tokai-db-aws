@@ -1,12 +1,9 @@
-// Place all the styles related to the people controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
-
 h2 {
   margin-bottom: 1%;
 }
 
 .people-tokai{
+  margin-top: 6px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -87,16 +84,6 @@ div[class*="person-"] p {
 }
 .people-sub a{ //出演者の a タグ
   margin: 0 20px 20px 0;
-}
-
-.person_tag  {
-  h4 {
-    margin: 0;
-    color: white;
-    background-color: rgb(200, 255, 0);
-    border-radius: 5px;
-    white-space: nowrap; //改行させないコード
-  }
 }
 
 

@@ -30,14 +30,6 @@
 
     <table border="1px" style="border-collapse: collapse; border-color: rgb(238, 232, 232)">
 
-
-      <tr class="video-title">
-        <th> タイトル </th>
-        <th>   
-          <p> <%= @video.title %> </p>
-        </th>
-      </tr>
-
       <tr class="video-description">
         <th> 概要 </th>
         <th>   
@@ -230,13 +222,6 @@
           <div class="tags">
               <%= render partial: "tags/tag-color", locals: { tags: @video.tags }%>
           </div> <%# video-tags %>
-        </th>
-      </tr>
-
-      <tr class="video-updated_on">
-        <th> アップロード日 </th>
-        <th>   
-          <%= @video.updated_on %> 
         </th>
       </tr>
 

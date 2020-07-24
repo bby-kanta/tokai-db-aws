@@ -1,51 +1,48 @@
 <%= stylesheet_link_tag "musics", :media => "all" %>
 
-<p><%= link_to 'BGM一覧に戻る',musics_path %></p>
-
-
-<div class="article-image">
-  <iframe src="https://www.youtube.com/embed/<%= @music.url %>?autoplay=1&loop=1&playlist=<%= @music.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="title">
+  <h3><%= link_to 'BGM',musics_path %> / <%= @music.name %> </h3>
 </div>
 
-<div class="music-show">
-  <table class="table table-borderless">
-    <tr> 
-      <th>BGM名</th> 
-      <th><%= @music.name %> </th> 
-    </tr>
-    <tr> 
-      <th>概要</th> 
-      <th> <%=safe_join(@music.description.split("\n"),tag(:br))%> </th>
-    </tr>
-</table>
+<div class="music-player-background">
+  <div class="music-player">
+    <iframe src="https://www.youtube.com/embed/<%= @music.url %>?autoplay=1&loop=1&playlist=<%= @music.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
 </div>
 
-<div class="recommend-bgm">
-  <h2>おすすめBGM</h2>
-  <% @musics.each do |music|%>
-    <div class="btn btn-success">
-      <%= link_to music_path(music.id) do %>
-        <%= music.name %>
-        (<%= music.videos.count %>)
-      <% end %>
-    </div>
+<div class="width-96">
+  <div class="music-show">
+    <h1><%= @music.name %></h1>
+    <p><%= @music.description %></p>
+  </div>
+
+  <div class="recommend-bgm">
+    <h2>おすすめBGM</h2>
+    <% @musics.each do |music|%>
+      <div class="btn btn-success">
+        <%= link_to music_path(music.id) do %>
+          <%= music.name %>
+          (<%= music.videos.count %>)
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+
+
+
+  <% if user_signed_in?  && current_user.id == 1 %>
+    <%= link_to '編集',edit_music_path(@music) %>
+    <%= link_to '削除',music_path(@music),
+      method: :delete,
+      data: {confirm: '本当に削除しますか？'}
+    %>
   <% end %>
+
+  <h2><%= @music.name %> が使われている動画リスト </h2>
+  <div class="video_articles">
+    <%= render partial: "videos/video-articles", locals: { videos: @music.videos } %>
+  </div>
+
+  <%= @music.id %>
 </div>
-
-
-
-
-<% if user_signed_in?  && current_user.id == 1 %>
-  <%= link_to '編集',edit_music_path(@music) %>
-  <%= link_to '削除',music_path(@music),
-    method: :delete,
-    data: {confirm: '本当に削除しますか？'}
-  %>
-<% end %>
-
-<h2><%= @music.name %> が使われている動画リスト </h2>
-<div class="video_articles">
-  <%= render partial: "videos/video-articles", locals: { videos: @music.videos } %>
-</div>
-
-<%= @music.id %>

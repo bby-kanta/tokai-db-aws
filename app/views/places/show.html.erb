@@ -1,6 +1,8 @@
 <%= stylesheet_link_tag "places", :media => "all" %>
 
-<p><%= link_to '撮影場所一覧に戻る',places_path %></p>
+<div class="title">
+  <h3><%= link_to 'PLACE',places_path %> / <%= @place.name %> </h3>
+</div>
 
 <div
   class="js-places-show"
