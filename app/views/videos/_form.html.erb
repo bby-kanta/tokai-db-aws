@@ -1,4 +1,4 @@
-<div class="form_video">
+<div class="form_video width-96">
 
   <%= form_for @video do |a| %>
   
@@ -17,10 +17,18 @@
       <%= a.text_area :description %>
     </div>
 
-    <div class="form-">
-      <%= a.label :highlight ,'見所' %>
-      <%= a.text_area :highlight %>
+    <% if @video.highlight.present? %> <%# 記事作成のときのみ初期値が設定される %>
+      <div class="form-">
+        <%= a.label :highlight ,'見所' %>
+        <%= a.text_area :highlight %>
+      </div>
+    <% else %>
+      <div class="form-">
+        <%= a.label :highlight ,'見所' %>
+        <%= a.text_area :highlight, value: " &lt;a href=&quot;https://www.youtube.com/embed/動画コード?autoplay=1&start=秒数&quot; target=&quot;player&quot; id=&quot;click&quot;&gt;表示させる文字&lt;/a&gt;".html_safe %>
     </div>
+    <% end %>
+
 
     <div class="form-">
       <%= a.label :quotes, '名言' %>
@@ -127,14 +135,14 @@
       </div>
     </div>
 
-    <div class="form-collection-check">
+    <div class="recommends-check">
       <%= a.label :recommend_ids , '関連動画' %>
-      <div class='form_group'>
+      <div class='recommend-videos'>
         <%= a.collection_check_boxes(:recommend_ids, Video.all.order(title:'desc'), :id, :title) do |recommend| %>
-          <div class='form_check'>
+          <div class='recommend-video'>
               <%= recommend.label class: 'form-check-label' do %>
                   <%= recommend.check_box class: 'form-check-input' %>
-                  <%= recommend.text %>
+                  <p><%= recommend.text %></p>
               <% end %>
           </div>
         <% end %>
