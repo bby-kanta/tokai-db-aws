@@ -24,7 +24,14 @@
     </div>
   </div>
 
+  <%# かんたのみ表示 %>
+  <% if user_signed_in?  && current_user.id == 1 %>
 
+    <%= link_to '編集',edit_person_path(@person) %>
+    <%= link_to '削除',person_path(@person),
+      method: :delete,
+      data: {confirm: '本当に削除しますか？'}
+    %>
 
   <%# personが持っているハッシュタグリストです %>
   <div class="person_tags">
@@ -42,64 +49,67 @@
     </div>
   </div>
 
-  <%# かんたのみ表示 %>
-  <% if user_signed_in?  && current_user.id == 1 %>
 
-    <%= link_to '編集',edit_person_path(@person) %>
-    <%= link_to '削除',person_path(@person),
-      method: :delete,
-      data: {confirm: '本当に削除しますか？'}
-    %>
+  <div class="width-96">
+    <div class="tag_forms">
+      <div class="tag_form">
+      <h2>ハッシュタグ入力フォーム</h2>
+        <%= form_for ([@person,@tag]) do |a| %>
 
+          <div class="tag-field">
+            <%= a.label :name ,'ハッシュタグ' %>
+            <%= a.text_field :name,placeholder:'ハッシュタグ名を入力してください' %>
+          </div>
 
-  <div class="tag_forms">
-    <div class="tag_form">
-    <h2>ハッシュタグ入力フォーム</h2>
-      <%= form_for ([@person,@tag]) do |a| %>
+          <div class="tag-field">
+            <%= a.label :sort ,'ふりがな' %>
+            <%= a.text_field :sort,placeholder:'ハッシュタグ名のふりがなを入力してください' %>
+          </div>
 
-        <div class="tag-field">
-          <%= a.label :name ,'ハッシュタグ' %>
-          <%= a.text_field :name,placeholder:'ハッシュタグ名を入力してください' %>
-        </div>
+          <div class="tag-field">
+            <%= a.label :description ,'タグの概要' %>
+            <%= a.text_area :description,placeholder:'概要を入力してください' %>
+          </div>
 
-        <div class="tag-field">
-          <%= a.label :description ,'タグの概要' %>
-          <%= a.text_area :description,placeholder:'概要を入力してください' %>
-        </div>
+          <div>
+            <%= a.submit %>
+          </div>
 
-        <div>
-          <%= a.submit %>
-        </div>
+        <% end %>
+      </div>
 
-      <% end %>
+      <div class="tag_form">
+      <h2>罰ゲーム入力フォーム</h2>
+        <%= form_for ([@person,@penalty]) do |a| %>
+
+          <div class="tag-field">
+            <%= a.label :name ,'罰ゲーム名' %>
+            <%= a.text_field :name,placeholder:'罰ゲーム名を入力してください' %>
+          </div>
+
+          <div class="tag-field">
+            <%= a.label :sort ,'ふりがな' %>
+            <%= a.text_field :sort,placeholder:'ふりがなを入力してください' %>
+          </div>
+
+          <div class="tag-field">
+            <%= a.label :description ,'罰ゲームの概要' %>
+            <%= a.text_area :description,placeholder:'概要を入力してください' %>
+          </div>
+
+          <div class="tag-field">
+            <%= a.label :since ,'いつから始まったか' %>
+          <%= a.date_select :since,{start_year: 2014,end_year: 2020,use_month_numbers: true} %>
+          </div>
+
+          <div>
+            <%= a.submit %>
+          </div>
+
+        <% end %>
+      </div>
+    <% end %>
     </div>
-
-    <div class="tag_form">
-    <h2>罰ゲーム入力フォーム</h2>
-      <%= form_for ([@person,@penalty]) do |a| %>
-
-        <div class="tag-field">
-          <%= a.label :name ,'罰ゲーム名' %>
-          <%= a.text_field :name,placeholder:'罰ゲーム名を入力してください' %>
-        </div>
-
-        <div class="tag-field">
-          <%= a.label :description ,'罰ゲームの概要' %>
-          <%= a.text_area :description,placeholder:'概要を入力してください' %>
-        </div>
-
-        <div class="tag-field">
-          <%= a.label :since ,'いつから始まったか' %>
-        <%= a.date_select :since,{start_year: 2014,end_year: 2020,use_month_numbers: true} %>
-        </div>
-
-        <div>
-          <%= a.submit %>
-        </div>
-
-      <% end %>
-    </div>
-  <% end %>
   </div>
 
   <div class="Appear-on-videos">

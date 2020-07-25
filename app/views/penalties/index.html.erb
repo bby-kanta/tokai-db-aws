@@ -13,6 +13,9 @@
 <div class="width-96">
   <div class="search-form">
     <%= search_form_for @searches,html: { class: "form-inline" }, url: search_penalties_path do |f| %>
+
+    <%= f.select :sorts, { '新しい順': 'since desc', '古い順': 'since asc','五十音順': 'sort asc'} , { selected: params[:q][:sorts] } %>
+
     <%= f.search_field :name_or_description_cont %>
     <%= f.submit  %>
     <% end %>

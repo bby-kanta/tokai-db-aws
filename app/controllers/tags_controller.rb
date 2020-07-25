@@ -63,7 +63,7 @@ class TagsController < ApplicationController
 
   private
   def tag_params
-    params.require(:tag).permit(:name,:description,:person_id)
+    params.require(:tag).permit(:name,:description,:sort,:person_id)
   end
 
   def search_params
