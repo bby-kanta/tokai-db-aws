@@ -21,4 +21,3 @@ document.addEventListener('DOMContentLoaded', () => {
     render: h => h(PlacesShow, { props })
   }).$mount()
 })
-

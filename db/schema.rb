@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_100311) do
+ActiveRecord::Schema.define(version: 2020_07_25_090726) do
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.bigint "user_id"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.bigint "person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "sort"
+    t.string "penalty_image_id"
     t.index ["person_id"], name: "index_penalties_on_person_id"
   end
 
@@ -63,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "person_image_id"
   end
 
   create_table "person_videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -115,6 +118,8 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.bigint "person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "sort"
+    t.string "tag_image_id"
     t.index ["person_id"], name: "index_tags_on_person_id"
   end
 
@@ -146,6 +151,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_100311) do
     t.date "updated_on", default: "1998-09-28", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "sort"
   end
 
   add_foreign_key "favorites", "users"

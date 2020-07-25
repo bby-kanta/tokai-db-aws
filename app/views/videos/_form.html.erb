@@ -13,6 +13,11 @@
     </div>
 
     <div class="form-">
+      <%= a.label :sort , 'タイトルのふりがな「例：よんじゅろく〇〇」' %>
+      <%= a.text_field :sort %>
+    </div>
+
+    <div class="form-">
       <%= a.label :description ,'概要' %>
       <%= a.text_area :description %>
     </div>
@@ -82,7 +87,7 @@
     <div class="form-collection-check">
       <%= a.label :penalty_ids , '罰ゲーム' %>
       <div class='form_group'>
-        <%= a.collection_check_boxes(:penalty_ids, Penalty.all, :id, :name) do |penalty| %>
+        <%= a.collection_check_boxes(:penalty_ids, Penalty.all.order(sort:'asc'), :id, :name) do |penalty| %>
           <div class='form_check'>
               <%= penalty.label class: 'form-check-label' do %>
                   <%= penalty.check_box class: 'form-check-input' %>
@@ -124,7 +129,7 @@
     <div class="form-collection-check">
       <%= a.label :tag_ids , 'ハッシュタグ' %>
       <div class='form_group'>
-        <%= a.collection_check_boxes(:tag_ids, Tag.all.order(name:'asc'), :id, :name) do |tag| %>
+        <%= a.collection_check_boxes(:tag_ids, Tag.all.order(sort:'asc'), :id, :name) do |tag| %>
           <div class='form_check'>
               <%= tag.label class: 'form-check-label' do %>
                   <%= tag.check_box class: 'form-check-input' %>
@@ -138,7 +143,7 @@
     <div class="recommends-check">
       <%= a.label :recommend_ids , '関連動画' %>
       <div class='recommend-videos'>
-        <%= a.collection_check_boxes(:recommend_ids, Video.all.order(title:'desc'), :id, :title) do |recommend| %>
+        <%= a.collection_check_boxes(:recommend_ids, Video.all.order(sort:'asc'), :id, :title) do |recommend| %>
           <div class='recommend-video'>
               <%= recommend.label class: 'form-check-label' do %>
                   <%= recommend.check_box class: 'form-check-input' %>

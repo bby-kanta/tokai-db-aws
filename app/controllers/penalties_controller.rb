@@ -63,7 +63,7 @@ class PenaltiesController < ApplicationController
 
   private
   def penalty_params
-    params.require(:penalty).permit(:name,:description,:since,:person_id)
+    params.require(:penalty).permit(:name,:description,:since,:sort,:person_id)
   end
 
   def search_params
