@@ -1,5 +1,26 @@
 import Vue from 'vue'
+import PlacesIndex from '../components/places/PlacesIndex.vue';
 import PlacesShow from '../components/places/PlacesShow.vue'
+
+document.addEventListener('DOMContentLoaded', () => {
+  const el = document.querySelector('.js-places-index')
+
+  if (el == null) {
+    return
+  }
+
+  const { notice, places } = el.dataset
+
+  const props = {
+    notice: notice,
+    places: places ? JSON.parse(places) : [],
+  }
+
+  new Vue({
+    el: el,
+    render: h => h(PlacesIndex, { props })
+  }).$mount()
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.querySelector('.js-places-show')

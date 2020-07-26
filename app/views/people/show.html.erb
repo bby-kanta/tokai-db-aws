@@ -24,15 +24,6 @@
     </div>
   </div>
 
-  <%# かんたのみ表示 %>
-  <% if user_signed_in?  && current_user.id == 1 %>
-
-    <%= link_to '編集',edit_person_path(@person) %>
-    <%= link_to '削除',person_path(@person),
-      method: :delete,
-      data: {confirm: '本当に削除しますか？'}
-    %>
-
   <%# personが持っているハッシュタグリストです %>
   <div class="person_tags">
     <h3> <%= @person.name %> に関係するハッシュタグ </h3>
@@ -49,11 +40,19 @@
     </div>
   </div>
 
+  <%# かんたのみ表示 %>
+  <% if user_signed_in?  && current_user.id == 1 %>
 
-  <div class="width-96">
-    <div class="tag_forms">
+    <%= link_to '編集',edit_person_path(@person) %>
+    <%= link_to '削除',person_path(@person),
+      method: :delete,
+      data: {confirm: '本当に削除しますか？'}
+    %>
+
+
+    <div class="tag_forms width-96">
       <div class="tag_form">
-      <h2>ハッシュタグ入力フォーム</h2>
+        <h2>ハッシュタグ入力フォーム</h2>
         <%= form_for ([@person,@tag]) do |a| %>
 
           <div class="tag-field">
@@ -79,7 +78,7 @@
       </div>
 
       <div class="tag_form">
-      <h2>罰ゲーム入力フォーム</h2>
+        <h2>罰ゲーム入力フォーム</h2>
         <%= form_for ([@person,@penalty]) do |a| %>
 
           <div class="tag-field">
@@ -108,9 +107,9 @@
 
         <% end %>
       </div>
-    <% end %>
     </div>
-  </div>
+  <% end %>
+
 
   <div class="Appear-on-videos">
     <h2><%= @person.name %> さんが出演している動画（ランダムで表示されます） </h2>
