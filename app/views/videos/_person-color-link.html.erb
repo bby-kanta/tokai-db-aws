@@ -1,32 +1,18 @@
 <% case person_kind %>
 <% when 'てつや' , 1 %>
-  <%= link_to person_path(@tetsuya) do %>
-    <h3 class="tetsuya"> てつや </h3>
-  <% end %>
+  <%= link_to "てつや", person_path(@tetsuya),{class: "btn tetsuya"} %>
 <% when 'しばゆー',2 %>
-  <%= link_to person_path(@shibayu) do %>
-    <h3 class="shibayu"> しばゆー </h3>
-  <% end %>
+  <%= link_to "しばゆー", person_path(@shibayu),{class: "btn shibayu"} %>
 <% when 'りょう',3 %>
-  <%= link_to person_path(@ryo) do %>
-    <h3 class="ryo"> りょう </h3> 
-  <% end %>
+  <%= link_to "りょう", person_path(@ryo),{class: "btn ryo"} %>
 <% when 'としみつ' ,4%>
-  <%= link_to person_path(@toshimitsu) do %>
-    <h3 class="toshimitsu"> としみつ </h3>
-  <% end %>
+  <%= link_to "としみつ", person_path(@toshimitsu),{class: "btn toshimitsu"} %>
 <% when 'ゆめまる',5 %>
-  <%= link_to person_path(@yumemaru) do %>
-    <h3 class="yumemaru"> ゆめまる </h3>
-  <% end %>
+  <%= link_to "ゆめまる", person_path(@yumemaru),{class: "btn yumemaru"} %>
 <% when '虫眼鏡',6 %>
-  <%= link_to person_path(@mushimegane) do %>
-    <h3 class="mushimegane"> 虫眼鏡 </h3>
-  <% end %>
+  <%= link_to "虫眼鏡", person_path(@mushimegane),{class: "btn mushimegane"} %>
 <% when 0 %>
-    <h3 class="tokai"> 不明 </h3>
+  <%= link_to "不明", person_path(7),{class: "btn tokai"} %>
 <% else %>
-  <%= link_to person_path(person) do %>
-    <h3 class="tokai"> <%= person.name %> </h3>
-  <% end %>
+  <%= link_to person.name, person_path(person),{class: "btn tokai"} %>
 <% end %>

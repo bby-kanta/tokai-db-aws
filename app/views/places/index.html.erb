@@ -18,20 +18,28 @@
 <div class="width-96">
   <div class="search-form">
     <%= search_form_for @searches,html: { class: "form-inline" }, url: search_places_path do |f| %>
-    <%= f.label :name_or_description, '撮影場所検索' %>
     <%= f.search_field :name_or_description_cont %>
     <%= f.submit '検索' %>
     <% end %>
   </div>
 
-  <div class="hashtags">
-    <% @places.each do |place|%>
-      <div class="btn btn-danger">
-        <%= link_to place_path(place.id) do %>
-          <%= place.name %>
-          (<%= place.videos.count %>)
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <% if false %> <%#コメントアウト %>
+    <div class="hashtags">
+      <% @places.each do |place|%>
+        <div class="btn btn-danger">
+          <%= link_to place_path(place.id) do %>
+            <%= place.name %>
+            (<%= place.videos.count %>)
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
 </div>
+
+<div
+  class="js-places-index"
+  data-notice="<%= notice %>"
+  data-places="<%= places_index_json(@places) %>"
+></div>

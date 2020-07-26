@@ -72,6 +72,7 @@ td, th {
   display: flex;
   flex-direction: column;
   a {
+    font-size: 20px;
     margin-bottom: 1%;
     color: rgb(0, 60, 255);
   }
@@ -81,47 +82,19 @@ td, th {
   font-size: 40px;
 }
 
-.video-tags{ // ハッシュタグ
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.video-tag * {
-  margin: 0 5px 5px 0;
-  display: inline-block;
-  background-color: rgb(0, 247, 255);
-  border-radius: 5px;
-  color: white;
-  font-size: 0.8em;
-}
 
-
-div[class*="video-"] , .channel{
-  color: white;
-  display:inline-block;
-}
-
-
-div[class*="video-"] a , .channel h3 , .video-category h3 {
-  border-radius: 5px;
-  color : white;
-  padding: 8px;
-}
-
-
-
-div[class*="video-person"] a h3 {
-  border-radius: 5px;
-  padding: 8px;
-}
-
-
-.channel h3 {
+.channel {
   background-color: red;
-  font-size: 1.3em;
+  a {
+    color: white;
+  }
 }
-.video-category h3 {
+
+.video-category {
   background-color: rgb(212, 0, 255);
+  a {
+    color: white;
+  }
 }
 .video-penalty h3 {
   font-size: 0.7em;
@@ -178,4 +151,21 @@ div[class*="video-person"] a h3 {
   .video_title { //タイトルが下に入って重ならない用
     margin-top: 590px;
   }
+
+  .video-description {
+    th {
+
+      p {
+        font-size: 25px;
+      }
+    }
+  }
+
+  .highlight-content {
+    a {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+  }
+
 }
