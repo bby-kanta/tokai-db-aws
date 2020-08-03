@@ -12,8 +12,10 @@
   </div>
 
   <div class="width-96">
+    <input type="text" v-model="keyword">
+
     <div class="hash-tags">
-      <div class="hash-tag" v-for="tag in tags" :key="tag.id">
+      <div class="hash-tag" v-for="tag in filteredTags" :key="tag.id">
         <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.videos.length +')' "></TagColor>
       </div>
     </div>
@@ -35,6 +37,7 @@ export default {
 
   data: function () {
     return {
+      keyword: '',
       tags: []
     }
   },
@@ -44,13 +47,45 @@ export default {
       .then(response => (this.tags = response.data))
   },
 
+  computed: {
+    filteredTags: function() { //検索機能
+
+      var tags = [];
+
+      for(var i in this.tags) {
+        var tag = this.tags[i];
+        if(tag.name.indexOf(this.keyword) !== -1) {
+            tags.push(tag);
+        }
+      }
+      console.log(tags);
+      return tags;
+    },
+
+  }
+
 }  //export default
 </script>
 
 <style lang="scss" scoped>
 
+  input {
+    margin-top: 20px;
+  }
+
   .hash-tags {
+    margin-top: 30px;
     display : flex;
+    flex-wrap: wrap;
+    .hash-tag {
+      margin: 0 10px 10px 0;
+    }
+  }
+
+  .background-image {
+    img {
+      object-position: 0 45%;
+    }
   }
 
 </style>

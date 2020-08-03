@@ -25,7 +25,7 @@
   </div>
 
   <h3 class="width-96"> {{ person.name }} に関係するハッシュタグ </h3>
-  <div class="person_tags">
+  <div class="person_tags ">
     <div class="person-tag" v-for="tag in person.tags" :key="tag.id">
       <TagColor :person="person.id" :tag_id="tag.id" :tag_name="tag.name" ></TagColor>
     </div>
@@ -104,11 +104,11 @@ export default {
   }
 
   .person_tags , .person_penalties {
-    padding: 30px 0px;
+    padding: 30px 30px;
     background-color: rgb(250, 250, 250);
 
     .person-tag , .person-penalty {
-      margin-left: 4%;
+      margin: 0 10px 10px 0;
     }
   }
 

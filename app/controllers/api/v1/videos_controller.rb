@@ -19,7 +19,7 @@ class Api::V1::VideosController < ApiController
   end
 
   def recommend
-    tags = Video.order(updated_on:'desc').eager_load(:tags).sample(8)
+    tags = Video.order(updated_on:'desc').eager_load(:tags).sample(40)
     @videos = tags.as_json(include: [users:{only:[:id]}],methods: :random_tags)
     render json: @videos
   end

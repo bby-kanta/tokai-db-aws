@@ -32,7 +32,7 @@
       <tr class="video-highlight">
         <th> 見所 </th>
         <th>   
-          <div class="highlight-content"> {{ video.highlight }} </div>
+          <div class="highlight-content" v-html="video.highlight"></div>
         </th>
       </tr>
 
@@ -78,65 +78,38 @@
         </th>
       </tr>
 
-      <!-- <tr>
+      <tr>
         <th> カテゴリー </th>
         <th>   
           <div class="btn video-category">
-            <% case @video.category %>
-              <% when 0 %>
-                <%= link_to "企画もの", search_videos_path(@search, :'q[category_eq' => 0 ) %>
-              <% when 1 %>
-                <%= link_to "サブチャン", search_videos_path(@search, :'q[category_eq' => 1 ) %>
-              <% when 2 %>
-                <%= link_to "コント", search_videos_path(@search, :'q[category_eq' => 2 ) %>
-              <% when 3 %>
-                <%= link_to "クイズ", search_videos_path(@search, :'q[category_eq' => 3 ) %>
-              <% when 4 %>
-                <%= link_to "選手権", search_videos_path(@search, :'q[category_eq' => 4 ) %>
-              <% when 5 %>
-                <%= link_to "検証系", search_videos_path(@search, :'q[category_eq' => 5 ) %>
-              <% when 6 %>
-                <%= link_to "対決", search_videos_path(@search, :'q[category_eq' => 6 ) %>
-              <% when 7 %>
-                <%= link_to "王", search_videos_path(@search, :'q[category_eq' => 7 ) %>
-              <% when 8 %>
-                <%= link_to "文理対決", search_videos_path(@search, :'q[category_eq' => 8 ) %>
-              <% when 9 %>
-                <%= link_to "旅行", search_videos_path(@search, :'q[category_eq' => 9 ) %>
-              <% when 10 %>
-                <%= link_to "料理", search_videos_path(@search, :'q[category_eq' => 10 ) %>
-              <% when 11 %>
-                <%= link_to "スポーツ", search_videos_path(@search, :'q[category_eq' => 11 ) %>
-              <% when 12 %>
-                <%= link_to "ドッキリ", search_videos_path(@search, :'q[category_eq' => 12 ) %>
-              <% when 13 %>
-                <%= link_to "ゲーム", search_videos_path(@search, :'q[category_eq' => 13 ) %>
-              <% when 14 %>
-                <%= link_to "コラボ", search_videos_path(@search, :'q[category_eq' => 14 ) %>
-              <% when 91 %>
-                <%= link_to "ニンマリシティへようこそ", search_videos_path(@search, :'q[category_eq' => 91 ) %>
-              <% when 92 %>
-                <%= link_to "ゆめまる美術館", search_videos_path(@search, :'q[category_eq' => 92 ) %>
-              <% when 93 %>
-                <%= link_to "ブラーボりょうのボンサバドゥチャンネル", search_videos_path(@search, :'q[category_eq' => 93 ) %>
-              <% when 94 %>
-                <%= link_to "虫眼鏡の放送部", search_videos_path(@search, :'q[category_eq' => 94 ) %>
-              <% when 95 %>
-                <%= link_to "としみつ東海オンエアの", search_videos_path(@search, :'q[category_eq' => 95 ) %>
-              <% when 96 %>
-                <%= link_to "動画アップロードチャンネル", search_videos_path(@search, :'q[category_eq' => 96 ) %>
-              <% when 99 %>
-                <%= link_to "ごはんじゃんけん", search_videos_path(@search, :'q[category_eq' => 99 ) %>
-              <% when 98 %>
-                <%= link_to "いじわる", search_videos_path(@search, :'q[category_eq' => 98 ) %>
-              <% when 97 %>
-                <%= link_to "十字架(サブチャン)", search_videos_path(@search, :'q[category_eq' => 97 ) %>
-              <% else %>
-                <%= link_to "その他", search_videos_path(@search, :'q[kind_of_eq' => 3 ) %>
-            <% end %>
+            <a v-if=" video.category == 0 ">企画もの</a>
+            <a v-else-if=" video.category == 1 "> サブチャン </a>
+            <a v-else-if=" video.category == 2 "> コント </a>
+            <a v-else-if=" video.category == 3 "> クイズ </a>
+            <a v-else-if=" video.category == 4 "> 選手権 </a>
+            <a v-else-if=" video.category == 5 "> 検証系 </a>
+            <a v-else-if=" video.category == 6 "> 対決 </a>
+            <a v-else-if=" video.category == 7 "> 王 </a>
+            <a v-else-if=" video.category == 8 "> 文理対決 </a>
+            <a v-else-if=" video.category == 9 "> 旅行 </a>
+            <a v-else-if=" video.category == 10 "> 料理 </a>
+            <a v-else-if=" video.category == 11 "> スポーツ </a>
+            <a v-else-if=" video.category == 12 "> ドッキリ </a>
+            <a v-else-if=" video.category == 13 "> ゲーム </a>
+            <a v-else-if=" video.category == 14 "> コラボ </a>
+            <a v-else-if=" video.category == 91 "> ニンマリシティへようこそ </a>
+            <a v-else-if=" video.category == 92 "> ゆめまる美術館 </a>
+            <a v-else-if=" video.category == 93 "> ブラーボりょうのボンサバドゥチャンネル </a>
+            <a v-else-if=" video.category == 94 "> 虫眼鏡の放送部 </a>
+            <a v-else-if=" video.category == 95 "> としみつ東海オンエアの </a>
+            <a v-else-if=" video.category == 96 "> 動画アップロードチャンネル </a>
+            <a v-else-if=" video.category == 97 "> 十字架(サブチャン) </a>
+            <a v-else-if=" video.category == 98 "> いじわる </a>
+            <a v-else-if=" video.category == 99 "> ごはんじゃんけん </a>
+            <a v-else                          >その他</a>
           </div>
         </th>
-      </tr> -->
+      </tr>
 
       <tr>
         <th> 登場メンバー </th>
@@ -222,7 +195,7 @@
 
   <div class="related-videos">
     <VideosRecommend :videos="video.recommends"></VideosRecommend>
-    <VideosRecommend :videos="videos"></VideosRecommend>
+    <VideosRecommend :videos="random(videos, 8)"></VideosRecommend>
   </div>
 
 
@@ -256,13 +229,14 @@ export default {
       video: {},
       videos: {}
     }
+    
   },
 
-  // mounted () {
-  //   axios
-  //     .get(`/api/v1/videos/${this.$route.params.id}.json`)
-  //     .then(response => (this.video = response.data))
-  // },
+  mounted () {
+    axios
+      .get('/api/v1/videos.json')
+      .then(response => (this.videos = response.data))
+  },
 
   watch: {
     $route (to, from) {
@@ -270,18 +244,29 @@ export default {
       this.fetchVideos(to.params.id)
       }
   },
-    methods: {
+
+  methods: {
     fetchVideos(id) {
       axios
       .get(`/api/v1/videos/${this.$route.params.id}.json`)
       .then(response => (this.video = response.data))
-      
-      axios
-      .get('/api/v1/videos/recommend.json')
-      .then(response => (this.videos = response.data))
+    },
 
+    random(array, num) {  //配列から特定の数だけ取り出すメソッド
+      var a = array;
+      var t = [];
+      var r = [];
+      var l = a.length;
+      var n = num < l ? num : l;
+      while (n-- > 0) {
+        var i = Math.random() * l | 0;
+        r[n] = t[i] || a[i];
+        --l;
+        t[i] = t[l] || a[l];
+      }
+      return r;
     }
-  }
+  }  //mrthods
 }
 </script>
 

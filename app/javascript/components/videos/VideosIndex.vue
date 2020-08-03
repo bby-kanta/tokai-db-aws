@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <input type="text" v-model="keyword">
 
     <div class="tabs">
       <div class="btn-container">
@@ -9,6 +8,9 @@
                 :class="{ active: currentTab === index }"
                 @click="currentTab = index">{{ tab.tabName }}</button>
       </div>
+
+        <input type="text" v-model="keyword">
+
       <div class="tab-content">
         <div v-show="currentTab === 0">
           <VideosArticles :videos="filteredvideos"></VideosArticles> 
@@ -37,7 +39,7 @@ import VideosArticles from './VideosArticles.vue';
 
 export default {
   components: {
-    VideosArticles
+    VideosArticles,
   },
 
   data: function () {
@@ -109,6 +111,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+input {
+  margin: 0 0 10px 20px;
+}
 
 //  タブ  https://qiita.com/terufumi1122/items/16e7612a80f81f652000
 .tabs {

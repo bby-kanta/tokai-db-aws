@@ -22,19 +22,6 @@
       </div>
     </div>
 
-
-    <!-- <%= link_to person_path(personid) do %>
-      <div class="image-person">
-        <%= image_tag(person_image) %>
-      </div>
-      <div class="introduce-person">
-        <h3><%= personid.name %></h3>
-        <h4> 出演回数 <%= personid.videos.count %>  回 </h4>
-        <p><%=personid.description %></p>
-
-      </div> <%# introduce-person %>
-    <% end %> -->
-
   </div>
 </template>
 
@@ -124,26 +111,6 @@ div[class*="person-"] p {
   font-size: 0.5em;
 }
 
-// 記事の中の罰ゲームタグのデザイン
-.person_penalties{
-  margin-top: 3%;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-}
-.penalty-person h4{
-  margin: 0;
-  padding: 2px;
-  color: white;
-  border-radius: 5px;
-  // 2行以上は隠す
-  font-size: 0.4em;
-  overflow: hidden;
-  height: 1.8em;
-  line-height: 1.8;
-}
-
-
 .people-sub { //出演者一覧のdiv
   display: flex;
   flex-wrap: wrap;
@@ -151,59 +118,6 @@ div[class*="person-"] p {
 .people-sub a{ //出演者の a タグ
   margin: 0 20px 20px 0;
 }
-
-
-
-.person_background-image {
-  img {
-    width: 100%;
-    height: 300px;
-    position: absolute;
-    object-fit: cover;  //トリミング
-    object-position: 0 30%;
-    opacity: 0.4;
-    filter: blur(5px);
-  }
-}
-
-
-.person_tags , .person_penalty {
-  padding: 30px 0px;
-  background-color: rgb(250, 250, 250);
-  h3 {
-    border-bottom: 2px solid white;
-    padding-bottom: 10px;
-    margin: 0 0 20px 4%;
-  }
-  .tags-list , .penalty-list {
-    margin-left: 4%;
-  }
-}
-
-.btn a{
-  color: white;
-}
-
-.tag_forms {
-  display: flex;
-  flex-direction: column;
-}
-
-.tag_form {
-
-  .tag-field{
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.Appear-on-videos {
-  margin: 20px 0px;
-  display: flex;
-  justify-content: center
-}
-
-
 
 @media screen and (max-width: 999px){ //widthが999pxまでのCSS(スマホ用)
   .people-tokai{

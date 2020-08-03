@@ -14,8 +14,9 @@
   </div>
 
   <div class="width-96">
+    <input type="text" v-model="keyword">
     <div class="penalties">
-      <div class="penalty" v-for="penalty in penalties" :key="penalty.id">
+      <div class="penalty" v-for="penalty in filteredPenalties" :key="penalty.id">
         <PenaltyColor :person="penalty.person_id" :penalty_id="penalty.id" :penalty_name="penalty.name" :count=" '(' + penalty.videos.length + ')' "></PenaltyColor>
       </div>
     </div>
@@ -37,6 +38,7 @@ export default {
 
   data: function () {
     return {
+      keyword: '',
       penalties: []
     }
   },
@@ -45,14 +47,39 @@ export default {
       .get('/api/v1/penalties.json')
       .then(response => (this.penalties = response.data))
   },
+  computed: {
+    filteredPenalties: function() { //検索機能
+
+      var penalties = [];
+
+      for(var i in this.penalties) {
+        var tag = this.penalties[i];
+        if(tag.name.indexOf(this.keyword) !== -1) {
+            penalties.push(tag);
+        }
+      }
+      console.log(penalties);
+      return penalties;
+    },
+
+  }
 
 }  //export default
 </script>
 
 <style lang="scss" scoped>
 
+  input {
+    margin-top: 20px;
+  }
+
   .penalties {
+    margin-top: 10px;
     display: flex;
+    flex-wrap: wrap;
+    .penalty {
+      margin: 0 10px 10px 0;
+    }
   }
 
 </style>

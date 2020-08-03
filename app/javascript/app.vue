@@ -3,6 +3,7 @@
     <p>{{ message }}</p>
   </div> -->
   <div>
+    <Menu></Menu>
     <router-view></router-view>
   </div>
 </template>
@@ -11,6 +12,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import Menu from 'components/Menu.vue'
 import VideosIndex from 'components/videos/VideosIndex.vue'
 import VideosShow from 'components/videos/VideosShow.vue'
 import PeopleIndex from 'components/people/PeopleIndex.vue'
@@ -27,6 +29,7 @@ import PlacesShow from 'components/places/PlacesShow.vue'
 const router = new VueRouter({
   routes: [
     { path: '/',
+      name: 'VideosIndex',
       component: VideosIndex },
     { path: '/videos/:id(\\d+)',  // :id は数値のみに制限する
       name: 'VideosShow',
@@ -67,7 +70,11 @@ const router = new VueRouter({
 Vue.use(VueRouter)
 
 export default {
-  router
+  router,
+
+  components: {
+    Menu
+  },
 }
 </script>
 
