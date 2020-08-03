@@ -64,7 +64,11 @@ const router = new VueRouter({
     { path: '/places/:id(\\d+)',
       name: 'PlacesShow',
       component: PlacesShow },
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) { //リンクをクリックしたら一番上へ
+     return { x: 0, y: 0 }
+  }
+
 })
 
 Vue.use(VueRouter)
@@ -74,7 +78,7 @@ export default {
 
   components: {
     Menu
-  },
+  }
 }
 </script>
 

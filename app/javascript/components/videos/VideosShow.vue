@@ -265,8 +265,9 @@ export default {
         t[i] = t[l] || a[l];
       }
       return r;
-    }
-  }  //mrthods
+    },
+
+  }  //methods
 }
 </script>
 
