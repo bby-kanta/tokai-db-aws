@@ -517,7 +517,7 @@ div[id*="like-"]{ //inlineがないと横並びにならない
     object-position: 0 30%;
     opacity: 0.4;
     filter: blur(5px);
-    animation: SlideIn 1s;
+    animation: SlideIn 2s;
   }
 }
 
@@ -532,9 +532,9 @@ div[id*="like-"]{ //inlineがないと横並びにならない
     box-shadow: 2px 2px 4px gray;
 
     animation-name: fade-in;
-    animation-duration: 2s; //アニメーション時間
+    animation-duration: 4s; //アニメーション時間
     animation-timing-function: ease-out; //アニメーションさせるイージング
-    animation-delay: normal; //アニメーション開始させる時間
+    animation-delay: 0s; //アニメーション開始させる時間
     animation-iteration-count: 1; //繰り返し回数
     animation-direction: normal; //往復処理をするかどうか
     animation-fill-mode: forwards; //アニメーション後のスタイルをどうするか
@@ -580,6 +580,9 @@ footer {
     opacity: 0;
     transform: translate3d(0, 30px, 0);
   }
+  30% {
+    opacity: 0;
+  }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -588,8 +591,11 @@ footer {
 
 @keyframes SlideIn {
   0% {
-    opacity: 0.8;
+    opacity: 0;
     transform: translateX(-1000px);
+  }
+  30% {
+    opacity: 0;
   }
   100% {
     opacity: 0.4;
