@@ -83,8 +83,9 @@ export default {
 
 <style lang="scss" scoped>
 
-  .person_tags {
+  .person_tags , .person_penalties {
     display: flex;
+    flex-wrap: wrap;
   }
 
   h2 {
