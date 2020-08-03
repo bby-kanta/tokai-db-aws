@@ -13,4 +13,5 @@ environment.plugins.prepend('Provide',
 
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.loaders.prepend('vue', vue)
+environment.loaders.get('vue').options.extractCSS = false
 module.exports = environment
