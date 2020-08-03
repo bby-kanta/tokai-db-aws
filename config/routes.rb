@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+
+#api用
+  namespace :api, {format: 'json'} do
+    namespace :v1 do
+      resources :videos, only: [:index, :show] do
+        collection do
+          get 'recommend'
+        end
+      end
+      resources :people, only: [:index, :show] 
+      resources :penalties, only: [:index, :show] 
+      resources :tags, only: [:index, :show] 
+      resources :musics, only: [:index, :show] 
+      resources :places, only: [:index, :show] 
+    end
+  end
+
+
   get 'relationships/create'
   get 'relationships/destroy'
   devise_for :users

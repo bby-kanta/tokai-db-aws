@@ -1,31 +1,52 @@
 <template>
-  <div class="width-96">
-    <p id="notice">{{ notice }}</p>
+  <div>
 
-    <div v-for="place in places" :key="place.name" class="hashtags">
-        <div class="btn btn-danger">
-        <a :href="place.show">{{place.name }} ({{place.count}})</a>
+    <div class="background-image">
+      <img src="../../../assets/images/okazaki.jpeg">
+    </div>
+
+    <div class="background-title">
+      <div class="background-title-column">
+        <h3>PLACES</h3>
+        <h2>撮影場所</h2>
+      </div>
+    </div>
+
+    <div class="width-96">
+
+        <div class="places">
+            <div class="place btn btn-danger" v-for="place in places" :key="place.id">
+              <router-link :to="{ name: 'PlacesShow', params: { id: place.id } }" >
+                {{ place.name }} {{ '(' + place.videos.length + ')' }}
+              </router-link>
+            </div>
         </div>
+
     </div>
 
   </div>
+
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'PlacesIndex',
-  props: {
-    notice: {
-      type: String,
-      required: true
-    },
-    places: {
-      type: Array,
-      required: true
+
+  data: function () {
+    return {
+      places: []
     }
-  }
-}
+  },
+  mounted () {
+    axios
+      .get('/api/v1/places.json')
+      .then(response => (this.places = response.data))
+  },
+
+}  //export default
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
 </style>

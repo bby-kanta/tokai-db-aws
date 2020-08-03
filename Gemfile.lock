@@ -267,7 +267,7 @@ DEPENDENCIES
   rails (~> 6.0.3, >= 6.0.3.1)
   rails-i18n
   ransack
-  rspec-rails
+  rspec-rails (~> 4.0.0.beta2)
   sass-rails (>= 6)
   spring
   spring-watcher-listen (~> 2.0.0)
@@ -275,9 +275,6 @@ DEPENDENCIES
   uglifier
   web-console (>= 3.3.0)
   webpacker (~> 4.0)
-
-RUBY VERSION
-   ruby 2.6.2p47
 
 BUNDLED WITH
    1.17.2

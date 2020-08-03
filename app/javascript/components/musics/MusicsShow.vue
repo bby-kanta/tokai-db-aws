@@ -3,29 +3,20 @@
 <div>
 
   <div class="title">
-    <h3> <router-link :to="{ name: 'PlacesIndex' }"> Places </router-link> / {{ place.name }} </h3>
+    <h3> <router-link :to="{ name: 'MusicsIndex' }"> BGM </router-link> / {{ music.name }} </h3>
   </div>
 
-  <div class="person_background-image">
-    <PeopleImages :person='0'></PeopleImages>
-  </div>
-
-  <div class="person_introduce_box">
-    <div class="person_image">
-      <PeopleImages :person='0'></PeopleImages>
-    </div>
-
-    <div class="person_name_description">
-      <div class="person_name">
-        <h3>{{ place.name }}</h3>
-      </div>
-      <div class="person_description">
-        <p> {{ place.description }} </p>  
-      </div>
+  <div class="music-player-background">
+    <div class="music-player">
+      <iframe :src="'https://www.youtube.com/embed/'+ music.url+'?autoplay=1&loop=1&playlist='+ music.url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 
   <div class="width-96">
+    <div class="music-show">
+      <h1> {{ music.name }} </h1>
+      <p> {{ music.description }} </p>
+    </div>
 
     <!-- <div class="recommend-bgm">
       <h2>おすすめBGM</h2>
@@ -39,8 +30,8 @@
       <% end %>
     </div> -->
 
-    <h2> {{ place.name }} で撮影された動画リスト </h2>
-      <VideosArticles :videos="place.videos"></VideosArticles>
+    <h2> {{ music.name }} が使われている動画リスト </h2>
+      <VideosArticles :videos="music.videos"></VideosArticles>
 
   </div>
 
@@ -52,24 +43,22 @@
 import axios from 'axios';
 
 import VideosArticles from '../videos/VideosArticles.vue';
-import PeopleImages from '../people/PeopleImages.vue';
 
 
 export default {
   components: {
-    VideosArticles,
-    PeopleImages
+    VideosArticles
   },
 
   data: function () {
     return {
-      place: {}
+      music: {}
     }
   },
   mounted () {
       axios
-      .get(`/api/v1/places/${this.$route.params.id}.json`)
-      .then(response => (this.place = response.data))
+      .get(`/api/v1/musics/${this.$route.params.id}.json`)
+      .then(response => (this.music = response.data))
   },
 
 }  //export default

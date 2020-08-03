@@ -4,13 +4,6 @@
   <h3><%= link_to 'PLACE',places_path %> / <%= @place.name %> </h3>
 </div>
 
-<div
-  class="js-places-show"
-  data-name="<%= @place.name %>"
-  data-description="<%= @place.description %>"
-  data-edit-place-path="<%= edit_place_path(@place) %>"
-></div>
-
 <div class="recommend-place">
   <h2>おすすめ撮影場所</h2>
   <% @places.each do |place|%>

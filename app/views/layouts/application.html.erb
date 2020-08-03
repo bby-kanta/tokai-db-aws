@@ -7,6 +7,8 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all','data-turbolinks-eval': 'false'%>
     <%= javascript_pack_tag 'application','data-turbolinks-eval': 'false' %>
+    <%= javascript_pack_tag 'hello_vue' %>
+    <%#= javascript_pack_tag 'videos' %>
     <%= javascript_pack_tag 'places' %>
   </head>
 
@@ -14,10 +16,10 @@
 
     <%# <div class="navbar"> %>
     <nav class="navbar navbar-light bg-white fixed-top">
-      <div>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="title-logo">
+        <%# <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> %>
         <%= link_to image_tag('tokaidb-logo.jpg',size: '400x60'),videos_path %>
       </div>
 
