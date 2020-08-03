@@ -1,53 +1,45 @@
-<%= stylesheet_link_tag "videos", :media => "all" %>
+<template>
 
 <div class="all-contents">
 
   <div class="video_box">
     <div class="video-youtube">
-      <iframe name="player" width="100%" height="100%" src="https://www.youtube.com/embed/<%= @video.url %>?autoplay=1&loop=1&playlist=<%= @video.url %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe name="player" width="100%" height="100%" :src="'https://www.youtube.com/embed/' + video.url + '?autoplay=1&loop=1&playlist=' + video.url " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <div class="video_title">
-      <h3> <%= @video.title %> </h3>
+      <h3> {{ video.title }} </h3>
     </div>
 
     <div class="video_date">
-      <h2><%= @video.updated_on %> に公開済み </h2>
+      <h2> {{ video.updated_on }} に公開済み </h2>
 
-    <%# 自分がログインしているときのみ表示  %>
-    <% if user_signed_in?  && current_user.id == 1 %>
-        <%= link_to '編集',edit_video_path(@video) %>
-        <%= link_to '削除',video_path(@video) ,
-        method: :delete,
-        data: {confirm: '本当に削除しますか？'}
-        %>
-    <% end %>
     </div>
 
-    <div id="like-<%= @video.id %>"> <%#いいね機能%>
+    <!-- <div id="like-<%= @video.id %>"> <%#いいね機能%>
       <%= render partial: "videos/like", locals: {video: @video }%>
-    </div>
+    </div> -->
 
     <table border="1px" style="border-collapse: collapse; border-color: rgb(238, 232, 232)">
 
       <tr class="video-description">
         <th> 概要 </th>
         <th>   
-          <p> <%=safe_join(@video.description.split("\n"),tag(:br))%> </p>
+          <p> {{ video.description }} </p>
         </th>
       </tr>
 
       <tr class="video-highlight">
         <th> 見所 </th>
         <th>   
-          <div class="highlight-content"> <%= raw @video.highlight %> </div>
+          <div class="highlight-content"> {{ video.highlight }} </div>
         </th>
       </tr>
 
       <tr class="video-quotes">
         <th> 名言 </th>
         <th>   
-          <p> <%= @video.quotes %> </p>
+          <p> {{ video.quotes}} </p>
         </th>
       </tr>
 
@@ -55,16 +47,10 @@
         <th> ランク </th>
         <th>
           <div class="video-rate">
-            <% case @video.rate %>
-              <% when 1 %>
-                <h3 class="S"> S </h3>
-              <% when 2 %>
-                <h3 class="A"> A </h3> 
-              <% when 3 %>
-                <h3 class="B"> B </h3> 
-              <% else %>
-                <h3 class="C"> C </h3> 
-            <% end %>
+            <h3 v-if="      video.rate == 1 " class="S"> S </h3>
+            <h3 v-else-if=" video.rate == 2 " class="A"> A </h3>
+            <h3 v-else-if=" video.rate == 3 " class="B"> B </h3>
+            <h3 v-else                        class="C"> C </h3>
           </div>
         </th>
       </tr>
@@ -73,7 +59,12 @@
         <th> チャンネル種類 </th>
         <th>
           <div class="btn channel">
-            <% case @video.kind_of %>
+            <a v-if="      video.kind_of == 0 ">メインチャンネル</a>
+            <a v-else-if=" video.kind_of == 1 ">東海オンエアの控室</a>
+            <a v-else-if=" video.kind_of == 2 ">個人チャンネル</a>
+            <a v-else                          >その他のチャンネル</a>
+
+            <!-- <% case @video.kind_of %>
               <% when 0 %>
                 <%= link_to "メインチャンネル", search_videos_path(@search, :'q[kind_of_eq' => 0 ) %>
               <% when 1 %>
@@ -82,12 +73,12 @@
                 <%= link_to "個人チャンネル", search_videos_path(@search, :'q[kind_of_eq' => 2 ) %>
               <% else %>
                 <%= link_to "その他のチャンネル", search_videos_path(@search, :'q[kind_of_eq' => 3 ) %>
-            <% end %>
+            <% end %> -->
           </div>
         </th>
       </tr>
 
-      <tr>
+      <!-- <tr>
         <th> カテゴリー </th>
         <th>   
           <div class="btn video-category">
@@ -145,15 +136,15 @@
             <% end %>
           </div>
         </th>
-      </tr>
+      </tr> -->
 
       <tr>
         <th> 登場メンバー </th>
         <th>
           <div class="video-people">
-            <% @video.people.each do |person| %>
-                <%= render partial: "person-color-link", locals: { person_kind: person.name,person: person } %>
-            <% end %>
+            <div class="person" v-for="person in video.people" :key="person.id">
+              <VideosPersonColor :person="person.id" :person_name="person.name"></VideosPersonColor>
+            </div>
           </div>
         </th>
       </tr>
@@ -162,7 +153,7 @@
         <th> マンオブザマッチ </th>
         <th>
           <div class="video-person-mvp">
-            <%= render partial: "person-color-link", locals: { person_kind: @video.mvp } %>
+              <VideosPersonColor :person="video.mvp"></VideosPersonColor>
           </div>
         </th>
       </tr>
@@ -171,23 +162,20 @@
         <th> 編集者 </th>
         <th>
           <div class="video-person-editor">
-            <%= render partial: "person-color-link", locals: { person_kind: @video.editor } %>
+              <VideosPersonColor :person="video.editor"></VideosPersonColor>
           </div>
         </th>
       </tr>
-
 
       <tr>
         <th> 撮影場所 </th>
         <th>
           <div class="places">
-            <% @video.places.each do |place| %>
-              <%= link_to place_path(place.id) do %>
-                <div class="btn btn-danger">
-                  <%= place.name %>
-                </div>
-              <% end %>
-            <% end %>
+            <div class="btn btn-danger place" v-for="place in video.places" :key="place.id">
+              <router-link :to="{ name: 'PlacesShow', params: { id: place.id } }" >
+                {{ place.name }}
+              </router-link>
+            </div>
           </div>
         </th>
       </tr>
@@ -196,11 +184,11 @@
         <th> BGM </th>
         <th>
           <div class="musics">
-            <% @video.musics.each do |music| %>
-              <div class="btn btn-success">
-                <%= link_to music.name ,music_path(music.id)%>
+              <div class="btn btn-success music" v-for="music in video.musics" :key="music.id">
+                  <router-link :to="{ name: 'MusicsShow', params: { id: music.id } }" >
+                    {{ music.name }}
+                  </router-link>
               </div>
-            <% end %>
           </div>
         </th>
       </tr>
@@ -209,26 +197,153 @@
         <th> 罰ゲーム </th>
         <th>
           <div class="penalties">
-              <%= render partial: "penalties/penalty-color", locals: { penalties: @video.penalties }%>
-          </div> <%# video-tags %>
+            <div class="penalty" v-for="penalty in video.penalties" :key="penalty.id">
+              <PenaltyColor :person="penalty.person_id" :penalty_id="penalty.id" :penalty_name="penalty.name"></PenaltyColor>
+            </div>
+          </div>
         </th>
       </tr>
 
+    
       <tr>
         <th> ハッシュタグ </th>
         <th> 
           <div class="tags">
-              <%= render partial: "tags/tag-color", locals: { tags: @video.tags }%>
-          </div> <%# video-tags %>
+            <div class="tag" v-for="tag in video.tags" :key="tag.id">
+              <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name"></TagColor>
+            </div>
+          </div>
         </th>
-      </tr>
+      </tr> 
 
     </table>
 
   </div>
 
   <div class="related-videos">
-    <%= render partial: "video-articles-show", locals: { videos: @related }%>
-    <%= render partial: "video-articles-show", locals: { videos: Video.all.sample(6) }%>
+    <VideosRecommend :videos="video.recommends"></VideosRecommend>
+    <VideosRecommend :videos="videos"></VideosRecommend>
   </div>
+
+
 </div>
+
+
+</template>
+
+<script>
+import axios from 'axios';
+
+import VideosRecommend   from './VideosRecommend.vue';
+import VideosPersonColor from './VideosPersonColor.vue';
+import PenaltyColor from '../PenaltyColor.vue';
+import TagColor from '../TagColor.vue';
+
+export default {
+  components: {
+    VideosRecommend,
+    VideosPersonColor,
+    PenaltyColor,
+    TagColor,
+  },
+
+  created() {
+    this.fetchVideos(this.$route.params.id)
+  },
+
+  data: function () {
+    return {
+      video: {},
+      videos: {}
+    }
+  },
+
+  // mounted () {
+  //   axios
+  //     .get(`/api/v1/videos/${this.$route.params.id}.json`)
+  //     .then(response => (this.video = response.data))
+  // },
+
+  watch: {
+    $route (to, from) {
+      // this.$router.go({ name: 'VideosShow' })
+      this.fetchVideos(to.params.id)
+      }
+  },
+    methods: {
+    fetchVideos(id) {
+      axios
+      .get(`/api/v1/videos/${this.$route.params.id}.json`)
+      .then(response => (this.video = response.data))
+      
+      axios
+      .get('/api/v1/videos/recommend.json')
+      .then(response => (this.videos = response.data))
+
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+
+  .video-people , .penalties , .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .person , .penalty , .tag , .place , .music {
+    margin: 0 3px 3px 0;
+  }
+
+@media screen and (max-width: 999px){ /*widthが999pxまでのCSS(スマホ用)*/
+
+  .all-contents {
+    flex-direction: column;
+  }
+
+  .related-videos {
+    width: 100%;
+    .video-article_show {
+      width: 100%;
+    }
+  }
+
+  .main-contents {
+    margin : 0;
+  }
+
+  .video_box{
+    width : 100%;
+  }
+
+  .video-youtube { /*動画を固定表示する*/
+    position: fixed;
+    z-index: 999;
+    top : 1;
+    left: 0;
+  }
+  .video_title { /*タイトルが下に入って重ならない用*/
+    margin-top: 590px;
+  }
+
+  .video-description {
+    th {
+
+      p {
+        font-size: 25px;
+      }
+    }
+  }
+
+  .highlight-content {
+    a {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+  }
+
+}
+
+
+</style>

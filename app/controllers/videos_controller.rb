@@ -44,8 +44,8 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = Video.find(params[:id])
-    @videos = Video.all.order(updated_on:'desc')
+    @video   = Video.find(params[:id])
+    @videos  = Video.all.order(updated_on:'desc')
     @related = @video.recommends
     @tetsuya     = @video.people.find_by(name:'てつや')
     @shibayu     = @video.people.find_by(name:'しばゆー')

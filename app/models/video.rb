@@ -22,4 +22,8 @@ class Video < ApplicationRecord
   has_many :relationships,dependent: :destroy
   has_many :recommends, through: :relationships
 
+  def random_tags
+    tags.select(:id,:name).sample(4)
+  end
+
 end
