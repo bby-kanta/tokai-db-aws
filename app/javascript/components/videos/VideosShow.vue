@@ -13,12 +13,12 @@
 
     <div class="video_date">
       <h2> {{ video.updated_on }} に公開済み </h2>
+      
+      <a v-if="user == 1" :href=" '/videos/' + $route.params.id + '/edit#/' ">編集</a>
+
+      <i v-if="users_id.includes(user)"  class="fas fa-heart" style="color:red"> {{ users_id.length }} </i>
 
     </div>
-
-    <!-- <div id="like-<%= @video.id %>"> <%#いいね機能%>
-      <%= render partial: "videos/like", locals: {video: @video }%>
-    </div> -->
 
     <table border="1px" style="border-collapse: collapse; border-color: rgb(238, 232, 232)">
 
@@ -227,15 +227,21 @@ export default {
   data: function () {
     return {
       video: {},
-      videos: {}
+      videos: {},
+      user: {},
     }
-    
+
   },
 
   mounted () {
     axios
       .get('/api/v1/videos.json')
       .then(response => (this.videos = response.data))
+
+    axios
+      .get('/api/v1/users.json')
+      .then(response => (this.user = response.data))
+
   },
 
   watch: {
@@ -243,6 +249,23 @@ export default {
       // this.$router.go({ name: 'VideosShow' })
       this.fetchVideos(to.params.id)
       }
+  },
+
+  computed: {
+    users_id: function() { //users_idにはvideoのusersのidがシンプルな配列で入る→ 連想配列では無くなったのでincludesメソッドが使える
+      var users = this.video.users;
+      var user = this.user;
+      var users_id = [];
+      var hoge = [];
+
+      for(hoge in users){
+        users_id.push(users[hoge].id); 
+      }
+
+      console.log(users_id);
+      console.log(users_id.includes(user));
+      return users_id 
+    },
   },
 
   methods: {

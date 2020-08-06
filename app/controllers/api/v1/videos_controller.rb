@@ -15,7 +15,7 @@ class Api::V1::VideosController < ApiController
 
   def show
     @video = Video.find(params[:id])
-    render json: @video.to_json(include: [{people:{only: [:id,:name]}},{penalties:{only: [:id,:name,:person_id]}},{places:{only: [:id,:name]}},{musics:{only: [:id,:name]}},{tags:{only: [:id,:person_id,:name]}},{recommends: {include: [tags:{only: [:id,:name]}],except: [:description,:highlight,:created_at,:updated_at,:sort],methods: :random_tags }}])
+    render json: @video.to_json(include: [{people:{only: [:id,:name]}},{penalties:{only: [:id,:name,:person_id]}},{places:{only: [:id,:name]}},{musics:{only: [:id,:name]}},{tags:{only: [:id,:person_id,:name]}},{users:{only: [:id]}},{recommends: {include: [tags:{only: [:id,:name]}],except: [:description,:highlight,:created_at,:updated_at,:sort],methods: :random_tags }}])
   end
 
   def recommend

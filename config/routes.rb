@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :tags, only: [:index, :show] 
       resources :musics, only: [:index, :show] 
       resources :places, only: [:index, :show] 
+      resources :users
     end
   end
 

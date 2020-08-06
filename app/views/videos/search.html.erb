@@ -1,57 +1,65 @@
 <%= stylesheet_link_tag "videos", :media => "all" %>
 
-<ul class="nav nav-pills nav-fill">
-  <li class="nav-item">
-    <a href="#all-videos" class="nav-link active" data-toggle="tab">全動画一覧(<%= @all_videos.count %>)</a>
-  </li>
-  <li class="nav-item">
-    <a href="#main-videos" class="nav-link" data-toggle="tab">メインチャンネル(<%= @all_videos.where(kind_of: 0).count %>)</a>
-  </li>
-  <li class="nav-item">
-    <a href="#sub-videos" class="nav-link" data-toggle="tab">サブチャンネル(<%= @all_videos.where(kind_of: 1).count %>)</a>
-  </li>
-  <li class="nav-item">
-    <a href="#private-videos" class="nav-link" data-toggle="tab">個人チャンネル(<%= @all_videos.where(kind_of: 2).count %>)</a>
-  </li>
-  <li class="nav-item">
-    <a href="#deffrent-videos" class="nav-link" data-toggle="tab">その他(<%= @all_videos.where(kind_of: 3).count %>)</a>
-  </li>
-</ul>
+<div 
+  class="search-videos-index"
+  data-videos="<%= videos_index_json(@all_videos) %>"
+>
+</div>  <%# search_videos.jsを読み込んでいる。 videos_index_jsonメソッドはvideos_helperにて定義 %>
 
-<div class="tab-content">
-  <div id="all-videos" class="tab-pane fade show active">
-    <div class="video_articles">
-      <%= render partial: "video-articles", locals: { videos: @videos }%>
+<% if false %>
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a href="#all-videos" class="nav-link active" data-toggle="tab">全動画一覧(<%= @all_videos.count %>)</a>
+    </li>
+    <li class="nav-item">
+      <a href="#main-videos" class="nav-link" data-toggle="tab">メインチャンネル(<%= @all_videos.where(kind_of: 0).count %>)</a>
+    </li>
+    <li class="nav-item">
+      <a href="#sub-videos" class="nav-link" data-toggle="tab">サブチャンネル(<%= @all_videos.where(kind_of: 1).count %>)</a>
+    </li>
+    <li class="nav-item">
+      <a href="#private-videos" class="nav-link" data-toggle="tab">個人チャンネル(<%= @all_videos.where(kind_of: 2).count %>)</a>
+    </li>
+    <li class="nav-item">
+      <a href="#deffrent-videos" class="nav-link" data-toggle="tab">その他(<%= @all_videos.where(kind_of: 3).count %>)</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="all-videos" class="tab-pane fade show active">
+      <div class="video_articles">
+        <%= render partial: "video-articles", locals: { videos: @videos }%>
+      </div>
+      <%= paginate @videos %>
     </div>
-    <%= paginate @videos %>
-  </div>
 
-  <div id="main-videos" class="tab-pane fade">
-    <div class="video_articles">
-      <%= render partial: "video-articles", locals: { videos: @main }%>
+    <div id="main-videos" class="tab-pane fade">
+      <div class="video_articles">
+        <%= render partial: "video-articles", locals: { videos: @main }%>
+      </div>
+      <%= paginate @main %>
     </div>
-    <%= paginate @main %>
-  </div>
 
-  <div id="sub-videos" class="tab-pane fade">
-    <div class="video_articles">
-      <%= render partial: "video-articles", locals: { videos: @sub }%>
+    <div id="sub-videos" class="tab-pane fade">
+      <div class="video_articles">
+        <%= render partial: "video-articles", locals: { videos: @sub }%>
+      </div>
+          <%= paginate @sub %>
     </div>
-        <%= paginate @sub %>
-  </div>
 
-  <div id="private-videos" class="tab-pane fade">
-    <div class="video_articles">
-      <%= render partial: "video-articles", locals: { videos: @private }%>
+    <div id="private-videos" class="tab-pane fade">
+      <div class="video_articles">
+        <%= render partial: "video-articles", locals: { videos: @private }%>
+      </div>
+      <%= paginate @private %>
     </div>
-    <%= paginate @private %>
-  </div>
 
-  <div id="deffrent-videos" class="tab-pane fade">
-    <div class="video_articles">
-      <%= render partial: "video-articles", locals: { videos: @other }%>
+    <div id="deffrent-videos" class="tab-pane fade">
+      <div class="video_articles">
+        <%= render partial: "video-articles", locals: { videos: @other }%>
+      </div>
+      <%= paginate @other %>
     </div>
-    <%= paginate @other %>
-  </div>
 
-</div>
+  </div>
+<% end %>
