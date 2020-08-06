@@ -19,10 +19,12 @@
     <%# <div class="navbar"> %>
     <nav class="navbar navbar-light bg-white fixed-top">
       <div class="title-logo">
-        <%# <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button> %>
-        <%= link_to image_tag('tokaidb-logo.jpg',size: '400x60'),videos_path %>
+        </button>
+        <a href="/#/">
+          <img src="/assets/tokaidb-logo.jpg" width="400px" height="70px" alt="タイトルロゴ">
+        </a>
       </div>
 
     <%# 自分がログインしているときのみ表示  %>
@@ -30,7 +32,7 @@
       <%= link_to '記事作成' ,new_video_path  %>
     <% end %>
 
-      <div class="nav-serch">
+      <div class="nav-serch">  <%# 検索 %>
         <%= search_form_for @search,html: { class: "form-inline" }, url: search_videos_path do |f| %>
           <%#= f.label :title_or_description_or_highlight, 'キーワード' %>
           <%= f.search_field :title_or_description_or_highlight_cont %>
@@ -78,9 +80,9 @@
 
                   <div class="form-date">
                     <%= f.label :updated_on, 'アップデート日'%>
-                    <%= f.date_select :updated_on_gteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
+                    <%= f.date_field :updated_on_gteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
                     <%= f.label :updated_on_cont, 'から' %>
-                    <%= f.date_select :updated_on_lteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
+                    <%= f.date_field :updated_on_lteq,{start_year: 2013,end_year: 2020,include_blank: true} %>
                   </div>
 
                   <div class="form_">
@@ -99,7 +101,7 @@
 
       </div>
 
-      <% if user_signed_in? %>
+      <% if user_signed_in? %>  <%# ログイン %>
         <div class="user_btn">
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </div>
@@ -134,19 +136,19 @@
                 </li>
             <% end %>
           <li class="nav-item">
-            <%= link_to "登場人物",people_path, {class: "nav-link"} %>
+            <a href="/#/people" class="nav-link" > 登場人物 </a>
           </li>
           <li class="nav-item">
-            <%= link_to "罰ゲーム(十字架)",penalties_path,{class: "nav-link"} %>
+            <a href="/#/penalties" class="nav-link" > 罰ゲーム(十字架) </a>
           </li>
           <li class="nav-item">
-            <%= link_to "撮影場所",places_path ,{class: "nav-link"}%>
+            <a href="/#/places" class="nav-link" > 撮影場所 </a>
           </li>
           <li class="nav-item">
-            <%= link_to "BGM",musics_path,{class: "nav-link"} %>
+            <a href="/#/musics" class="nav-link" > BGM </a>
           </li>
           <li class="nav-item">
-            <%= link_to "ハッシュタグ",tags_path,{class: "nav-link"} %>
+            <a href="/#/tags" class="nav-link" > ハッシュタグ </a>
           </li>
 
         </ul>
