@@ -3,7 +3,6 @@
     <p>{{ message }}</p>
   </div> -->
   <div>
-    <Menu></Menu>
     <router-view></router-view>
   </div>
 </template>
@@ -12,7 +11,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Menu from 'components/Menu.vue'
 import VideosIndex from 'components/videos/VideosIndex.vue'
 import VideosShow from 'components/videos/VideosShow.vue'
 import PeopleIndex from 'components/people/PeopleIndex.vue'
@@ -75,10 +73,6 @@ Vue.use(VueRouter)
 
 export default {
   router,
-
-  components: {
-    Menu
-  }
 }
 </script>
 

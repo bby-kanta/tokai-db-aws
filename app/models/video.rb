@@ -26,4 +26,8 @@ class Video < ApplicationRecord
     tags.select(:id,:name).sample(4)
   end
 
+  def users_id_select
+    users.select(:id)
+  end
+
 end

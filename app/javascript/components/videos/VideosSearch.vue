@@ -1,0 +1,130 @@
+<template>
+  <div id="search-videos-index">
+
+    <div class="video_articles">
+      <div class="video_article" v-for="video in videos" :key="video.id">
+        <a :href="'/#/videos/' + video.id ">  <!-- 少々強引だけどSPAに合流させる -->
+
+          <div class="article-image">
+            <img :src="'https://img.youtube.com/vi/' + video.url + '/maxresdefault.jpg'">
+          </div>
+
+          <div class="article-column">
+            <div class="article-title">
+              <p class="article_title">{{video.title}}</p>
+            </div>
+
+            <div class="article_row">
+
+              <div class="article-rate" v-if="video.rate == 1">
+                <h3 class="S"> S </h3>
+              </div>
+              <div class="article-rate" v-else-if="video.rate == 2">
+                <h3 class="A"> A </h3> 
+              </div>
+              <div class="article-rate" v-else-if="video.rate == 3">
+                <h3 class="B"> B </h3> 
+              </div>
+              <div class="article-rate" v-else>
+                <h3 class="C"> C </h3> 
+              </div>
+
+              <div class="article-mvp">
+                <h3 v-if="video.mvp      == 1" class="tetsuya">てつや</h3>
+                <h3 v-else-if="video.mvp == 2" class="shibayu">しばゆー</h3>
+                <h3 v-else-if="video.mvp == 3" class="ryo">りょう</h3>
+                <h3 v-else-if="video.mvp == 4" class="toshimitsu">としみつ</h3>
+                <h3 v-else-if="video.mvp == 5" class="yumemaru">ゆめまる</h3>
+                <h3 v-else-if="video.mvp == 6" class="mushimegane">虫眼鏡</h3>
+                <h3 v-else class="tokai">該当無し</h3>
+              </div>
+              
+              <div class="article-tags" >
+                  <div class="article-tag btn" v-for="tag in video.random_tags" :key="tag.id">
+                    <h3>{{ tag.name }}</h3>
+                  </div>
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="article-date">
+            {{ video.updated_on }}
+            <div id="like-">
+              <i class="far fa-heart"> {{ video.users.length }} </i>
+              <!-- <i class="fas fa-heart" style="color:red"> {{ video.users.length }} </i> -->
+            </div>
+          </div>
+
+        </a>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+import VideosArticles from './VideosArticles.vue';
+
+export default {
+
+  name: 'VideosSearch',
+  components: {
+    VideosArticles,
+  },
+
+ props: {
+    videos: {
+      type: Array,
+      required: true
+    },
+
+  },
+
+  computed: {
+
+  }  //computed
+}  //export default
+</script>
+
+<style lang="scss" scoped>
+
+.video_articles {
+  margin-top: 20px;
+}
+
+//  タブ  https://qiita.com/terufumi1122/items/16e7612a80f81f652000
+.tabs {
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+}
+.btn-container {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+button {
+  width: 19%;
+  font-size: 20px;
+  text-align: center;
+  margin: 10px;
+  padding: 3px 10px;
+  background: white;
+  border-radius: 10px;
+}
+button.active{
+  background: rgb(255, 145, 0);
+  color: white;
+  border-color: white;
+}
+.tab-content div {
+  background: #ffffff;
+  width: 100%;
+  margin: 0 auto;
+}
+
+</style>
