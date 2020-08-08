@@ -19,9 +19,9 @@
       <!-- ↓いいねボタン -->
       <i v-if="users_id.includes(user)" v-on:click="destroyFavorite" class="fas fa-heart" style="color:red"> {{ users_id.length }} </i>
 
-      <a v-else-if="user == 'none'" href="users/sign_up">
+      <!-- <a v-else-if="user == 'none'" href="users/sign_up">
         <i  class="far fa-heart"> {{ users_id.length }} </i>
-      </a>
+      </a> -->
 
       <i v-else v-on:click="createFavorite" class="far fa-heart" > {{ users_id.length }} </i>
 
