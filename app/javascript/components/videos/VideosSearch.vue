@@ -5,6 +5,11 @@
       <div class="video_article" v-for="video in videos" :key="video.id">
         <a :href="'/#/videos/' + video.id ">  <!-- 少々強引だけどSPAに合流させる -->
 
+          <div v-if="video.kind_of == 0" class="article-kind_of btn tetsuya">メイン</div>
+          <div v-if="video.kind_of == 1" class="article-kind_of btn toshimitsu">控え室</div>
+          <div v-if="video.kind_of == 2" class="article-kind_of btn ryo">個チャン</div>
+          <div v-if="video.kind_of == 3" class="article-kind_of btn yumemaru">その他</div>
+
           <div class="article-image">
             <img :src="'https://img.youtube.com/vi/' + video.url + '/maxresdefault.jpg'">
           </div>
@@ -112,8 +117,19 @@ export default {
 
 <style lang="scss" scoped>
 
+.article-kind_of {
+  position: absolute;
+  z-index: 10;
+  margin: 9px 0 0 10px;
+  border-radius: 20px;
+}
+
 .video_articles {
   margin-top: 20px;
+}
+
+.video_article {
+  box-shadow: 2px 2px 4px gray;
 }
 
 //  タブ  https://qiita.com/terufumi1122/items/16e7612a80f81f652000

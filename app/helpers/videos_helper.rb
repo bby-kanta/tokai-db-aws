@@ -6,6 +6,7 @@ module VideosHelper
         id: video.id,
         title: video.title,
         url: video.url,
+        kind_of: video.kind_of,
         rate: video.rate,
         mvp: video.mvp,
         updated_on: video.updated_on,

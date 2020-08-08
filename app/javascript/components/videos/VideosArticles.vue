@@ -135,7 +135,8 @@ export default {
     margin-right: 0.5em;
     margin-bottom: 1em;
     width :24%;
-    border: 2px solid rgb(238, 237, 237)
+    border: 2px solid rgb(238, 237, 237);
+    box-shadow: 2px 2px 4px gray;
   }
   .video_article-show {
     width: 400px;
