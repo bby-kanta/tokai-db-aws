@@ -729,7 +729,7 @@ div[id*="like-"]{ //inlineがないと横並びにならない
 
 footer {
   width: 100%;
-  height: 100px;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -740,6 +740,25 @@ footer {
   a,a:visited,a:hover,p {
     color: white;
 
+  }
+}
+
+.footer-home {
+  a {
+    font-size:25px;
+    i {
+      font-size: 40px;
+    }
+  }
+}
+
+.footer-menu {
+  width: 24%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  a{
+    font-size:20px;
   }
 }
 
