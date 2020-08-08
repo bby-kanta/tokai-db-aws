@@ -20,9 +20,60 @@
     <%# <div class="navbar"> %>
     <nav class="navbar navbar-light bg-white fixed-top">
       <div class="title-logo">
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <div id="nav-toggle">
+            <div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div id="gloval-nav">
+            <nav>
+                <ul id="navigation">
+                  <% if user_signed_in? %>
+                    <li>
+                      <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: 'nav-link' %>
+                    </li>
+                    <li>
+                      <%= link_to "いいねした動画",user_path(current_user.id), {class: "nav-link"} %>
+                    </li>
+                  <% else %>
+                      <li>
+                        <%= link_to "ログイン", new_user_session_path, class: 'nav-link' %>
+                      </li>
+                      <li>
+                        <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
+                      </li>
+                  <% end %>
+                <li>
+                  <a href="/#/people" class="nav-link"> 登場人物 </a>
+                </li>
+                <li>
+                  <a href="/#/penalties" class="nav-link" > 罰ゲーム(十字架) </a>
+                </li>
+                <li>
+                  <a href="/#/places" class="nav-link" > 撮影場所 </a>
+                </li>
+                <li>
+                  <a href="/#/musics" class="nav-link" > BGM </a>
+                </li>
+                <li>
+                  <a href="/#/tags" class="nav-link" > ハッシュタグ </a>
+                </li>
+
+                </ul>
+            </nav>
+
+            <div id="nav-bg-wrap">
+                <div class="nav-bg home"></div>
+                <div class="nav-bg news"></div>
+                <div class="nav-bg about"></div>
+                <div class="nav-bg works"></div>
+                <div class="nav-bg contact"></div>
+              </div>
+        </div>
+
         <a href="/#/">
           <img src="/assets/tokaidb-logo.jpg" width="400px" height="70px" alt="タイトルロゴ">
         </a>
@@ -177,11 +228,18 @@
   </body>
   <footer>
     <div class="footer-home">
-      <%= link_to videos_path do %>
-        <i class="fas fa-home"></i>
-        HOME
-      <% end %>
+      <a href="/#/">
+        <i class="fas fa-home"></i>HOME
+      </a>
     </div>
+    <div class="footer-menu">
+      <a href="/#/people">People</a>
+      <a href="/#/penalties">Penalties</a>
+      <a href="/#/places">Places</a>
+      <a href="/#/musics">BGM</a>
+      <a href="/#/tags">Hashtags</a>
+    </div>
+
     <p> © 2020 かんた東海オンエア伝導大使の All rights reserved. </p>
 
   </footer>

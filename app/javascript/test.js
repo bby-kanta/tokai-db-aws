@@ -12,3 +12,23 @@ $(function() {  //フェードイン・アウト  https://adan.jp.net/blog/progr
     $(this).delay(3000).fadeOut("slow");
   });
 });
+
+(function($) {
+  $(function () {
+      $('#nav-toggle , #navigation li a[href]').on('click', function() {
+          $('body').toggleClass('open');
+      });
+      $('#navigation li a').on({
+          'mouseenter' : function(){
+              var index = $(this).index();
+              $('#nav-bg-wrap .nav-bg').eq(index).addClass('active');
+              
+          },
+          'mouseleave' : function(){
+              var index = $(this).index();
+              $('#nav-bg-wrap .nav-bg').eq(index).removeClass('active');
+          }
+      });
+  });
+
+})(jQuery);
