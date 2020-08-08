@@ -1,3 +1,66 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.devise {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .devise-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    margin-top: 100px;
+    padding: 30px;
+    background-color: rgb(255, 229, 213);
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px gray;
+    div {
+      margin-bottom: 20px;
+    }
+    form {
+      width: 80%;
+    }
+  }
+}
+
+.devise-title {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  i {
+    font-size: 60px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+}
+
+.field {
+  input[type="email"] , input[type="password"] , input[type="text"] {
+    width: 100%;
+    height: 60px;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+
+  input[type="submit"] {
+    width: 80%;
+    background-color: yellow;
+  }
+}
+
+@media screen and (max-width: 999px){
+  .devise {
+
+    .devise-content {
+      width: 90%;
+    }
+  }
+
+}

@@ -49,8 +49,9 @@
           </div>
           <div class="article-date">
             {{ video.updated_on }}
-            <div id="like-<%= video.id %>">
-
+            <div id="like-">
+              <i v-if="users_id(video.users).includes(user)" class="fas fa-heart" style="color:red"> {{ video.users.length }} </i>
+              <i v-else class="far fa-heart"> {{ video.users.length }} </i>
             </div>
           </div>
 
@@ -65,11 +66,35 @@
 import axios from 'axios';
 
 export default {
-  
+
+  data: function () {
+    return {
+      user: {},  //current_userのID
+    }
+  },
+
   props: [
    'videos'
-  ]
+  ],
 
+  mounted () {
+    axios  //currentuserのID
+      .get('/api/v1/users.json')
+      .then(response => (this.user = response.data))
+  },
+
+  methods: {
+    users_id(users) { //users_idにはvideoのusersのidがシンプルな配列で入る→ 連想配列では無くなったのでincludesメソッドが使える
+      var user = this.user;
+      var users_id = [];
+      var hoge = [];
+
+      for(hoge in users){
+        users_id.push(users[hoge].id);  //例）users_id = [1,2]
+      }
+      return users_id 
+    },
+  },
 }
 
 </script>

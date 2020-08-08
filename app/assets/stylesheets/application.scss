@@ -23,22 +23,25 @@
   justify-content: flex-start;
 }
 
- body { padding-top: 57px; } //navbarを固定した時にに必要なpadding!公式にも記述あり。 https://qiita.com/PoohSunny/items/ff78ed50332ddaf330a8
+ body { padding-top: 68px; } //navbarを固定した時にに必要なpadding!公式にも記述あり。 https://qiita.com/PoohSunny/items/ff78ed50332ddaf330a8
 
  .nav {
    margin: 0 auto;
    width : 97%;
-  padding-top: 30px; //重ならない用
+   padding-top: 30px; //重ならない用
 }
 
 .notification {
+  display: none; //メッセージはデフォルトで消しておく
   display: flex;
-  justify-content: center;
+  padding-left: 20px;
   margin-top: 20px;
-  background-color: rgb(5, 253, 253);
+  background-color: rgb(253, 245, 5);
+  box-shadow: 2px 2px 4px gray;
+
   p {
     font-size: 30px;
-    color: white;
+    color: rgb(0, 0, 0);
   }
 }
 

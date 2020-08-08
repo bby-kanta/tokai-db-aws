@@ -10,7 +10,7 @@ class Api::V1::UsersController < ApiController
       @user = current_user.id
       render json: @user
     else
-      @user = 'ログインしていません'
+      @user = 'none'
       render json: @user
     end
 
