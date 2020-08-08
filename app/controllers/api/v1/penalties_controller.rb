@@ -13,7 +13,7 @@ class Api::V1::PenaltiesController < ApiController
 
   def show
     @penalty = Penalty.find(params[:id])
-    render json: @penalty.to_json(include: {videos:{only:[:id,:title,:url,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } } ) 
+    render json: @penalty.to_json(include: {videos:{only:[:id,:title,:url,:kind_of,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } } ) 
   end
 
 end
