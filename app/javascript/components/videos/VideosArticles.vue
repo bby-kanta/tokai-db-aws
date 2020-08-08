@@ -4,6 +4,11 @@
       <div class="video_article" v-for="video in videos" :key="video.id">
         <router-link :to="{ name: 'VideosShow', params: { id: video.id } }">
           
+          <div v-if="video.kind_of == 0" class="article-kind_of btn tetsuya">メイン</div>
+          <div v-if="video.kind_of == 1" class="article-kind_of btn toshimitsu">控え室</div>
+          <div v-if="video.kind_of == 2" class="article-kind_of btn ryo">個チャン</div>
+          <div v-if="video.kind_of == 3" class="article-kind_of btn yumemaru">その他</div>
+
           <div class="article-image">
             <img :src="'https://img.youtube.com/vi/' + video.url + '/maxresdefault.jpg'">
           </div>
@@ -107,6 +112,13 @@ export default {
 
 <style lang="scss" scoped>
 
+.article-kind_of {
+  position: absolute;
+  z-index: 10;
+  margin: 9px 0 0 10px;
+  border-radius: 20px;
+}
+
 @media screen and (min-width: 1000px){ //widthが900pxまでのCSS
   div[class*="video_articles"] {
     width: 100%;
@@ -159,7 +171,6 @@ export default {
       height: 100%;
     }
   }
-
 
   .article-column{
     display: flex;
