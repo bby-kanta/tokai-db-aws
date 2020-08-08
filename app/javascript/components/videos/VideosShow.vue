@@ -16,7 +16,12 @@
       
       <a v-if="user == 1" :href=" '/videos/' + $route.params.id + '/edit#/' ">編集</a>
 
+      <!-- ↓いいねボタン -->
       <i v-if="users_id.includes(user)" v-on:click="destroyFavorite" class="fas fa-heart" style="color:red"> {{ users_id.length }} </i>
+
+      <a v-else-if="user == 'none'" href="users/sign_up">
+        <i  class="far fa-heart"> {{ users_id.length }} </i>
+      </a>
 
       <i v-else v-on:click="createFavorite" class="far fa-heart" > {{ users_id.length }} </i>
 
@@ -379,9 +384,14 @@ export default {
 
 }
 
-.fa-heart {
-  cursor: pointer;
+.video_date {
+  .fa-heart {
+    margin: 20px 0;
+    font-size: 30px;
+    cursor: pointer;
+  }
 }
+
 
 
 </style>
