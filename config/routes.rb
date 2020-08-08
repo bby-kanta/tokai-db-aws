@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :musics, only: [:index, :show] 
       resources :places, only: [:index, :show] 
       resources :users
+      resources :favorites, only: [:index ,:create, :destroy]
     end
   end
 

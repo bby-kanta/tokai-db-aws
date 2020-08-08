@@ -13,7 +13,7 @@ class Api::V1::PeopleController < ApiController
 
   def show
     @person = Person.find(params[:id])
-    render json: @person.to_json(include: [{penalties:{only: [:id,:name,:person_id]}},{tags:{only: [:id,:person_id,:name]}},{videos:{only:[:id,:title,:url,:rate,:mvp,:updated_on] , methods: :random_tags } }  ])
+    render json: @person.to_json(include: [{penalties:{only: [:id,:name,:person_id]}},{tags:{only: [:id,:person_id,:name]}},{videos:{only:[:id,:title,:url,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } }  ])
   end
 
 end

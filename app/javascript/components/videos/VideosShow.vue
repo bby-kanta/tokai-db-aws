@@ -16,7 +16,10 @@
       
       <a v-if="user == 1" :href=" '/videos/' + $route.params.id + '/edit#/' ">編集</a>
 
-      <i v-if="users_id.includes(user)"  class="fas fa-heart" style="color:red"> {{ users_id.length }} </i>
+      <i v-if="users_id.includes(user)" v-on:click="destroyFavorite" class="fas fa-heart" style="color:red"> {{ users_id.length }} </i>
+
+      <i v-else v-on:click="createFavorite" class="far fa-heart" > {{ users_id.length }} </i>
+
 
     </div>
 
@@ -229,6 +232,7 @@ export default {
       video: {},
       videos: {},
       user: {},
+      favorite: {},
     }
 
   },
@@ -241,38 +245,41 @@ export default {
     axios
       .get('/api/v1/users.json')
       .then(response => (this.user = response.data))
-
   },
 
   watch: {
     $route (to, from) {
       // this.$router.go({ name: 'VideosShow' })
       this.fetchVideos(to.params.id)
-      }
+      },
   },
 
   computed: {
     users_id: function() { //users_idにはvideoのusersのidがシンプルな配列で入る→ 連想配列では無くなったのでincludesメソッドが使える
-      var users = this.video.users;
+      var users = this.video.users;  //例）"video.users":[{"id":1},{"id":2}]
       var user = this.user;
       var users_id = [];
       var hoge = [];
 
       for(hoge in users){
-        users_id.push(users[hoge].id); 
+        users_id.push(users[hoge].id);  //例）users_id = [1,2]
       }
 
-      console.log(users_id);
-      console.log(users_id.includes(user));
+      // console.log(users_id);
+      // console.log(users_id.includes(user));
       return users_id 
     },
   },
 
   methods: {
+
     fetchVideos(id) {
       axios
       .get(`/api/v1/videos/${this.$route.params.id}.json`)
       .then(response => (this.video = response.data))
+      axios  //いいね更新用
+        .get('/api/v1/favorites.json')
+        .then(response => (this.favorite = response.data))
     },
 
     random(array, num) {  //配列から特定の数だけ取り出すメソッド
@@ -288,6 +295,24 @@ export default {
         t[i] = t[l] || a[l];
       }
       return r;
+    },
+
+    createFavorite: async function() {  //https://qiita.com/TakeshiFukushima/items/a6c698fec648c11eee9a
+       await axios.post('/api/v1/favorites',{video_id: this.video.id , user_id: this.user.id})
+       this.fetchVideos(this.video.id)
+    },
+
+    destroyFavorite: async function() {
+      const likeId = this.findLikeId();
+       axios.delete(`/api/v1/favorites/${likeId}`);
+      this.fetchVideos(this.video.id);
+    },
+
+    findLikeId: function() {
+      const like = this.favorite.find((like) => {
+        return (like.user_id === this.user & like.video_id === this.video.id)
+      })
+      if (like) { return like.id }
     },
 
   }  //methods
@@ -352,6 +377,10 @@ export default {
     }
   }
 
+}
+
+.fa-heart {
+  cursor: pointer;
 }
 
 

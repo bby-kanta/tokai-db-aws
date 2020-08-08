@@ -12,7 +12,7 @@ class Api::V1::MusicsController < ApiController
 
   def show
     @music = Music.find(params[:id])
-    render json: @music.to_json(include: {videos:{only:[:id,:title,:url,:rate,:mvp,:updated_on] , include:{musics:{only: [:id,:name,:person_id]}} , methods: :random_tags } } ) 
+    render json: @music.to_json(include: {videos:{only:[:id,:title,:url,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } } ) 
   end
 
 end
