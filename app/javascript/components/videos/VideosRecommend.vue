@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <div class="video_article-show" v-for="video in videos" :key="video.id">
+      <div class="video_article-show" v-for="video in random(ComputedVideos,10)" :key="video.id">
         <router-link :to="{ name: 'VideosShow', params: { id: video.id } }">
 
           <div v-if="video.kind_of == 0" class="article-kind_of btn tetsuya">メイン</div>
@@ -74,13 +74,24 @@ export default {
 
   data: function () {
     return {
+      jsonVideos: [],
       user: {},  //current_userのID
     }
   },
 
-  props: [
-   'videos'
-  ],
+  created() {
+    this.fetchAxios()
+  },
+
+  watch: {
+    $route (to, from) {
+      this.fetchAxios()
+    },
+  },
+
+  props: {
+    videos: {},
+  },
 
   mounted () {
     axios  //currentuserのID
@@ -88,7 +99,19 @@ export default {
       .then(response => (this.user = response.data))
   },
 
+  computed: {
+    ComputedVideos() {
+      return this.videos || this.jsonVideos  //videosがあればvideosを、無ければjsonVideosをreturnする。  https://www.it-swarm.dev/ja/vue.js/prop%E5%BC%95%E6%95%B0%E3%81%8Cnull%E3%81%AE%E5%A0%B4%E5%90%88%E3%80%81%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E5%80%A4%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%BE%E3%81%99/836510682/
+    }
+  },
+
   methods: {
+    fetchAxios(){  //videosをJSONで取得する
+      axios
+        .get('/api/v1/videos.json')
+        .then(response => (this.jsonVideos = response.data))
+    },
+
     users_id(users) { //users_idにはvideoのusersのidがシンプルな配列で入る→ 連想配列では無くなったのでincludesメソッドが使える
       var user = this.user;
       var users_id = [];
@@ -99,6 +122,7 @@ export default {
       }
       return users_id 
     },
+
   },
 }
 

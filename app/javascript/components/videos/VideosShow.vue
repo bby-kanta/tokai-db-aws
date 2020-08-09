@@ -17,13 +17,11 @@
       <a v-if="user == 1" :href=" '/videos/' + $route.params.id + '/edit#/' ">編集</a>
 
       <!-- ↓いいねボタン -->
-      <i v-if="users_id.includes(user)" v-on:click="destroyFavorite" class="fas fa-heart" style="color:red"> {{ users_id.length }} </i>
-
+      <i v-if="users_id().includes(user)" v-on:click="destroyFavorite" class="fas fa-heart" style="color:red"> {{ users_id().length }} </i>
       <a v-else-if="user == 'none'" href="users/sign_up">
-        <i  class="far fa-heart"> {{ users_id.length }} </i>
+        <i  class="far fa-heart"> {{ users_id().length }} </i>
       </a>
-
-      <i v-else v-on:click="createFavorite" class="far fa-heart" > {{ users_id.length }} </i>
+      <i v-else v-on:click="createFavorite" class="far fa-heart" > {{ users_id().length }} </i>
 
 
     </div>
@@ -199,11 +197,41 @@
 
     </table>
 
+    <div class="comment-contents">
+      <h2> {{ video.comments.length }} 件のコメント </h2>
+      <form @submit="createComment">
+
+        <div class="comment-form">
+          <input v-model="comment.content" class="comment-box" type="text" placeholder="コメントを入力する">
+          <div class="text_underline"></div>
+        </div>
+
+        <div class="comment-submit">
+          <button type="submit"> コメント </button>
+        </div>
+
+      </form>
+
+      <div class="comments">
+        <div v-for="comment in video.comments" :key="comment.id" class="comment">
+          <div class="comment-name">
+            <img src="../../../assets/images/peace.jpg" width="30" height="30">
+            <h2> {{ comment.user.name }} </h2>
+            <i v-if="comment.user.id == user " @click="destroyComment(comment.id)" class="far fa-trash-alt"></i>
+          </div>
+          <div class="comment-text">
+            <p> {{ comment.content }} </p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
   </div>
 
   <div class="related-videos">
     <VideosRecommend :videos="video.recommends"></VideosRecommend>
-    <VideosRecommend :videos="random(videos, 8)"></VideosRecommend>
+    <VideosRecommend></VideosRecommend>
   </div>
 
 
@@ -238,15 +266,14 @@ export default {
       videos: {},
       user: {},
       favorite: {},
+      comment: {
+        content: "",
+      },
     }
 
   },
 
   mounted () {
-    axios
-      .get('/api/v1/videos.json')
-      .then(response => (this.videos = response.data))
-
     axios
       .get('/api/v1/users.json')
       .then(response => (this.user = response.data))
@@ -260,20 +287,7 @@ export default {
   },
 
   computed: {
-    users_id: function() { //users_idにはvideoのusersのidがシンプルな配列で入る→ 連想配列では無くなったのでincludesメソッドが使える
-      var users = this.video.users;  //例）"video.users":[{"id":1},{"id":2}]
-      var user = this.user;
-      var users_id = [];
-      var hoge = [];
 
-      for(hoge in users){
-        users_id.push(users[hoge].id);  //例）users_id = [1,2]
-      }
-
-      // console.log(users_id);
-      // console.log(users_id.includes(user));
-      return users_id 
-    },
   },
 
   methods: {
@@ -283,23 +297,8 @@ export default {
       .get(`/api/v1/videos/${this.$route.params.id}.json`)
       .then(response => (this.video = response.data))
       axios  //いいね更新用
-        .get(`/api/v1/favorites`)
+        .get('/api/v1/favorites.json')
         .then(response => (this.favorite = response.data))
-    },
-
-    random(array, num) {  //配列から特定の数だけ取り出すメソッド
-      var a = array;
-      var t = [];
-      var r = [];
-      var l = a.length;
-      var n = num < l ? num : l;
-      while (n-- > 0) {
-        var i = Math.random() * l | 0;
-        r[n] = t[i] || a[i];
-        --l;
-        t[i] = t[l] || a[l];
-      }
-      return r;
     },
 
     createFavorite: async function() {  //https://qiita.com/TakeshiFukushima/items/a6c698fec648c11eee9a
@@ -320,6 +319,21 @@ export default {
       if (like) { return like.id }
     },
 
+    createComment: function() {
+      axios
+        .post('/api/v1/comments',{ content: this.comment.content ,video_id: this.video.id} );
+      // this.fetchVideos(this.video.id);
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
+    },
+
+    destroyComment(comment_id) {
+      const comment = comment_id
+      console.log('コメントID'+comment+'を消します')
+      axios.delete(`/api/v1/comments/${comment}`);
+      // this.fetchVideos(this.video.id);
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
+    },
+
   }  //methods
 }
 </script>
@@ -333,6 +347,96 @@ export default {
 
   .person , .penalty , .tag , .place , .music {
     margin: 0 3px 3px 0;
+  }
+
+  .comment-contents {  //コメント関連
+    width: 100%;
+    margin-top: 40px;
+    .comment-form {  //コメントの入力フォーム
+      margin-top: 30px;
+
+      .comment-box {
+        font-size: 16px;
+        width: 100%;
+        border: none;
+        outline: none;
+        padding-bottom: 8px;
+        box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+      }
+      .text_underline{
+        position: relative; /*.text_underline::beforeの親要素*/
+        border-top: 3px solid #c2c2c2; /*text3の下線*/
+      }
+
+      .text_underline::before,
+      .text_underline::after{
+          position: absolute; 
+          bottom: 0px; /*中央配置*/
+          width: 0px; /*アニメーションで0pxから50%に*/
+          height: 3px; /*高さ*/
+          content: '';
+          background-color: #ff8c00; /*アニメーションの色*/
+          transition: all 0.5s;
+          -webkit-transition: all 0.5s;
+      }
+
+      /*中央から右へのアニメーション*/
+      .text_underline::before{
+          left: 50%; /*中央配置*/
+      }
+
+      /*中央から左へのアニメーション*/
+      .text_underline::after{ 
+          right: 50%; /*中央配置*/
+      }
+
+      .comment-box:focus + .text_underline::before,
+      .comment-box:focus + .text_underline::after{
+          width: 50%;
+      }
+    }
+    .comment-submit {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row-reverse;
+      button {
+        position: relative;
+        display: inline-block;
+        padding: 0.25em 0.5em;
+        text-decoration: none;
+        color: #FFF;
+        background: #fd9535;/*背景色*/
+        border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+        border-radius: 4px;/*角の丸み*/
+        box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+        font-weight: bold;
+      }
+    }
+    .comments {
+      margin: 20px 0;
+      .comment {
+        margin: 20px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #c2c2c2;
+        .comment-name {
+          margin-bottom: 10px;
+          display:flex;
+          align-items: center;
+          h2 {
+            margin: 0 10px;
+          }
+          img {
+            border-radius: 50%;
+            border: 1px solid rgb(53, 53, 53);
+          }
+        }
+        .comment-text {
+          p {
+            margin-left: 40px;
+          }
+        }
+      }
+    }
   }
 
 @media screen and (max-width: 999px){ /*widthが999pxまでのCSS(スマホ用)*/

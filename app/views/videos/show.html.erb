@@ -225,6 +225,31 @@
 
     </table>
 
+    <div class="comments">
+
+      <div class="tag_form">
+        <h2>コメント入力フォーム</h2>
+        <%= form_for ([@video,@comment]) do |a| %>
+
+          <div class="tag-field">
+            <%= a.text_field :content,placeholder:'コメントを入力してください' %>
+          </div>
+
+          <div>
+            <%= a.submit %>
+          </div>
+
+        <% end %>
+
+      <% @comments.each do |comment|%>
+
+        <%= comment.user.name %>
+        <%= comment.content %>
+
+      <% end %>
+
+    </div>
+
   </div>
 
   <div class="related-videos">

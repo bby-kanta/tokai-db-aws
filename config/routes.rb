@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :places, only: [:index, :show] 
       resources :users
       resources :favorites, only: [:index ,:create, :destroy]
+      resources :comments, only: [:index ,:create, :destroy]
     end
   end
 
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   resources :videos do
     resource :relationships,only: [:create,:destroy]
     resource :favorites,only: [:create,:destroy]
+    resources :comments
     collection do
       get 'search'
     end

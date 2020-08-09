@@ -53,6 +53,10 @@ class VideosController < ApplicationController
     @toshimitsu  = @video.people.find_by(name:'としみつ')
     @yumemaru    = @video.people.find_by(name:'ゆめまる')
     @mushimegane = @video.people.find_by(name:'虫眼鏡')
+
+    @comments = @video.comments.includes(:user)
+    @comment = @video.comments.build  #コメント作成用
+
   end
 
   def edit

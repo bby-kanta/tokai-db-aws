@@ -1,5 +1,8 @@
 class Video < ApplicationRecord
 
+  has_many :comments,dependent: :destroy
+  has_many :users, through: :comments
+
   has_many :favorites,dependent: :destroy
   has_many :users, through: :favorites
   accepts_nested_attributes_for :favorites
