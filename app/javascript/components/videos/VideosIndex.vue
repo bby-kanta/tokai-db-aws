@@ -6,7 +6,7 @@
         <button v-for="(tab, index) in tabs"
                 :key="tab.id"
                 :class="{ active: currentTab === index }"
-                @click="currentTab = index">{{ tab.tabName }}</button>
+                @click="currentTab = index">{{ tab.tabName + tab.videosLength }}</button>
       </div>
 
         <input type="text" v-model="keyword">
@@ -53,11 +53,11 @@ export default {
       id: 0,
       tabName: "",
       tabs: [
-        {id: 1, tabName: '全動画'},
-        {id: 2, tabName: 'メインチャンネル'},
-        {id: 3, tabName: '控え室'},
-        {id: 4, tabName: '個人チャンネル'},
-        {id: 5, tabName: 'その他'}
+        {id: 1, tabName: '全動画', videosLength: '' },
+        {id: 2, tabName: 'メイン', videosLength: ''},
+        {id: 3, tabName: '控え室', videosLength: ''},
+        {id: 4, tabName: '個チャン', videosLength: ''},
+        {id: 5, tabName: 'その他', videosLength: ''}
       ],
     }
   },
@@ -65,11 +65,11 @@ export default {
     axios
       .get('/api/v1/videos.json')
       .then(response => (this.videos = response.data))
-  },
+    
+    },
   computed: {
 
     filteredvideos: function() { //検索機能
-
       var videos = [];
 
       for(var i in this.videos) {
@@ -85,24 +85,29 @@ export default {
     mainvideos: function () {  //メインチャンネル
       var videos = this.filteredvideos;
       const mainvideos = videos.filter(video => video.kind_of == 0);
+      this.tabs[0].videosLength = '(' + this.filteredvideos.length + ')'; //全動画の個数（入れるところが無かったのでここに）
+      this.tabs[1].videosLength = '(' + mainvideos.length + ')';  //メインの個数
       return mainvideos;
     },  //mainvideos
 
     subvideos: function () {  //サブチャンネル
       var videos = this.filteredvideos;
       const subvideos = videos.filter(video => video.kind_of == 1);
+      this.tabs[2].videosLength = '(' + subvideos.length + ')';  //サブの個数
       return subvideos;
     },  //subvideos
 
     privatevideos: function () {  //個人チャンネル
       var videos = this.filteredvideos;
       const privatevideos = videos.filter(video => video.kind_of == 2);
+      this.tabs[3].videosLength = '(' + privatevideos.length + ')';  //個チャンの個数
       return privatevideos;
     },  //privatevideos
 
     othervideos: function () {  //その他のチャンネル
       var videos = this.filteredvideos;
       const othervideos = videos.filter(video => video.kind_of == 3);
+      this.tabs[4].videosLength = '(' + othervideos.length + ')';  //メインの個数
       return othervideos;
     },  //othervideos
 
@@ -137,6 +142,8 @@ button {
   padding: 3px 10px;
   background: white;
   border-radius: 10px;
+  color: rgb(199, 199, 199);
+  border: none;
 }
 button.active{
   background: rgb(255, 145, 0);
