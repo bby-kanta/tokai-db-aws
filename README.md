@@ -1,8 +1,7 @@
 # README
 # 【このアプリについて】
 
-![docker-tile](https://user-images.githubusercontent.com/63182123/89801119-adf8c700-db6a-11ea-950d-eded27f32e69.png)
-
+<img width="1792" alt="スクリーンショット 2020-08-11 0 45 53" src="https://user-images.githubusercontent.com/63182123/89802163-14cab000-db6c-11ea-992b-7381e3519d25.png">
 
 https://toukaionair.com/
 
@@ -54,6 +53,9 @@ Twitterのようないいね機能です。いいねした動画を一覧で表�
 メンバーを象徴する色が一人一人にあるのですが、そのメンバーカラーによってハッシュタグの色が変わるようになっています。
  
 # 【使った技術】  
+
+![docker-tile](https://user-images.githubusercontent.com/63182123/89801119-adf8c700-db6a-11ea-950d-eded27f32e69.png)
+
 ## Ruby on rails 6  　　
 WebPackerが便利です。
 
