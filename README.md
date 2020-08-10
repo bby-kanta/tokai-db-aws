@@ -1,6 +1,8 @@
 # README
 # 【このアプリについて】
 
+![onair-bird-tile](https://user-images.githubusercontent.com/63182123/89798211-db437600-db66-11ea-8d0b-98cd1dc2750b.jpg)
+
 https://toukaionair.com/
 
 僕が大好きなグループYouTuber「東海オンエア」さんの動画検索アプリです。
