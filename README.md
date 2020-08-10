@@ -62,6 +62,7 @@ rails+docker+MySQL（RDS）で構築したものをAWSのEC2にSSH接続して�
 ## Docker  
 最初はHerokuにデプロイしただけだったんですがモダンな技術を使ってみたいという思いからDockerで構築しなおしました。
 勉強しているときはいるのかこれと思いましたが使ってみてDockerのすごさを感じ取りました。初期の頃は環境構築で挫折しかけたのですが最初にDockerを学べばそのリスクからは逃れられそうです。
+http://dockeri.co/image/kakakakakku/rubocop.co
 
 ## CircleCI
 masterブランチにプッシュされたら、CircleCIからEC2にSSH接続して自動デプロイしDockerComposeを再起動するようにしています。
