@@ -1,7 +1,7 @@
 # README
 # 【このアプリについて】
 
-![onair-bird-tile](https://user-images.githubusercontent.com/63182123/89798211-db437600-db66-11ea-8d0b-98cd1dc2750b.jpg)
+![nginx-tile](https://user-images.githubusercontent.com/63182123/89799886-016a1580-db69-11ea-9f6b-609516b72a6c.png)
 
 https://toukaionair.com/
 
