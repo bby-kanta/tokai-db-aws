@@ -9,7 +9,7 @@
                 @click="currentTab = index">{{ tab.tabName + tab.videosLength }}</button>
       </div>
 
-        <input type="text" v-model="keyword">
+      <input type="text" v-model="keyword" placeholder="リアルタイム検索">
 
       <div class="tab-content">
         <div v-show="currentTab === 0">
@@ -111,7 +111,8 @@ export default {
       return othervideos;
     },  //othervideos
 
-  }  //computed
+  },  //computed
+
 }  //export default
 </script>
 
