@@ -1,7 +1,8 @@
 # README
 # 【このアプリについて】
 
-![nginx-tile](https://user-images.githubusercontent.com/63182123/89799886-016a1580-db69-11ea-9f6b-609516b72a6c.png)
+![docker-tile](https://user-images.githubusercontent.com/63182123/89801119-adf8c700-db6a-11ea-950d-eded27f32e69.png)
+
 
 https://toukaionair.com/
 
