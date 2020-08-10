@@ -158,7 +158,9 @@ export default {
   .video_article-show {
     width: 400px;
     border: 2px solid rgb(238, 237, 237)
-
+  }
+  .video_article-show:hover {
+    opacity: 0.5 !important;
   }
 
   // ↓記事が上にホバーするコード
