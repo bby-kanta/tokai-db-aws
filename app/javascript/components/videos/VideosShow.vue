@@ -217,7 +217,7 @@
           <div class="comment-name">
             <img src="../../../assets/images/peace.jpg" width="30" height="30">
             <h2> {{ comment.user.name }} </h2>
-            <i v-if="comment.user.id == user " @click="destroyComment(comment.id)" class="far fa-trash-alt"></i>
+            <i v-if="comment.user.id == user " @click="confirmDelete(), destroyComment(comment.id)" class="far fa-trash-alt"></i>
           </div>
           <div class="comment-text">
             <p> {{ comment.content }} </p>
@@ -262,7 +262,9 @@ export default {
 
   data: function () {
     return {
-      video: {},
+      video: {
+        comments: '',  //これがないとコンソールに一瞬lengthが定義されてない的なエラーが出る（実害は無し）
+      },
       videos: {},
       user: {},
       favorite: {},
@@ -281,7 +283,6 @@ export default {
 
   watch: {
     $route (to, from) {
-      // this.$router.go({ name: 'VideosShow' })
       this.fetchVideos(to.params.id)
       },
   },
@@ -322,8 +323,8 @@ export default {
     createComment: function() {
       axios
         .post('/api/v1/comments',{ content: this.comment.content ,video_id: this.video.id} );
-      // this.fetchVideos(this.video.id);
-      this.$router.go({path: this.$router.currentRoute.path, force: true})
+      this.fetchVideos(this.video.id);
+      // this.$router.go({path: this.$router.currentRoute.path, force: true})
     },
 
     destroyComment(comment_id) {
@@ -332,6 +333,11 @@ export default {
       axios.delete(`/api/v1/comments/${comment}`);
       // this.fetchVideos(this.video.id);
       this.$router.go({path: this.$router.currentRoute.path, force: true})
+    },
+
+    confirmDelete(){
+      const ans = confirm('本当に消しますか?'); 
+      if(!ans) event.preventDefault(); // 「キャンセル」押下ならば event を抑制
     },
 
   }  //methods
@@ -349,7 +355,7 @@ export default {
     margin: 0 3px 3px 0;
   }
 
-  .comment-contents {  //コメント関連
+  .comment-contents {  //コメント関連  https://qiita.com/KengoShimizu/items/22c14b282fa9f53f4bd8
     width: 100%;
     margin-top: 40px;
     .comment-form {  //コメントの入力フォーム
@@ -414,6 +420,9 @@ export default {
     }
     .comments {
       margin: 20px 0;
+      .comment:hover {
+        border-bottom: 2px solid #ff8c00;
+      }
       .comment {
         margin: 20px 0;
         padding-bottom: 10px;
@@ -428,6 +437,9 @@ export default {
           img {
             border-radius: 50%;
             border: 1px solid rgb(53, 53, 53);
+          }
+          i:before, i:before {
+            cursor: pointer;
           }
         }
         .comment-text {
