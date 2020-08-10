@@ -69,3 +69,4 @@ masterブランチにプッシュされたら、CircleCIからEC2にSSH接続し
 
 ## MySQL  
 DBは実務で役立ちそうという思いからMySQLを選択しました。
+![ER図](https://user-images.githubusercontent.com/63182123/89796272-64a57900-db64-11ea-9e26-f7cc77252bfb.png)
