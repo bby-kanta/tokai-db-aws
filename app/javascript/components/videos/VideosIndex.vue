@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-
+    <SubscriberCounter></SubscriberCounter>
     <div class="tabs">
       <div class="btn-container">
         <button v-for="(tab, index) in tabs"
@@ -36,10 +36,12 @@
 <script>
 import axios from 'axios';
 import VideosArticles from './VideosArticles.vue';
+import SubscriberCounter from '../SubscriberCounter.vue';
 
 export default {
   components: {
     VideosArticles,
+    SubscriberCounter,
   },
 
   data: function () {
@@ -65,7 +67,6 @@ export default {
     axios
       .get('/api/v1/videos.json')
       .then(response => (this.videos = response.data))
-    
     },
   computed: {
 
