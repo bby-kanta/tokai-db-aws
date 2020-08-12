@@ -12,7 +12,7 @@
     </div>
 
     <div class="video_date">
-      <h2> {{ video.updated_on }} に公開済み </h2>
+      <h2> {{ youtube.items[0].statistics.viewCount + '回視聴'}} {{ video.updated_on }} に公開済み </h2>
       
       <a v-if="user == 1" :href=" '/videos/' + $route.params.id + '/edit#/' ">編集</a>
 
@@ -183,7 +183,6 @@
         </th>
       </tr>
 
-    
       <tr>
         <th> ハッシュタグ </th>
         <th> 
@@ -192,6 +191,13 @@
               <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name"></TagColor>
             </div>
           </div>
+        </th>
+      </tr>
+
+      <tr>
+        <th> 概要(本家) </th>
+        <th>
+          <div class="description-real" v-html="youtube.items[0].snippet.description">  </div>
         </th>
       </tr> 
 
@@ -271,6 +277,16 @@ export default {
       comment: {
         content: "",
       },
+      youtube: {
+        items: [{
+          snippet: {
+            description: "",
+          },
+          statistics: {
+            viewCount: '',
+          }
+        }]
+      },
     }
 
   },
@@ -278,7 +294,7 @@ export default {
   mounted () {
     axios
       .get('/api/v1/users.json')
-      .then(response => (this.user = response.data))
+      .then(response => (this.user = response.data)) 
   },
 
   watch: {
@@ -293,13 +309,17 @@ export default {
 
   methods: {
 
-    fetchVideos(id) {
-      axios
+    async fetchVideos(id) {
+      await axios
       .get(`/api/v1/videos/${this.$route.params.id}.json`)
       .then(response => (this.video = response.data))
       axios  //いいね更新用
         .get('/api/v1/favorites.json')
         .then(response => (this.favorite = response.data))
+      await
+      axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${this.video.url}&key=AIzaSyDovZVx44zT7JglmnHzWoeUeXDrQra4CVg&part=snippet,statistics`)
+      .then(response => (this.youtube = response.data))
+      console.log(this.youtube)
     },
 
     createFavorite: async function() {  //https://qiita.com/TakeshiFukushima/items/a6c698fec648c11eee9a
@@ -353,6 +373,10 @@ export default {
 
   .person , .penalty , .tag , .place , .music {
     margin: 0 3px 3px 0;
+  }
+
+  .description-real {
+    white-space: pre-line;  //本家の概要に改行を許可する
   }
 
   .comment-contents {  //コメント関連  https://qiita.com/KengoShimizu/items/22c14b282fa9f53f4bd8

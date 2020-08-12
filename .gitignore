@@ -38,3 +38,8 @@ secret.yaml
 
 !/tmp/pid/.keep
 !/tmp/sockets/.keep
+
+# env files
+.env
+.env.local
+.env.*.local
