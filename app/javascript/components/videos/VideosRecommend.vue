@@ -108,7 +108,7 @@ export default {
   methods: {
     fetchAxios(){  //videosをJSONで取得する
       axios
-        .get('/api/v1/videos.json')
+        .get('/api/v1/videos/recommend.json')
         .then(response => (this.jsonVideos = response.data))
     },
 

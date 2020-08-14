@@ -10,6 +10,7 @@
 <script>
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import InfiniteLoading from 'vue-infinite-loading'
 
 import VideosIndex from 'components/videos/VideosIndex.vue'
 import VideosShow from 'components/videos/VideosShow.vue'
@@ -70,6 +71,12 @@ const router = new VueRouter({
 })
 
 Vue.use(VueRouter)
+Vue.use(InfiniteLoading, {  //無限スクロール
+  slots: {
+      noMore: 'すべて読み込みました',
+      noResults: '読み込み完了しています',
+  },
+});
 
 export default {
   router,
