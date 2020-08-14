@@ -13,7 +13,8 @@
 
       <div class="tab-content">
         <div v-show="currentTab === 0">
-          <VideosArticles :videos="filteredvideos"></VideosArticles> 
+          <VideosArticles :videos="filteredvideos"></VideosArticles>
+           <infinite-loading @infinite="infiniteHandler"></infinite-loading>
         </div>
         <div v-show="currentTab === 1">
           <VideosArticles :videos="mainvideos"></VideosArticles>
@@ -49,6 +50,7 @@ export default {
       keyword: '',
       videos: [],
       main: [],
+      page: 1,
 
       //タブ
       currentTab: 0,
@@ -64,9 +66,9 @@ export default {
     }
   },
   mounted () {
-    axios
-      .get('/api/v1/videos.json')
-      .then(response => (this.videos = response.data))
+    // axios
+    //   .get('/api/v1/videos.json')
+    //   .then(response => (this.videos = response.data))
     },
   computed: {
 
@@ -113,6 +115,29 @@ export default {
     },  //othervideos
 
   },  //computed
+
+  methods: {
+    infiniteHandler($state) {
+        axios.get(`/api/v1/videos`, {
+            params: {
+                page: this.page,
+            },
+        }).then(({ data }) => {
+            //そのままだと読み込み時にカクつくので1500毎に読み込む
+            setTimeout(() => {
+                if (this.page <=data.kaminari.pagenation.pages) {
+                    this.page += 1
+                    this.videos.push(...data.videos)
+                    $state.loaded()
+                } else {
+                    $state.complete()
+                }
+            }, 1000)
+        }).catch((err) => {
+            $state.complete()
+        })
+    }
+  }
 
 }  //export default
 </script>

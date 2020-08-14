@@ -92,7 +92,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  h1 {
+  h1 {  //https://1-notes.com/css-text-design/
     font-size:5em;
     text-align:center;
     line-height:0.95em;

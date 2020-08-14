@@ -1,4 +1,5 @@
 class Api::V1::VideosController < ApiController
+  include Pagenation  #pagenation_controllerにて定義
 
   # ActiveRecordのレコードが見つからなければ404 not foundを応答する
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -6,11 +7,11 @@ class Api::V1::VideosController < ApiController
   end
 
   def index
-    tags = Video.order(updated_on:'desc').eager_load(:tags)
-    # videos = tags.as_json(:include => {:tags => {:only => [:id, :name]},:users})
-    # @videos = tags.as_json(include: [{tags: {only: [:id, :name]}},users:{only:[:id]}],methods: :_tags)
-    @videos = tags.as_json(include: [users:{only:[:id]}],methods: :random_tags)
-    render json: @videos
+    videos = Video.order(updated_on:'desc').eager_load(:tags).page(params[:page]).per(20)  #perの数だけvideoを読み込む
+    pagenation = resources_with_pagination(videos)  #pagenation_controllerにて定義
+    @videos = videos.as_json(include: [users:{only:[:id]}],methods: :random_tags)
+    object = { videos: @videos, kaminari: pagenation }  #{}でjsonを複数渡せる
+    render json: object
   end
 
   def show

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="video_articles">
-      <div class="video_article" v-for="video in videos" :key="video.id">
+      <div class="video_article" v-for="(video,$index) in videos" :key="$index">
         <router-link :to="{ name: 'VideosShow', params: { id: video.id } }">
           
           <div v-if="video.kind_of == 0" class="article-kind_of btn tetsuya">メイン</div>
@@ -65,8 +65,8 @@
 
         </router-link>
       
-
       </div>
+
     </div>
   </div>
 </template>
@@ -83,7 +83,7 @@ export default {
   },
   
   props: [
-   'videos'
+    'videos',
   ],
 
   mounted () {
