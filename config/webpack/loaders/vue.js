@@ -1,8 +1,6 @@
 
 module.exports = {
-  build: {
-    publicPath: '/',
-  },
+  publicPath: '/',
   test: /\.vue(\.erb)?$/,
   use: [{
     loader: 'vue-loader',
