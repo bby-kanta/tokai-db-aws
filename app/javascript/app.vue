@@ -1,7 +1,4 @@
 <template>
-  <!-- <div id="app">
-    <p>{{ message }}</p>
-  </div> -->
   <div>
     <router-view></router-view>
   </div>
@@ -26,6 +23,7 @@ import PlacesIndex from 'components/places/PlacesIndex.vue'
 import PlacesShow from 'components/places/PlacesShow.vue'
 
 const router = new VueRouter({
+  mode: 'history',
   routes: [
     { path: '/',
       name: 'VideosIndex',
@@ -70,7 +68,7 @@ const router = new VueRouter({
 
 })
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 Vue.use(InfiniteLoading, {  //無限スクロール
   slots: {
       noMore: 'すべて読み込みました',
