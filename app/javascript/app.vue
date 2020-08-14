@@ -23,9 +23,12 @@ import PlacesIndex from 'components/places/PlacesIndex.vue'
 import PlacesShow from 'components/places/PlacesShow.vue'
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   routes: [
     { path: '/',
+      name: 'VideosIndex',
+      component: VideosIndex },
+    { path: '/videos',
       name: 'VideosIndex',
       component: VideosIndex },
     { path: '/videos/:id(\\d+)',  // :id は数値のみに制限する
