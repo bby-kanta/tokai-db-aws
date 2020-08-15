@@ -63,7 +63,7 @@ Twitterのようないいね機能です。いいねした動画を一覧で表�
 ### メンバーカラー  
 メンバーを象徴する色が一人一人にあるのですが、そのメンバーカラーによってハッシュタグの色が変わるようになっています。
  
-# 【使った技術】  
+# 【使った技術】
 
 ![docker-tile](https://user-images.githubusercontent.com/63182123/89801119-adf8c700-db6a-11ea-950d-eded27f32e69.png)
 
@@ -89,3 +89,14 @@ masterブランチにプッシュされたら、CircleCIからEC2にSSH接続し
 ## MySQL  
 DBは実務で役立ちそうという思いからMySQLを選択しました。
 ![ER図](https://user-images.githubusercontent.com/63182123/89796272-64a57900-db64-11ea-9e26-f7cc77252bfb.png)
+
+
+# 【外部API】
+
+
+## YouTube data API
+東海オンエアのチャンネル登録者数・総再生数を取得しています。
+
+## Twitter API
+記事が投稿されたら自動ツイートされる仕組みにしてます。
+https://twitter.com/TO__AMBASSADOR
