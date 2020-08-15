@@ -33,4 +33,36 @@ class Video < ApplicationRecord
     users.select(:id)
   end
 
+  def rating
+    if rate == 1
+      return "S"
+    elsif rate == 2 
+      return "A"
+    elsif rate == 3 
+      return "B"
+    else
+      return "C"
+    end
+
+  end
+
+  def mvp_name
+    if mvp == 1
+      return "てつや"
+    elsif mvp == 2 
+      return "しばゆー"
+    elsif mvp == 3 
+      return "りょう"
+    elsif mvp == 4
+      return "としみつ"
+    elsif mvp == 5
+      return "ゆめまる"
+    elsif mvp == 6
+      return "虫眼鏡"
+    else
+      return "該当者なし"
+    end
+
+  end
+
 end

@@ -4,6 +4,12 @@
     <link rel="icon" type="image/png" href="/assets/peace2.png">
     <title>かんた東海オンエア伝導大使の</title>
     <%= analytics_init if Rails.env.production? %> <%# グーグルアナリティクス用 %>
+    <meta property="og:image" content="<%= asset_url('tokai-onair4.jpg') %>" />
+    <meta property="og:url" content="https://toukaionair.com/#/" /> 
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@TO__AMBASSADOR" />
+    <meta name="twitter:title" content="かんた東海オンエア伝導大使の" />
+    <meta name="twitter:description" content="※ランクはあくまでも個人的な評価です。東海オンエアの動画は全て面白いです。" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all','data-turbolinks-eval': 'false'%>
