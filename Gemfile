@@ -64,6 +64,8 @@ gem 'font-awesome-sass'
 
 gem 'google-analytics-rails'
 
+gem 'twitter' #twitterAPI 8/15追加
+
 # 7/14 逃げていたテストに挑戦
 group :development, :test do
   gem 'rspec-rails', '~> 4.0.0.beta2'

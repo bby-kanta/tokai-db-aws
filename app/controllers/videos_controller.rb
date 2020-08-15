@@ -1,6 +1,7 @@
 class VideosController < ApplicationController
 
   before_action :manji, except: [:index,:show,:search]
+  before_action :twitter_client, only: [:create]
 
 
   def manji
@@ -37,6 +38,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
     if @video.save
+      @client.update("記事を投稿しました! \n\n タイトル：#{@video.title} \n ランク：#{@video.rating} \n MVP：#{@video.mvp_name} \n 動画投稿日：#{@video.updated_on} \n https://toukaionair.com/#/videos/#{@video.id} \r")
       redirect_to videos_path
     else
       render 'new'
@@ -85,6 +87,15 @@ class VideosController < ApplicationController
 
     def search_params
       params.require(:q).permit(:title_cont_or_description_or_highlight_cont_or_rate_or_updated_on_cont_or_updated_on_lteq_or_category_eq_or_mvp_eq)
+    end
+
+    def twitter_client
+      @client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = Rails.application.credentials.twitter[:api_key]
+        config.consumer_secret     = Rails.application.credentials.twitter[:api_secret_key]
+        config.access_token        = Rails.application.credentials.twitter[:access_token]
+        config.access_token_secret = Rails.application.credentials.twitter[:access_token_secret]
+      end
     end
 
 end
