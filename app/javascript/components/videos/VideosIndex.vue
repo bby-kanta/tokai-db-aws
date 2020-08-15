@@ -14,19 +14,23 @@
       <div class="tab-content">
         <div v-show="currentTab === 0">
           <VideosArticles :videos="filteredvideos"></VideosArticles>
-           <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>  <!-- 無限スクロール -->
         </div>
         <div v-show="currentTab === 1">
           <VideosArticles :videos="mainvideos"></VideosArticles>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>  <!-- 無限スクロール -->
         </div>
         <div v-show="currentTab === 2">
           <VideosArticles :videos="subvideos"></VideosArticles>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>  <!-- 無限スクロール -->
         </div>
         <div v-show="currentTab === 3">
           <VideosArticles :videos="privatevideos"></VideosArticles>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>  <!-- 無限スクロール -->
         </div>
         <div v-show="currentTab === 4">
           <VideosArticles :videos="othervideos"></VideosArticles>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>  <!-- 無限スクロール -->
         </div>
       </div>
     </div>
@@ -132,7 +136,7 @@ export default {
                 } else {
                     $state.complete()
                 }
-            }, 1000)
+            }, 800)
         }).catch((err) => {
             $state.complete()
         })
