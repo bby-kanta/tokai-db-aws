@@ -38,7 +38,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
     if @video.save
-      @client.update("記事を投稿しました! \n\n タイトル：#{@video.title} \n ランク：#{@video.rating} \n MVP：#{@video.mvp_name} \n 動画投稿日：#{@video.updated_on} \n https://toukaionair.com/#/videos/#{@video.id} \r")
+      @client.update("記事を投稿しました! \n\n タイトル：#{@video.title} \n ランク：#{@video.rating} \n MVP：#{@video.mvp_name} \n 動画投稿日：#{@video.updated_on} \n https://toukaionair.com/#/videos/#{@video.id} \r")  #https://github.com/sferik/twitter/blob/master/examples/Update.md#update
       redirect_to videos_path
     else
       render 'new'
