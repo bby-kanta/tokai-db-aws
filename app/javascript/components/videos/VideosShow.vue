@@ -38,7 +38,7 @@
       <tr class="video-highlight">
         <th> 見所 </th>
         <th>   
-          <div class="highlight-content" v-html="video.highlight"></div>
+          <div  @click="top" class="highlight-content" v-html="video.highlight"></div>
         </th>
       </tr>
 
@@ -359,6 +359,19 @@ export default {
       const ans = confirm('本当に消しますか?'); 
       if(!ans) event.preventDefault(); // 「キャンセル」押下ならば event を抑制
     },
+
+    top() {
+
+      const duration = 200;  // 移動速度（0.2秒で終了）
+      const interval = 10;    // 0.01秒ごとに移動
+      const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
+      const timer = setInterval(() => {
+          window.scrollBy(0, step);   // スクロール位置を移動
+          if(window.scrollY <= 0) {
+              clearInterval(timer);
+          }
+      }, interval);
+    }
 
   }  //methods
 }
