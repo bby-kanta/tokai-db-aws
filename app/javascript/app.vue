@@ -73,7 +73,10 @@ const router = new VueRouter({
 
 Vue.use(VueRouter);
 Vue.use(InfiniteLoading, {  //無限スクロール
-  slots: {
+  props: {
+    spinner: 'bubbles',
+  },
+  slots: { 
       noMore: 'すべて読み込みました',
       noResults: '読み込み完了しています',
   },
