@@ -66,21 +66,10 @@
         <th> チャンネル種類 </th>
         <th>
           <div class="btn channel">
-            <a v-if="      video.kind_of == 0 ">メインチャンネル</a>
-            <a v-else-if=" video.kind_of == 1 ">東海オンエアの控室</a>
-            <a v-else-if=" video.kind_of == 2 ">個人チャンネル</a>
-            <a v-else                          >その他のチャンネル</a>
-
-            <!-- <% case @video.kind_of %>
-              <% when 0 %>
-                <%= link_to "メインチャンネル", search_videos_path(@search, :'q[kind_of_eq' => 0 ) %>
-              <% when 1 %>
-                <%= link_to "東海オンエアの控え室", search_videos_path(@search, :'q[kind_of_eq' => 1 ) %>
-              <% when 2 %>
-                <%= link_to "個人チャンネル", search_videos_path(@search, :'q[kind_of_eq' => 2 ) %>
-              <% else %>
-                <%= link_to "その他のチャンネル", search_videos_path(@search, :'q[kind_of_eq' => 3 ) %>
-            <% end %> -->
+            <a v-if="      video.kind_of == 0 " href="/videos/search?q%5Bkind_of_eq=0">メインチャンネル</a>
+            <a v-else-if=" video.kind_of == 1 " href="/videos/search?q%5Bkind_of_eq=1">東海オンエアの控室</a>
+            <a v-else-if=" video.kind_of == 2 " href="/videos/search?q%5Bkind_of_eq=2">個人チャンネル</a>
+            <a v-else                           href="/videos/search?q%5Bkind_of_eq=3">その他のチャンネル</a>
           </div>
         </th>
       </tr>
@@ -89,31 +78,31 @@
         <th> カテゴリー </th>
         <th>   
           <div class="btn video-category">
-            <a v-if=" video.category == 0 ">企画もの</a>
-            <a v-else-if=" video.category == 1 "> サブチャン </a>
-            <a v-else-if=" video.category == 2 "> コント </a>
-            <a v-else-if=" video.category == 3 "> クイズ </a>
-            <a v-else-if=" video.category == 4 "> 選手権 </a>
-            <a v-else-if=" video.category == 5 "> 検証系 </a>
-            <a v-else-if=" video.category == 6 "> 対決 </a>
-            <a v-else-if=" video.category == 7 "> 王 </a>
-            <a v-else-if=" video.category == 8 "> 文理対決 </a>
-            <a v-else-if=" video.category == 9 "> 旅行 </a>
-            <a v-else-if=" video.category == 10 "> 料理 </a>
-            <a v-else-if=" video.category == 11 "> スポーツ </a>
-            <a v-else-if=" video.category == 12 "> ドッキリ </a>
-            <a v-else-if=" video.category == 13 "> ゲーム </a>
-            <a v-else-if=" video.category == 14 "> コラボ </a>
-            <a v-else-if=" video.category == 91 "> ニンマリシティへようこそ </a>
-            <a v-else-if=" video.category == 92 "> ゆめまる美術館 </a>
-            <a v-else-if=" video.category == 93 "> ブラーボりょうのボンサバドゥチャンネル </a>
-            <a v-else-if=" video.category == 94 "> 虫眼鏡の放送部 </a>
-            <a v-else-if=" video.category == 95 "> としみつ東海オンエアの </a>
-            <a v-else-if=" video.category == 96 "> 動画アップロードチャンネル </a>
-            <a v-else-if=" video.category == 97 "> 十字架(サブチャン) </a>
-            <a v-else-if=" video.category == 98 "> いじわる </a>
-            <a v-else-if=" video.category == 99 "> ごはんじゃんけん </a>
-            <a v-else                          >その他</a>
+            <a v-if=" video.category == 0 " href="/videos/search?q%5Bcategory_eq=0">企画もの</a>
+            <a v-else-if=" video.category == 1 " href="/videos/search?q%5Bcategory_eq=1"> サブチャン </a>
+            <a v-else-if=" video.category == 2 " href="/videos/search?q%5Bcategory_eq=2"> コント </a>
+            <a v-else-if=" video.category == 3 " href="/videos/search?q%5Bcategory_eq=3"> クイズ </a>
+            <a v-else-if=" video.category == 4 " href="/videos/search?q%5Bcategory_eq=4"> 選手権 </a>
+            <a v-else-if=" video.category == 5 " href="/videos/search?q%5Bcategory_eq=5"> 検証系 </a>
+            <a v-else-if=" video.category == 6 " href="/videos/search?q%5Bcategory_eq=6"> 対決 </a>
+            <a v-else-if=" video.category == 7 " href="/videos/search?q%5Bcategory_eq=7"> 王 </a>
+            <a v-else-if=" video.category == 8 " href="/videos/search?q%5Bcategory_eq=8"> 文理対決 </a>
+            <a v-else-if=" video.category == 9 " href="/videos/search?q%5Bcategory_eq=9"> 旅行 </a>
+            <a v-else-if=" video.category == 10 " href="/videos/search?q%5Bcategory_eq=10"> 料理 </a>
+            <a v-else-if=" video.category == 11 " href="/videos/search?q%5Bcategory_eq=11"> スポーツ </a>
+            <a v-else-if=" video.category == 12 " href="/videos/search?q%5Bcategory_eq=12"> ドッキリ </a>
+            <a v-else-if=" video.category == 13 " href="/videos/search?q%5Bcategory_eq=13"> ゲーム </a>
+            <a v-else-if=" video.category == 14 " href="/videos/search?q%5Bcategory_eq=14"> コラボ </a>
+            <a v-else-if=" video.category == 91 " href="/videos/search?q%5Bcategory_eq=91"> ニンマリシティへようこそ </a>
+            <a v-else-if=" video.category == 92 " href="/videos/search?q%5Bcategory_eq=92"> ゆめまる美術館 </a>
+            <a v-else-if=" video.category == 93 " href="/videos/search?q%5Bcategory_eq=93"> ブラーボりょうのボンサバドゥチャンネル </a>
+            <a v-else-if=" video.category == 94 " href="/videos/search?q%5Bcategory_eq=94"> 虫眼鏡の放送部 </a>
+            <a v-else-if=" video.category == 95 " href="/videos/search?q%5Bcategory_eq=95"> としみつ東海オンエアの </a>
+            <a v-else-if=" video.category == 96 " href="/videos/search?q%5Bcategory_eq=96"> 動画アップロードチャンネル </a>
+            <a v-else-if=" video.category == 97 " href="/videos/search?q%5Bcategory_eq=97"> 十字架(サブチャン) </a>
+            <a v-else-if=" video.category == 98 " href="/videos/search?q%5Bcategory_eq=98"> いじわる </a>
+            <a v-else-if=" video.category == 99 " href="/videos/search?q%5Bcategory_eq=99"> ごはんじゃんけん </a>
+            <a v-else                             href="/videos/search?q%5Bcategory_eq=90">その他</a>
           </div>
         </th>
       </tr>
