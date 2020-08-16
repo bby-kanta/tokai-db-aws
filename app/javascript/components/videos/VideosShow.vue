@@ -15,6 +15,7 @@
       <h2> {{ youtube.items[0].statistics.viewCount + '回視聴'}} {{ video.updated_on }} に公開済み </h2>
       
       <a v-if="user == 1" :href=" '/videos/' + $route.params.id + '/edit#/' ">編集</a>
+      <a v-if="user == 1" :href=" '/videos/' + $route.params.id ">管理用</a>
 
       <!-- ↓いいねボタン -->
       <i v-if="users_id().includes(user)" v-on:click="destroyFavorite" class="fas fa-heart" style="color:red"> {{ users_id().length }} </i>

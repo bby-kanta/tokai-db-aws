@@ -87,7 +87,19 @@
 
     <%# 自分がログインしているときのみ表示  %>
     <% if user_signed_in?  && current_user.id == 1 %>
-      <%= link_to '記事作成' ,new_video_path  %>
+      <div class="kanta-only-show">
+        <%= link_to '記事作成' ,new_video_path  %>
+        <%= link_to 'て' ,person_path(1)  %>
+        <%= link_to 'し' ,person_path(2)  %>
+        <%= link_to 'り' ,person_path(3)  %>
+        <%= link_to 'と' ,person_path(4)  %>
+        <%= link_to 'ゆ' ,person_path(5)  %>
+        <%= link_to 'む' ,person_path(6)  %>
+        <%= link_to '東' ,person_path(7)  %>
+        <%= link_to '人' ,new_person_path  %>
+        <%= link_to '場' ,new_place_path  %>
+        <%= link_to '曲' ,new_music_path  %>
+      </div>
     <% end %>
 
       <div class="nav-serch">  <%# 検索 %>
