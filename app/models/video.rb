@@ -1,5 +1,4 @@
 class Video < ApplicationRecord
-
   has_many :comments,dependent: :destroy
   has_many :users, through: :comments
 
@@ -31,6 +30,10 @@ class Video < ApplicationRecord
 
   def users_id_select
     users.select(:id)
+  end
+
+  def users_id_map  #"users":[{"id":1},{"id":2}] となっていたものを"users_id_map":[1,2]とする。
+    users.map {|x| x.id}
   end
 
   def rating

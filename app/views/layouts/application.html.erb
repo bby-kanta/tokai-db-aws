@@ -42,7 +42,7 @@
                       <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: 'nav-link' %>
                     </li>
                     <li>
-                      <%= link_to "いいねした動画",user_path(current_user.id), {class: "nav-link"} %>
+                      <a href="/#/users/<%= current_user.id %>" class="nav-link" > いいねした動画 </a>
                     </li>
                   <% else %>
                       <li>

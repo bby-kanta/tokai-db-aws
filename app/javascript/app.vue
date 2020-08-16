@@ -11,6 +11,7 @@ import InfiniteLoading from 'vue-infinite-loading'
 
 import VideosIndex from 'components/videos/VideosIndex.vue'
 import VideosShow from 'components/videos/VideosShow.vue'
+import UsersShow from 'components/users/UsersShow.vue'
 import PeopleIndex from 'components/people/PeopleIndex.vue'
 import PeopleShow from 'components/people/PeopleShow.vue'
 import PenaltiesIndex from 'components/penalties/PenaltiesIndex.vue'
@@ -34,6 +35,9 @@ const router = new VueRouter({
     { path: '/videos/:id(\\d+)',  // :id は数値のみに制限する
       name: 'VideosShow',
       component: VideosShow },
+    { path: '/users/:id(\\d+)',  // :id は数値のみに制限する
+      name: 'UsersShow',
+      component: UsersShow },
     { path: '/people',
       name: 'PeopleIndex',
       component: PeopleIndex },
