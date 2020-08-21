@@ -67,14 +67,24 @@
       
       </div>
 
+      <InFeedAdsense
+          data-ad-layout-key="-6t+ed+2i-1n-4w"
+          data-ad-client="ca-pub-6030549237323507"
+          data-ad-slot="4173694552">
+      </InFeedAdsense>
+
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Ads from 'vue-google-adsense'
 
 export default {
+  components: {
+    Ads,
+  },
 
   data: function () {
     return {
