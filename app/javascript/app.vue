@@ -8,6 +8,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import InfiniteLoading from 'vue-infinite-loading'
+import Ads from 'vue-google-adsense'
 
 import VideosIndex from 'components/videos/VideosIndex.vue'
 import VideosShow from 'components/videos/VideosShow.vue'
@@ -85,6 +86,12 @@ Vue.use(InfiniteLoading, {  //無限スクロール
       noResults: '読み込み完了しています',
   },
 });
+
+// google adsense
+Vue.use(require('vue-script2'))
+Vue.use(Ads.Adsense)
+Vue.use(Ads.InArticleAdsense)
+Vue.use(Ads.InFeedAdsense)
 
 export default {
   router,
