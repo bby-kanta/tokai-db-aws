@@ -67,7 +67,15 @@
       
       </div>
 
-    </div>
+      <div class="google-adsense">
+        <InFeedAdsense
+          data-ad-layout-key="-6s+ed+2g-1n-4q"
+          data-ad-client="ca-pub-6030549237323507"
+          data-ad-slot="4173694552">
+        </InFeedAdsense>
+      </div>
+
+    </div>  <!-- video_articles -->
   </div>
 </template>
 
@@ -111,6 +119,8 @@ export default {
 
 <style lang="scss" scoped>
 
+
+
 .article-kind_of {
   position: absolute;
   z-index: 10;
@@ -140,7 +150,9 @@ export default {
   .video_article-show {
     width: 400px;
     border: 2px solid rgb(238, 237, 237)
-
+  }
+  .google-adsense {
+    width: 24%;
   }
 
   // ↓記事が上にホバーするコード
@@ -270,5 +282,11 @@ export default {
   }
 }
 //ここまでvideo記事のデザイン
+
+@media screen and (max-width: 999px){ /*widthが999pxまでのCSS(スマホ用)*/
+  .google-adsense {
+    width: 100%;
+  }
+}
 
 </style>
