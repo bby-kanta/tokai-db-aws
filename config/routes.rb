@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :videos, only: [:index, :show] do
         collection do
           get 'recommend'
+          get 'count'
         end
       end
       resources :people, only: [:index, :show] 

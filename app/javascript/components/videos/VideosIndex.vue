@@ -53,7 +53,7 @@ export default {
     return {
       keyword: '',
       videos: [],
-      main: [],
+      count: [],
       page: 1,
 
       //タブ
@@ -70,9 +70,9 @@ export default {
     }
   },
   mounted () {
-    // axios
-    //   .get('/api/v1/videos.json')
-    //   .then(response => (this.videos = response.data))
+    axios
+      .get('/api/v1/videos/count.json')
+      .then(response => (this.count = response.data))
     },
   computed: {
 
@@ -92,29 +92,29 @@ export default {
     mainvideos: function () {  //メインチャンネル
       var videos = this.filteredvideos;
       const mainvideos = videos.filter(video => video.kind_of == 0);
-      this.tabs[0].videosLength = '(' + this.filteredvideos.length + ')'; //全動画の個数（入れるところが無かったのでここに）
-      this.tabs[1].videosLength = '(' + mainvideos.length + ')';  //メインの個数
+      this.tabs[0].videosLength = '(' + this.count.videos + ')'; //全動画の個数（入れるところが無かったのでここに）
+      this.tabs[1].videosLength = '(' + this.count.main + ')';  //メインの個数
       return mainvideos;
     },  //mainvideos
 
     subvideos: function () {  //サブチャンネル
       var videos = this.filteredvideos;
       const subvideos = videos.filter(video => video.kind_of == 1);
-      this.tabs[2].videosLength = '(' + subvideos.length + ')';  //サブの個数
+      this.tabs[2].videosLength = '(' + this.count.sub + ')';  //サブの個数
       return subvideos;
     },  //subvideos
 
     privatevideos: function () {  //個人チャンネル
       var videos = this.filteredvideos;
       const privatevideos = videos.filter(video => video.kind_of == 2);
-      this.tabs[3].videosLength = '(' + privatevideos.length + ')';  //個チャンの個数
+      this.tabs[3].videosLength = '(' + this.count.private + ')';  //個チャンの個数
       return privatevideos;
     },  //privatevideos
 
     othervideos: function () {  //その他のチャンネル
       var videos = this.filteredvideos;
       const othervideos = videos.filter(video => video.kind_of == 3);
-      this.tabs[4].videosLength = '(' + othervideos.length + ')';  //メインの個数
+      this.tabs[4].videosLength = '(' + this.count.other + ')';  //メインの個数
       return othervideos;
     },  //othervideos
 
