@@ -227,6 +227,11 @@
 
   <div class="related-videos">
     <VideosRecommend :videos="video.recommends"></VideosRecommend>
+    <InFeedAdsense
+      data-ad-layout-key="-6s+ed+2g-1n-4q"
+      data-ad-client="ca-pub-6030549237323507"
+      data-ad-slot="4173694552">
+    </InFeedAdsense>
     <VideosRecommend></VideosRecommend>
   </div>
 
