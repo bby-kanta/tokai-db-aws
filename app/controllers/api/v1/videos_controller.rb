@@ -25,4 +25,15 @@ class Api::V1::VideosController < ApiController
     render json: @videos
   end
 
+  def count
+    @videos  = Video.all
+    @all     = @videos.count
+    @main    = @videos.where(kind_of: 0).count
+    @sub     = @videos.where(kind_of: 1).count
+    @private = @videos.where(kind_of: 2).count
+    @other   = @videos.where(kind_of: 3).count
+    object = { videos: @all, main: @main, sub: @sub, private: @private, other: @other}
+    render json: object
+  end
+
 end
