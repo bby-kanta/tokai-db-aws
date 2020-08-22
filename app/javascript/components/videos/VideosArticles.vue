@@ -67,7 +67,7 @@
       
       </div>
 
-      <div class="google-adsense">
+      <div class="google-adsense">  <!-- なぜか全動画一覧以外ではエラーが出る  -->
         <InFeedAdsense
           data-ad-layout-key="-6j+cr+4e+8-4s"
           data-ad-client="ca-pub-6030549237323507"
@@ -81,8 +81,12 @@
 
 <script>
 import axios from 'axios';
+import Ads from 'vue-google-adsense'
 
 export default {
+  components : {
+  	Ads
+  },
   data: function () {
     return {
       user: {},  //current_userのID
