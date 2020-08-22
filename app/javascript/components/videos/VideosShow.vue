@@ -220,7 +220,12 @@
           </div>
         </div>
       </div>
-      
+
+      <Adsense
+          data-ad-client="ca-pub-6030549237323507"
+          data-ad-slot="4196394214">
+      </Adsense>
+
     </div>
 
   </div>
