@@ -483,6 +483,16 @@ export default {
     }
   }
 
+@media screen and (min-width: 1000px){
+  .related-videos {
+    width: 400px;
+    .video-article_show {
+      width: 100%;
+    }
+  }
+
+}
+
 @media screen and (max-width: 999px){ /*widthが999pxまでのCSS(スマホ用)*/
 
   .all-contents {
