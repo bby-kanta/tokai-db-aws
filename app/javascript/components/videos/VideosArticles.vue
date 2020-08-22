@@ -69,9 +69,9 @@
 
       <div class="google-adsense">
         <InFeedAdsense
-          data-ad-layout-key="-6s+ed+2g-1n-4q"
+          data-ad-layout-key="-6j+cr+4e+8-4s"
           data-ad-client="ca-pub-6030549237323507"
-          data-ad-slot="4173694552">
+          data-ad-slot="8230351456">
         </InFeedAdsense>
       </div>
 

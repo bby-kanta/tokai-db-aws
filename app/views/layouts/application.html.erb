@@ -52,6 +52,9 @@
                       <li>
                         <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
                       </li>
+                      <li>
+                        <%= link_to 'テストユーザーでログイン', users_guest_sign_in_path, method: :post %>
+                      </li>
                   <% end %>
                 <li>
                   <a href="/#/people" class="nav-link"> 登場人物 </a>
