@@ -1,5 +1,6 @@
 class PenaltiesController < ApplicationController
   before_action :manji, except: [:index,:show,:search]
+  before_action :twitter_client, only: [:create]
 
   def manji
     if user_signed_in?
@@ -33,9 +34,10 @@ class PenaltiesController < ApplicationController
   def create
     # 人物のところにフォームあり
     person = Person.find(params[:person_id])
-    penalty = person.penalties.build(penalty_params)
-      if penalty.save
-        redirect_to penalties_path
+    @penalty = person.penalties.build(penalty_params)
+      if @penalty.save
+        @client.update("罰ゲーム【#{@penalty.name}】 を作成しました！ \n https://toukaionair.com/#/penalties/#{@penalty.id} \r")
+        redirect_to penalty_path(@penalty)
       else
         render 'index'
       end
@@ -68,6 +70,15 @@ class PenaltiesController < ApplicationController
 
   def search_params
     params.require(:q).permit(:name_cont_or_description_cont)
+  end
+
+  def twitter_client
+    @client = Twitter::REST::Client.new do |config|
+      config.consumer_key        = Rails.application.credentials.twitter[:api_key]
+      config.consumer_secret     = Rails.application.credentials.twitter[:api_secret_key]
+      config.access_token        = Rails.application.credentials.twitter[:access_token]
+      config.access_token_secret = Rails.application.credentials.twitter[:access_token_secret]
+    end
   end
 
 end
