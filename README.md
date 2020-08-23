@@ -35,6 +35,10 @@ YouTubeのトレンドとして、「1日に1本動画をあげること」こ�
  
 ### 検索・詳細検索・ソート  
 ランク別に絞り込むことも可能ですし、ワードでの検索・並び替えも行うことができます。
+
+### リアルタイム検索機能
+Vueの双方向データバインディングを用いた絞り込み機能です。
+文字を入力した段階でマッチした検索結果がリアルタイムで表示されます。
  
 ### ハッシュタグ  
 これは完全にファンに向けた機能で、あらゆる動画の共通ポイントを言語化することによって見たい動画があるけど、記憶が曖昧で完全に思い出せないときなどに非常に有効です。  
@@ -76,7 +80,7 @@ WebPackerが便利です。
 
 ## Vue.js
 SPA化するために使用しました。
-railsのAPIモードでJSONをaxiosで送っています。
+railsのAPIモードでJSON化してフロントのVueのaxiosで取ってきています。
 
 ## AWS (EC2/ALB/Route53/VPC/RDS)
 rails+docker+MySQL（RDS）で構築したものをAWSのEC2にSSH接続してデプロイしました。
@@ -97,10 +101,21 @@ DBは実務で役立ちそうという思いからMySQLを選択しました。
 
 # 【外部API】
 
-
 ## YouTube data API
 東海オンエアのチャンネル登録者数・総再生数を取得しています。
 
 ## Twitter API
 記事が投稿されたら自動ツイートされる仕組みにしてます。
 https://twitter.com/TO__AMBASSADOR
+
+# 【特に見ていただきたいところ】
+## [api/v1/videos_controller.rb](https://github.com/momokan928/tokai-db-aws/blob/master/app/controllers/api/v1/videos_controller.rb)
+rails側からVueにJSONを渡すための記述です。
+## [app.vue](https://github.com/momokan928/tokai-db-aws/blob/master/app/javascript/app.vue)
+Vueのルーターなどの設定が書かれています。
+## [Dockerfile](https://github.com/momokan928/tokai-db-aws/blob/master/Dockerfile)
+RubyのDockerイメージです。
+## [docker-compose.yml](https://github.com/momokan928/tokai-db-aws/blob/master/docker-compose.yml)
+railsとnginxのためのdocker-compose.ymlです。
+## [.circleci/config.yml](https://github.com/momokan928/tokai-db-aws/blob/master/.circleci/config.yml)
+CircleCIの設定ファイルです。AWSにSSHした後のコマンドなどが書かれています。
