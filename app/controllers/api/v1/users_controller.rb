@@ -18,17 +18,12 @@ class Api::V1::UsersController < ApiController
   end
 
   def show
-    if user_signed_in?
-      videos = current_user.videos.order(created_at:'desc').eager_load(:tags).page(params[:page]).per(40)
+      user = User.find(params[:id])
+      videos = user.videos.order(created_at:'desc').eager_load(:tags).page(params[:page]).per(40)
       pagenation = resources_with_pagination(videos)  #pagenation_controllerにて定義
       @videos = videos.as_json(include: [users:{only:[:id]}],methods: [:random_tags])
-      object = { videos: @videos, kaminari: pagenation } 
+      object = { videos: @videos, kaminari: pagenation ,user: user} 
       render json: object
-    else
-      @user = 'none'
-      render json: @user
-    end
-
   end
 
   def recommend
