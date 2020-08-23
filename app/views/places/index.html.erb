@@ -16,14 +16,6 @@
 <% end %>
 
 <div class="width-96">
-  <div class="search-form">
-    <%= search_form_for @searches,html: { class: "form-inline" }, url: search_places_path do |f| %>
-    <%= f.search_field :name_or_description_cont %>
-    <%= f.submit '検索' %>
-    <% end %>
-  </div>
-
-  <% if false %> <%#コメントアウト %>
     <div class="hashtags">
       <% @places.each do |place|%>
         <div class="btn btn-danger">
@@ -34,12 +26,4 @@
         </div>
       <% end %>
     </div>
-  <% end %>
-
 </div>
-
-<div
-  class="js-places-index"
-  data-notice="<%= notice %>"
-  data-places="<%= places_index_json(@places) %>"
-></div>

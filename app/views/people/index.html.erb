@@ -10,42 +10,8 @@
   <h2> <%= link_to '人物タグ作成' ,new_person_path %> </h2>
 <% end %>
 
-<div class="people-tokai"><%# メンバーの記事一覧 %>
-
-  <div class="person-tetsuya">
-    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'てつや') , person_image: 'tetsuya.jpg'} %>
-  </div>
-
-  <div class="person-sibayu">
-    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'しばゆー') , person_image: 'sibayu.jpg'} %>
-  </div>
-
-  <div class="person-ryo">
-    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'りょう') , person_image: 'ryo.jpg'} %>
-  </div>
-
-  <div class="person-toshimitsu">
-    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'としみつ'), person_image: 'toshimitsu.jpg'} %>
-  </div>
-
-  <div class="person-yumemaru">
-    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'ゆめまる') , person_image: 'yumemaru.jpg'} %>
-  </div>
-
-  <div class="person-mushimegane">
-    <%= render partial: "person-article", locals: { personid: Person.find_by(name:'虫眼鏡') , person_image: 'mushimegane.jpg'} %>
-  </div>
-
-</div>  <%# people-tokai %>
-
 <div class="width-96">
   <h2>出演者一覧</h2> 
-  <div class="search-form">
-    <%= search_form_for @searches,html: { class: "form-inline" }, url: search_people_path do |f| %>
-    <%= f.search_field :name_or_description_cont %>
-    <%= f.submit '検索' %>
-    <% end %>
-  </div>
 
   <div class="people-sub">
     <% @people.each do |person|%>

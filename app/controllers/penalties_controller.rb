@@ -10,21 +10,12 @@ class PenaltiesController < ApplicationController
     end
   end
 
-
   def index
-    @searches = Penalty.ransack(params[:q])
     @penalties = Penalty.all.order(since:'desc')
-  end
-
-  def search
-    @searches = Penalty.ransack(params[:q])
-    @penalties = @searches.result.joins(:penalty_videos).group(:penalty_id).order('count(video_id) desc') 
-    render 'index'
   end
 
   def show
     @penalty = Penalty.find(params[:id])
-    @penalties = Penalty.all.sample(10)
   end
 
   def new
@@ -66,10 +57,6 @@ class PenaltiesController < ApplicationController
   private
   def penalty_params
     params.require(:penalty).permit(:name,:description,:since,:sort,:person_id)
-  end
-
-  def search_params
-    params.require(:q).permit(:name_cont_or_description_cont)
   end
 
   def twitter_client

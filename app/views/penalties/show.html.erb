@@ -33,18 +33,9 @@
 <% end %>
 
 <div class="width-96">
-  <div class="recommend-penalty">
-    <h2>おすすめ罰ゲーム</h2>
-    <div class="penalties">
-      <%= render partial: "penalty-color", locals: { penalties: @penalties }%>
-    </div>
-  </div>
-
-
   <h2><%= @penalty.name %> が行われている動画リスト </h2>
   <div class="video_articles">
     <%= render partial: "videos/video-articles", locals: { videos: @penalty.videos } %>
   </div>
-
   <%= @penalty.id %>
 </div>

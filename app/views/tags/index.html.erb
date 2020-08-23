@@ -11,16 +11,6 @@
 </div>
 
 <div class="width-96">
-  <div class="search-form">
-    <%= search_form_for @searches,html: { class: "form-inline" }, url: search_tags_path do |f| %>
-
-    <%= f.select :sorts, { '五十音正順': 'sort asc','五十音逆順': 'sort desc'} , { selected: params[:q][:sorts] } %>
-
-    <%= f.search_field :name_or_description_cont %>
-    <%= f.submit '検索' %>
-    <% end %>
-  </div>
-
   <div class="hash-tags">
     <%= render partial: "tag-color", locals: { tags: @tags }%>
   </div>
