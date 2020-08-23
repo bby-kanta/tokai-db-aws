@@ -4,7 +4,7 @@ class VideosController < ApplicationController
   before_action :twitter_client, only: [:create]
 
 
-  def manji
+  def manji  #管理者以外はCRUD不可
     if user_signed_in?
       redirect_to action: :index unless current_user.id == 1
     else
@@ -13,22 +13,11 @@ class VideosController < ApplicationController
   end
 
   def index
-    @all_videos  = Video.all.order(updated_on:'desc')
-    @videos  = @all_videos.page(params[:page]).per(40)
-    @main    = @all_videos.where(kind_of: 0).page(params[:page]).per(40)
-    @sub     = @all_videos.where(kind_of: 1).page(params[:page]).per(40)
-    @private = @all_videos.where(kind_of: 2).page(params[:page]).per(40)
-    @other   = @all_videos.where(kind_of: 3).page(params[:page]).per(40)
   end
 
-  def search
+  def search  #ransack用アクション
     @search = Video.ransack(params[:q])
     @all_videos = @search.result
-    @videos  = @search.result.page(params[:page]).per(40).order(updated_on: 'desc')
-    @main    = @videos.where(kind_of: 0).page(params[:page]).per(40)
-    @sub     = @videos.where(kind_of: 1).page(params[:page]).per(40)
-    @private = @videos.where(kind_of: 2).page(params[:page]).per(40)
-    @other   = @videos.where(kind_of: 3).page(params[:page]).per(40)
   end
 
   def new
@@ -55,10 +44,6 @@ class VideosController < ApplicationController
     @toshimitsu  = @video.people.find_by(name:'としみつ')
     @yumemaru    = @video.people.find_by(name:'ゆめまる')
     @mushimegane = @video.people.find_by(name:'虫眼鏡')
-
-    @comments = @video.comments.includes(:user)
-    @comment = @video.comments.build  #コメント作成用
-
   end
 
   def edit

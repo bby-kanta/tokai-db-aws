@@ -24,13 +24,6 @@
 </div>
 
 <div class="width-96">
-  <div class="recommend-tag">
-    <h2>おすすめハッシュタグ</h2>
-    <div class="hash-tags">
-      <%= render partial: "tag-color", locals: { tags: @tags }%>
-    </div>
-  </div>
-
   <% if user_signed_in?  && current_user.id == 1 %>
     <%= link_to '編集',edit_tag_path(@tag) %>
     <%= link_to '削除',tag_path(@tag),
@@ -47,4 +40,3 @@
 
   <%= @tag.id %>
 </div>
-

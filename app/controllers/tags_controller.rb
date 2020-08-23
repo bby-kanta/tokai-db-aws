@@ -11,20 +11,12 @@ class TagsController < ApplicationController
   end
 
   def index
-    @searches = Tag.ransack(params[:q])
     @tags = Tag.joins(:tag_videos).group(:tag_id).order('count(video_id) desc')  # https://qiita.com/kent_ear/items/5748d6b6db83fb5e8782
-  end
-
-  def search
-    @searches = Tag.ransack(params[:q])
-    @tags = @searches.result.joins(:tag_videos).group(:tag_id).order('count(video_id) desc') 
-    render 'index'
   end
 
   def show
     @tag = Tag.find(params[:id])
     @videos = @tag.videos
-    @tags = Tag.all.sample(10)
   end
 
   def new
@@ -66,10 +58,6 @@ class TagsController < ApplicationController
   private
   def tag_params
     params.require(:tag).permit(:name,:description,:sort,:person_id)
-  end
-
-  def search_params
-    params.require(:q).permit(:name_cont_or_description_cont)
   end
 
   def twitter_client

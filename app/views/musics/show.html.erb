@@ -16,21 +16,6 @@
     <p><%= @music.description %></p>
   </div>
 
-  <div class="recommend-bgm">
-    <h2>おすすめBGM</h2>
-    <% @musics.each do |music|%>
-      <div class="btn btn-success">
-        <%= link_to music_path(music.id) do %>
-          <%= music.name %>
-          (<%= music.videos.count %>)
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-
-
-
-
   <% if user_signed_in?  && current_user.id == 1 %>
     <%= link_to '編集',edit_music_path(@music) %>
     <%= link_to '削除',music_path(@music),
