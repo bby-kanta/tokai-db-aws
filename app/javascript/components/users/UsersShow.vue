@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="title">
+      <h3>{{ user.name }}さんがいいねした動画一覧</h3>
+    </div>
     <VideosArticles :videos="videos"></VideosArticles>
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
@@ -25,6 +28,9 @@ export default {
   },
 
   mounted () {
+    axios
+      .get(`/api/v1/users/${this.$route.params.id}`)
+      .then(response => (this.user = response.data.user)) 
   },
 
   computed: {
@@ -58,5 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.title {
+  margin-bottom: 20px;
+}
 </style>

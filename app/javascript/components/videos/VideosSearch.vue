@@ -1,6 +1,10 @@
 <template>
   <div id="search-videos-index">
 
+    <div class="title">
+      <h3>{{videos.length}}件の記事が見つかりました</h3>
+    </div>
+
     <div class="video_articles">
       <div class="video_article" v-for="video in videos" :key="video.id">
         <a :href="'/#/videos/' + video.id ">  <!-- 少々強引だけどSPAに合流させる -->

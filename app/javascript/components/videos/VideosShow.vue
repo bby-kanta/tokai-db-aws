@@ -212,7 +212,11 @@
         <div v-for="comment in video.comments" :key="comment.id" class="comment">
           <div class="comment-name">
             <img src="../../../assets/images/peace.jpg" width="30" height="30">
-            <h2> {{ comment.user.name }} </h2>
+            <h2>
+              <router-link :to="{ name: 'UsersShow', params: { id: comment.user.id } }">
+                {{ comment.user.name }}
+              </router-link>
+            </h2>
             <i v-if="comment.user.id == user " @click="confirmDelete(), destroyComment(comment.id)" class="far fa-trash-alt"></i>
           </div>
           <div class="comment-text">
