@@ -359,11 +359,6 @@ export default {
       this.$router.go({path: this.$router.currentRoute.path, force: true})
     },
 
-    confirmDelete(){
-      const ans = confirm('本当に消しますか?'); 
-      if(!ans) event.preventDefault(); // 「キャンセル」押下ならば event を抑制
-    },
-
     top() {
 
       const duration = 200;  // 移動速度（0.2秒で終了）

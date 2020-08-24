@@ -26,6 +26,7 @@
   </div>
 
   <button v-if="user == tag.user_id" @click="openModal">編集</button> <!-- モーダルウインドウのボタン https://reffect.co.jp/vue/understand-component-by-moda-window -->
+  <button v-if="user == tag.user_id" @click="confirmDelete(), destroyTag(tag.id)">削除</button>
 
   <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
     <div id="modal-content">
@@ -137,6 +138,12 @@ export default {
       axios
         .put(`/api/v1/tags/${this.tag.id}`,{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description} );
       this.$router.go({path: this.$router.currentRoute.path, force: true})
+    },
+    destroyTag(tag_id) {
+      const tag = tag_id
+      console.log('コメントID'+tag+'を消します')
+      axios.delete(`/api/v1/tags/${tag}`);
+      this.$router.push({ name: 'TagsIndex'})
     },
   }
 

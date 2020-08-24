@@ -25,6 +25,11 @@ class Api::V1::TagsController < ApiController
     @tag.update!(tag_params)
   end
 
+  def destroy
+    Tag.find(params[:id]).destroy!
+    head :ok
+  end
+
   private
 
   def tag_params

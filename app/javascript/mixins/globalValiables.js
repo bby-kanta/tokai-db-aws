@@ -40,6 +40,10 @@ export default {    // exportする
       // console.log(users_id.includes(user));
       return users_id 
     },
+    confirmDelete(){
+      const ans = confirm('本当に消しますか?'); 
+      if(!ans) event.preventDefault(); // 「キャンセル」押下ならば event を抑制
+    },
 
   },
 
