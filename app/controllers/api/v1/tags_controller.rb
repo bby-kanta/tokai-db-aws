@@ -15,4 +15,18 @@ class Api::V1::TagsController < ApiController
     render json: @tag.to_json(include: {videos:{only:[:id,:title,:url,:kind_of,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } } ) 
   end
 
+  def create
+    # current_user.favorites.create!(video_id: params[:video_id])
+    # @person = Person.find(params[:id])
+    @tags = current_user.tags.create!(tag_params)
+    # @tags.update!(person_id: @person.id)
+    head :created
+  end
+
+  private
+
+  def tag_params
+    params.require(:tag).permit(:user_id,:name,:description,:sort,:person_id)
+  end
+
 end

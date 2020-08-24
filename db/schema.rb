@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_09_054519) do
+ActiveRecord::Schema.define(version: 2020_08_24_105537) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.text "content", null: false
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2020_08_09_054519) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "sort"
     t.string "tag_image_id"
+    t.integer "user_id"
     t.index ["person_id"], name: "index_tags_on_person_id"
   end
 

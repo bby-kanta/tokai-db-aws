@@ -1,5 +1,4 @@
 <template>
-
 <div class="show-person_page">
   <div class="title">
     <h3> <router-link :to="{ name: 'PeopleIndex' }"> Character </router-link> / {{ person.name }} </h3>
@@ -21,6 +20,27 @@
       <div class="person_description">
         <p> {{ person.description }} </p>
       </div>
+    </div>
+  </div>
+
+  <button @click="openModal">{{person.name}}のタグを作る</button> <!-- モーダルウインドウのボタン https://reffect.co.jp/vue/understand-component-by-moda-window -->
+  <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
+    <div id="modal-content">
+      <p>これがモーダルウィンドウです。</p>
+      <form @submit="createTag">
+
+        <div class="comment-form">
+          <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
+          <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
+          <input v-model="tag.description" class="comment-box" type="text" placeholder="概要を入力する">
+        </div>
+
+        <div class="comment-submit">
+          <button type="submit"> コメント </button>
+        </div>
+
+      </form>
+      <p><button @click="closeModal">close</button></p>
     </div>
   </div>
 
@@ -47,7 +67,6 @@
   </div>
 
 </div>
-
 </template>
 
 <script>
@@ -69,14 +88,35 @@ export default {
 
   data: function () {
     return {
-      person: {}
-    }
+      person: {},
+      showContent: false,
+
+      tag: {
+        name: "",
+        sort: "",
+        description: "",
+      },
+     }
   },
   mounted () {
       axios
       .get(`/api/v1/people/${this.$route.params.id}.json`)
       .then(response => (this.person = response.data))
   },
+  methods: {
+    openModal: function(){
+      this.showContent = true
+    },
+    closeModal: function(){
+      this.showContent = false
+    },
+    createTag: function() {
+      axios
+        .post('/api/v1/tags',{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description ,person_id: this.person.id} );
+      // this.fetchVideos(this.video.id);
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
+    },
+  }
 
 }  //export default
 </script>
@@ -122,7 +162,28 @@ export default {
     display: flex;
     justify-content: center
   }
-
+  
+  #overlay{ //モーダルウインドウ
+    /*　要素を重ねた時の順番　*/
+    z-index:1;
+    /*　画面全体を覆う設定　*/
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.5);
+    /*　画面の中央に要素を表示させる設定　*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    #modal-content { //モーダルウインドウの中身
+      z-index:2;
+      width:50%;
+      padding: 1em;
+      background:#fff;
+    }
+  }
 
 
   @media screen and (max-width: 999px){ //widthが999pxまでのCSS(スマホ用)
