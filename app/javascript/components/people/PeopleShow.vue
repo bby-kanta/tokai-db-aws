@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <button @click="openModal">{{person.name}}のタグを作る</button> <!-- モーダルウインドウのボタン https://reffect.co.jp/vue/understand-component-by-moda-window -->
+  <button v-if="user != 'none'" @click="openModal">{{person.name}}のタグを作る</button> <!-- モーダルウインドウのボタン https://reffect.co.jp/vue/understand-component-by-moda-window -->
   <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
     <div id="modal-content">
       <p>これがモーダルウィンドウです。</p>
@@ -88,6 +88,7 @@ export default {
 
   data: function () {
     return {
+      user: '',
       person: {},
       showContent: false,
 
@@ -102,6 +103,9 @@ export default {
       axios
       .get(`/api/v1/people/${this.$route.params.id}.json`)
       .then(response => (this.person = response.data))
+      axios
+      .get('/api/v1/users.json')
+      .then(response => (this.user = response.data))
   },
   methods: {
     openModal: function(){

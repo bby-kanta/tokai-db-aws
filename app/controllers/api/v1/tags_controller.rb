@@ -16,11 +16,13 @@ class Api::V1::TagsController < ApiController
   end
 
   def create
-    # current_user.favorites.create!(video_id: params[:video_id])
-    # @person = Person.find(params[:id])
-    @tags = current_user.tags.create!(tag_params)
-    # @tags.update!(person_id: @person.id)
+    current_user.tags.create!(tag_params)
     head :created
+  end
+
+  def update
+    @tag = Tag.find(params[:id])
+    @tag.update!(tag_params)
   end
 
   private

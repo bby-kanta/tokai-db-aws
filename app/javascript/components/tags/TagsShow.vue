@@ -25,20 +25,34 @@
     </div>
   </div>
 
+  <button v-if="user == tag.user_id" @click="openModal">編集</button> <!-- モーダルウインドウのボタン https://reffect.co.jp/vue/understand-component-by-moda-window -->
 
-    <!-- <div class="recommend-penalty">
-      <h2>おすすめ罰ゲーム</h2>
-      <div class="penalties">
-        <%= render partial: "penalty-color", locals: { penalties: @penalties }%>
-      </div>
-    </div> -->
+  <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
+    <div id="modal-content">
+      <p>タグ編集フォーム</p>
+      <form @submit="UpdateTag">
 
-    <h2 class="width-96"> おすすめタグ </h2>
-      <div class="hash-tags gray">
-        <div class="hash-tag" v-for="tag in random(tags, 20)" :key="tag.id">
-          <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.videos.length +')' "></TagColor>
+        <div class="comment-form">
+          <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
+          <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
+          <input v-model="tag.description" class="comment-box" type="text" placeholder="概要を入力する">
         </div>
+
+        <div class="comment-submit">
+          <button type="submit"> 更新 </button>
+        </div>
+
+      </form>
+      <p><button @click="closeModal">close</button></p>
+    </div>
+  </div>
+
+  <h2 class="width-96"> おすすめタグ </h2>
+    <div class="hash-tags gray">
+      <div class="hash-tag" v-for="tag in random(tags, 20)" :key="tag.id">
+        <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.videos.length +')' "></TagColor>
       </div>
+    </div>
 
   <div class="width-96">
     <h2> {{ tag.name }} が行われている動画リスト </h2>
@@ -70,14 +84,20 @@ export default {
 
   data: function () {
     return {
+      user:'',
+      showContent: false,
       tag: {},
-      tags: {}
+      tags: {},
+
     }
   },
   mounted () {
       axios
       .get('/api/v1/tags.json')
       .then(response => (this.tags = response.data))
+      axios
+      .get('/api/v1/users.json')
+      .then(response => (this.user = response.data))
   },
 
   watch: {
@@ -106,7 +126,18 @@ export default {
         t[i] = t[l] || a[l];
       }
       return r;
-    }
+    },
+    openModal: function(){
+      this.showContent = true
+    },
+    closeModal: function(){
+      this.showContent = false
+    },
+    UpdateTag: function() {
+      axios
+        .put(`/api/v1/tags/${this.tag.id}`,{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description} );
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
+    },
   }
 
 }  //export default
@@ -120,6 +151,28 @@ export default {
   flex-wrap: wrap;
   .hash-tag {
     margin: 0 10px 10px 0;
+  }
+}
+
+#overlay{ //モーダルウインドウ
+  /*　要素を重ねた時の順番　*/
+  z-index:1;
+  /*　画面全体を覆う設定　*/
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.5);
+  /*　画面の中央に要素を表示させる設定　*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  #modal-content { //モーダルウインドウの中身
+    z-index:2;
+    width:50%;
+    padding: 1em;
+    background:#fff;
   }
 }
 

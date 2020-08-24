@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       end
       resources :people, only: [:index, :show] 
       resources :penalties, only: [:index, :show] 
-      resources :tags, only: [:index, :show, :create, :destroy] 
+      resources :tags, only: [:index, :show, :create, :destroy, :update] 
       resources :musics, only: [:index, :show] 
       resources :places, only: [:index, :show] 
       resources :users
