@@ -24,7 +24,9 @@
       </a>
       <i v-else v-on:click="createFavorite" class="far fa-heart" > {{ users_id().length }} </i>
 
-
+      <a :href="`https://www.youtube.com/embed/`+ video.url +`?autoplay=1`" target="player" class="ml-5" @click="top"> 
+        <i class="fas fa-sync fa-2x"></i>
+      </a>
     </div>
 
     <table border="1px" style="border-collapse: collapse; border-color: rgb(238, 232, 232)">
@@ -38,8 +40,8 @@
 
       <tr class="video-highlight">
         <th> 見所 </th>
-        <th>   
-          <div  @click="top" class="highlight-content" v-html="video.highlight"></div>
+        <th>
+          <div @click="top" class="highlight-content" v-html="video.highlight"></div>
         </th>
       </tr>
 
