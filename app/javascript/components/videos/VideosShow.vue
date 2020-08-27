@@ -394,8 +394,8 @@ export default {
       }, interval);
     },
 
-    createVideoTag(id) {
-      axios.post('/api/v1/tag_videos',{video_id: this.video.id , tag_id: id})
+    async createVideoTag(id) {
+      await axios.post('/api/v1/tag_videos',{video_id: this.video.id , tag_id: id})
       this.fetchVideos(this.video.id)
     },
     destroyVideoTag(VideoTag_id) {
