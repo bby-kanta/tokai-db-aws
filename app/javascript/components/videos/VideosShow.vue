@@ -182,8 +182,8 @@
             </div>
           </div>
 
-          <div class="text_line"></div>
-          <h2 class="mt-3 mb-3">あなたが作ったハッシュタグリスト</h2>
+          <div class="text_line" v-if="user != 'none'"></div>
+          <h2 class="mt-3 mb-3" v-if="user != 'none'">あなたが作ったハッシュタグリスト</h2>
           <div class="tags">
             <div v-for="tag in userTags" :key="tag.id">
               <div v-if="tags_id().includes(tag.id)" @click="destroyVideoTag(tag.id)" class="btn red-black tag">

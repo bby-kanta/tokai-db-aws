@@ -23,28 +23,10 @@
     </div>
   </div>
 
-  <button v-if="user != 'none'" @click="openModal">{{person.name}}のタグを作る</button> <!-- モーダルウインドウのボタン https://reffect.co.jp/vue/understand-component-by-moda-window -->
-  <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
-    <div id="modal-content">
-      <p>これがモーダルウィンドウです。</p>
-      <form @submit="createTag">
-
-        <div class="comment-form">
-          <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
-          <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
-          <input v-model="tag.description" class="comment-box" type="text" placeholder="概要を入力する">
-        </div>
-
-        <div class="comment-submit">
-          <button type="submit"> コメント </button>
-        </div>
-
-      </form>
-      <p><button @click="closeModal">close</button></p>
-    </div>
+  <div class="person-tags-title">
+    <h3> {{ person.name }} に関係するハッシュタグ </h3>
+    <p v-if="user != 'none'" @click="openModal" class="orange">{{person.name}}のタグを作る</p> <!-- モーダルウインドウのボタン https://reffect.co.jp/vue/understand-component-by-moda-window -->
   </div>
-
-  <h3 class="width-96"> {{ person.name }} に関係するハッシュタグ </h3>
   <div class="person_tags ">
     <div class="person-tag" v-for="tag in person.tags" :key="tag.id">
       <TagColor :person="person.id" :tag_id="tag.id" :tag_name="tag.name" ></TagColor>
@@ -64,6 +46,26 @@
 
   <div class="video_articles">
     <VideosArticles :videos="person.videos"></VideosArticles>
+  </div>
+
+  <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
+    <div id="modal-content">
+      <i class="fas fa-times fa-2x" @click="closeModal"></i>
+      <h2>{{person.name}}のタグを作る</h2>
+      <form @submit="createTag">
+
+        <div class="comment-form">
+          <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
+          <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
+          <textarea v-model="tag.description" class="" placeholder="概要を入力する"></textarea>
+        </div>
+
+        <div class="comment-submit">
+          <button type="submit">作成</button>
+        </div>
+
+      </form>
+    </div>
   </div>
 
 </div>
@@ -127,6 +129,16 @@ export default {
 
 <style lang="scss" scoped>
 
+  .person-tags-title {
+    width: 96%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    p {
+      margin-left: 20px;
+      cursor: pointer;
+    }
+  }
   .person_tags , .person_penalties {
     display: flex;
     flex-wrap: wrap;
@@ -186,6 +198,29 @@ export default {
       width:50%;
       padding: 1em;
       background:#fff;
+      border-radius: 20px;
+      i {
+        color: orange;
+        cursor: pointer;
+      }
+      form {
+        .comment-form {
+          display: flex;
+          flex-direction: column;
+          input {
+            margin : 5px 0;
+          }
+          textarea {
+            width: 100%;
+            height: 100px;
+            margin : 5px 0;
+          }
+        }
+        .comment-submit {
+          display: flex;
+          flex-direction: row-reverse;
+        }
+      }
     }
   }
 
