@@ -340,10 +340,10 @@ export default {
       await axios
       .get(`/api/v1/videos/${this.$route.params.id}.json`)
       .then(response => (this.video = response.data))
-      axios  //いいね更新用
+      await axios  //いいね更新用
         .get('/api/v1/favorites.json')
         .then(response => (this.favorite = response.data))
-      axios  //tag_videos更新用
+      await axios  //tag_videos更新用
         .get('/api/v1/tag_videos.json')
         .then(response => (this.tagVideos = response.data))
     },
