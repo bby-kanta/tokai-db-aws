@@ -1,5 +1,4 @@
 <template>
-
 <div class="show-person_page">
   <div class="title">
     <h3> <router-link :to="{ name: 'PeopleIndex' }"> Character </router-link> / {{ person.name }} </h3>
@@ -24,7 +23,10 @@
     </div>
   </div>
 
-  <h3 class="width-96"> {{ person.name }} に関係するハッシュタグ </h3>
+  <div class="person-tags-title">
+    <h3> {{ person.name }} に関係するハッシュタグ </h3>
+    <p v-if="user != 'none'" @click="openModal" class="orange">{{person.name}}のタグを作る</p> <!-- モーダルウインドウのボタン https://reffect.co.jp/vue/understand-component-by-moda-window -->
+  </div>
   <div class="person_tags ">
     <div class="person-tag" v-for="tag in person.tags" :key="tag.id">
       <TagColor :person="person.id" :tag_id="tag.id" :tag_name="tag.name" ></TagColor>
@@ -46,8 +48,27 @@
     <VideosArticles :videos="person.videos"></VideosArticles>
   </div>
 
-</div>
+  <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
+    <div id="modal-content">
+      <i class="fas fa-times fa-2x" @click="closeModal"></i>
+      <h2>{{person.name}}のタグを作る</h2>
+      <form @submit="createTag">
 
+        <div class="comment-form">
+          <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
+          <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
+          <textarea v-model="tag.description" class="" placeholder="概要を入力する"></textarea>
+        </div>
+
+        <div class="comment-submit">
+          <button type="submit">作成</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>
 </template>
 
 <script>
@@ -69,20 +90,55 @@ export default {
 
   data: function () {
     return {
-      person: {}
-    }
+      user: '',
+      person: {},
+      showContent: false,
+
+      tag: {
+        name: "",
+        sort: "",
+        description: "",
+      },
+     }
   },
   mounted () {
       axios
       .get(`/api/v1/people/${this.$route.params.id}.json`)
       .then(response => (this.person = response.data))
+      axios
+      .get('/api/v1/users.json')
+      .then(response => (this.user = response.data))
   },
+  methods: {
+    openModal: function(){
+      this.showContent = true
+    },
+    closeModal: function(){
+      this.showContent = false
+    },
+    createTag: function() {
+      axios
+        .post('/api/v1/tags',{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description ,person_id: this.person.id} );
+      // this.fetchVideos(this.video.id);
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
+    },
+  }
 
 }  //export default
 </script>
 
 <style lang="scss" scoped>
 
+  .person-tags-title {
+    width: 96%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    p {
+      margin-left: 20px;
+      cursor: pointer;
+    }
+  }
   .person_tags , .person_penalties {
     display: flex;
     flex-wrap: wrap;
@@ -122,7 +178,51 @@ export default {
     display: flex;
     justify-content: center
   }
-
+  
+  #overlay{ //モーダルウインドウ
+    /*　要素を重ねた時の順番　*/
+    z-index:1;
+    /*　画面全体を覆う設定　*/
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.5);
+    /*　画面の中央に要素を表示させる設定　*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    #modal-content { //モーダルウインドウの中身
+      z-index:2;
+      width:50%;
+      padding: 1em;
+      background:#fff;
+      border-radius: 20px;
+      i {
+        color: orange;
+        cursor: pointer;
+      }
+      form {
+        .comment-form {
+          display: flex;
+          flex-direction: column;
+          input {
+            margin : 5px 0;
+          }
+          textarea {
+            width: 100%;
+            height: 100px;
+            margin : 5px 0;
+          }
+        }
+        .comment-submit {
+          display: flex;
+          flex-direction: row-reverse;
+        }
+      }
+    }
+  }
 
 
   @media screen and (max-width: 999px){ //widthが999pxまでのCSS(スマホ用)

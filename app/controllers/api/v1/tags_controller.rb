@@ -15,4 +15,25 @@ class Api::V1::TagsController < ApiController
     render json: @tag.to_json(include: {videos:{only:[:id,:title,:url,:kind_of,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } } ) 
   end
 
+  def create
+    current_user.tags.create!(tag_params)
+    head :created
+  end
+
+  def update
+    @tag = Tag.find(params[:id])
+    @tag.update!(tag_params)
+  end
+
+  def destroy
+    Tag.find(params[:id]).destroy!
+    head :ok
+  end
+
+  private
+
+  def tag_params
+    params.require(:tag).permit(:user_id,:name,:description,:sort,:person_id)
+  end
+
 end

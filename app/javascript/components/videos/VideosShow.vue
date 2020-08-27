@@ -181,6 +181,20 @@
               <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name"></TagColor>
             </div>
           </div>
+
+          <div class="text_line" v-if="user != 'none'"></div>
+          <h2 class="mt-3 mb-3" v-if="user != 'none'">あなたが作ったハッシュタグリスト</h2>
+          <div class="tags">
+            <div v-for="tag in userTags" :key="tag.id">
+              <div v-if="tags_id().includes(tag.id)" @click="destroyVideoTag(tag.id)" class="btn red-black tag">
+                {{ tag.name }}
+              </div>
+              <div v-else @click="createVideoTag(tag.id)" class="btn red tag">
+                {{ tag.name }}
+              </div>
+            </div>
+          </div>
+
         </th>
       </tr>
 
@@ -276,6 +290,8 @@ export default {
         comments: '',  //これがないとコンソールに一瞬lengthが定義されてない的なエラーが出る（実害は無し）
       },
       videos: {},
+      userTags: {},
+      tagVideos: {},
       user: {},
       favorite: {},
       comment: {
@@ -295,10 +311,17 @@ export default {
 
   },
 
-  mounted () {
-    axios
+  async mounted () {
+    await axios
       .get('/api/v1/users.json')
-      .then(response => (this.user = response.data)) 
+      .then(response => (this.user = response.data))
+    await axios
+      .get(`/api/v1/users/${this.user}`)
+      .then(response => (this.userTags = response.data.tags))
+    await axios
+      .get(`https://www.googleapis.com/youtube/v3/videos?id=${this.video.url}&key=AIzaSyDovZVx44zT7JglmnHzWoeUeXDrQra4CVg&part=snippet,statistics`)
+      .then(response => (this.youtube = response.data))
+      console.log(this.youtube)
   },
 
   watch: {
@@ -320,10 +343,9 @@ export default {
       axios  //いいね更新用
         .get('/api/v1/favorites.json')
         .then(response => (this.favorite = response.data))
-      await
-      axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${this.video.url}&key=AIzaSyDovZVx44zT7JglmnHzWoeUeXDrQra4CVg&part=snippet,statistics`)
-      .then(response => (this.youtube = response.data))
-      console.log(this.youtube)
+      axios  //tag_videos更新用
+        .get('/api/v1/tag_videos.json')
+        .then(response => (this.tagVideos = response.data))
     },
 
     createFavorite: async function() {  //https://qiita.com/TakeshiFukushima/items/a6c698fec648c11eee9a
@@ -359,11 +381,6 @@ export default {
       this.$router.go({path: this.$router.currentRoute.path, force: true})
     },
 
-    confirmDelete(){
-      const ans = confirm('本当に消しますか?'); 
-      if(!ans) event.preventDefault(); // 「キャンセル」押下ならば event を抑制
-    },
-
     top() {
 
       const duration = 200;  // 移動速度（0.2秒で終了）
@@ -375,7 +392,23 @@ export default {
               clearInterval(timer);
           }
       }, interval);
-    }
+    },
+
+    createVideoTag(id) {
+      axios.post('/api/v1/tag_videos',{video_id: this.video.id , tag_id: id})
+      this.fetchVideos(this.video.id)
+    },
+    destroyVideoTag(VideoTag_id) {
+      const videoTagId = this.findVideoTagId(VideoTag_id);
+       axios.delete(`/api/v1/tag_videos/${videoTagId}`);
+      this.fetchVideos(this.video.id);
+    },
+    findVideoTagId(tagid) {
+      const tag = this.tagVideos.find((tag) => {
+        return (tag.tag_id === tagid & tag.video_id === this.video.id)
+      })
+      if (tag) { return tag.id }
+    },
 
   }  //methods
 }
@@ -394,6 +427,12 @@ export default {
 
   .description-real {
     white-space: pre-line;  //本家の概要に改行を許可する
+  }
+
+  .text_line {
+    margin-top: 30px;
+    width: 100%;
+    border-bottom: 2px solid rgb(0, 0, 0);
   }
 
   .comment-contents {  //コメント関連  https://qiita.com/KengoShimizu/items/22c14b282fa9f53f4bd8
@@ -557,6 +596,24 @@ export default {
     font-size: 30px;
     cursor: pointer;
   }
+}
+
+.red {
+  background-color: red;
+  color: white;
+  -webkit-transform: translate(0);
+  transform: translate(0) ;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+.red:hover {
+  -webkit-transform: translateY(-5px) scale(1);
+  transform: translateY(-5px) scale(1);
+  opacity: 0.9;
+}
+.red-black {
+  background-color: rgb(177, 0, 0);
+  color: rgb(196, 196, 196);
 }
 
 

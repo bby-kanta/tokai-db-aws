@@ -107,12 +107,80 @@ export default {
 // }
 
 <style lang="scss">
+.dip-fl {
+  width: 96%;
+  display: flex;
+  margin: 0 auto;
+}
+
+button {
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #fd9535;
+  border-bottom: solid 2px #d27d00;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+  font-weight: bold;
+}
+
+.orange {
+  color: orange;
+}
+
 @media screen and (max-width: 999px){ /*widthが999pxまでのCSS(スマホ用)*/
 
   .title {
     padding-top: 15px;
   }
 
+}
+
+#overlay{ //モーダルウインドウ
+  /*　要素を重ねた時の順番　*/
+  z-index:1;
+  /*　画面全体を覆う設定　*/
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.5);
+  /*　画面の中央に要素を表示させる設定　*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  #modal-content { //モーダルウインドウの中身
+    z-index:2;
+    width:50%;
+    padding: 1em;
+    background:#fff;
+    border-radius: 20px;
+    i {
+      color: orange;
+      cursor: pointer;
+    }
+    form {
+      .comment-form {
+        display: flex;
+        flex-direction: column;
+        input {
+          margin : 5px 0;
+        }
+        textarea {
+          width: 100%;
+          height: 100px;
+          margin : 5px 0;
+        }
+      }
+      .comment-submit {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+    }
+  }
 }
 
 </style>

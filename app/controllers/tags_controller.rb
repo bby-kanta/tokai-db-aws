@@ -27,6 +27,7 @@ class TagsController < ApplicationController
     # 人物のところにフォームあり
     person = Person.find(params[:person_id])
     @tag = person.tags.build(tag_params)
+    @tag.user_id = 1
       if @tag.save
         @client.update("ハッシュタグ【#{@tag.name}】 を作成しました！ \n https://toukaionair.com/#/tags/#{@tag.id} \r")
         redirect_to tag_path(@tag)

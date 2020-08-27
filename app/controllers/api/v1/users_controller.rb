@@ -22,7 +22,8 @@ class Api::V1::UsersController < ApiController
       videos = user.videos.order(created_at:'desc').eager_load(:tags).page(params[:page]).per(40)
       pagenation = resources_with_pagination(videos)  #pagenation_controllerにて定義
       @videos = videos.as_json(include: [users:{only:[:id]}],methods: [:random_tags])
-      object = { videos: @videos, kaminari: pagenation ,user: user} 
+      @tags = current_user.tags.order(sort:'asc').as_json(only: [:id,:name,:sort,:person_id,:user_id])
+      object = { videos: @videos, kaminari: pagenation ,user: user ,tags: @tags} 
       render json: object
   end
 

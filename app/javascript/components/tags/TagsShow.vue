@@ -25,24 +25,41 @@
     </div>
   </div>
 
+  <div class="dip-fl mb-5">
+    <button v-if="user == tag.user_id" @click="openModal">編集</button> <!-- モーダルウインドウのボタン https://reffect.co.jp/vue/understand-component-by-moda-window -->
+    <button v-if="user == tag.user_id" @click="confirmDelete(), destroyTag(tag.id)">削除</button>
+  </div>
 
-    <!-- <div class="recommend-penalty">
-      <h2>おすすめ罰ゲーム</h2>
-      <div class="penalties">
-        <%= render partial: "penalty-color", locals: { penalties: @penalties }%>
+  <h2 class="width-96"> おすすめタグ </h2>
+    <div class="hash-tags gray">
+      <div class="hash-tag" v-for="tag in random(tags, 20)" :key="tag.id">
+        <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.videos.length +')' "></TagColor>
       </div>
-    </div> -->
-
-    <h2 class="width-96"> おすすめタグ </h2>
-      <div class="hash-tags gray">
-        <div class="hash-tag" v-for="tag in random(tags, 20)" :key="tag.id">
-          <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.videos.length +')' "></TagColor>
-        </div>
-      </div>
+    </div>
 
   <div class="width-96">
     <h2> {{ tag.name }} が行われている動画リスト </h2>
       <VideosArticles :videos="tag.videos"></VideosArticles>
+  </div>
+
+  <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
+    <div id="modal-content">
+      <i class="fas fa-times fa-2x" @click="closeModal"></i>
+      <h2>{{tag.name}}を編集する</h2>
+      <form @submit="UpdateTag">
+
+        <div class="comment-form">
+          <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
+          <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
+          <textarea v-model="tag.description" class="" placeholder="概要を入力する"></textarea>
+        </div>
+
+        <div class="comment-submit">
+          <button type="submit">作成</button>
+        </div>
+
+      </form>
+    </div>
   </div>
 
 </div>
@@ -70,14 +87,20 @@ export default {
 
   data: function () {
     return {
+      user:'',
+      showContent: false,
       tag: {},
-      tags: {}
+      tags: {},
+
     }
   },
   mounted () {
       axios
       .get('/api/v1/tags.json')
       .then(response => (this.tags = response.data))
+      axios
+      .get('/api/v1/users.json')
+      .then(response => (this.user = response.data))
   },
 
   watch: {
@@ -106,7 +129,24 @@ export default {
         t[i] = t[l] || a[l];
       }
       return r;
-    }
+    },
+    openModal: function(){
+      this.showContent = true
+    },
+    closeModal: function(){
+      this.showContent = false
+    },
+    UpdateTag: function() {
+      axios
+        .put(`/api/v1/tags/${this.tag.id}`,{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description} );
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
+    },
+    destroyTag(tag_id) {
+      const tag = tag_id
+      console.log('コメントID'+tag+'を消します')
+      axios.delete(`/api/v1/tags/${tag}`);
+      this.$router.push({ name: 'TagsIndex'})
+    },
   }
 
 }  //export default

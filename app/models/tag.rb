@@ -5,4 +5,5 @@ class Tag < ApplicationRecord
   accepts_nested_attributes_for :tag_videos
   
   belongs_to :person
+  belongs_to :user
 end

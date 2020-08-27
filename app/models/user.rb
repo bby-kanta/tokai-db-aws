@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :favorites,dependent: :destroy
   has_many :videos, through: :favorites
 
+  has_many :tags,dependent: :destroy
+
 
   def already_favorited?(video)
     self.favorites.exists?(video_id: video.id)

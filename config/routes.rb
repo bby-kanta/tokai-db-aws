@@ -11,12 +11,13 @@ Rails.application.routes.draw do
       end
       resources :people, only: [:index, :show] 
       resources :penalties, only: [:index, :show] 
-      resources :tags, only: [:index, :show] 
+      resources :tags, only: [:index, :show, :create, :destroy, :update] 
       resources :musics, only: [:index, :show] 
       resources :places, only: [:index, :show] 
       resources :users
       resources :favorites, only: [:index ,:create, :destroy]
       resources :comments, only: [:index ,:create, :destroy]
+      resources :tag_videos, only: [:index ,:create, :destroy]
     end
   end
 
