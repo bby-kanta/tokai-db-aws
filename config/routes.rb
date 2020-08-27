@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resources :users
       resources :favorites, only: [:index ,:create, :destroy]
       resources :comments, only: [:index ,:create, :destroy]
+      resources :tag_videos, only: [:index ,:create, :destroy]
     end
   end
 

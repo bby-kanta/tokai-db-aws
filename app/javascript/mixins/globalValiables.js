@@ -40,6 +40,19 @@ export default {    // exportする
       // console.log(users_id.includes(user));
       return users_id 
     },
+    tags_id: function() { //tags_idにはvideoのtagsのidがシンプルな配列で入る→ 連想配列では無くなったのでincludesメソッドが使える
+      var tags = this.video.tags;  //例）"video.tags":[{"id":1},{"id":2}]
+      var tags_id = [];
+      var hoge = [];
+
+      for(hoge in tags){
+        tags_id.push(tags[hoge].id);  //例）tags_id = [1,2]
+      }
+
+      // console.log(tags_id);
+      // console.log(tags_id.includes(tag));
+      return tags_id 
+    },
     confirmDelete(){
       const ans = confirm('本当に消しますか?'); 
       if(!ans) event.preventDefault(); // 「キャンセル」押下ならば event を抑制
