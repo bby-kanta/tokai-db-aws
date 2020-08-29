@@ -19,6 +19,11 @@ class Api::V1::VideosController < ApiController
     render json: @video.to_json(include: [ {comments:{include:{user: {only:[:id,:name]}},except:[:updated_at]}} , {people:{only: [:id,:name]}},{penalties:{only: [:id,:name,:person_id]}},{places:{only: [:id,:name]}},{musics:{only: [:id,:name]}},{tags:{only: [:id,:person_id,:name]}},{users:{only: [:id]}},{recommends: {include: [tags:{only: [:id,:name]} , users:{only: [:id]}],except: [:description,:highlight,:created_at,:updated_at,:sort],methods: :random_tags }}])
   end
 
+  def update
+    @video = Video.find(params[:id])
+    @video.update!(video_params)
+  end
+
   def recommend
     tags = Video.order(updated_on:'desc').eager_load(:tags).sample(40)
     @videos = tags.as_json(include: [users:{only:[:id]}],methods: :random_tags)
@@ -34,6 +39,12 @@ class Api::V1::VideosController < ApiController
     @other   = @videos.where(kind_of: 3).count
     object = { videos: @all, main: @main, sub: @sub, private: @private, other: @other}
     render json: object
+  end
+
+  private
+
+  def video_params
+    params.require(:video).permit(:highlight,:updated_on)
   end
 
 end
