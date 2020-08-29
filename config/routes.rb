@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 #api用
   namespace :api, {format: 'json'} do
     namespace :v1 do
-      resources :videos, only: [:index, :show] do
+      resources :videos, only: [:index, :show, :update] do
         collection do
           get 'recommend'
           get 'count'

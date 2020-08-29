@@ -1,47 +1,67 @@
 <template>
 
-<div class="all-contents">
-
+<div class="all-contents" v-if="user == 1">
   <div class="video_box">
     <div class="video-youtube">
       <iframe name="player" width="100%" height="100%" :src="'https://www.youtube.com/embed/' + video.url + '?autoplay=1&loop=1&playlist=' + video.url " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <div class="video_title">
+      <div class="mb-2">
+        <input v-model="minutes" type="number">分
+        <input v-model="seconds" type="number">秒 →
+        {{minutesToseconds}}秒です！
+      </div>
       <h3> {{ video.title }} </h3>
+      <router-link :to="{ name: 'VideosShow', params: { id: video.id } }">showページへ移動</router-link>
     </div>
 
-    <div class="video_date">
-      <h2> {{ youtube.items[0].statistics.viewCount + '回視聴'}} {{ video.updated_on }} に公開済み </h2>
-      
-      <a v-if="user == 1" :href=" '/videos/' + $route.params.id + '/edit#/' ">編集</a>
-      <a v-if="user == 1" :href=" '/#/videos/edit/' + $route.params.id ">管理用</a>
-
-      <!-- ↓いいねボタン -->
-      <i v-if="users_id().includes(user)" v-on:click="destroyFavorite" class="fas fa-heart" style="color:red"> {{ users_id().length }} </i>
-      <a v-else-if="user == 'none'" href="users/sign_up">
-        <i  class="far fa-heart"> {{ users_id().length }} </i>
-      </a>
-      <i v-else v-on:click="createFavorite" class="far fa-heart" > {{ users_id().length }} </i>
-
-      <a :href="`https://www.youtube.com/embed/`+ video.url +`?autoplay=1`" target="player" class="ml-5" @click="top"> 
-        <i class="fas fa-sync fa-2x"></i>
-      </a>
-    </div>
 
     <table border="1px" style="border-collapse: collapse; border-color: rgb(238, 232, 232)">
-
-      <tr class="video-description">
-        <th> 概要 </th>
-        <th>   
-          <p> {{ video.description }} </p>
-        </th>
-      </tr>
 
       <tr class="video-highlight">
         <th> 見所 </th>
         <th>
           <div @click="top" class="highlight-content" v-html="video.highlight"></div>
+        </th>
+      </tr>
+
+      <tr>
+        <th> ハッシュタグ </th>
+        <th> 
+          <div class="tags">
+            <div class="tag" v-for="tag in video.tags" :key="tag.id">
+              <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name"></TagColor>
+            </div>
+          </div>
+
+          <div class="text_line" v-if="user != 'none'"></div>
+          <h2 class="mt-3 mb-3" v-if="user != 'none'">あなたが作ったハッシュタグリスト</h2>
+          <div class="tags">
+            <div v-for="tag in userTags" :key="tag.id">
+              <div v-if="tags_id().includes(tag.id)" @click="destroyVideoTag(tag.id)" class="btn red-black tag">
+                {{ tag.name }}
+              </div>
+              <div v-else @click="createVideoTag(tag.id)" class="btn red tag">
+                {{ tag.name }}
+              </div>
+            </div>
+          </div>
+
+        </th>
+      </tr>
+
+      <tr class="video-description">
+        <th> 投稿日 </th>
+        <th>   
+          <p> {{ video.updated_on }} </p>
+        </th>
+      </tr>
+
+      <tr class="video-description">
+        <th> 概要 </th>
+        <th>   
+          <p> {{ video.description }} </p>
         </th>
       </tr>
 
@@ -175,89 +195,53 @@
         </th>
       </tr>
 
-      <tr>
-        <th> ハッシュタグ </th>
-        <th> 
-          <div class="tags">
-            <div class="tag" v-for="tag in video.tags" :key="tag.id">
-              <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name"></TagColor>
-            </div>
-          </div>
-
-          <div class="text_line" v-if="user != 'none'"></div>
-          <h2 class="mt-3 mb-3" v-if="user != 'none'">あなたが作ったハッシュタグリスト</h2>
-          <div class="tags">
-            <div v-for="tag in userTags" :key="tag.id">
-              <div v-if="tags_id().includes(tag.id)" @click="destroyVideoTag(tag.id)" class="btn red-black tag">
-                {{ tag.name }}
-              </div>
-              <div v-else @click="createVideoTag(tag.id)" class="btn red tag">
-                {{ tag.name }}
-              </div>
-            </div>
-          </div>
-
-        </th>
-      </tr>
-
-      <tr>
-        <th> 概要(本家) </th>
-        <th>
-          <div class="description-real" v-html="youtube.items[0].snippet.description">  </div>
-        </th>
-      </tr> 
-
     </table>
-
-    <div class="comment-contents">
-      <h2> {{ video.comments.length }} 件のコメント </h2>
-      <form @submit="createComment">
-
-        <div class="comment-form">
-          <input v-model="comment.content" class="comment-box" type="text" placeholder="コメントを入力する">
-          <div class="text_underline"></div>
-        </div>
-
-        <div class="comment-submit">
-          <button type="submit"> コメント </button>
-        </div>
-
-      </form>
-
-      <div class="comments">
-        <div v-for="comment in video.comments" :key="comment.id" class="comment">
-          <div class="comment-name">
-            <img src="../../../assets/images/peace.jpg" width="30" height="30">
-            <h2>
-              <router-link :to="{ name: 'UsersShow', params: { id: comment.user.id } }">
-                {{ comment.user.name }}
-              </router-link>
-            </h2>
-            <i v-if="comment.user.id == user " @click="confirmDelete(), destroyComment(comment.id)" class="far fa-trash-alt"></i>
-          </div>
-          <div class="comment-text">
-            <p> {{ comment.content }} </p>
-          </div>
-        </div>
-      </div>
-
-      <Adsense
-          data-ad-client="ca-pub-6030549237323507"
-          data-ad-slot="4196394214">
-      </Adsense>
-
-    </div>
 
   </div>
 
   <div class="related-videos">
-    <VideosRecommend :videos="video.recommends"></VideosRecommend>
-    <InFeedAdsense
-      data-ad-layout-key="-6s+ed+2g-1n-4q"
-      data-ad-client="ca-pub-6030549237323507"
-      data-ad-slot="4173694552">
-    </InFeedAdsense>
-    <VideosRecommend></VideosRecommend>
+    <div>
+      <form @submit="UpdateVideo()">
+
+        <div class="comment-form">
+          <textarea v-model="video.highlight" class="" placeholder="見所を入力する"></textarea>
+        </div>
+
+        <div>
+          公開日を{{ youtube.items[0].snippet.publishedAt }}に更新する。
+        </div>
+
+        <div class="comment-submit">
+          <button type="submit">更新</button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="tag-form">
+      <form @submit="createTag">
+        <h2>ハッシュタグを作る</h2>
+        <div class="comment-form">
+          <select v-model="tag.person_id">
+            <option value=''>人物名</option>
+            <option value=1>てつや</option>
+            <option value=2>しばゆー</option>
+            <option value=3>りょう</option>
+            <option value=4>としみつ</option>
+            <option value=5>ゆめまる</option>
+            <option value=6>虫眼鏡</option>
+            <option value=7>共通タグ</option>
+          </select>
+          <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
+          <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
+          <textarea v-model="tag.description" class="" placeholder="概要を入力する"></textarea>
+        </div>
+        <div class="comment-submit">
+          <button type="submit">作成</button>
+        </div>
+      </form>
+    </div>
+
   </div>
 
 
@@ -289,20 +273,26 @@ export default {
   data: function () {
     return {
       video: {
-        comments: '',  //これがないとコンソールに一瞬lengthが定義されてない的なエラーが出る（実害は無し）
+        highlight: '',
+        updated_on: ''
       },
       videos: {},
       userTags: {},
       tagVideos: {},
       user: {},
-      favorite: {},
-      comment: {
-        content: "",
+      minutes: '',
+      seconds: '',
+      tag: {
+        name: "",
+        sort: "",
+        description: "",
+        person_id: "",
       },
       youtube: {
         items: [{
           snippet: {
             description: "",
+            publishedAt: "",
           },
           statistics: {
             viewCount: '',
@@ -317,13 +307,6 @@ export default {
     await axios
     .get('/api/v1/users.json')
     .then(response => (this.user = response.data));
-
-    if (this.user != 'none') {
-      await axios
-        .get(`/api/v1/users/${this.user}`)
-        .then(response => (this.userTags = response.data.tags))
-    }
-
   },
 
   watch: {
@@ -333,7 +316,12 @@ export default {
   },
 
   computed: {
-
+    minutesToseconds: function() { //分数を秒数に変換する
+      const cpMinutes = Number(this.minutes * 60);
+      const seconds   = Number(this.seconds);
+      const cpSeconds = cpMinutes + seconds;
+      return cpSeconds;
+    }
   },
 
   methods: {
@@ -342,48 +330,23 @@ export default {
       await axios
       .get(`/api/v1/videos/${this.$route.params.id}.json`)
       .then(response => (this.video = response.data))
-      await axios  //いいね更新用
-        .get('/api/v1/favorites.json')
-        .then(response => (this.favorite = response.data))
       await axios  //tag_videos更新用
         .get('/api/v1/tag_videos.json')
         .then(response => (this.tagVideos = response.data))
       await axios
       .get(`https://www.googleapis.com/youtube/v3/videos?id=${this.video.url}&key=AIzaSyDovZVx44zT7JglmnHzWoeUeXDrQra4CVg&part=snippet,statistics`)
       .then(response => (this.youtube = response.data))
+      if (this.user != 'none') {
+        await axios
+          .get(`/api/v1/users/${this.user}`)
+          .then(response => (this.userTags = response.data.tags))
+      }
     },
 
-    createFavorite: async function() {  //https://qiita.com/TakeshiFukushima/items/a6c698fec648c11eee9a
-       await axios.post('/api/v1/favorites',{video_id: this.video.id , user_id: this.user.id})
-       this.fetchVideos(this.video.id)
-    },
-
-    destroyFavorite: async function() {
-      const likeId = this.findLikeId();
-       axios.delete(`/api/v1/favorites/${likeId}`);
+    createTag: async function() {
+      await axios
+        .post('/api/v1/tags',{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description ,person_id: this.tag.person_id} );
       this.fetchVideos(this.video.id);
-    },
-
-    findLikeId: function() {
-      const like = this.favorite.find((like) => {
-        return (like.user_id === this.user & like.video_id === this.video.id)
-      })
-      if (like) { return like.id }
-    },
-
-    createComment: function() {
-      axios
-        .post('/api/v1/comments',{ content: this.comment.content ,video_id: this.video.id} );
-      this.fetchVideos(this.video.id);
-      // this.$router.go({path: this.$router.currentRoute.path, force: true})
-    },
-
-    destroyComment(comment_id) {
-      const comment = comment_id
-      console.log('コメントID'+comment+'を消します')
-      axios.delete(`/api/v1/comments/${comment}`);
-      // this.fetchVideos(this.video.id);
-      this.$router.go({path: this.$router.currentRoute.path, force: true})
     },
 
     top() {
@@ -397,6 +360,12 @@ export default {
               clearInterval(timer);
           }
       }, interval);
+    },
+
+    UpdateVideo: async function() {
+      await axios
+        .put(`/api/v1/videos/${this.video.id}`,{ highlight: this.video.highlight, updated_on: this.youtube.items[0].snippet.publishedAt} );
+      this.fetchVideos(this.video.id);
     },
 
     async createVideoTag(id) {
@@ -421,6 +390,17 @@ export default {
 
 <style lang="scss" scoped>
 
+form {
+  textarea {
+    width: 100%;
+    height: 600px;
+  }
+  .comment-submit{
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
+
   .video-people , .penalties , .tags {
     display: flex;
     flex-wrap: wrap;
@@ -440,107 +420,15 @@ export default {
     border-bottom: 2px solid rgb(0, 0, 0);
   }
 
-  .comment-contents {  //コメント関連  https://qiita.com/KengoShimizu/items/22c14b282fa9f53f4bd8
-    width: 100%;
-    margin-top: 40px;
-    .comment-form {  //コメントの入力フォーム
-      margin-top: 30px;
-
-      .comment-box {
-        font-size: 16px;
-        width: 100%;
-        border: none;
-        outline: none;
-        padding-bottom: 8px;
-        box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
-      }
-      .text_underline{
-        position: relative; /*.text_underline::beforeの親要素*/
-        border-top: 3px solid #c2c2c2; /*text3の下線*/
-      }
-
-      .text_underline::before,
-      .text_underline::after{
-          position: absolute; 
-          bottom: 0px; /*中央配置*/
-          width: 0px; /*アニメーションで0pxから50%に*/
-          height: 3px; /*高さ*/
-          content: '';
-          background-color: #ff8c00; /*アニメーションの色*/
-          transition: all 0.5s;
-          -webkit-transition: all 0.5s;
-      }
-
-      /*中央から右へのアニメーション*/
-      .text_underline::before{
-          left: 50%; /*中央配置*/
-      }
-
-      /*中央から左へのアニメーション*/
-      .text_underline::after{ 
-          right: 50%; /*中央配置*/
-      }
-
-      .comment-box:focus + .text_underline::before,
-      .comment-box:focus + .text_underline::after{
-          width: 50%;
-      }
-    }
-    .comment-submit {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: row-reverse;
-      button {
-        position: relative;
-        display: inline-block;
-        padding: 0.25em 0.5em;
-        text-decoration: none;
-        color: #FFF;
-        background: #fd9535;/*背景色*/
-        border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-        border-radius: 4px;/*角の丸み*/
-        box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-        font-weight: bold;
-      }
-    }
-    .comments {
-      margin: 20px 0;
-      .comment:hover {
-        border-bottom: 2px solid #ff8c00;
-      }
-      .comment {
-        margin: 20px 0;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #c2c2c2;
-        .comment-name {
-          margin-bottom: 10px;
-          display:flex;
-          align-items: center;
-          h2 {
-            margin: 0 10px;
-          }
-          img {
-            border-radius: 50%;
-            border: 1px solid rgb(53, 53, 53);
-          }
-          i:before, i:before {
-            cursor: pointer;
-          }
-        }
-        .comment-text {
-          p {
-            margin-left: 40px;
-          }
-        }
-      }
-    }
-  }
 
 @media screen and (min-width: 1000px){
+  .video_box{
+    width : 75%;
+  }
   .related-videos {
-    width: 400px;
-    .video-article_show {
-      width: 100%;
+    margin-left: 20px;
+    .tag-form {
+      margin-top: 100px;
     }
   }
 

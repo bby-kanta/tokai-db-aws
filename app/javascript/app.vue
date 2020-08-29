@@ -12,6 +12,7 @@ import Ads from 'vue-google-adsense'
 
 import VideosIndex from 'components/videos/VideosIndex.vue'
 import VideosShow from 'components/videos/VideosShow.vue'
+import VideosEdit from 'components/videos/VideosEdit.vue'
 import UsersShow from 'components/users/UsersShow.vue'
 import PeopleIndex from 'components/people/PeopleIndex.vue'
 import PeopleShow from 'components/people/PeopleShow.vue'
@@ -36,6 +37,9 @@ const router = new VueRouter({
     { path: '/videos/:id(\\d+)',  // :id は数値のみに制限する
       name: 'VideosShow',
       component: VideosShow },
+    { path: '/videos/edit/:id(\\d+)', 
+      name: 'VideosEdit',
+      component: VideosEdit },
     { path: '/users/:id(\\d+)',  // :id は数値のみに制限する
       name: 'UsersShow',
       component: UsersShow },
