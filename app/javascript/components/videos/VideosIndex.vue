@@ -9,14 +9,54 @@
                 @click="currentTab = index">{{ tab.tabName + tab.videosLength }}</button>
       </div>
 
-      <input type="text" v-model="keyword" placeholder="リアルタイム検索">
-      <select v-model="rateSelect">
-        <option value=''>ランク</option>
-        <option value=1>S</option>
-        <option value=2>A</option>
-        <option value=3>B</option>
-        <option value=4>C</option>
-      </select>
+      <div>
+        <input type="text" v-model="keyword" placeholder="リアルタイム検索">
+        <select v-model="rateSelect">
+          <option value=''>ランク</option>
+          <option value=1>S</option>
+          <option value=2>A</option>
+          <option value=3>B</option>
+          <option value=4>C</option>
+        </select>
+        <select v-model="mvpSelect">
+          <option value=''>MOM</option>
+          <option value=1>てつや</option>
+          <option value=2>しばゆー</option>
+          <option value=3>りょう</option>
+          <option value=4>としみつ</option>
+          <option value=5>ゆめまる</option>
+          <option value=6>虫眼鏡</option>
+        </select>
+        <select v-model="categorySelect">
+          <option value=''>カテゴリー</option>
+          <option value=0>企画もの</option>
+          <option value=1> サブチャン </option>
+          <option value=2> コント </option>
+          <option value=3> クイズ </option>
+          <option value=4> 選手権 </option>
+          <option value=5> 検証系 </option>
+          <option value=6> 対決 </option>
+          <option value=7> 王 </option>
+          <option value=8> 文理対決 </option>
+          <option value=9> 旅行 </option>
+          <option value=10> 料理 </option>
+          <option value=11> スポーツ </option>
+          <option value=12> ドッキリ </option>
+          <option value=13> ゲーム </option>
+          <option value=14> コラボ </option>
+          <option value=91> ニンマリシティへようこそ </option>
+          <option value=92> ゆめまる美術館 </option>
+          <option value=93> ブラーボりょうのボンサバドゥチャンネル </option>
+          <option value=94> 虫眼鏡の放送部 </option>
+          <option value=95> としみつ東海オンエアの </option>
+          <option value=96> 動画アップロードチャンネル </option>
+          <option value=97> 十字架(サブチャン) </option>
+          <option value=98> いじわる </option>
+          <option value=99> ごはんじゃんけん </option>
+          <option value=90>その他</option>
+        </select>
+
+      </div>
 
       <div class="tab-content">
         <div v-show="currentTab === 0">
@@ -60,6 +100,8 @@ export default {
     return {
       keyword: '',
       rateSelect:'',
+      mvpSelect: '',
+      categorySelect: '',
       videos: [],
       count: [],
       page: 1,
@@ -89,8 +131,12 @@ export default {
 
       for(var i in this.videos) {
         var video = this.videos[i];
-        if(video.title.indexOf(this.keyword) !== -1 &&
-           this.rateSelect == '' | video.rate == this.rateSelect
+        if(video.title.indexOf(this.keyword) !== -1 |
+           video.description.indexOf(this.keyword) !== -1 |
+           video.highlight.indexOf(this.keyword) !== -1 &&
+           this.rateSelect == '' | video.rate == this.rateSelect &&
+           this.mvpSelect  == '' | video.mvp  == this.mvpSelect &&
+           this.categorySelect == '' | video.category == this.categorySelect
         ) {
             videos.push(video);
         }
