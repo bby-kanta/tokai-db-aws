@@ -283,7 +283,7 @@ export default {
   },
 
   created() {
-    this.fetchVideos(this.$route.params.id)
+    this.fetchVideos(this.$route.params.id);
   },
 
   data: function () {
@@ -315,15 +315,15 @@ export default {
 
   async mounted () {
     await axios
-      .get('/api/v1/users.json')
-      .then(response => (this.user = response.data))
-    await axios
-      .get(`/api/v1/users/${this.user}`)
-      .then(response => (this.userTags = response.data.tags))
-    await axios
-      .get(`https://www.googleapis.com/youtube/v3/videos?id=${this.video.url}&key=AIzaSyDovZVx44zT7JglmnHzWoeUeXDrQra4CVg&part=snippet,statistics`)
-      .then(response => (this.youtube = response.data))
-      console.log(this.youtube)
+    .get('/api/v1/users.json')
+    .then(response => (this.user = response.data));
+
+    if (this.user != 'none') {
+      await axios
+        .get(`/api/v1/users/${this.user}`)
+        .then(response => (this.userTags = response.data.tags))
+    }
+
   },
 
   watch: {
@@ -348,6 +348,9 @@ export default {
       await axios  //tag_videos更新用
         .get('/api/v1/tag_videos.json')
         .then(response => (this.tagVideos = response.data))
+      await axios
+      .get(`https://www.googleapis.com/youtube/v3/videos?id=${this.video.url}&key=AIzaSyDovZVx44zT7JglmnHzWoeUeXDrQra4CVg&part=snippet,statistics`)
+      .then(response => (this.youtube = response.data))
     },
 
     createFavorite: async function() {  //https://qiita.com/TakeshiFukushima/items/a6c698fec648c11eee9a

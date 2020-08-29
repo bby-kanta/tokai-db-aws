@@ -10,6 +10,13 @@
       </div>
 
       <input type="text" v-model="keyword" placeholder="リアルタイム検索">
+      <select v-model="rateSelect">
+        <option value=''>ランク</option>
+        <option value=1>S</option>
+        <option value=2>A</option>
+        <option value=3>B</option>
+        <option value=4>C</option>
+      </select>
 
       <div class="tab-content">
         <div v-show="currentTab === 0">
@@ -52,6 +59,7 @@ export default {
   data: function () {
     return {
       keyword: '',
+      rateSelect:'',
       videos: [],
       count: [],
       page: 1,
@@ -81,7 +89,9 @@ export default {
 
       for(var i in this.videos) {
         var video = this.videos[i];
-        if(video.title.indexOf(this.keyword) !== -1) {
+        if(video.title.indexOf(this.keyword) !== -1 &&
+           this.rateSelect == '' | video.rate == this.rateSelect
+        ) {
             videos.push(video);
         }
       }
