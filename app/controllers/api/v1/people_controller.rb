@@ -16,4 +16,15 @@ class Api::V1::PeopleController < ApiController
     render json: @person.to_json(include: [{penalties:{only: [:id,:name,:person_id]}},{tags:{only: [:id,:person_id,:name]}},{videos:{only:[:id,:title,:url,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } }  ])
   end
 
+  def create
+    Person.create!(person_params)
+    head :created
+  end
+
+  private
+
+  def person_params
+    params.require(:person).permit(:name,:description)
+  end
+
 end

@@ -9,11 +9,11 @@ Rails.application.routes.draw do
           get 'count'
         end
       end
-      resources :people, only: [:index, :show] 
-      resources :penalties, only: [:index, :show] 
+      resources :people, only: [:index, :show, :create] 
+      resources :penalties, only: [:index, :show, :create] 
       resources :tags, only: [:index, :show, :create, :destroy, :update] 
-      resources :musics, only: [:index, :show] 
-      resources :places, only: [:index, :show] 
+      resources :musics, only: [:index, :show, :create] 
+      resources :places, only: [:index, :show, :create] 
       resources :users
       resources :favorites, only: [:index ,:create, :destroy]
       resources :comments, only: [:index ,:create, :destroy]

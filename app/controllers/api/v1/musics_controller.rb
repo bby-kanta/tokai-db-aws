@@ -15,4 +15,15 @@ class Api::V1::MusicsController < ApiController
     render json: @music.to_json(include: {videos:{only:[:id,:title,:url,:kind_of,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } } ) 
   end
 
+  def create
+    Music.create!(music_params)
+    head :created
+  end
+
+  private
+
+  def music_params
+    params.require(:music).permit(:name,:description,:url)
+  end
+
 end
