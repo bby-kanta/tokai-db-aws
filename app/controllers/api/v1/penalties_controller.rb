@@ -16,4 +16,15 @@ class Api::V1::PenaltiesController < ApiController
     render json: @penalty.to_json(include: {videos:{only:[:id,:title,:url,:kind_of,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } } ) 
   end
 
+  def create
+    Penalty.create!(penalty_params)
+    head :created
+  end
+
+  private
+
+  def penalty_params
+    params.require(:penalty).permit(:name,:description,:sort,:person_id,:since)
+  end
+
 end

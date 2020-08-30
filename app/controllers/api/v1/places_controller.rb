@@ -15,4 +15,15 @@ class Api::V1::PlacesController < ApiController
     render json: @place.to_json(include: {videos:{only:[:id,:title,:url,:kind_of,:rate,:mvp,:updated_on],include: {users:{only:[:id]}}, methods: :random_tags } } ) 
   end
 
+  def create
+    Place.create!(place_params)
+    head :created
+  end
+
+  private
+
+  def place_params
+    params.require(:place).permit(:name,:description)
+  end
+
 end

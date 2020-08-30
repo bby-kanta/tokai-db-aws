@@ -200,7 +200,7 @@
   </div>
 
   <div class="related-videos">
-    <div>
+    <div class="update-video">
       <form @submit="UpdateVideo()">
 
         <div class="comment-form">
@@ -208,6 +208,7 @@
         </div>
 
         <div>
+          <input v-model="youtube.items[0].snippet.publishedAt" class="comment-box" type="date" placeholder="ふりがなを入力する">
           公開日を{{ youtube.items[0].snippet.publishedAt }}に更新する。
         </div>
 
@@ -218,29 +219,114 @@
       </form>
     </div>
 
-    <div class="tag-form">
-      <form @submit="createTag">
-        <h2>ハッシュタグを作る</h2>
-        <div class="comment-form">
-          <select v-model="tag.person_id">
-            <option value=''>人物名</option>
-            <option value=1>てつや</option>
-            <option value=2>しばゆー</option>
-            <option value=3>りょう</option>
-            <option value=4>としみつ</option>
-            <option value=5>ゆめまる</option>
-            <option value=6>虫眼鏡</option>
-            <option value=7>共通タグ</option>
-          </select>
-          <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
-          <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
-          <textarea v-model="tag.description" class="" placeholder="概要を入力する"></textarea>
+    <div class="tabs">
+      <div class="btn-container">
+        <button v-for="(tab, index) in tabs"
+                :key="tab.id"
+                :class="{ active: currentTab === index }"
+                @click="currentTab = index">{{ tab.tabName }}</button>
+      </div>
+
+      <div class="tab-content">
+        <div v-show="currentTab === 0">
+          <div class="tag-form">
+            <form @submit="createTag">
+              <h2>ハッシュタグを作る</h2>
+              <div class="comment-form">
+                <select v-model="tag.person_id">
+                  <option value=''>人物名</option>
+                  <option value=1>てつや</option>
+                  <option value=2>しばゆー</option>
+                  <option value=3>りょう</option>
+                  <option value=4>としみつ</option>
+                  <option value=5>ゆめまる</option>
+                  <option value=6>虫眼鏡</option>
+                  <option value=7>共通タグ</option>
+                </select>
+                <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
+                <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
+                <textarea v-model="tag.description" class="" placeholder="概要を入力する"></textarea>
+              </div>
+              <div class="comment-submit">
+                <button type="submit">作成</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="comment-submit">
-          <button type="submit">作成</button>
+        <div v-show="currentTab === 1">
+          <div class="tag-form">
+            <form @submit="createPenalty">
+              <h2>罰ゲームを作る</h2>
+              <div class="comment-form">
+                <select v-model="penalty.person_id">
+                  <option value=''>人物名</option>
+                  <option value=1>てつや</option>
+                  <option value=2>しばゆー</option>
+                  <option value=3>りょう</option>
+                  <option value=4>としみつ</option>
+                  <option value=5>ゆめまる</option>
+                  <option value=6>虫眼鏡</option>
+                </select>
+                <input v-model="penalty.name" class="comment-box" type="text" placeholder="罰ゲーム名を入力する">
+                <input v-model="penalty.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
+                <input v-model="penalty.since" class="comment-box" type="date" placeholder="ふりがなを入力する">
+                <textarea v-model="penalty.description" class="" placeholder="概要を入力する"></textarea>
+              </div>
+              <div class="comment-submit">
+                <button type="submit">作成</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+        <div v-show="currentTab === 2">
+          <div class="tag-form">
+            <form @submit="createPlace">
+              <h2>撮影場所を作る</h2>
+              <div class="comment-form">
+                <input v-model="place.name" class="comment-box" type="text" placeholder="場所の名前を入力する">
+                <textarea v-model="place.description" class="" placeholder="概要を入力する"></textarea>
+              </div>
+              <div class="comment-submit">
+                <button type="submit">作成</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div v-show="currentTab === 3">
+          <div class="tag-form">
+            <div class="video-youtube">
+              <iframe name="player" width="100%" height="100%" :src="'https://www.youtube.com/embed/' + music.url + '?autoplay=1&loop=1&playlist=' + music.url " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <form @submit="createMusic">
+              <h2>BGMを作る</h2>
+              <div class="comment-form">
+                <input v-model="music.name" class="comment-box" type="text" placeholder="BGM名を入力する">
+                <input v-model="music.url" class="comment-box" type="text" placeholder="動画コードを入力する">
+                <textarea v-model="music.description" class="" placeholder="概要を入力する"></textarea>
+              </div>
+              <div class="comment-submit">
+                <button type="submit">作成</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div v-show="currentTab === 4">
+          <div class="tag-form">
+            <form @submit="createPerson">
+              <h2>出演者タグを作る</h2>
+              <div class="comment-form">
+                <input v-model="person.name" class="comment-box" type="text" placeholder="出演者の名前を入力する">
+                <textarea v-model="person.description" class="" placeholder="概要を入力する"></textarea>
+              </div>
+              <div class="comment-submit">
+                <button type="submit">作成</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+
 
   </div>
 
@@ -282,12 +368,48 @@ export default {
       user: {},
       minutes: '',
       seconds: '',
+      // ハッシュタグ
       tag: {
         name: "",
         sort: "",
         description: "",
         person_id: "",
       },
+      // 罰ゲーム
+      penalty: {
+        name: "",
+        sort: "",
+        description: "",
+        person_id: "",
+        since: "",
+      },
+      //撮影場所
+      place: {
+        name: "",
+        description: "",
+      },
+      //BGM
+      music: {
+        name: "",
+        description: "",
+        url: ""
+      },
+      //出演者
+      person: {
+        name: "",
+        description: "",
+      },
+      //タブ
+      currentTab: 0,
+      id: 0,
+      tabName: "",
+      tabs: [
+        {id: 1, tabName: 'タグ'},
+        {id: 2, tabName: '罰ゲーム'},
+        {id: 3, tabName: '撮影場所'},
+        {id: 4, tabName: 'BGM'},
+        {id: 5, tabName: '人物'}
+      ],
       youtube: {
         items: [{
           snippet: {
@@ -333,19 +455,43 @@ export default {
       await axios  //tag_videos更新用
         .get('/api/v1/tag_videos.json')
         .then(response => (this.tagVideos = response.data))
-      await axios
-      .get(`https://www.googleapis.com/youtube/v3/videos?id=${this.video.url}&key=AIzaSyDovZVx44zT7JglmnHzWoeUeXDrQra4CVg&part=snippet,statistics`)
-      .then(response => (this.youtube = response.data))
       if (this.user != 'none') {
         await axios
           .get(`/api/v1/users/${this.user}`)
           .then(response => (this.userTags = response.data.tags))
+      await axios
+      .get(`https://www.googleapis.com/youtube/v3/videos?id=${this.video.url}&key=AIzaSyBCXbm3lqPhpyJN0OR2Z_kH-GoLTW-Ulps&part=snippet,statistics`)
+      .then(response => (this.youtube = response.data))
       }
     },
 
     createTag: async function() {
       await axios
         .post('/api/v1/tags',{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description ,person_id: this.tag.person_id} );
+      this.fetchVideos(this.video.id);
+    },
+
+    createPenalty: async function() {
+      await axios
+        .post('/api/v1/penalties',{ name: this.penalty.name , sort: this.penalty.sort, description: this.penalty.description ,person_id: this.penalty.person_id, since: this.penalty.since} );
+      this.fetchVideos(this.video.id);
+    },
+
+    createPlace: async function() {
+      await axios
+        .post('/api/v1/places',{ name: this.place.name, description: this.place.description } );
+      this.fetchVideos(this.video.id);
+    },
+
+    createMusic: async function() {
+      await axios
+        .post('/api/v1/musics',{ name: this.music.name, description: this.music.description, url: this.music.url } );
+      this.fetchVideos(this.video.id);
+    },
+
+    createPerson: async function() {
+      await axios
+        .post('/api/v1/people',{ name: this.person.name, description: this.person.description } );
       this.fetchVideos(this.video.id);
     },
 
@@ -390,6 +536,41 @@ export default {
 
 <style lang="scss" scoped>
 
+//  タブ  https://qiita.com/terufumi1122/items/16e7612a80f81f652000
+.tabs {
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  .btn-container {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    button {
+      width: 19%;
+      font-size: 20px;
+      text-align: center;
+      margin: 10px;
+      padding: 3px 10px;
+      background: white;
+      border-radius: 10px;
+      color: rgb(199, 199, 199);
+      border: none;
+    }
+    button.active{
+      background: rgb(255, 145, 0);
+      color: white;
+      border-color: white;
+    }
+  }
+  .tab-content div {
+    background: #ffffff;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
 form {
   textarea {
     width: 100%;
@@ -423,10 +604,14 @@ form {
 
 @media screen and (min-width: 1000px){
   .video_box{
-    width : 75%;
+    width : 60%;
   }
   .related-videos {
+    width : 40%;
     margin-left: 20px;
+    .update-video {
+      margin-bottom: 80px;
+    }
     .tag-form {
       margin-top: 100px;
     }
