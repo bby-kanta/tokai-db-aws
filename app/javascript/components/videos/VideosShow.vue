@@ -185,7 +185,8 @@
           </div>
 
           <div class="text_line" v-if="user != 'none'"></div>
-          <h2 class="mt-3 mb-3" v-if="user != 'none'">あなたが作ったハッシュタグリスト</h2>
+          <h2 @click="fetchUserTags()" class="mt-3 mb-3 blue" v-if="user != 'none' && userTags.length == null">あなたのタグを紐付ける</h2>
+          <h2 v-if="userTags.length" class="mt-3 mb-3">あなたが作成したタグ</h2>
           <div class="tags">
             <div v-for="tag in userTags" :key="tag.id">
               <div v-if="tags_id().includes(tag.id)" @click="destroyVideoTag(tag.id)" class="btn red-black tag">
@@ -317,13 +318,6 @@ export default {
     await axios
     .get('/api/v1/users.json')
     .then(response => (this.user = response.data));
-
-    if (this.user != 'none') {
-      await axios
-        .get(`/api/v1/users/${this.user}`)
-        .then(response => (this.userTags = response.data.tags))
-    }
-
   },
 
   watch: {
@@ -354,8 +348,8 @@ export default {
     },
 
     createFavorite: async function() {  //https://qiita.com/TakeshiFukushima/items/a6c698fec648c11eee9a
-       await axios.post('/api/v1/favorites',{video_id: this.video.id , user_id: this.user.id})
-       this.fetchVideos(this.video.id)
+      await axios.post('/api/v1/favorites',{video_id: this.video.id , user_id: this.user.id})
+      this.fetchVideos(this.video.id)
     },
 
     destroyFavorite: async function() {
@@ -399,6 +393,14 @@ export default {
       }, interval);
     },
 
+    fetchUserTags: async function () {
+      if (this.user != 'none') {
+        await axios
+          .get(`/api/v1/users/${this.user}`)
+          .then(response => (this.userTags = response.data.tags))
+      }
+    },
+
     async createVideoTag(id) {
       await axios.post('/api/v1/tag_videos',{video_id: this.video.id , tag_id: id})
       this.fetchVideos(this.video.id)
@@ -420,6 +422,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .blue {
+    color: blue;
+    cursor: pointer;
+  }
 
   .video-people , .penalties , .tags {
     display: flex;
