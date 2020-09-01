@@ -16,9 +16,15 @@
       <div class="person_name_description">
         <div class="person_name">
           <h3> {{ user.name }} </h3>
+          <p v-if="currentUser === user.id" @click="openModal" class="blue">編集</p>
         </div>
         <div class="person_description">
-          <p> </p>
+          <p>東海オンエアファン歴{{user.history}}年</p>
+          <p>
+            一番好きなメンバー：
+            <MemberLink :person="user.person_id"></MemberLink>    
+          </p>
+          <p>{{user.description}}</p>
         </div>
       </div>
     </div>
@@ -67,6 +73,46 @@
       </div>
     </div>
 
+    <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
+      <div id="modal-content">
+        <i class="fas fa-times fa-2x" @click="closeModal"></i>
+        <form @submit="updateUser">
+
+          <div class="comment-form">
+            <div class="mt-2 mb-3">
+              <p>ユーザー名</p>
+              <input v-model="user.name" class="comment-box" type="text" placeholder="ユーザー名を入力する">
+            </div>
+            <div class="mb-3">
+              <p>ファン歴</p>
+              <input v-model="user.history" class="comment-box" type="number" placeholder="ファン歴を入力する">
+            </div>
+            <div class="mb-3">
+              <p>一番好きなメンバー</p>
+              <select v-model="user.person_id">
+                <option value=''>一番好きなメンバー</option>
+                <option value=1>てつや</option>
+                <option value=2>しばゆー</option>
+                <option value=3>りょう</option>
+                <option value=4>としみつ</option>
+                <option value=5>ゆめまる</option>
+                <option value=6>虫眼鏡</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <p>自己紹介</p>
+              <textarea v-model="user.description" class="" placeholder="自己紹介を入力する"></textarea>
+            </div>
+          </div>
+
+          <div class="comment-submit">
+            <button type="submit">更新</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -76,6 +122,7 @@ import VideosArticles from '../videos/VideosArticles.vue';
 import SubscriberCounter from '../SubscriberCounter.vue';
 import TagColor from '../TagColor.vue';
 import PeopleImages from '../people/PeopleImages.vue';
+import MemberLink from '../MemberLink.vue';
 
 export default {
   components: {
@@ -83,10 +130,12 @@ export default {
     SubscriberCounter,
     TagColor,
     PeopleImages,
+    MemberLink,
   },
 
   data: function () {
     return {
+      currentUser: '',
       user: '',
       videos: [],
       tags: [],
@@ -107,8 +156,10 @@ export default {
 
   mounted () {
     axios
-      .get(`/api/v1/users/${this.$route.params.id}`)
-      .then(response => (this.videos = response.data.videos ,this.comments = response.data.comments,this.user = response.data.user,this.tags = response.data.tags))
+      .get(`/api/v1/users`)
+      .then(response => (this.currentUser = response.data))
+      
+    this.fetchUser()
   },
 
   computed: {
@@ -116,6 +167,19 @@ export default {
   },  //computed
 
   methods: {
+    fetchUser: async function () {
+      await axios
+        .get(`/api/v1/users/${this.$route.params.id}`)
+        .then(response => (this.videos = response.data.videos ,this.comments = response.data.comments,this.user = response.data.user,this.tags = response.data.tags))
+    },
+
+    updateUser: async function(){
+      await axios
+        .put(`/api/v1/users/${this.user.id}`,{ name: this.user.name, description: this.user.description, history: this.user.history, person_id: this.user.person_id} );
+      this.fetchUser()
+      this.closeModal()
+    },
+
     infiniteHandler($state) {
         axios.get(`/api/v1/users/${this.$route.params.id}`, {
             params: {
@@ -156,7 +220,7 @@ export default {
         }).catch((err) => {
             $state.complete()
         })
-    }
+    },
   }
 
 }  //export default
@@ -220,27 +284,27 @@ export default {
   width: 100%;
   background: white;
   border-radius: 10px;
-}
-.btn-container {
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: center;
-}
-button {
-  width: 30%;
-  font-size: 20px;
-  text-align: center;
-  margin: 10px;
-  padding: 3px 10px;
-  background: white;
-  border-radius: 10px;
-  color: rgb(199, 199, 199);
-  border: none;
-}
-button.active{
-  background: rgb(255, 145, 0);
-  color: white;
-  border-color: white;
+  .btn-container {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  button {
+    width: 30%;
+    font-size: 20px;
+    text-align: center;
+    margin: 10px;
+    padding: 3px 10px;
+    background: white;
+    border-radius: 10px;
+    color: rgb(199, 199, 199);
+    border: none;
+  }
+  button.active{
+    background: rgb(255, 145, 0);
+    color: white;
+    border-color: white;
+  }
 }
 
 </style>

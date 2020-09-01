@@ -7,6 +7,7 @@ export default {    // exportする
   data() {
       return {
           serverPass: "https://toukaionair.com",    // サーバーサイドのパスを定義
+          showContent: false,
       }
   },
 
@@ -53,10 +54,19 @@ export default {    // exportする
       // console.log(tags_id.includes(tag));
       return tags_id 
     },
+
     confirmDelete(){
       const ans = confirm('本当に消しますか?'); 
       if(!ans) event.preventDefault(); // 「キャンセル」押下ならば event を抑制
     },
+
+    openModal: function(){
+      this.showContent = true
+    },
+    closeModal: function(){
+      this.showContent = false
+    },
+
 
   },
 

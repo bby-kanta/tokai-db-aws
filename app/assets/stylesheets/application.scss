@@ -460,9 +460,9 @@ textarea {
   width: 1200px;
   height: 400px;
 }
-select {
+select,input[type="number"] {
   width: 100px;
-  height: 40px;
+  height: 30px;
 }
 
 .form-collection-check { //中間テーブルのセレクター

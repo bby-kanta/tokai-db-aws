@@ -133,6 +133,11 @@ button {
 .orange {
   color: orange;
 }
+.blue {
+  color: blue;
+  cursor: pointer;
+  display: inline;
+}
 
 @media screen and (max-width: 999px){ /*widthが999pxまでのCSS(スマホ用)*/
 
