@@ -33,7 +33,7 @@
   <h2 class="width-96"> おすすめタグ </h2>
     <div class="hash-tags gray">
       <div class="hash-tag" v-for="tag in random(tags, 20)" :key="tag.id">
-        <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.videos.length +')' "></TagColor>
+        <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.tag_videos_count +')' "></TagColor>
       </div>
     </div>
 

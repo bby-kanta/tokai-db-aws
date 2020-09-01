@@ -1,10 +1,72 @@
 <template>
   <div id="app">
     <div class="title">
-      <h3>{{ user.name }}さんがいいねした動画一覧</h3>
+      <h3> マイページ / {{user.name}} </h3>
     </div>
-    <VideosArticles :videos="videos"></VideosArticles>
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+
+    <div class="person_background-image">
+      <PeopleImages :person='7'></PeopleImages>      
+    </div>
+
+    <div class="person_introduce_box">
+      <div class="person_image">
+        <PeopleImages :person="7"></PeopleImages>      
+      </div>
+
+      <div class="person_name_description">
+        <div class="person_name">
+          <h3> {{ user.name }} </h3>
+        </div>
+        <div class="person_description">
+          <p> </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="btn-container">
+        <button v-for="(tab, index) in tabs"
+                :key="tab.id"
+                :class="{ active: currentTab === index }"
+                @click="currentTab = index">{{ tab.tabName }}</button>
+      </div>
+
+      <div class="tab-content">
+        <div v-show="currentTab === 0">
+          <VideosArticles :videos="videos"></VideosArticles>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        </div>
+        <div v-show="currentTab === 1">
+          <div class="hash-tags">
+            <div class="hash-tag" v-for="tag in tags" :key="tag.id">
+              <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.tag_videos_count +')' "></TagColor>
+            </div>
+          </div>
+        </div>
+        <div v-show="currentTab === 2" class="comments-box">
+            <div class="comments">
+              <div v-for="comment in comments" :key="comment.id" class="comment">
+                <router-link :to="{ name: 'VideosShow', params: { id: comment.video_id } }">
+                  <div class="comment-video-title">
+                    <i class="fas fa-arrow-left"></i>
+                    {{comment.video.title}}
+                  </div>
+                  <div class="comment-name">
+                    <img src="../../../assets/images/peace.jpg" width="30" height="30">
+                    <h2>{{ user.name }}</h2>
+                    <!-- <i v-if="comment.user.id == user " @click="confirmDelete(), destroyComment(comment.id)" class="far fa-trash-alt"></i> -->
+                  </div>
+                  <div class="comment-text">
+                    <p> {{ comment.content }} </p>
+                  </div>
+                </router-link>
+              </div>
+            </div>
+          <infinite-loading @infinite="infiniteHandlerComment"></infinite-loading>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -12,25 +74,41 @@
 import axios from 'axios';
 import VideosArticles from '../videos/VideosArticles.vue';
 import SubscriberCounter from '../SubscriberCounter.vue';
+import TagColor from '../TagColor.vue';
+import PeopleImages from '../people/PeopleImages.vue';
 
 export default {
   components: {
     VideosArticles,
     SubscriberCounter,
+    TagColor,
+    PeopleImages,
   },
 
   data: function () {
     return {
       user: '',
       videos: [],
-      page: 1,
+      tags: [],
+      comments: [],
+      page: 2,
+      comment_page: 2,
+      //タブ
+      currentTab: 0,
+      id: 0,
+      tabName: "",
+      tabs: [
+        {id: 1, tabName: 'いいね'},
+        {id: 2, tabName: '作ったタグ'},
+        {id: 3, tabName: 'コメント'},
+      ],
     }
   },
 
   mounted () {
     axios
       .get(`/api/v1/users/${this.$route.params.id}`)
-      .then(response => (this.user = response.data.user)) 
+      .then(response => (this.videos = response.data.videos ,this.comments = response.data.comments,this.user = response.data.user,this.tags = response.data.tags))
   },
 
   computed: {
@@ -57,6 +135,27 @@ export default {
         }).catch((err) => {
             $state.complete()
         })
+    },
+
+    infiniteHandlerComment($state) {
+        axios.get(`/api/v1/users/${this.$route.params.id}`, {
+            params: {
+                page: this.comment_page,
+            },
+        }).then(({ data }) => {
+            //そのままだと読み込み時にカクつくので1500毎に読み込む
+            setTimeout(() => {
+                if (this.comment_page <= data.pagenation_comments.pagenation.pages) {
+                    this.comment_page += 1
+                    this.comments.push(...data.comments)
+                    $state.loaded()
+                } else {
+                    $state.complete()
+                }
+            }, 800)
+        }).catch((err) => {
+            $state.complete()
+        })
     }
   }
 
@@ -67,4 +166,81 @@ export default {
 .title {
   margin-bottom: 20px;
 }
+
+.hash-tags {
+  margin-top: 30px;
+  display : flex;
+  flex-wrap: wrap;
+  .hash-tag {
+    margin: 0 10px 10px 0;
+  }
+}
+
+.comments {
+  width: 70%;
+  margin: 20px auto;
+  .comment:hover {
+    border-bottom: 2px solid #ff8c00;
+  }
+  .comment {
+    margin: 5px 0 0 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #c2c2c2;
+    .comment-video-title {
+      margin: 0 0 10px 0;
+      color: rgb(136, 136, 136);
+    }
+    .comment-name {
+      margin-bottom: 10px;
+      display:flex;
+      align-items: center;
+      h2 {
+        margin: 0 10px;
+      }
+      img {
+        border-radius: 50%;
+        border: 1px solid rgb(53, 53, 53);
+      }
+      i:before, i:before {
+        cursor: pointer;
+      }
+    }
+    .comment-text {
+      p {
+        margin-left: 40px;
+      }
+    }
+  }
+}
+
+//  タブ  https://qiita.com/terufumi1122/items/16e7612a80f81f652000
+.tabs {
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+}
+.btn-container {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+button {
+  width: 30%;
+  font-size: 20px;
+  text-align: center;
+  margin: 10px;
+  padding: 3px 10px;
+  background: white;
+  border-radius: 10px;
+  color: rgb(199, 199, 199);
+  border: none;
+}
+button.active{
+  background: rgb(255, 145, 0);
+  color: white;
+  border-color: white;
+}
+
 </style>
