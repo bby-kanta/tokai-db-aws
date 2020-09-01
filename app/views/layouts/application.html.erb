@@ -43,7 +43,7 @@
                       <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: 'nav-link' %>
                     </li>
                     <li>
-                      <a href="/#/users/<%= current_user.id %>" class="nav-link" > いいねした動画 </a>
+                      <a href="/#/users/<%= current_user.id %>" class="nav-link" > マイページ </a>
                     </li>
                   <% else %>
                       <li>
@@ -70,6 +70,9 @@
                 </li>
                 <li>
                   <a href="/#/tags" class="nav-link" > ハッシュタグ </a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/TO__AMBASSADOR" class="nav-link" > 公式Twitter </a>
                 </li>
 
                 </ul>

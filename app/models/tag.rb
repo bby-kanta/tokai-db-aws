@@ -6,4 +6,10 @@ class Tag < ApplicationRecord
   
   belongs_to :person
   belongs_to :user
+
+  def tag_videos_count
+    videos.count
+  end
+
+
 end

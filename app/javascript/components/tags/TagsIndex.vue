@@ -16,7 +16,7 @@
 
     <div class="hash-tags">
       <div class="hash-tag" v-for="tag in filteredTags" :key="tag.id">
-        <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.videos.length +')' "></TagColor>
+        <TagColor :person="tag.person_id" :tag_id="tag.id" :tag_name="tag.name" :count="'('+ tag.tag_videos_count +')' "></TagColor>
       </div>
     </div>
   </div>
