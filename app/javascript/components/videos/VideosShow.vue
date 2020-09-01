@@ -422,11 +422,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .blue {
-    color: blue;
-    cursor: pointer;
-  }
-
   .video-people , .penalties , .tags {
     display: flex;
     flex-wrap: wrap;

@@ -30,7 +30,18 @@ class Api::V1::UsersController < ApiController
       render json: object
   end
 
+  def update
+    @user = User.find(params[:id])
+    @user.update!(user_params)
+  end
+
   def recommend
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name,:description, :person_id, :history)
   end
 
 end
