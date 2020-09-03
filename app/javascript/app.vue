@@ -138,6 +138,9 @@ button {
   cursor: pointer;
   display: inline;
 }
+.pointer {
+  cursor: pointer;
+}
 
 @media screen and (max-width: 999px){ /*widthが999pxまでのCSS(スマホ用)*/
 
