@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         collection do
           get 'recommend'
           get 'count'
+          get 'all'
         end
       end
       resources :people, only: [:index, :show, :create] 
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
       resources :places, only: [:index, :show, :create] 
       resources :users
       resources :favorites, only: [:index ,:create, :destroy]
+      resources :relationships, only: [:index,:create, :destroy]
       resources :comments, only: [:index ,:create, :destroy]
       resources :tag_videos, only: [:index ,:create, :destroy]
     end

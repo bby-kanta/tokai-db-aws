@@ -324,6 +324,24 @@
             </form>
           </div>
         </div>
+        <div v-show="currentTab === 5">
+          <div class="tag-form">
+              <h2 @click="fetchAllVideos()" v-if="videos.length == null" class="blue">関連動画を紐付ける</h2>
+              <input type="text" v-model="keyword" v-if="videos.length != null" placeholder="タイトル検索">
+              <select v-model="select" v-if="videos.length != null">
+                <option value=""></option>
+                <option value='1'>既に紐付けられている動画</option>
+              </select>
+              <div v-for="video in filteredvideos" :key="video.id">
+                <div v-if="recommend_id.includes(video.id)" @click="destroyRelationship(video.id)" class="pointer">
+                  {{ video.title }}
+                </div>
+                <div v-else @click="createRelationship(video.id)" class="blue">
+                  {{ video.title }}
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -365,6 +383,9 @@ export default {
       videos: {},
       userTags: {},
       tagVideos: {},
+      relationships: {},
+      keyword: '',
+      select: '',
       user: {},
       minutes: '',
       seconds: '',
@@ -408,7 +429,8 @@ export default {
         {id: 2, tabName: '罰ゲーム'},
         {id: 3, tabName: '撮影場所'},
         {id: 4, tabName: 'BGM'},
-        {id: 5, tabName: '人物'}
+        {id: 5, tabName: '人物'},
+        {id: 6, tabName: '関連動画'}
       ],
       youtube: {
         items: [{
@@ -443,7 +465,31 @@ export default {
       const seconds   = Number(this.seconds);
       const cpSeconds = cpMinutes + seconds;
       return cpSeconds;
-    }
+    },
+    filteredvideos: function() { //検索機能
+      var videos = [];
+
+      for(var i in this.videos) {
+        var video = this.videos[i];
+        if(video.title.indexOf(this.keyword) !== -1 |
+           video.sort.indexOf(this.keyword) !== -1 &&
+           this.select == "" | this.recommend_id.includes(video.id)
+        ) {
+            videos.push(video);
+        }
+      }
+      return videos;
+    },
+    recommend_id: function() {
+      var recommends = this.video.recommends;  //例）"video.recommend":[{"id":1},{"id":2}]
+      var recommend_id = [];
+      var hoge = [];
+
+      for(hoge in recommends){
+        recommend_id.push(recommends[hoge].id);  //例）recommend_id = [1,2]
+      }
+      return recommend_id 
+    },
   },
 
   methods: {
@@ -455,6 +501,9 @@ export default {
       await axios  //tag_videos更新用
         .get('/api/v1/tag_videos.json')
         .then(response => (this.tagVideos = response.data))
+      await axios
+        .get(`/api/v1/relationships.json`)
+        .then(response => (this.relationships = response.data))
       if (this.user != 'none') {
         await axios
           .get(`/api/v1/users/${this.user}`)
@@ -528,6 +577,28 @@ export default {
         return (tag.tag_id === tagid & tag.video_id === this.video.id)
       })
       if (tag) { return tag.id }
+    },
+
+    fetchAllVideos: async function () {
+      await axios
+      .get(`/api/v1/videos/all.json`)
+      .then(response => (this.videos = response.data))
+    },
+
+    async createRelationship(id) {
+      await axios.post(`/api/v1/relationships`,{video_id: this.video.id , recommend_id: id})
+      this.fetchVideos(this.video.id);
+    },
+    destroyRelationship(id) {
+      const relationship = this.findRelationshipId(id);
+       axios.delete(`/api/v1/relationships/${relationship}`);
+      this.fetchVideos(this.video.id);
+    },
+    findRelationshipId(id) {
+      const relationship = this.relationships.find((relationship) => {
+        return (relationship.recommend_id === id & relationship.video_id === this.video.id)
+      })
+      if (relationship) { return relationship.id }
     },
 
   }  //methods

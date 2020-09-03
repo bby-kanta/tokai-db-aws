@@ -173,9 +173,12 @@ export default {
         .then(response => (this.videos = response.data.videos ,this.comments = response.data.comments,this.user = response.data.user,this.tags = response.data.tags))
     },
 
-    updateUser: async function(){
-      await axios
-        .put(`/api/v1/users/${this.user.id}`,{ name: this.user.name, description: this.user.description, history: this.user.history, person_id: this.user.person_id} );
+    updateUser: function(){
+      axios
+        .put(`/api/v1/users/${this.user.id}`,{ name: this.user.name, description: this.user.description, history: this.user.history, person_id: this.user.person_id} )
+        .then(response => {
+          this.$router.push({ name: 'UsersShow', params: { id: this.user.id } });
+        })
       this.fetchUser()
       this.closeModal()
     },

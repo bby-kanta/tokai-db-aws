@@ -41,6 +41,11 @@ class Api::V1::VideosController < ApiController
     render json: object
   end
 
+  def all
+    @videos = Video.select(:id,:title,:sort).order(sort: 'asc')
+    render json: @videos
+  end
+
   private
 
   def video_params

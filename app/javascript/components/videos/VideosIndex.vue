@@ -111,11 +111,11 @@ export default {
       id: 0,
       tabName: "",
       tabs: [
-        {id: 1, tabName: '全動画', videosLength: '' },
-        {id: 2, tabName: 'メイン', videosLength: ''},
-        {id: 3, tabName: '控え室', videosLength: ''},
-        {id: 4, tabName: '個チャン', videosLength: ''},
-        {id: 5, tabName: 'その他', videosLength: ''}
+        {id: 1, tabName: '全動画', videosLength: '0' },
+        {id: 2, tabName: 'メイン', videosLength: '0'},
+        {id: 3, tabName: '控え室', videosLength: '0'},
+        {id: 4, tabName: '個チャン', videosLength: '0'},
+        {id: 5, tabName: 'その他', videosLength: '0'}
       ],
     }
   },
