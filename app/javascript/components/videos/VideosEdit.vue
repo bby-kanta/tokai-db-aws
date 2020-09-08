@@ -8,9 +8,19 @@
 
     <div class="video_title">
       <div class="mb-2">
-        <input v-model="minutes" type="number">分
-        <input v-model="seconds" type="number">秒 →
-        {{minutesToseconds}}秒です！
+        <div class="minutes-to-second">
+          <input v-model="minutes" type="number" min="0">分
+          <input v-model="seconds" type="number" min="0" max="60">秒 →
+          {{minutesToseconds}}秒です！
+        </div>
+        <div class="second-button mt-3">
+          <button @click="seconds = 0">0秒</button>
+          <button @click="seconds = 10">10秒</button>
+          <button @click="seconds = 20">20秒</button>
+          <button @click="seconds = 30">30秒</button>
+          <button @click="seconds = 40">40秒</button>
+          <button @click="seconds = 50">50秒</button>
+        </div>
       </div>
       <h3> {{ video.title }} </h3>
       <router-link :to="{ name: 'VideosShow', params: { id: video.id } }">showページへ移動</router-link>
@@ -639,6 +649,14 @@ export default {
     background: #ffffff;
     width: 100%;
     margin: 0 auto;
+  }
+}
+
+.minutes-to-second { //分数を秒数に変換するツール
+  font-size: 40px;
+  input[type="number"] {
+    height: 50px;
+    font-size: 30px;
   }
 }
 
