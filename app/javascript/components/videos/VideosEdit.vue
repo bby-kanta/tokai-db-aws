@@ -72,6 +72,7 @@
         <th> 概要 </th>
         <th>   
           <p> {{ video.description }} </p>
+          <textarea v-model="video.description" cols="30" rows="10"></textarea>
         </th>
       </tr>
 
@@ -388,6 +389,7 @@ export default {
     return {
       video: {
         highlight: '',
+        description: '',
         updated_on: ''
       },
       videos: {},
@@ -569,7 +571,7 @@ export default {
 
     UpdateVideo: async function() {
       await axios
-        .put(`/api/v1/videos/${this.video.id}`,{ highlight: this.video.highlight, updated_on: this.youtube.items[0].snippet.publishedAt} );
+        .put(`/api/v1/videos/${this.video.id}`,{ highlight: this.video.highlight, description: this.video.description, updated_on: this.youtube.items[0].snippet.publishedAt} );
       this.fetchVideos(this.video.id);
     },
 
@@ -650,6 +652,10 @@ export default {
     width: 100%;
     margin: 0 auto;
   }
+}
+
+textarea {
+  width: 100%;
 }
 
 .minutes-to-second { //分数を秒数に変換するツール

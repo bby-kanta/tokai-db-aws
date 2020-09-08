@@ -49,7 +49,7 @@ class Api::V1::VideosController < ApiController
   private
 
   def video_params
-    params.require(:video).permit(:highlight,:updated_on)
+    params.require(:video).permit(:highlight,:description,:updated_on)
   end
 
 end
