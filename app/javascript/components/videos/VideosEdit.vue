@@ -70,8 +70,7 @@
 
       <tr class="video-description">
         <th> 概要 </th>
-        <th>   
-          <p> {{ video.description }} </p>
+        <th>
           <textarea v-model="video.description" cols="30" rows="10"></textarea>
         </th>
       </tr>
@@ -307,6 +306,13 @@
               <div class="comment-submit">
                 <button @click="createMusic()">作成</button>
               </div>
+
+              <div class="music-playlist">
+                <h2 @click="fetchMusics()" v-if="musics.length == null" class="blue">BGM一覧を表示する</h2>
+                <ul>
+                  <li v-for="bgm in musics" :key="bgm.id" @click="music.name = bgm.name, music.url = bgm.url">{{bgm.name}}</li>
+                </ul>
+              </div>
           </div>
         </div>
         <div v-show="currentTab === 4">
@@ -376,7 +382,8 @@ export default {
       video: {
         highlight: '',
         description: '',
-        updated_on: ''
+        updated_on: '',
+        tags: {},
       },
       videos: {},
       userTags: {},
@@ -408,6 +415,7 @@ export default {
         description: "",
       },
       //BGM
+      musics: {},
       music: {
         name: "",
         description: "",
@@ -515,7 +523,9 @@ export default {
     createTag: async function() {
       await axios
         .post('/api/v1/tags',{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description ,person_id: this.tag.person_id} );
-      this.fetchVideos(this.video.id);
+      await axios
+        .get(`/api/v1/users/${this.user}`)
+        .then(response => (this.userTags = response.data.tags))
       this.tag.name = ""
       this.tag.sort = ""
       this.tag.description = ""
@@ -525,7 +535,6 @@ export default {
     createPenalty: async function() {
       await axios
         .post('/api/v1/penalties',{ name: this.penalty.name , sort: this.penalty.sort, description: this.penalty.description ,person_id: this.penalty.person_id, since: this.penalty.since} );
-      this.fetchVideos(this.video.id);
       this.penalty.name = ""
       this.penalty.sort = ""
       this.penalty.description = ""
@@ -536,7 +545,6 @@ export default {
     createPlace: async function() {
       await axios
         .post('/api/v1/places',{ name: this.place.name, description: this.place.description } );
-      this.fetchVideos(this.video.id);
       this.place.name = ""
       this.place.description = ""
     },
@@ -544,7 +552,6 @@ export default {
     createMusic: async function() {
       await axios
         .post('/api/v1/musics',{ name: this.music.name, description: this.music.description, url: this.music.url } );
-      this.fetchVideos(this.video.id);
       this.music.name = ""
       this.music.description = ""
       this.music.url = ""
@@ -553,7 +560,6 @@ export default {
     createPerson: async function() {
       await axios
         .post('/api/v1/people',{ name: this.person.name, description: this.person.description } );
-      this.fetchVideos(this.video.id);
       this.person.name = ""
       this.person.description = ""
     },
@@ -615,6 +621,11 @@ export default {
       if (relationship) { return relationship.id }
     },
 
+    fetchMusics: async function () {
+      await axios
+      .get(`/api/v1/musics.json`)
+      .then(response => (this.musics = response.data))
+    },
 
   }  //methods
 }
@@ -699,6 +710,14 @@ form {
     border-bottom: 2px solid rgb(0, 0, 0);
   }
 
+.music-playlist {
+  ul {
+    li {
+      color: blue;
+      cursor: pointer;
+    }
+  }
+}
 
 @media screen and (min-width: 1000px){
   .video_box{
