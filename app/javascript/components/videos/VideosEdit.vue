@@ -70,8 +70,7 @@
 
       <tr class="video-description">
         <th> 概要 </th>
-        <th>   
-          <p> {{ video.description }} </p>
+        <th>
           <textarea v-model="video.description" cols="30" rows="10"></textarea>
         </th>
       </tr>
@@ -212,8 +211,6 @@
 
   <div class="related-videos">
     <div class="update-video">
-      <form @submit="UpdateVideo()">
-
         <div class="comment-form">
           <textarea v-model="video.highlight" class="" placeholder="見所を入力する"></textarea>
         </div>
@@ -224,10 +221,8 @@
         </div>
 
         <div class="comment-submit">
-          <button type="submit">更新</button>
+          <button @click="UpdateVideo()">更新</button>
         </div>
-
-      </form>
     </div>
 
     <div class="tabs">
@@ -241,7 +236,6 @@
       <div class="tab-content">
         <div v-show="currentTab === 0">
           <div class="tag-form">
-            <form @submit="createTag">
               <h2>ハッシュタグを作る</h2>
               <div class="comment-form">
                 <select v-model="tag.person_id">
@@ -259,14 +253,12 @@
                 <textarea v-model="tag.description" class="" placeholder="概要を入力する"></textarea>
               </div>
               <div class="comment-submit">
-                <button type="submit">作成</button>
+                <button @click="createTag()">作成</button>
               </div>
-            </form>
           </div>
         </div>
         <div v-show="currentTab === 1">
           <div class="tag-form">
-            <form @submit="createPenalty">
               <h2>罰ゲームを作る</h2>
               <div class="comment-form">
                 <select v-model="penalty.person_id">
@@ -284,23 +276,20 @@
                 <textarea v-model="penalty.description" class="" placeholder="概要を入力する"></textarea>
               </div>
               <div class="comment-submit">
-                <button type="submit">作成</button>
+                <button @click="createPenalty()">作成</button>
               </div>
-            </form>
           </div>
         </div>
         <div v-show="currentTab === 2">
           <div class="tag-form">
-            <form @submit="createPlace">
               <h2>撮影場所を作る</h2>
               <div class="comment-form">
                 <input v-model="place.name" class="comment-box" type="text" placeholder="場所の名前を入力する">
                 <textarea v-model="place.description" class="" placeholder="概要を入力する"></textarea>
               </div>
               <div class="comment-submit">
-                <button type="submit">作成</button>
+                <button @click="createPlace()">作成</button>
               </div>
-            </form>
           </div>
         </div>
         <div v-show="currentTab === 3">
@@ -308,7 +297,6 @@
             <div class="video-youtube">
               <iframe name="player" width="100%" height="100%" :src="'https://www.youtube.com/embed/' + music.url + '?autoplay=1&loop=1&playlist=' + music.url " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <form @submit="createMusic">
               <h2>BGMを作る</h2>
               <div class="comment-form">
                 <input v-model="music.name" class="comment-box" type="text" placeholder="BGM名を入力する">
@@ -316,23 +304,27 @@
                 <textarea v-model="music.description" class="" placeholder="概要を入力する"></textarea>
               </div>
               <div class="comment-submit">
-                <button type="submit">作成</button>
+                <button @click="createMusic()">作成</button>
               </div>
-            </form>
+
+              <div class="music-playlist">
+                <h2 @click="fetchMusics()" v-if="musics.length == null" class="blue">BGM一覧を表示する</h2>
+                <ul>
+                  <li v-for="bgm in musics" :key="bgm.id" @click="music.name = bgm.name, music.url = bgm.url">{{bgm.name}}</li>
+                </ul>
+              </div>
           </div>
         </div>
         <div v-show="currentTab === 4">
           <div class="tag-form">
-            <form @submit="createPerson">
               <h2>出演者タグを作る</h2>
               <div class="comment-form">
                 <input v-model="person.name" class="comment-box" type="text" placeholder="出演者の名前を入力する">
                 <textarea v-model="person.description" class="" placeholder="概要を入力する"></textarea>
               </div>
               <div class="comment-submit">
-                <button type="submit">作成</button>
+                <button @click="createPerson()">作成</button>
               </div>
-            </form>
           </div>
         </div>
         <div v-show="currentTab === 5">
@@ -390,7 +382,8 @@ export default {
       video: {
         highlight: '',
         description: '',
-        updated_on: ''
+        updated_on: '',
+        tags: {},
       },
       videos: {},
       userTags: {},
@@ -422,6 +415,7 @@ export default {
         description: "",
       },
       //BGM
+      musics: {},
       music: {
         name: "",
         description: "",
@@ -529,31 +523,45 @@ export default {
     createTag: async function() {
       await axios
         .post('/api/v1/tags',{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description ,person_id: this.tag.person_id} );
-      this.fetchVideos(this.video.id);
+      await axios
+        .get(`/api/v1/users/${this.user}`)
+        .then(response => (this.userTags = response.data.tags))
+      this.tag.name = ""
+      this.tag.sort = ""
+      this.tag.description = ""
+      this.tag.person_id = ""
     },
 
     createPenalty: async function() {
       await axios
         .post('/api/v1/penalties',{ name: this.penalty.name , sort: this.penalty.sort, description: this.penalty.description ,person_id: this.penalty.person_id, since: this.penalty.since} );
-      this.fetchVideos(this.video.id);
+      this.penalty.name = ""
+      this.penalty.sort = ""
+      this.penalty.description = ""
+      this.penalty.person_id = ""
+      this.penalty.since = ""
     },
 
     createPlace: async function() {
       await axios
         .post('/api/v1/places',{ name: this.place.name, description: this.place.description } );
-      this.fetchVideos(this.video.id);
+      this.place.name = ""
+      this.place.description = ""
     },
 
     createMusic: async function() {
       await axios
         .post('/api/v1/musics',{ name: this.music.name, description: this.music.description, url: this.music.url } );
-      this.fetchVideos(this.video.id);
+      this.music.name = ""
+      this.music.description = ""
+      this.music.url = ""
     },
 
     createPerson: async function() {
       await axios
         .post('/api/v1/people',{ name: this.person.name, description: this.person.description } );
-      this.fetchVideos(this.video.id);
+      this.person.name = ""
+      this.person.description = ""
     },
 
     top() {
@@ -576,13 +584,25 @@ export default {
     },
 
     async createVideoTag(id) {
-      await axios.post('/api/v1/tag_videos',{video_id: this.video.id , tag_id: id})
-      this.fetchVideos(this.video.id)
+      await axios
+      .post('/api/v1/tag_videos',{video_id: this.video.id , tag_id: id})
+      await axios  //tag_videos更新用
+        .get('/api/v1/tag_videos.json')
+        .then(response => (this.tagVideos = response.data))
+      await axios
+        .get(`/api/v1/videos/${this.$route.params.id}.json`)
+        .then(response => (this.video.tags = response.data.tags))
     },
-    destroyVideoTag(VideoTag_id) {
+    async destroyVideoTag(VideoTag_id) {
       const videoTagId = this.findVideoTagId(VideoTag_id);
-       axios.delete(`/api/v1/tag_videos/${videoTagId}`);
-      this.fetchVideos(this.video.id);
+      await axios
+        .delete(`/api/v1/tag_videos/${videoTagId}`);
+      await axios  //tag_videos更新用
+        .get('/api/v1/tag_videos.json')
+        .then(response => (this.tagVideos = response.data))
+      await axios
+        .get(`/api/v1/videos/${this.$route.params.id}.json`)
+        .then(response => (this.video.tags = response.data.tags))
     },
     findVideoTagId(tagid) {
       const tag = this.tagVideos.find((tag) => {
@@ -611,6 +631,12 @@ export default {
         return (relationship.recommend_id === id & relationship.video_id === this.video.id)
       })
       if (relationship) { return relationship.id }
+    },
+
+    fetchMusics: async function () {
+      await axios
+      .get(`/api/v1/musics.json`)
+      .then(response => (this.musics = response.data))
     },
 
   }  //methods
@@ -666,7 +692,6 @@ textarea {
   }
 }
 
-form {
   textarea {
     width: 100%;
     height: 600px;
@@ -675,7 +700,6 @@ form {
     display: flex;
     flex-direction: row-reverse;
   }
-}
 
   .video-people , .penalties , .tags {
     display: flex;
@@ -696,6 +720,14 @@ form {
     border-bottom: 2px solid rgb(0, 0, 0);
   }
 
+.music-playlist {
+  ul {
+    li {
+      color: blue;
+      cursor: pointer;
+    }
+  }
+}
 
 @media screen and (min-width: 1000px){
   .video_box{

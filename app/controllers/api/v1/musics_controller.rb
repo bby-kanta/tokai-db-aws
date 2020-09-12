@@ -7,7 +7,7 @@ class Api::V1::MusicsController < ApiController
 
   def index
     @musics = Music.joins(:music_videos).group(:music_id).order('count(video_id) desc')
-    render json: @musics.to_json(except: [:description,:url,:created_at,:updated_at],include:{videos: {only: [:id]}})
+    render json: @musics.to_json(except: [:description,:created_at,:updated_at],include:{videos: {only: [:id]}})
   end
 
   def show

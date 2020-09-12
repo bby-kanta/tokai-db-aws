@@ -212,18 +212,15 @@
 
     <div class="comment-contents">
       <h2> {{ video.comments.length }} 件のコメント </h2>
-      <form @submit="createComment">
 
-        <div class="comment-form">
-          <input v-model="comment.content" class="comment-box" type="text" placeholder="コメントを入力する">
-          <div class="text_underline"></div>
-        </div>
+      <div class="comment-form">
+        <input v-model="comment.content" class="comment-box" type="text" placeholder="コメントを入力する">
+        <div class="text_underline"></div>
+      </div>
 
-        <div class="comment-submit">
-          <button type="submit"> コメント </button>
-        </div>
-
-      </form>
+      <div class="comment-submit">
+        <button @click="createComment()"> コメント </button>
+      </div>
 
       <div class="comments">
         <div v-for="comment in video.comments" :key="comment.id" class="comment">
@@ -365,19 +362,18 @@ export default {
       if (like) { return like.id }
     },
 
-    createComment: function() {
-      axios
+    createComment: async function() {
+      await axios
         .post('/api/v1/comments',{ content: this.comment.content ,video_id: this.video.id} );
       this.fetchVideos(this.video.id);
-      // this.$router.go({path: this.$router.currentRoute.path, force: true})
+      this.comment.content = ""
     },
 
-    destroyComment(comment_id) {
+    async destroyComment(comment_id) {
       const comment = comment_id
       console.log('コメントID'+comment+'を消します')
-      axios.delete(`/api/v1/comments/${comment}`);
-      // this.fetchVideos(this.video.id);
-      this.$router.go({path: this.$router.currentRoute.path, force: true})
+      await axios.delete(`/api/v1/comments/${comment}`);
+      this.fetchVideos(this.video.id);
     },
 
     top() {

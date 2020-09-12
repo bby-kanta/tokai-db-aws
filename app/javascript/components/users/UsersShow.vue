@@ -76,8 +76,6 @@
     <div id="overlay" v-show="showContent"> <!-- モーダルウインドウの中身 -->
       <div id="modal-content">
         <i class="fas fa-times fa-2x" @click="closeModal"></i>
-        <form @submit="updateUser">
-
           <div class="comment-form">
             <div class="mt-2 mb-3">
               <p>ユーザー名</p>
@@ -106,10 +104,9 @@
           </div>
 
           <div class="comment-submit">
-            <button type="submit">更新</button>
+            <button @click="updateUser()">更新</button>
           </div>
 
-        </form>
       </div>
     </div>
 

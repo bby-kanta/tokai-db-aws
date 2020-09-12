@@ -52,19 +52,17 @@
     <div id="modal-content">
       <i class="fas fa-times fa-2x" @click="closeModal"></i>
       <h2>{{person.name}}のタグを作る</h2>
-      <form @submit="createTag">
 
-        <div class="comment-form">
-          <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
-          <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
-          <textarea v-model="tag.description" class="" placeholder="概要を入力する"></textarea>
-        </div>
+      <div class="comment-form">
+        <input v-model="tag.name" class="comment-box" type="text" placeholder="タグ名を入力する">
+        <input v-model="tag.sort" class="comment-box" type="text" placeholder="ふりがなを入力する">
+        <textarea v-model="tag.description" class="" placeholder="概要を入力する"></textarea>
+      </div>
 
-        <div class="comment-submit">
-          <button type="submit">作成</button>
-        </div>
+      <div class="comment-submit">
+        <button @click="createTag()">作成</button>
+      </div>
 
-      </form>
     </div>
   </div>
 
@@ -116,11 +114,16 @@ export default {
     closeModal: function(){
       this.showContent = false
     },
-    createTag: function() {
-      axios
+    createTag: async function() {
+      await axios
         .post('/api/v1/tags',{ name: this.tag.name , sort: this.tag.sort, description: this.tag.description ,person_id: this.person.id} );
-      // this.fetchVideos(this.video.id);
-      this.$router.go({path: this.$router.currentRoute.path, force: true})
+      await axios
+      .get(`/api/v1/people/${this.$route.params.id}.json`)
+      .then(response => (this.person = response.data))
+      this.closeModal()
+      this.tag.name = ""
+      this.tag.sort = ""
+      this.tag.description = ""
     },
   }
 
