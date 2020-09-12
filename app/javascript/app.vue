@@ -174,7 +174,6 @@ button {
       color: orange;
       cursor: pointer;
     }
-    form {
       .comment-form {
         display: flex;
         flex-direction: column;
@@ -191,7 +190,6 @@ button {
         display: flex;
         flex-direction: row-reverse;
       }
-    }
   }
 }
 
