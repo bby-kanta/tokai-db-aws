@@ -34,7 +34,7 @@
       <tr class="video-description">
         <th> 概要 </th>
         <th>   
-          <p> {{ video.description }} </p>
+          <p class="description-real"> {{ video.description }} </p>
         </th>
       </tr>
 
