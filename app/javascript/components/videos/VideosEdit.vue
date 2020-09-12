@@ -584,13 +584,25 @@ export default {
     },
 
     async createVideoTag(id) {
-      await axios.post('/api/v1/tag_videos',{video_id: this.video.id , tag_id: id})
-      this.fetchVideos(this.video.id)
+      await axios
+      .post('/api/v1/tag_videos',{video_id: this.video.id , tag_id: id})
+      await axios  //tag_videos更新用
+        .get('/api/v1/tag_videos.json')
+        .then(response => (this.tagVideos = response.data))
+      await axios
+        .get(`/api/v1/videos/${this.$route.params.id}.json`)
+        .then(response => (this.video.tags = response.data.tags))
     },
-    destroyVideoTag(VideoTag_id) {
+    async destroyVideoTag(VideoTag_id) {
       const videoTagId = this.findVideoTagId(VideoTag_id);
-       axios.delete(`/api/v1/tag_videos/${videoTagId}`);
-      this.fetchVideos(this.video.id);
+      await axios
+        .delete(`/api/v1/tag_videos/${videoTagId}`);
+      await axios  //tag_videos更新用
+        .get('/api/v1/tag_videos.json')
+        .then(response => (this.tagVideos = response.data))
+      await axios
+        .get(`/api/v1/videos/${this.$route.params.id}.json`)
+        .then(response => (this.video.tags = response.data.tags))
     },
     findVideoTagId(tagid) {
       const tag = this.tagVideos.find((tag) => {
@@ -680,7 +692,6 @@ textarea {
   }
 }
 
-form {
   textarea {
     width: 100%;
     height: 600px;
@@ -689,7 +700,6 @@ form {
     display: flex;
     flex-direction: row-reverse;
   }
-}
 
   .video-people , .penalties , .tags {
     display: flex;
