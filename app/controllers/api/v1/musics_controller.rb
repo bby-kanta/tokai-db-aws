@@ -20,6 +20,10 @@ class Api::V1::MusicsController < ApiController
     head :created
   end
 
+  def all
+    render json: Music.select(:id,:name,:url)
+  end
+
   private
 
   def music_params

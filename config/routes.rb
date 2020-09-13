@@ -13,13 +13,18 @@ Rails.application.routes.draw do
       resources :people, only: [:index, :show, :create] 
       resources :penalties, only: [:index, :show, :create] 
       resources :tags, only: [:index, :show, :create, :destroy, :update] 
-      resources :musics, only: [:index, :show, :create] 
-      resources :places, only: [:index, :show, :create] 
+      resources :musics, only: [:index, :show, :create] do
+        collection do
+          get 'all'
+        end
+      end
+      resources :places, only: [:index, :show, :create]
       resources :users
       resources :favorites, only: [:index ,:create, :destroy]
       resources :relationships, only: [:index,:create, :destroy]
       resources :comments, only: [:index ,:create, :destroy]
-      resources :tag_videos, only: [:index ,:create, :destroy]
+      resources :tag_videos, only: [:index, :show,:create, :destroy]
+      resources :music_videos, only: [:index, :show,:create, :destroy]
     end
   end
 
