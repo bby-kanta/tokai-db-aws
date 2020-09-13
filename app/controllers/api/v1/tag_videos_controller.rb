@@ -3,7 +3,11 @@ class Api::V1::TagVideosController < ApiController
   def index
     render json: TagVideo.select(:id, :tag_id, :video_id)
   end
-    
+
+  def show
+    render json:TagVideo.where(video_id: params[:id]).select(:id, :tag_id, :video_id)
+  end
+
   def create
     TagVideo.create!(tag_params)
   end

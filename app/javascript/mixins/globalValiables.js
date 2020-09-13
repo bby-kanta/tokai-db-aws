@@ -54,6 +54,17 @@ export default {    // exportする
       // console.log(tags_id.includes(tag));
       return tags_id 
     },
+    musics_id: function() { //musics_idにはvideoのmusicsのidがシンプルな配列で入る→ 連想配列では無くなったのでincludesメソッドが使える
+      var musics = this.video.musics;  //例）"video.musics":[{"id":1},{"id":2}]
+      var musics_id = [];
+      var hoge = [];
+
+      for(hoge in musics){
+        musics_id.push(musics[hoge].id);  //例）musics_id = [1,2]
+      }
+
+      return musics_id 
+    },
 
     confirmDelete(){
       const ans = confirm('本当に消しますか?'); 

@@ -24,6 +24,7 @@
       </div>
       <h3> {{ video.title }} </h3>
       <router-link :to="{ name: 'VideosShow', params: { id: video.id } }">showページへ移動</router-link>
+      <a :href="'/videos/' + video.id + '/edit'">編集</a>
     </div>
 
 
@@ -191,6 +192,22 @@
                   </router-link>
               </div>
           </div>
+
+          <div class="text_line" v-if="user != 'none'"></div>
+
+          <h2 @click="fetchMusics()" class="mt-3 mb-3 blue" v-if="user != 'none' && musics.length == null">BGMを紐付ける</h2>
+          <h2 v-if="musics.length" class="mt-3 mb-3">BGMリスト</h2>
+
+          <div class="musics">
+            <div v-for="music in musics" :key="music.id">
+              <div v-if="musics_id().includes(music.id)" @click="destroyVideoMusic(music.id)" class="btn red-black tag">
+                {{ music.name }}
+              </div>
+              <div v-else @click="createVideoMusic(music.id)" class="btn red tag">
+                {{ music.name }}
+              </div>
+            </div>
+          </div>
         </th>
       </tr>
 
@@ -294,25 +311,28 @@
         </div>
         <div v-show="currentTab === 3">
           <div class="tag-form">
+            <h2 @click="fetchMusics()" v-if="musics.length == null" class="blue">BGM一覧を表示する</h2>
+            <select v-model="music.url" v-if="musics.length != null">
+                <option value="">選択して下さい</option>
+                <option v-for="bgm in musics" :key="bgm.id" :value="bgm.url">
+                  {{ bgm.name }}
+                </option>
+            </select>
+
             <div class="video-youtube">
               <iframe name="player" width="100%" height="100%" :src="'https://www.youtube.com/embed/' + music.url + '?autoplay=1&loop=1&playlist=' + music.url " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-              <h2>BGMを作る</h2>
-              <div class="comment-form">
-                <input v-model="music.name" class="comment-box" type="text" placeholder="BGM名を入力する">
-                <input v-model="music.url" class="comment-box" type="text" placeholder="動画コードを入力する">
-                <textarea v-model="music.description" class="" placeholder="概要を入力する"></textarea>
-              </div>
-              <div class="comment-submit">
-                <button @click="createMusic()">作成</button>
-              </div>
 
-              <div class="music-playlist">
-                <h2 @click="fetchMusics()" v-if="musics.length == null" class="blue">BGM一覧を表示する</h2>
-                <ul>
-                  <li v-for="bgm in musics" :key="bgm.id" @click="music.name = bgm.name, music.url = bgm.url">{{bgm.name}}</li>
-                </ul>
-              </div>
+            <h2>BGMを作る</h2>
+            <div class="comment-form">
+              <input v-model="music.name" class="comment-box" type="text" placeholder="BGM名を入力する">
+              <input v-model="music.url" class="comment-box" type="text" placeholder="動画コードを入力する">
+              <textarea v-model="music.description" class="" placeholder="概要を入力する"></textarea>
+            </div>
+            <div class="comment-submit">
+              <button @click="createMusic()">作成</button>
+            </div>
+
           </div>
         </div>
         <div v-show="currentTab === 4">
@@ -384,10 +404,12 @@ export default {
         description: '',
         updated_on: '',
         tags: {},
+        musics: {},
       },
       videos: {},
       userTags: {},
       tagVideos: {},
+      musicVideos: {},
       relationships: {},
       keyword: '',
       select: '',
@@ -505,8 +527,11 @@ export default {
       .get(`/api/v1/videos/${this.$route.params.id}.json`)
       .then(response => (this.video = response.data))
       await axios  //tag_videos更新用
-        .get('/api/v1/tag_videos.json')
+        .get(`/api/v1/tag_videos/${this.$route.params.id}.json`)
         .then(response => (this.tagVideos = response.data))
+      await axios  //music_videos更新用
+        .get(`/api/v1/music_videos/${this.$route.params.id}.json`)
+        .then(response => (this.musicVideos = response.data))
       await axios
         .get(`/api/v1/relationships.json`)
         .then(response => (this.relationships = response.data))
@@ -552,6 +577,7 @@ export default {
     createMusic: async function() {
       await axios
         .post('/api/v1/musics',{ name: this.music.name, description: this.music.description, url: this.music.url } );
+      this.fetchMusics()
       this.music.name = ""
       this.music.description = ""
       this.music.url = ""
@@ -587,7 +613,7 @@ export default {
       await axios
       .post('/api/v1/tag_videos',{video_id: this.video.id , tag_id: id})
       await axios  //tag_videos更新用
-        .get('/api/v1/tag_videos.json')
+        .get(`/api/v1/tag_videos/${this.$route.params.id}.json`)
         .then(response => (this.tagVideos = response.data))
       await axios
         .get(`/api/v1/videos/${this.$route.params.id}.json`)
@@ -598,7 +624,7 @@ export default {
       await axios
         .delete(`/api/v1/tag_videos/${videoTagId}`);
       await axios  //tag_videos更新用
-        .get('/api/v1/tag_videos.json')
+        .get(`/api/v1/tag_videos/${this.$route.params.id}.json`)
         .then(response => (this.tagVideos = response.data))
       await axios
         .get(`/api/v1/videos/${this.$route.params.id}.json`)
@@ -606,9 +632,37 @@ export default {
     },
     findVideoTagId(tagid) {
       const tag = this.tagVideos.find((tag) => {
-        return (tag.tag_id === tagid & tag.video_id === this.video.id)
+        return (tag.tag_id === tagid)
       })
       if (tag) { return tag.id }
+    },
+
+    async createVideoMusic(musicId) {
+      await axios
+      .post('/api/v1/music_videos',{video_id: this.video.id , music_id: musicId})
+      await axios  //music_videos更新用
+        .get(`/api/v1/music_videos/${this.$route.params.id}.json`)
+        .then(response => (this.musicVideos = response.data))
+      await axios
+        .get(`/api/v1/videos/${this.$route.params.id}.json`)
+        .then(response => (this.video.musics = response.data.musics))
+    },
+    async destroyVideoMusic(VideoMusic_id) {
+      const videoMusicId = this.findVideoMusicId(VideoMusic_id);
+      await axios
+        .delete(`/api/v1/music_videos/${videoMusicId}`);
+      await axios  //music_videos更新用
+        .get(`/api/v1/music_videos/${this.$route.params.id}.json`)
+        .then(response => (this.musicVideos = response.data))
+      await axios
+        .get(`/api/v1/videos/${this.$route.params.id}.json`)
+        .then(response => (this.video.musics = response.data.musics))
+    },
+    findVideoMusicId(musicid) {
+      const music = this.musicVideos.find((music) => {
+        return (music.music_id === musicid)
+      })
+      if (music) { return music.id }
     },
 
     fetchAllVideos: async function () {
@@ -635,7 +689,7 @@ export default {
 
     fetchMusics: async function () {
       await axios
-      .get(`/api/v1/musics.json`)
+      .get(`/api/v1/musics/all.json`)
       .then(response => (this.musics = response.data))
     },
 
@@ -692,41 +746,32 @@ textarea {
   }
 }
 
-  textarea {
-    width: 100%;
-    height: 600px;
-  }
-  .comment-submit{
-    display: flex;
-    flex-direction: row-reverse;
-  }
+textarea {
+  width: 100%;
+  height: 600px;
+}
+.comment-submit{
+  display: flex;
+  flex-direction: row-reverse;
+}
 
-  .video-people , .penalties , .tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
+.video-people, .penalties, .tags, .musics {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  .person , .penalty , .tag , .place , .music {
-    margin: 0 3px 3px 0;
-  }
+.person, .penalty, .tag, .place, .music {
+  margin: 0 3px 3px 0;
+}
 
-  .description-real {
-    white-space: pre-line;  //本家の概要に改行を許可する
-  }
+.description-real {
+  white-space: pre-line;  //本家の概要に改行を許可する
+}
 
-  .text_line {
-    margin-top: 30px;
-    width: 100%;
-    border-bottom: 2px solid rgb(0, 0, 0);
-  }
-
-.music-playlist {
-  ul {
-    li {
-      color: blue;
-      cursor: pointer;
-    }
-  }
+.text_line {
+  margin-top: 30px;
+  width: 100%;
+  border-bottom: 2px solid rgb(0, 0, 0);
 }
 
 @media screen and (min-width: 1000px){
