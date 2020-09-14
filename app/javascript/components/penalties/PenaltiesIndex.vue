@@ -14,7 +14,19 @@
   </div>
 
   <div class="width-96">
-    <input type="text" v-model="keyword">
+    <div class="search-box">
+      <input type="text" v-model="keyword" placeholder="罰ゲーム検索">
+      <select v-model="personSelect">
+        <option value=''>メンバー名</option>
+        <option value=1>てつや</option>
+        <option value=2>しばゆー</option>
+        <option value=3>りょう</option>
+        <option value=4>としみつ</option>
+        <option value=5>ゆめまる</option>
+        <option value=6>虫眼鏡</option>
+      </select>
+    </div>
+
     <div class="penalties">
       <div class="penalty" v-for="penalty in filteredPenalties" :key="penalty.id">
         <PenaltyColor :person="penalty.person_id" :penalty_id="penalty.id" :penalty_name="penalty.name" :count=" '(' + penalty.videos.length + ')' "></PenaltyColor>
@@ -38,8 +50,9 @@ export default {
 
   data: function () {
     return {
+      penalties: [],
       keyword: '',
-      penalties: []
+      personSelect: '',
     }
   },
   mounted () {
@@ -53,12 +66,13 @@ export default {
       var penalties = [];
 
       for(var i in this.penalties) {
-        var tag = this.penalties[i];
-        if(tag.name.indexOf(this.keyword) !== -1) {
-            penalties.push(tag);
+        var penalty = this.penalties[i];
+        if(penalty.name.indexOf(this.keyword) !== -1 &&
+           this.personSelect == '' | penalty.person_id == this.personSelect
+        ) {
+            penalties.push(penalty);
         }
       }
-      console.log(penalties);
       return penalties;
     },
 
@@ -69,17 +83,24 @@ export default {
 
 <style lang="scss" scoped>
 
+.search-box {
+  margin-top: 20px;
+  display: flex;
   input {
-    margin-top: 20px;
+    width: 20%;
   }
+  select {
+    margin-left: 10px;
+  }
+}
 
-  .penalties {
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    .penalty {
-      margin: 0 10px 10px 0;
-    }
+.penalties {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  .penalty {
+    margin: 0 10px 10px 0;
   }
+}
 
 </style>

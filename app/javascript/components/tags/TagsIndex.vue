@@ -12,7 +12,20 @@
   </div>
 
   <div class="width-96">
-    <input type="text" v-model="keyword">
+
+    <div class="search-box">
+      <input type="text" v-model="keyword" placeholder="ハッシュタグ検索">
+      <select v-model="personSelect">
+        <option value=''>メンバー名</option>
+        <option value=1>てつや</option>
+        <option value=2>しばゆー</option>
+        <option value=3>りょう</option>
+        <option value=4>としみつ</option>
+        <option value=5>ゆめまる</option>
+        <option value=6>虫眼鏡</option>
+        <option value=7>共通タグ</option>
+      </select>
+    </div>
 
     <div class="hash-tags">
       <div class="hash-tag" v-for="tag in filteredTags" :key="tag.id">
@@ -37,8 +50,9 @@ export default {
 
   data: function () {
     return {
+      tags: [],
       keyword: '',
-      tags: []
+      personSelect: '',
     }
   },
   mounted () {
@@ -54,11 +68,13 @@ export default {
 
       for(var i in this.tags) {
         var tag = this.tags[i];
-        if(tag.name.indexOf(this.keyword) !== -1) {
+        if(tag.name.indexOf(this.keyword) !== -1 |
+           tag.sort.indexOf(this.keyword) !== -1 &&
+           this.personSelect == '' | tag.person_id == this.personSelect
+        ) {
             tags.push(tag);
         }
       }
-      console.log(tags);
       return tags;
     },
 
@@ -69,23 +85,30 @@ export default {
 
 <style lang="scss" scoped>
 
+.search-box {
+  margin-top: 20px;
+  display: flex;
   input {
-    margin-top: 20px;
+    width: 20%;
   }
+  select {
+    margin-left: 10px;
+  }
+}
 
-  .hash-tags {
-    margin-top: 30px;
-    display : flex;
-    flex-wrap: wrap;
-    .hash-tag {
-      margin: 0 10px 10px 0;
-    }
+.hash-tags {
+  margin-top: 30px;
+  display : flex;
+  flex-wrap: wrap;
+  .hash-tag {
+    margin: 0 10px 10px 0;
   }
+}
 
-  .background-image {
-    img {
-      object-position: 0 45%;
-    }
+.background-image {
+  img {
+    object-position: 0 45%;
   }
+}
 
 </style>
