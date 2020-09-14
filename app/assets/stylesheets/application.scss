@@ -439,6 +439,14 @@ div[class*="form-"]{
   margin-bottom: 2%;
   display: flex;
   flex-direction: column;
+  input[type="text"] {
+    width: 700px;
+    height: 30px;
+  }
+  textarea {
+    width: 1200px;
+    height: 400px;
+  }
 }
 
 .form-date{
@@ -452,14 +460,7 @@ input[type="search"] {
   width: 310px;
   height: 30px;
 }
-input[type="text"] {
-  width: 300px;
-  height: 30px;
-}
-textarea {
-  width: 1200px;
-  height: 400px;
-}
+
 select,input[type="number"] {
   width: 100px;
   height: 30px;
