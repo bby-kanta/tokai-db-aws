@@ -51,8 +51,9 @@
 
           <div class="text_line" v-if="user != 'none'"></div>
           <h2 class="mt-3 mb-3" v-if="user != 'none'">あなたが作ったハッシュタグリスト</h2>
+          <input type="text" v-model="tagKeyword" placeholder="ハッシュタグ検索" class="mb-2">
           <div class="tags">
-            <div v-for="tag in userTags" :key="tag.id">
+            <div v-for="tag in filteredtags" :key="tag.id">
               <div v-if="tags_id().includes(tag.id)" @click="destroyVideoTag(tag.id)" class="btn red-black tag">
                 {{ tag.name }}
               </div>
@@ -200,9 +201,10 @@
 
           <h2 @click="fetchMusics()" class="mt-3 mb-3 blue" v-if="user != 'none' && musics.length == null">BGMを紐付ける</h2>
           <h2 v-if="musics.length" class="mt-3 mb-3">BGMリスト</h2>
+          <input v-if="musics.length" type="text" v-model="musicKeyword" placeholder="BGM検索" class="mb-2">
 
           <div class="musics">
-            <div v-for="music in musics" :key="music.id">
+            <div v-for="music in filteredmusics" :key="music.id">
               <div v-if="musics_id().includes(music.id)" @click="destroyVideoMusic(music.id)" class="btn red-black tag">
                 {{ music.name }}
               </div>
@@ -415,6 +417,8 @@ export default {
       musicVideos: {},
       relationships: {},
       keyword: '',
+      tagKeyword: '',
+      musicKeyword: '',
       select: '',
       user: {},
       minutes: '',
@@ -511,6 +515,31 @@ export default {
       }
       return videos;
     },
+    filteredtags: function() { //検索機能
+      var tags = [];
+
+      for(var i in this.userTags) {
+        var tag = this.userTags[i];
+        if(tag.name.indexOf(this.tagKeyword) !== -1 |
+           tag.sort.indexOf(this.tagKeyword) !== -1
+        ) {
+            tags.push(tag);
+        }
+      }
+      return tags;
+    },
+    filteredmusics: function() { //検索機能
+      var musics = [];
+
+      for(var i in this.musics) {
+        var music = this.musics[i];
+        if(music.name.indexOf(this.musicKeyword) !== -1
+        ) {
+            musics.push(music);
+        }
+      }
+      return musics;
+    },
     recommend_id: function() {
       var recommends = this.video.recommends;  //例）"video.recommend":[{"id":1},{"id":2}]
       var recommend_id = [];
@@ -521,6 +550,7 @@ export default {
       }
       return recommend_id 
     },
+    
   },
 
   methods: {
