@@ -7,7 +7,7 @@ class Api::V1::TagsController < ApiController
 
   def index
     @tags = Tag.joins(:tag_videos).group(:tag_id).order('count(video_id) desc')  # https://qiita.com/kent_ear/items/5748d6b6db83fb5e8782
-    render json: @tags.to_json(except: [:description,:sort,:tag_image_id,:created_at,:updated_at],methods: :tag_videos_count)
+    render json: @tags.to_json(except: [:description, :tag_image_id, :created_at, :updated_at],methods: :tag_videos_count)
   end
 
   def show
