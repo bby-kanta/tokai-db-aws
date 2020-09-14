@@ -27,6 +27,9 @@
       <a :href="'/videos/' + video.id + '/edit'">編集</a>
     </div>
 
+    <div class="video_date">
+      <h2>{{ video.updated_on }} に公開済み</h2>
+    </div>
 
     <table border="1px" style="border-collapse: collapse; border-color: rgb(238, 232, 232)">
 
@@ -233,7 +236,7 @@
         </div>
 
         <div>
-          <input v-model="youtube.items[0].snippet.publishedAt" class="comment-box" type="date" placeholder="ふりがなを入力する">
+          <input v-model="youtube.items[0].snippet.publishedAt" class="comment-box" type="date">
           公開日を{{ youtube.items[0].snippet.publishedAt }}に更新する。
         </div>
 
@@ -736,6 +739,7 @@ export default {
 
 textarea {
   width: 100%;
+  height: 250px;
 }
 
 .minutes-to-second { //分数を秒数に変換するツール
@@ -746,10 +750,6 @@ textarea {
   }
 }
 
-textarea {
-  width: 100%;
-  height: 600px;
-}
 .comment-submit{
   display: flex;
   flex-direction: row-reverse;
@@ -783,6 +783,10 @@ textarea {
     margin-left: 20px;
     .update-video {
       margin-bottom: 80px;
+      textarea {
+        width: 100%;
+        height: 600px;
+      }
     }
     .tag-form {
       margin-top: 100px;

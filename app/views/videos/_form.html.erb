@@ -1,15 +1,15 @@
 <div class="form_video width-96">
 
   <%= form_for @video do |a| %>
-  
-    <div class="form-">
-      <%= a.label :url , 'URL' %>
-      <%= a.text_field :url,placeholder:'URLを貼り付けてください' %>
-    </div>
 
     <div class="form-">
       <%= a.label :title , 'タイトル' %>
       <%= a.text_field :title %>
+    </div>
+  
+    <div class="form-">
+      <%= a.label :url , '動画コード' %>
+      <%= a.text_field :url,placeholder:'動画コードを貼り付けてください' %>
     </div>
 
     <div class="form-">
@@ -30,7 +30,7 @@
     <% else %>
       <div class="form-">
         <%= a.label :highlight ,'見所' %>
-        <%= a.text_area :highlight, value: " &lt;a href=&quot;https://www.youtube.com/embed/動画コード?autoplay=1&start=秒数&quot; target=&quot;player&quot; id=&quot;click&quot;&gt;表示させる文字&lt;/a&gt;".html_safe %>
+        <%= a.text_area :highlight, value: " &lt;a href=&quot;https://www.youtube.com/embed/◯?autoplay=1&start=&quot; target=&quot;player&quot; id=&quot;click&quot;&gt;&lt;/a&gt;".html_safe %>
     </div>
     <% end %>
 
